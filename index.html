@@ -1,100 +1,102 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <title>Nextage: cadastro de usuários</title>
-        <meta name="description"
-            content="Cadastre seus dados e se torne um usuário do Nextage!">
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-            crossorigin="anonymous">
+<head>
+    <title>Nextage: cadastro de usuários</title>
+    <meta name="description" content="Cadastre seus dados e se torne um usuário do Nextage!">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
-            <link rel="preconnect" href="https://fonts.googleapis.com">
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-            <link href="https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap" rel="stylesheet">
 
-            <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
-    
-    </head>
 
-    <body>
-        <header>
+</head>
 
-        </header>
+<body>
+    <header>
 
-        <main>
-            <!-- Linha (row) -->
-            <div class="row">
-                <!-- Coluna (col esquerda) -->
-                <div class="col-md-6" style="background-color: #DDF9FF;">
-                    <section>
-                        <h1>Crie sua conta e dê o<br> próximo passo na sua<br>
-                            jornada</h1>
-                        <p>No Nextage, você encontra tudo o que precisa para
-                            estudar,
-                            organizar seus conteúdos e evoluir todos os dias</p>
-                    </section>
-                    <section>
-                        <h2>Aprendizado que te acompanha</h2>
-                        <p>Acesse materiais, exercícios e recursos sempre que
-                            quiser.</p>
-                    </section>
+    </header>
 
-                    <section>
-                        <h2>Organize e acompanhe seu progresso</h2>
-                        <p>Tenha clareza da sua evolução e foque no que
-                            realmente importa.</p>
-                    </section>
+    <main>
+        <!-- Linha (row) -->
+        <div class="row">
+            <!-- Coluna (col esquerda) -->
+            <div class="col-lg-6 painel-esquerdo">
+                <section>
+                    <h1>Crie sua conta e dê o<br> próximo passo na sua<br>
+                        jornada</h1>
+                    <p>No Nextage, você encontra tudo o que precisa para
+                        estudar,
+                        organizar seus conteúdos e evoluir todos os dias</p>
+                </section>
+                <section>
+                    <h2>Aprendizado que te acompanha</h2>
+                    <p>Acesse materiais, exercícios e recursos sempre que
+                        quiser.</p>
+                </section>
 
-                    <section>
-                        <h2>Conecte-se com outros estudantes</h2>
-                        <p>Participe do fórum, troque ideias e aprenda junto com
-                            a comunidade.</p>
-                    </section>
-                </div>
-                <!-- Coluna (col direita) -->
-                <div class="col-6">
-                    <section>
-                        <h2>Criar conta</h2>
-                        <p>Prencha seus dados para começar a usar o Nextage.</p>
-                    </section>
+                <section>
+                    <h2>Organize e acompanhe seu progresso</h2>
+                    <p>Tenha clareza da sua evolução e foque no que
+                        realmente importa.</p>
+                </section>
 
-                    <section>
-                        <form>
-                            <h2>Nome</h2>
-                            <input type="text" id="nome" name="nome""><br>
-
-                            <h2>Email</h2>
-                            <input type="text" id="email" name="email""><br>
-
-                            <h2>Senha</h2>
-                            <input type="password" id="senha" name="senha""><br>
-
-                            <h2>Confirmar senha</h2>
-                            <input type="password" id="ConfirmarSenha"
-                                name="ConfirmarSenha""><br>
-
-                            <h2>Data de nascimento (opcional)</h2>
-                            <input type="password" id="ConfirmarSenha"
-                                name="ConfirmarSenha""><br>
-
-                            <button
-                                onclick="alert('Conta criada com sucesso!')">Criar
-                                minha conta</button>
-
-                        </form>
-                    </section>
-
-                    <section>
-                        <h3>Já tem uma conta? <a href="login.html"
-                                target="_blank">Entrar</a></h3>
-                    </section>
-                </div>
+                <section>
+                    <h2>Conecte-se com outros estudantes</h2>
+                    <p>Participe do fórum, troque ideias e aprenda junto com
+                        a comunidade.</p>
+                </section>
+                <img src="Group 4.png" class="imagem-rodape">
             </div>
+            <!-- Coluna (col direita) -->
+            <div class="col-lg-6 painel-direito">
 
-        </main>
-    </body>
+    <div class="d-flex flex-column justify-content-center">
+
+        <h2>Criar conta</h2>
+
+        <p>Preencha seus dados para começar a usar o Nextage.</p>
+
+        <form>
+
+            <label for="nome">Nome Completo</label><br>
+            <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo">
+            <br>
+            <label for="email">E-mail</label><br>
+            <input type="email" id="email" name="email"placeholder="Digite seu e-mail">
+            <br>
+            <label for="senha">Senha</label><br>
+            <input type="password" id="senha" name="senha"placeholder="Crie uma senha segura">
+            <br>
+            <label for="confirmarSenha">Confirmar senha</label><br>
+            <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Confirme sua senha">
+            <br>
+            <label for="dataNascimento">Data de nascimento (opcional)</label>
+            <br>
+            <input type="text" id="dataNascimento" name="dataNascimento"placeholder="DD/MM/AAAA">
+            <br>
+            <button type="button"
+                onclick="alert('Conta criada com sucesso!')">
+                Criar minha conta
+            </button>
+
+        </form>
+
+        <p>
+            Já tem uma conta?
+            <a href="login.html">Entrar</a>
+        </p>
+
+    </div>
+
+</div>
+        </div>
+
+    </main>
+</body>
+
 </html>
