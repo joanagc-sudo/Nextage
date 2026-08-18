@@ -248,3 +248,10 @@ nav a.ativo::after {
 
     font-size: 20px;
 }
+.icone img{
+    max-width: 100%;
+    padding: 0.4em;
+}
+#lapis{
+padding: 0.2em;
+}
