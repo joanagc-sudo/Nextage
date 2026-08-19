@@ -5,14 +5,14 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+/* o corpo da tela, define a cor do fundo e a fonte que ta sendo usada*/
 body {
     background-color: #9DC8CF;
     font-family: 'Momo Trust Display', sans-serif;
     color: #32818F;
     font-weight: normal;
 }
-
+/*é a classe que organiza o menu da tela */
 .navbar {
     width: 95%;
     height: 54px;
@@ -25,13 +25,14 @@ body {
     display: flex;
     align-items: center;
 }
-
+/*a logo que fica na navbar*/
 .logo {
     width: 240px;
 
     font-size: 24px;
     font-weight: normal;
     color: #086B7A;
+    
 }
 
 nav {
@@ -254,4 +255,9 @@ nav a.ativo::after {
 }
 #lapis{
 padding: 0.2em;
+}
+
+.card-atalho{transition:transform 0.2s ease;
+}
+.card-atalho:hover{ transform: scale(1.05);
 }
