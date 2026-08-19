@@ -270,3 +270,7 @@ padding: 0.2em;
 }
 .card-atalho:hover{ transform: scale(1.05);
 }
+
+.btn:hover{
+    background-color: #094e5a;
+} 

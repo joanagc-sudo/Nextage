@@ -78,7 +78,7 @@ body {
 
 }
 
-button {
+.btn-primary {
     display: block;
 
     width: 65%;
@@ -246,4 +246,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
+
+.btn-primary:hover{
+    background-color: #094e5a;
+} 
 
