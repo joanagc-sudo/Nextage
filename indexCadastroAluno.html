@@ -93,63 +93,65 @@
                         <form>
                             <div class="my-3">
                                 <label for="nome">Nome Completo</label><br>
-                                    <div class="input-group mt-1">
+                                <div class="input-group mt-1">
                                     <span class="input-group-text"
                                         id="basic-addon1">
                                         <i class="bi bi-person"></i>
                                     </span>
-                                    
-                                    <input class = "form-control" type="text" id="nome" name="nome"
-                                    placeholder="Digite seu nome completo">
+
+                                    <input class="form-control" type="text"
+                                        id="nome" name="nome"
+                                        placeholder="Digite seu nome completo">
                                 </div>
                             </div>
 
                             <div class="my-3">
                                 <label for="email">E-mail</label><br>
-                                    <div class="input-group mt-1">
+                                <div class="input-group mt-1">
                                     <span class="input-group-text"
                                         id="basic-addon1">
                                         <i class="bi bi-envelope"></i>
                                     </span>
-                                    
-                                    <input class = "form-control" type="email" id="email" name="email"
-                                    placeholder="Digite seu e-mail">
+
+                                    <input class="form-control" type="email"
+                                        id="email" name="email"
+                                        placeholder="Digite seu e-mail">
                                 </div>
                             </div>
 
                             <div>
-                                
-                                
+
                             </div>
 
                             <div class="my-3">
                                 <label for="senha">Senha</label><br>
-                                    <div class="input-group mt-1">
+                                <div class="input-group mt-1">
                                     <span class="input-group-text"
                                         id="basic-addon1">
                                         <i class="bi bi-lock"></i>
                                     </span>
-                                    
-                                    <input class = "form-control" type="password" id="senha" name="senha"
-                                    placeholder="Crie uma senha segura">
+
+                                    <input class="form-control" type="password"
+                                        id="senha" name="senha"
+                                        placeholder="Crie uma senha segura">
                                 </div>
                             </div>
                             <div class="my-3">
-                                
-                                
+
                             </div>
                             <div class="my-3">
                                 <label for="confirmarSenha">Confirmar
                                     senha</label>
-                                    <div class="input-group mt-1">
+                                <div class="input-group mt-1">
                                     <span class="input-group-text"
                                         id="basic-addon1">
                                         <i class="bi bi-lock"></i>
                                     </span>
-                                    
-                                    <input class = "form-control" type="password" id="confirmarSenha"
-                                    name="confirmarSenha"
-                                    placeholder="Confirme sua senha">
+
+                                    <input class="form-control" type="password"
+                                        id="confirmarSenha"
+                                        name="confirmarSenha"
+                                        placeholder="Confirme sua senha">
                                 </div>
                             </div>
 
@@ -161,16 +163,15 @@
                                         id="basic-addon1">
                                         <i class="bi bi-calendar4-week"></i>
                                     </span>
-                                    
+
                                     <input class="form-control" type="date"
                                         id="dataNascimento"
                                         name="dataNascimento"
-                                        placeholder="DD/MM/AAAA" >
+                                        placeholder="DD/MM/AAAA">
                                 </div>
                             </div>
                             <div>
-                                <button type="button"
-                                    onclick="alert('Conta criada com sucesso!')">
+                                <button type="button" onclick="mostrarAlerta()">
                                     Criar minha conta
                                 </button>
                             </div>
@@ -187,6 +188,34 @@
             </div>
 
         </main>
+        <div id="alerta-sucesso"
+     class="alert alert-success d-flex align-items-center d-none"
+     role="alert">
+
+    <svg class="bi flex-shrink-0 me-2"
+         width="20"
+         height="20"
+         role="img"
+         aria-label="Sucesso:">
+        <use xlink:href="#check-circle-fill"></use>
+    </svg>
+
+    <div>
+        Conta criada com sucesso!
+    </div>
+</div>
     </body>
 
 </html>
+
+<script>
+function mostrarAlerta() {
+    const alerta = document.getElementById("alerta-sucesso");
+
+    alerta.classList.remove("d-none");
+
+    setTimeout(function () {
+        window.location.href = "indexTelaInicial.html";
+    }, 500);
+}
+</script>
