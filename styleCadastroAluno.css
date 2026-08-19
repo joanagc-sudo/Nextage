@@ -78,21 +78,6 @@ body {
 
 }
 
-input {
-    width: 100%;
-    height: 38px;
-
-    padding: 8px 12px;
-
-    border: 1px solid #9bcbd5;
-    border-radius: 6px;
-
-    font-size: 1em;
-
-    outline: none;
-
-    margin-bottom: 2em;
-}
 button {
     display: block;
 
@@ -166,30 +151,14 @@ p{
     font-weight: 700;
 }
 
-.campo input::placeholder {
-    color: #9bb7bd;
+input::placeholder {
+    color: #6E868B !important;
 }
 
 .campo input:focus {
     border-color: #08788c;
     outline: none;
-}
-
-input {
-    width: 100%;
-    height: 2.5em;
-
-    padding: 0.5em 0.8em 0.5em 2.5em;
-
-    background-color: #FFFFFF;
-
-    border: 1px solid #9BCBD5;
-    border-radius: 0.4em;
-
-    color: #6E868B;
-
-    outline: none;
-}
+}   
 
 .imagem-rodape {
     position: absolute;
@@ -199,8 +168,6 @@ input {
     width: 90%;
     height: auto;
 }
-
-
 
 a {
     color:#126579
@@ -217,3 +184,45 @@ a {
 .entrar{
     text-align: center;
 }
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+.icone {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #078b94;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.texto{
+    margin-top: 18px;
+}
+
+.txtIntrodutorio{
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.dataNascimento{
+    text-align: start;
+}
+
+.form-control {
+    color: #126579 !important;
+} 
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+} 
