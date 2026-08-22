@@ -489,17 +489,17 @@ section {
 }
 
 .atalhos {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: center !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     gap: 10px;
 }
 
 .atalhos1 {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
     flex: 1;
     min-width: 0;
@@ -508,20 +508,20 @@ section {
 }
 
 .seta {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    width: 30px !important;
-    height: 50px !important;
+    width: 30px;
+    height: 50px;
 
-    padding: 0 !important;
-    margin: 0 !important;
+    padding: 0;
+    margin: 0;
 
-    border: none !important;
-    background: transparent !important;
+    border: none;
+    background: transparent;
 
-    color: #086B7A !important;
+    color: #086B7A;
 
     font-family: inherit;
     font-size: 28px;
