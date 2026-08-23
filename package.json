@@ -1,0 +1,24 @@
+{
+  "name": "nextage",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/joanagc-sudo/Nextage#readme",
+  "bugs": {
+    "url": "https://github.com/joanagc-sudo/Nextage/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joanagc-sudo/Nextage.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "http": "^0.0.1-security"
+  }
+}
