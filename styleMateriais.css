@@ -449,10 +449,20 @@ section {
 
 .bolaSimulado {
     width: 120px;
-    height: 0px;
+    height: 120px;
     margin: 10px auto;
     border-radius: 50%;
-    background-color: #c7dde2;
+    background-color: #BAD8DE;
+    justify-content: center;
+    align-items: center;
+
+    transform: translateX(1px);
+}
+
+.bolaSimulado img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
 }
 
 .simulado p {
@@ -530,3 +540,4 @@ section {
     cursor: pointer;
     flex-shrink: 0;
 }
+
