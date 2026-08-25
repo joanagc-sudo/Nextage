@@ -1,3 +1,5 @@
 Comando para iniciar:
 npm install
 npm run dev
+
+Animação de aumentar escala: scale(1.05); - transform 0.2s ease;
