@@ -13,6 +13,10 @@ body {
     font-weight: normal;
 }
 
+h1 {
+    transform: translate(865px);
+}
+
 .navbar {
     width: 95%;
     height: 54px;
@@ -177,7 +181,7 @@ section {
 }
 
 
-.sociologia {
+.assuntog1 {
     width: 150px;
     height: 175px;
 
@@ -192,7 +196,7 @@ section {
 
 
     margin: 10px 0;
-    padding: 55px;
+    padding: 20px;
 
     box-sizing: border-box;
     flex-shrink: 0;
@@ -200,18 +204,18 @@ section {
     cursor: pointer;
 }
 
-.sociologia img {
+.assuntog1 img {
     width: 70px;
     height: 150px;
     object-fit: contain;
     position: absolute;
     top: 18%;     
-    left: 10.7%;
+    left: 11.1%;
     transform: translate(-50%, -50%);
     z-index: 10;
 }
 
-.portugues {
+.assuntog2 {
     width: 150px;
     height: 175px;
 
@@ -225,7 +229,7 @@ section {
     align-items: center;
 
     margin: 10px 0;
-    padding: 55px;
+    padding: 40px;
 
     box-sizing: border-box;
     flex-shrink: 0;
@@ -233,18 +237,18 @@ section {
     cursor: pointer;
 }
 
-.portugues img {
+.assuntog2 img {
     width: 70px;
     height: 150px;
     object-fit: contain;
     position: absolute;
     top: 18.5%;     
-    left: 20.1%;
+    left: 20.8%;
     transform: translate(-50%, -50%);
     z-index: 10;
 }
 
-.filosofia {
+.assuntog3 {
     width: 150px;
     height: 175px;
 
@@ -258,7 +262,7 @@ section {
     align-items: center;
 
     margin: 10px 0;
-    padding: 55px;
+    padding: 40px;
 
     box-sizing: border-box;
     flex-shrink: 0;
@@ -266,18 +270,18 @@ section {
     cursor: pointer;
 }
 
-.filosofia img {
+.assuntog3 img {
     width: 70px;
     height: 150px;
     object-fit: contain;
     position: absolute;
     top: 18%;     
-    left: 29%;
+    left: 30.4%;
     transform: translate(-50%, -50%);
     z-index: 10;
 }
 
-.geografia {
+.assuntog4 {
     width: 150px;
     height: 175px;
 
@@ -292,7 +296,7 @@ section {
 
 
     margin: 10px 0;
-    padding: 55px;
+    padding: 24px;
 
     box-sizing: border-box;
     flex-shrink: 0;
@@ -300,18 +304,18 @@ section {
     cursor: pointer;
 }
 
-.geografia img {
+.assuntog4 img {
     width: 70px;
     height: 150px;
     object-fit: contain;
     position: absolute;
     top: 18%;     
-    left: 38.5%;
+    left: 40%;
     transform: translate(-50%, -50%);
     z-index: 10;
 }
 
-.fisica {
+.assuntog5 {
     width: 150px;
     height: 175px;
 
@@ -325,7 +329,7 @@ section {
     align-items: center;
 
     margin: 10px 0;
-    padding: 55px;
+    padding: 20px;
 
     box-sizing: border-box;
     flex-shrink: 0;
@@ -333,19 +337,19 @@ section {
     cursor: pointer;
 }
 
-.fisica img {
+.assuntog5 img {
     width: 70px;
     height: 150px;
     object-fit: contain;
     position: absolute;
     top: 18%;     
-    left: 47.8%;
+    left: 49.7%;
     transform: translate(-50%, -50%);
     z-index: 10;
 }
 
 
-.biologia {
+.assuntog6 {
     width: 150px;
     height: 175px;
 
@@ -359,7 +363,7 @@ section {
     align-items: center;
 
     margin: 10px 0;
-    padding: 55px;
+    padding: 40px;
 
     box-sizing: border-box;
     flex-shrink: 0;
@@ -367,19 +371,19 @@ section {
     cursor: pointer;
 }
 
-.biologia img {
+.assuntog6 img {
     width: 70px;
     height: 150px;
     object-fit: contain;
     position: absolute;
     top: 18%;     
-    left: 56.8%;
+    left: 59.2%;
     transform: translate(-50%, -50%);
     z-index: 10;
 }
 
 
-.ingles {
+.assuntog7 {
     width: 150px;
     height: 175px;
 
@@ -393,7 +397,7 @@ section {
     align-items: center;
 
     margin: 10px 0;
-    padding: 55px;
+    padding: 40px;
 
     box-sizing: border-box;
     flex-shrink: 0;
@@ -401,18 +405,18 @@ section {
     cursor: pointer;
 }
 
-.ingles img {
+.assuntog7 img {
     width: 70px;
     height: 150px;
     object-fit: contain;
     position: absolute;
     top: 18%;     
-    left: 66.1%;
+    left: 68.9%;
     transform: translate(-50%, -50%);
     z-index: 10;
 }
 
-.matematica {
+.assuntog8 {
     width: 150px;
     height: 175px;
 
@@ -426,7 +430,7 @@ section {
     align-items: center;
 
     margin: 10px 0;
-    padding: 55px;
+    padding: 20px;
 
     box-sizing: border-box;
     flex-shrink: 0;
@@ -434,13 +438,13 @@ section {
     cursor: pointer;
 }
 
-.matematica img {
+.assuntog8 img {
     width: 70px;
     height: 150px;
     object-fit: contain;
     position: absolute;
     top: 18%;     
-    left: 75.5%;
+    left: 78.5%;
     transform: translate(-50%, -50%);
     z-index: 10;
 }
@@ -641,3 +645,30 @@ section {
     flex-shrink: 0;
 }
 
+.assuntos, .assuntog1, .assuntog2, .assuntog3, .assuntog4, .assuntog5, .assuntog6, .assuntog7, .assuntog8 {
+    
+    display: flex;
+    flex-direction: row;
+
+    transform: translate(5%);
+
+    justify-content: center;
+    align-items: end;
+    margin: 10px;
+    padding: 20px;
+    top: 50%;
+    
+}
+
+.icones, .assuntog1 img, .assuntog2 img, .assuntog3 img, .assuntog4 img, .assuntog5 img, 
+.assuntog6 img, .assuntog7 img, .assuntog8 img {
+
+    display: flex;
+    flex-direction: row;
+
+    margin: 2px;
+    transform: translate(20px);
+    top: -10%;
+    left: 15%;
+
+}

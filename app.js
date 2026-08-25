@@ -20,6 +20,10 @@ app.get("/telainicial", function(req, res) {
     res.render("indexTelaInicial");
 });
 
+app.get("/indexMateriais", function(req, res) {
+    res.render("indexMateriais");
+});
+
 http.createServer(app).listen(8080, () => {
-    console.log("Servidor rodando na porta 8080");
+    console.log("Servidor inicializado. http://localhost:8080/");
 });
