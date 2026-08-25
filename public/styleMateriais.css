@@ -186,16 +186,29 @@ section {
     border-radius: 25px;
 
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: end;
     align-items: center;
 
+
     margin: 10px 0;
-    padding: 10px;
+    padding: 55px;
 
     box-sizing: border-box;
     flex-shrink: 0;
 
     cursor: pointer;
+}
+
+.sociologia img {
+    width: 70px;
+    height: 150px;
+    object-fit: contain;
+    position: absolute;
+    top: 18%;     
+    left: 10.7%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
 }
 
 .portugues {
@@ -206,17 +219,29 @@ section {
     background-color: #FFB956;
     border-radius: 25px;
 
-    display: flex;
-    justify-content: center;
+     display: flex;
+    flex-direction: column;
+    justify-content: end;
     align-items: center;
 
     margin: 10px 0;
-    padding: 10px;
+    padding: 55px;
 
     box-sizing: border-box;
     flex-shrink: 0;
 
     cursor: pointer;
+}
+
+.portugues img {
+    width: 70px;
+    height: 150px;
+    object-fit: contain;
+    position: absolute;
+    top: 18.5%;     
+    left: 20.1%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
 }
 
 .filosofia {
@@ -228,16 +253,28 @@ section {
     border-radius: 25px;
 
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: end;
     align-items: center;
 
     margin: 10px 0;
-    padding: 10px;
+    padding: 55px;
 
     box-sizing: border-box;
     flex-shrink: 0;
 
     cursor: pointer;
+}
+
+.filosofia img {
+    width: 70px;
+    height: 150px;
+    object-fit: contain;
+    position: absolute;
+    top: 18%;     
+    left: 29%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
 }
 
 .geografia {
@@ -249,16 +286,29 @@ section {
     border-radius: 25px;
 
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: end;
     align-items: center;
 
+
     margin: 10px 0;
-    padding: 10px;
+    padding: 55px;
 
     box-sizing: border-box;
     flex-shrink: 0;
 
     cursor: pointer;
+}
+
+.geografia img {
+    width: 70px;
+    height: 150px;
+    object-fit: contain;
+    position: absolute;
+    top: 18%;     
+    left: 38.5%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
 }
 
 .fisica {
@@ -269,18 +319,31 @@ section {
     background-color: #5EDFB2;
     border-radius: 25px;
 
-    display: flex;
-    justify-content: center;
+     display: flex;
+    flex-direction: column;
+    justify-content: end;
     align-items: center;
 
     margin: 10px 0;
-    padding: 10px;
+    padding: 55px;
 
     box-sizing: border-box;
     flex-shrink: 0;
 
     cursor: pointer;
 }
+
+.fisica img {
+    width: 70px;
+    height: 150px;
+    object-fit: contain;
+    position: absolute;
+    top: 18%;     
+    left: 47.8%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
 
 .biologia {
     width: 150px;
@@ -291,17 +354,30 @@ section {
     border-radius: 25px;
 
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: end;
     align-items: center;
 
     margin: 10px 0;
-    padding: 10px;
+    padding: 55px;
 
     box-sizing: border-box;
     flex-shrink: 0;
 
     cursor: pointer;
 }
+
+.biologia img {
+    width: 70px;
+    height: 150px;
+    object-fit: contain;
+    position: absolute;
+    top: 18%;     
+    left: 56.8%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
 
 .ingles {
     width: 150px;
@@ -312,16 +388,28 @@ section {
     border-radius: 25px;
 
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: end;
     align-items: center;
 
     margin: 10px 0;
-    padding: 10px;
+    padding: 55px;
 
     box-sizing: border-box;
     flex-shrink: 0;
 
     cursor: pointer;
+}
+
+.ingles img {
+    width: 70px;
+    height: 150px;
+    object-fit: contain;
+    position: absolute;
+    top: 18%;     
+    left: 66.1%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
 }
 
 .matematica {
@@ -333,16 +421,28 @@ section {
     border-radius: 25px;
 
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: end;
     align-items: center;
 
     margin: 10px 0;
-    padding: 10px;
+    padding: 55px;
 
     box-sizing: border-box;
     flex-shrink: 0;
-    
+
     cursor: pointer;
+}
+
+.matematica img {
+    width: 70px;
+    height: 150px;
+    object-fit: contain;
+    position: absolute;
+    top: 18%;     
+    left: 75.5%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
 }
 
 .atalhos2 {
@@ -461,7 +561,7 @@ section {
 
 .bolaSimulado img {
     width: 60px;
-    height: 60px;
+    height: 123px;
     object-fit: contain;
 }
 
