@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
+
+body {
+    background-color: #F0FCFF;
+    font-family: 'Momo Trust Display', sans-serif;
+    color: #32818F;
+    font-weight: normal;
+}
+.quadrado{
+        width: 150px;
+        height: 150px;
+        background-color: #DDF9FF;
+}
