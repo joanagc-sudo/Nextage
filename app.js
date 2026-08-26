@@ -1,6 +1,7 @@
 const http = require("http");
 const express = require("express");
 const path = require("path");
+const hbs = require('hbs');
 
 const app = express();
 
@@ -8,20 +9,22 @@ app.set('view engine', 'hbs');
 
 app.use(express.static(path.join(__dirname, "public")));
 
+hbs.registerPartials('./views/partials');
+
 app.get("/", function(req, res) {
-    res.render("indexCadastroAluno");
+    res.render("indexCadastroAluno", { layout: "/layouts/simples"});
 });
 
 app.get("/tela-inicial", function(req, res) {
-    res.render("indexTelaInicial");
+    res.render("indexTelaInicial", { layout: "/layouts/main"});
 });
 
 app.get("/materiais", function(req, res) {
-    res.render("indexMateriais");
+    res.render("indexMateriais", { layout: "/layouts/main"});
 });
 
 app.get("/login", function(req, res) {
-    res.render("indexTelaLogin");
+    res.render("indexTelaLogin", { layout: "/layouts/main"});
 });
 
 http.createServer(app).listen(8080, () => {

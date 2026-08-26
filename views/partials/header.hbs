@@ -1,0 +1,32 @@
+<header class="navbar">
+
+    <div class="logo">
+        <span>Nextage</span>
+    </div>
+
+    <nav>
+        <a href="/tela-inicial">Início</a>
+        <a href="#">Disciplinas</a>
+        <a href="/materiais">Materiais</a>
+        <a href="#">Fórum</a>
+    </nav>
+
+    <div class="usuario">
+        <img src="/imagens/usuario.png" alt="">
+    </div>
+
+</header>
+
+<script>
+    const urlAtual = window.location.pathname;
+
+    const links = document.querySelectorAll("nav a");
+
+    links.forEach(link => {
+        const urlLink = link.getAttribute("href");
+
+        if (urlLink === urlAtual) {
+            link.classList.add("ativo");
+        }
+    });
+</script>
