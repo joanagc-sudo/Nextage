@@ -650,12 +650,12 @@ section {
     display: flex;
     flex-direction: row;
 
-    transform: translate(5%);
+    transform: translate(60px);
 
     justify-content: center;
     align-items: end;
     margin: 10px;
-    padding: 20px;
+    padding: 10px;
     top: 50%;
     
 }
@@ -669,7 +669,7 @@ section {
     margin: 2px;
     transform: translate(20px);
     top: -10%;
-    left: 15%;
+    left: 13%;
 
 }
 
@@ -695,8 +695,10 @@ section {
     font-size: 80px;
 
     transform: translate(1px);
-    top: -10%;
+    top: 50%;
     left: 50%;
+    
+    margin: -51px;
 }
 
 .btn2:hover{
@@ -723,10 +725,12 @@ section {
     transform: translate(0.1px);
     top: -10%;
     left: 50%;
+
+    margin: -27px;
 }
 
 .assuntog1, .assuntog2, .assuntog3, .assuntog4, .assuntog5, .assuntog6, .assuntog7, .assuntog8
-    {transition:transform 0.2s ease;
+    {transition:transform 0.4s ease;
 }
 .assuntog1:hover, .assuntog2:hover, .assuntog3:hover, .assuntog4:hover, .assuntog5:hover, .assuntog6:hover, .assuntog7:hover, .assuntog8:hover{ transform: scale(1.05);
 }
