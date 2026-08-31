@@ -102,11 +102,12 @@ id_conteudo INT NOT NULL,
 PRIMARY KEY (id_topico, id_conteudo),
 FOREIGN KEY (id_topico) REFERENCES Topicos_forum(id_topico),
 FOREIGN KEY (id_conteudo) REFERENCES Conteudos(id_conteudo));
-INSERT INTO Usuarios_Administradores_Estudantes(
-id_usuario, nome, email, senha, tipo_usuario)
-VALUES (1, 'João Silva', 'joao@email.com', '123456', 1),
-(2, 'Maria Souza', 'maria@email.com', '654321', 2),
-(3, 'Carlos Lima', 'carlos@email.com', 'abcdef', 3);
+INSERT INTO Usuarios_Administradores_Estudantes
+(id_usuario, nome, email, senha, data_nascimento, tipo_usuario)
+VALUES
+(1, 'João Silva', 'joao@email.com', '123456', '2010-12-12', 1),
+(2, 'Maria Souza', 'maria@email.com', '654321', '2010-12-12', 1),
+(3, 'Carlos Lima', 'carlos@email.com', 'abcdef', '2010-12-12', 1);
 INSERT INTO Disciplinas (
 id_disciplina, nome)
 VALUES (1, 'Matemática'),
