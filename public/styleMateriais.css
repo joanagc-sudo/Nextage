@@ -14,7 +14,7 @@ body {
 }
 
 h1 {
-    transform: translate(865px);
+    text-align: center;
 }
 
 
@@ -78,7 +78,7 @@ section {
     width: 92%;
     height: 215px;
 
-    margin: 10px auto 20px;
+    margin: 1px auto 20px;
     padding: 5px 10px;
 
     background-color: #7DB2BC;
@@ -460,7 +460,6 @@ section {
     justify-content: center;
     align-items: center;
 
-    transform: translateX(250px);
 }
 
 .bolaQuestoes h2 {
@@ -480,14 +479,11 @@ section {
     align-items: center;
     justify-content: center;
 
-    transform: translateX(-85px);
 }
 
 .simulado {
     text-align: center;
-  
-    transform: translateX(-160px);
-    
+    justify-content: center;
 
 }
 
@@ -596,7 +592,7 @@ section {
     display: flex;
     flex-direction: row;
 
-    transform: translate(60px);
+    transform: translate(15px);
 
     justify-content: center;
     align-items: end;
