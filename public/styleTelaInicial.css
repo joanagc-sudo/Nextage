@@ -13,7 +13,7 @@ body {
     font-weight: normal;
 }
 /*parte que fica embaixo do menu, meio da tela*/
-.hero {
+.meio {
     width: 88%;
     min-height: 270px;
 
@@ -24,20 +24,20 @@ body {
     justify-content: space-between;
 }
 
-.hero-texto {
+.meio-texto {
     padding-left: 10px;
 }
 
-.hero h1 {
+.meio h1 {
     margin-bottom: 8px;
 
     color: white;
-    font-size: 30px;
+    font-size: 35px;
     line-height: 1.2;
     font-weight: normal;
 }
 
-.hero p {
+.meio p {
     margin-bottom: 25px;
 
     color: #2C7E8D;
@@ -46,7 +46,7 @@ body {
     font-weight: normal;
 }
 
-.hero button {
+.meio button {
     padding: 9px 20px;
 
     background-color: #08758A;
