@@ -38,16 +38,16 @@ app.post('/', async (req, res) => {
             });
         }
          // Verifica se o email já está cadastrado
-        const [alunoExistente] = await conn.query(
-            'SELECT id FROM alunos WHERE email = ?',
-            [email]
-        );
+        const [usuarioExistente] = await conn.query(
+    'SELECT id_usuario FROM Usuarios_Administradores_Estudantes WHERE email = ?',
+    [email]
+);
 
-        if (alunoExistente.length > 0) {
-            return res.status(409).json({
-                mensagem: 'Este e-mail já está cadastrado.'
-            });
-        }
+if (usuarioExistente.length > 0) {
+    return res.status(409).json({
+        mensagem: 'Este e-mail já está cadastrado.'
+    });
+}
 
         // Criptografa a senha
         const senhaCriptografada = await bcrypt.hash(senha, 10);

@@ -3,12 +3,14 @@ drop database if exists nextage;
 CREATE DATABASE IF NOT EXISTS nextage;
 USE nextage;
 CREATE TABLE Usuarios_Administradores_Estudantes (
-id_usuario INT PRIMARY KEY NOT NULL,
-nome VARCHAR(1000) NOT NULL,
-email VARCHAR(100) NOT NULL,
-senha VARCHAR(10) NOT NULL,
-data_nascimento date NOT NULL,
-tipo_usuario INT NOT NULL);
+    id_usuario INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(1000) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    data_nascimento DATE NOT NULL,
+    tipo_usuario INT NOT NULL,
+    PRIMARY KEY (id_usuario)
+);
 CREATE TABLE Disciplinas (
 id_disciplina INT PRIMARY KEY NOT NULL,
 nome VARCHAR(100) NOT NULL);
@@ -170,3 +172,6 @@ VALUES (1, 1), (2, 2), (3, 3);
 INSERT INTO Conteudos_TopicosForum
 (id_topico, id_conteudo)
 VALUES (1, 1), (2, 2), (3, 3);
+
+SELECT * FROM Usuarios_Administradores_Estudantes;
+
