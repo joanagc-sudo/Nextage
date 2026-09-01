@@ -1,0 +1,62 @@
+{{#if query.success}}
+
+<div id="alerta-sucesso"
+    class="alert alert-success d-flex align-items-center"
+    role="alert">
+
+    <svg class="bi flex-shrink-0 me-2"
+        width="20"
+        height="20"
+        role="img"
+        aria-label="Sucesso:">
+        <use xlink:href="#check-circle-fill"></use>
+    </svg>
+
+    <div>
+        {{query.success}}
+    </div>
+</div>
+
+{{/if}}
+
+{{#if query.error}}
+
+<div id="alerta-danger"
+    class="alert alert-danger d-flex align-items-center"
+    role="alert">
+
+    <svg class="bi flex-shrink-0 me-2"
+        width="20"
+        height="20"
+        role="img"
+        aria-label="Error:">
+        <use xlink:href="#check-circle-fill"></use>
+    </svg>
+
+    <div>
+        {{query.error}}
+    </div>
+</div>
+
+{{/if}}
+
+{{#if query.warning}}
+
+<div id="alerta-warning"
+    class="alert alert-warning d-flex align-items-center"
+    role="alert">
+
+    <svg class="bi flex-shrink-0 me-2"
+        width="20"
+        height="20"
+        role="img"
+        aria-label="Warning:">
+        <use xlink:href="#check-circle-fill"></use>
+    </svg>
+
+    <div>
+        {{query.warning}}
+    </div>
+</div>
+
+{{/if}}
