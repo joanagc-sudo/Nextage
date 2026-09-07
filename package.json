@@ -23,7 +23,7 @@
     "express": "^5.2.1",
     "hbs": "^4.3.0",
     "http": "^0.0.1-security",
-    "mysql2": "^3.24.2",
+    "mysql2": "^3.24.3",
     "nextage": "github:joanagc-sudo/Nextage"
   },
   "devDependencies": {

@@ -1,10 +1,28 @@
-<link rel="stylesheet" href="styleTelaQuestoes.css">
+<!--<link rel="stylesheet" href="styleTelaQuestoes.css">-->
 
-<section class="atalhos">
+<h1>Filtrar Questões</h1>
 
-    <div class="questoes">
-        <h2>Filtrar Questões</h2>
+<form id="filtrarQuestoes">
+    <div class="my-3">
+        <label for="palavra-chave">Palavra-chave</label><br>
+        <div class="input-group mt-1">
+            <input class="form-control" type="text" id="palavra-chave" name="palavra-chave"
+                placeholder="Busque por palavra-chave">
+        </div>
     </div>
 
-    <div class="fundoQuestoes">
+    <div class="my-3">
+        <label for="disciplina" class="form-label">Disciplina</label>
+
+        <input class="form-control form-select pe-5 custom-search-select" list="listaDisciplinas" id="disciplina"
+            placeholder="Selecione as disciplinas">
+
+        <datalist id="listaDisciplinas">
+            <option value="Matemática">
+            <option value="Português">
+            <option value="História">
+            <option value="Geografia">
+        </datalist>
     </div>
+
+</form>
