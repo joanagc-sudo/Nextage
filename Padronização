@@ -1,6 +1,7 @@
 Comando para iniciar:
-npm install
-npm run dev
+npm install 
 npm install mysql2
+npm run dev
+
 
 Animação de aumentar escala: scale(1.05); - transform 0.2s ease;

@@ -1,95 +1,367 @@
-<!--<link rel="stylesheet" href="styleTelaQuestoes.css">-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <h1>Filtrar Questões</h1>
 
 <form id="filtrarQuestoes">
+
+    <!-- PALAVRA-CHAVE -->
     <div class="my-3">
-        <label for="palavra-chave">Palavra-chave</label><br>
-        <div class="input-group mt-1">
-            <input class="form-control" type="text" id="palavra-chave" name="palavra-chave"
-                placeholder="Busque por palavra-chave">
-        </div>
+
+        <label for="palavra-chave" class="form-label">
+            Palavra-chave
+        </label>
+
+        <input
+            class="form-control"
+            type="text"
+            id="palavra-chave"
+            name="palavra-chave"
+            placeholder="Busque por palavra-chave">
+
     </div>
-    
-    <div class="my-3">
-        <label class="form-label">Disciplina</label>
+
+
+    <!-- TODOS OS CAMPOS SERÃO CRIADOS AQUI -->
+    <div id="containerFiltros"></div>
+
+</form>
+
+
+<style>
+
+.dropdown-menu {
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.campo-pesquisa {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: white;
+    padding-bottom: 8px;
+}
+
+.item-filtro {
+    padding: 5px;
+}
+
+.item-filtro:hover {
+    background-color: #f5f5f5;
+}
+
+.botao-filtro {
+    white-space: normal;
+    min-height: 38px;
+}
+
+</style>
+
+
+<script>
+
+
+// =====================================================
+// LISTAS
+// =====================================================
+
+const disciplinas = [
+
+    "Biologia",
+    "Espanhol",
+    "Física",
+    "Filosofia",
+    "Geografia",
+    "História",
+    "Inglês",
+    "Matemática",
+    "Português",
+    "Química",
+    "Redação",
+    "Sociologia"
+
+];
+
+
+const conteudos = [
+
+    "Álgebra",
+    "Geometria",
+    "Trigonometria",
+    "Funções",
+    "Equações",
+    "Probabilidade",
+    "Estatística"
+
+];
+
+
+const bancas = [
+
+    "CEBRASPE",
+    "FCC",
+    "FGV",
+    "VUNESP",
+    "AOCP"
+
+];
+
+
+const cargos = [
+
+    "Analista",
+    "Técnico",
+    "Professor",
+    "Auditor",
+    "Assistente"
+
+];
+
+
+// =====================================================
+// CONFIGURAÇÃO DOS CAMPOS
+// =====================================================
+
+const filtros = [
+
+    {
+        nome: "Disciplina",
+        lista: disciplinas,
+        multiplo: true
+    },
+
+    {
+        nome: "Conteúdo",
+        lista: conteudos,
+        multiplo: true
+    },
+
+    {
+        nome: "Banca",
+        lista: bancas,
+        multiplo: true
+    },
+
+    {
+        nome: "Cargo",
+        lista: cargos,
+        multiplo: true
+    }
+
+];
+
+
+// =====================================================
+// CONTAINER
+// =====================================================
+
+const container =
+    document.getElementById("containerFiltros");
+
+
+// =====================================================
+// FUNÇÃO GENÉRICA
+// =====================================================
+
+function criarCampoFiltro(config) {
+
+    const campo =
+        document.createElement("div");
+
+    campo.className =
+        "my-3 campo-filtro";
+
+
+    campo.innerHTML = `
+
+        <label class="form-label">
+            ${config.nome}
+        </label>
+
 
         <div class="dropdown w-100">
-            <button class="form-select text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Selecione as disciplinas
+
+
+            <!-- BOTÃO -->
+
+            <button
+                type="button"
+                class="form-select text-start botao-filtro"
+                data-bs-toggle="dropdown"
+                data-bs-auto-close="outside">
+
+                Selecione ${config.nome.toLowerCase()}
+
             </button>
+
+
+            <!-- MENU -->
 
             <ul class="dropdown-menu w-100 p-2">
 
-                <li>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Matemática">
-                        <label class="form-check-label">
-                            Matemática
-                        </label>
-                    </div>
+
+                <!-- PESQUISA -->
+
+                <li class="campo-pesquisa">
+
+                    <input
+                        type="text"
+                        class="form-control pesquisa-filtro"
+                        placeholder="Pesquisar..."
+                        autocomplete="off">
+
                 </li>
 
-                <li>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Português">
-                        <label class="form-check-label">
-                            Português
-                        </label>
-                    </div>
-                </li>
 
                 <li>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="História">
-                        <label class="form-check-label">
-                            História
-                        </label>
-                    </div>
+                    <hr class="dropdown-divider">
                 </li>
 
-                <li>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Geografia">
-                        <label class="form-check-label">
-                            Geografia
-                        </label>
-                    </div>
-                </li>
+
+                <!-- OPÇÕES -->
+
+                <div class="lista-filtro">
+
+                    ${config.lista.map(opcao => `
+
+                        <li class="item-filtro">
+
+                            <div class="form-check">
+
+                                <input
+                                    class="form-check-input checkbox-filtro"
+                                    type="checkbox"
+                                    value="${opcao}">
+
+                                <label class="form-check-label">
+                                    ${opcao}
+                                </label>
+
+                            </div>
+
+                        </li>
+
+                    `).join("")}
+
+                </div>
 
             </ul>
+
         </div>
-    </div>
-</form>
 
-<script>
-    document.querySelectorAll('.dropdown').forEach(dropdown => {
+    `;
 
-        const botao = dropdown.querySelector('button');
-        const checkboxes = dropdown.querySelectorAll('.form-check-input');
 
-        checkboxes.forEach(checkbox => {
+    container.appendChild(campo);
 
-            checkbox.addEventListener('change', () => {
 
-                const selecionadas = [];
+    // =================================================
+    // ELEMENTOS
+    // =================================================
 
-                checkboxes.forEach(item => {
-                    if (item.checked) {
-                        selecionadas.push(item.value);
-                    }
-                });
+    const botao =
+        campo.querySelector(".botao-filtro");
 
-                if (selecionadas.length === 0) {
-                    botao.textContent = 'Selecione as disciplinas';
-                } else {
-                    botao.textContent = selecionadas.join(', ');
-                }
+    const pesquisa =
+        campo.querySelector(".pesquisa-filtro");
 
-            });
+    const itens =
+        campo.querySelectorAll(".item-filtro");
+
+    const checkboxes =
+        campo.querySelectorAll(".checkbox-filtro");
+
+
+    // =================================================
+    // PESQUISA
+    // =================================================
+
+    pesquisa.addEventListener("input", function () {
+
+        const texto =
+            this.value
+                .toLowerCase()
+                .trim();
+
+
+        itens.forEach(function (item) {
+
+            const nome =
+                item
+                    .querySelector(".form-check-label")
+                    .textContent
+                    .toLowerCase();
+
+
+            item.style.display =
+                nome.includes(texto)
+                    ? ""
+                    : "none";
 
         });
 
     });
+
+
+    // =================================================
+    // SELEÇÃO
+    // =================================================
+
+    checkboxes.forEach(function (checkbox) {
+
+        checkbox.addEventListener("change", function () {
+
+            const selecionadas = [];
+
+
+            checkboxes.forEach(function (item) {
+
+                if (item.checked) {
+
+                    selecionadas.push(
+                        item.value
+                    );
+
+                }
+
+            });
+
+
+            // Nenhuma selecionada
+
+            if (selecionadas.length === 0) {
+
+                botao.textContent =
+                    `Selecione ${config.nome.toLowerCase()}`;
+
+            }
+
+
+            // Uma ou várias selecionadas
+
+            else {
+
+                botao.textContent =
+                    selecionadas.join(", ");
+
+            }
+
+        });
+
+    });
+
+}
+
+
+// =====================================================
+// CRIAR TODOS OS FILTROS
+// =====================================================
+
+filtros.forEach(function (filtro) {
+
+    criarCampoFiltro(filtro);
+
+});
+
+
 </script>
