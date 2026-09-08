@@ -86,7 +86,7 @@ app.get("/materiais", function (req, res) {
     res.render("indexMateriais", { layout: "/layouts/main", query: req.query });
 });
 
-app.get("/login", function (req, res) {
+app.get("/tela-login", function (req, res) {
     res.render("indexTelaLogin", { layout: "/layouts/main", query: req.query });
 });
 
