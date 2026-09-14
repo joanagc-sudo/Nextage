@@ -78,20 +78,29 @@ app.post('/', async (req, res) => {
     }
 });
 
-app.get("/tela-inicial", function (req, res) {
+app.get("/tela-inicial", async function (req, res) {
     res.render("indexTelaInicial", { layout: "/layouts/main", query: req.query });
 });
 
-app.get("/materiais", function (req, res) {
+app.get("/materiais", async function (req, res) {
     res.render("indexMateriais", { layout: "/layouts/main", query: req.query });
 });
 
-app.get("/tela-login", function (req, res) {
+app.get("/tela-login", async function (req, res) {
     res.render("indexTelaLogin", { layout: "/layouts/main", query: req.query });
 });
 
-app.get("/questoes", function (req, res) {
-    res.render("indexTelaQuestoes", { layout: "/layouts/main", query: req.query });
+app.get("/questoes", async function (req, res) {
+
+    const [result] = await conn.query(
+            `SELECT * FROM questoes 
+            JOIN vestibulares ON questoes.id_vestibular = vestibulares.id_vestibular
+            JOIN alternativas ON questoes.id_questao = alternativas.questoes_id_questao`
+        );
+    
+    //console.log(result);
+
+    res.render("indexTelaQuestoes", { layout: "/layouts/main", query: req.query, result: result });
 });
 
 http.createServer(app).listen(8080, () => {
