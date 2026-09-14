@@ -1,39 +1,49 @@
-<!--<link rel="stylesheet" href="styleTelaQuestoes.css">-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <link rel="stylesheet" href="styleLogin.css">
 
-    <!-- Ícones -->
+<main class="conteudo">
+    <div class="card-login">
 
-</head>
-<body>
+        <h1>Bem-vindo de volta!</h1>
+        <p>Para continuar sua experiência informe seus dados de acesso.</p>
 
-    <div class="container">
-        <div class="card-login">
+        <form method="POST" action="/login">
 
-            <h1>Bem-vindo de volta!</h1>
-            <p>Para continuar sua experiência informe seus dados de acesso</p>
-
-            <form>
-
-                <label>E-mail</label>
-                <div class="input-box">
-                    <i class="fa-regular fa-envelope"></i>
-                    <input type="email" placeholder="Insira seu e-mail">
+            <div class="my-3">
+                <label for="email" class="form-label">E-mail</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-envelope"></i>
+                    </span>
+                    <input
+                        type="email"
+                        class="form-control"
+                        id="email"
+                        name="email"
+                        placeholder="Insira seu e-mail"
+                        required>
                 </div>
+            </div>
 
-                <label>Senha</label>
-                <div class="input-box">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="password" placeholder="Insira sua senha">
-                    <i class="fa-regular fa-eye eye"></i>
+            <div class="my-3">
+                <label for="senha" class="form-label">Senha</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-lock"></i>
+                    </span>
+                    <input
+                        type="password"
+                        class="form-control"
+                        id="senha"
+                        name="senha"
+                        placeholder="Insira sua senha"
+                        required>
                 </div>
+            </div>
 
-                <button type="submit">login</button>
+            <button type="submit">login</button>
 
-            </form>
+        </form>
 
-        </div>
     </div>
-
-</body>
-</html>
+</main>
