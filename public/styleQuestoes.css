@@ -4,6 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: #9DC8CF;
 }
 
 body {
@@ -11,5 +12,9 @@ body {
     font-family: 'Momo Trust Display', sans-serif;
     color: #32818F;
     font-weight: normal;
+}
+
+.filtros{
+    background-color: #BAD8DE;
 }
 
