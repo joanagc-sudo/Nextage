@@ -5,6 +5,7 @@
     padding:0;
     box-sizing:border-box;
     font-family:"Momo Trust Display", sans-serif;
+    
 }
 
 body{
@@ -14,30 +15,26 @@ body{
     display:flex;
     flex-direction:column;
 }
-
 .perfil{
 
     font-size:38px;
     color:#0C6878;
 }
-
 .conteudo{
 
     flex:1;
-
     display:flex;
     justify-content:center;
     align-items:center;
     padding:40px 20px;
 }
-
 .card-login{
 
     width:360px;
     background:#F5F3EE;
     padding:40px;
+    
 }
-
 .card-login h1{
 
     color:#0C6878;
@@ -45,13 +42,11 @@ body{
     line-height:1;
     margin-bottom:10px;
 }
-
 .card-login p{
 
     color:#6b6b6b;
     margin-bottom:30px;
 }
-
 .card-login label{
 
     display:block;
@@ -61,7 +56,6 @@ body{
 }
 
 .input-box{
-
     display:flex;
     align-items:center;
     border:1px solid #A5C6CE;
@@ -71,19 +65,16 @@ body{
 }
 
 .input-box i{
-
     color:#0C6878;
 }
 
 .input-box input{
-
     border:none;
     background:transparent;
     outline:none;
     flex:1;
     margin:0 10px;
 }
-
 button{
 
     display:block;
