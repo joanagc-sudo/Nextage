@@ -1,27 +1,67 @@
-<header class="navbar">
+<header class="navbar"> 
+ 
+    <div class="logo"> 
+        <span>Nextage</span> 
+    </div> 
+ 
+    <nav> 
+        <a href="/tela-inicial">Início</a> 
+        <a href="#">Disciplinas</a> 
+        <a href="/materiais">Materiais</a> 
+        <a href="#">Fórum</a> 
+        <a href="/questoes">Questões</a> 
+    </nav> 
+ 
+    <!-- Área do usuário -->
+    <div class="usuario-container">
 
-    <div class="logo">
-        <span>Nextage</span>
-    </div>
+        <button class="usuario" id="botaoUsuario">
+            <img src="/imagens/usuario.png" alt="Perfil">
+        </button>
 
-    <nav>
-        <a href="/tela-inicial">Início</a>
-        <a href="#">Disciplinas</a>
-        <a href="/materiais">Materiais</a>
-        <a href="#">Fórum</a>
-        <a href="/questoes">Questões</a>
-     
-    </nav>
+        <!-- Menu que aparece ao clicar -->
+        <div class="menu-usuario" id="menuUsuario">
 
-    <div class="usuario">
-        <img src="/imagens/usuario.png" alt="">
+            <div class="perfil-info">
+                <img src="/imagens/usuario.png" alt="Perfil">
+                <div>
+                    <strong>Nome do Usuário</strong>
+                    <span>usuario@email.com</span>
+                </div>
+            </div>
+
+            <div class="separador"></div>
+
+            <button class="opcao-menu" id="trocarConta">
+                <span>⇄</span>
+                Trocar de conta
+            </button>
+
+            <button class="opcao-menu" id="alterarFoto">
+                <span>📷</span>
+                Alterar foto
+            </button>
+
+            <div class="separador"></div>
+
+            <button class="opcao-menu sair" id="sair">
+                <span>↪</span>
+                Sair
+            </button>
+
+        </div>
+
     </div>
 
 </header>
 
-<script>
-    const urlAtual = window.location.pathname;
 
+<script>
+    // =========================
+    // MENU ATIVO
+    // =========================
+
+    const urlAtual = window.location.pathname;
     const links = document.querySelectorAll("nav a");
 
     links.forEach(link => {
@@ -31,4 +71,45 @@
             link.classList.add("ativo");
         }
     });
+
+
+    const botaoUsuario = document.getElementById("botaoUsuario");
+    const menuUsuario = document.getElementById("menuUsuario");
+
+    botaoUsuario.addEventListener("click", function(event) {
+
+        event.stopPropagation();
+
+        menuUsuario.classList.toggle("aberto");
+
+    });
+
+    document.addEventListener("click", function(event) {
+
+        if (!menuUsuario.contains(event.target) &&
+            !botaoUsuario.contains(event.target)) {
+
+            menuUsuario.classList.remove("aberto");
+
+        }
+
+    });
+
+    document.getElementById("trocarConta").addEventListener("click", function() {
+        window.location.href = "/tela-login";
+
+    });
+
+    document.getElementById("alterarFoto").addEventListener("click", function() {
+        alert("Aqui será possível alterar a foto de perfil.");
+
+    });
+
+
+    document.getElementById("sair").addEventListener("click", function() {
+
+        window.location.href = "/";
+
+    });
 </script>
+
