@@ -1,52 +1,76 @@
-<header class="navbar"> 
- 
-    <div class="logo"> 
-        <span>Nextage</span> 
-    </div> 
- 
-    <nav> 
-        <a href="/tela-inicial">Início</a> 
-        <a href="#">Disciplinas</a> 
-        <a href="/materiais">Materiais</a> 
-        <a href="#">Fórum</a> 
-        <a href="/questoes">Questões</a> 
-    </nav> 
- 
-    <!-- Área do usuário -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>Nextage</span>
+    </div>
+
+    <nav>
+        <a href="/tela-inicial">Início</a>
+        <a href="#">Disciplinas</a>
+        <a href="/materiais">Materiais</a>
+        <a href="#">Fórum</a>
+        <a href="/questoes">Questões</a>
+    </nav>
+
     <div class="usuario-container">
 
+        <!-- Botão do usuário -->
         <button class="usuario" id="botaoUsuario">
             <img src="/imagens/usuario.png" alt="Perfil">
         </button>
 
-        <!-- Menu que aparece ao clicar -->
+
+        <!-- MENU DO USUÁRIO -->
         <div class="menu-usuario" id="menuUsuario">
 
+            <!-- Informações do perfil -->
             <div class="perfil-info">
+
                 <img src="/imagens/usuario.png" alt="Perfil">
+
                 <div>
                     <strong>Nome do Usuário</strong>
                     <span>usuario@email.com</span>
                 </div>
+
             </div>
 
+
             <div class="separador"></div>
 
+
+            <!-- Trocar conta -->
             <button class="opcao-menu" id="trocarConta">
-                <span>⇄</span>
-                Trocar de conta
+
+                <i class="bi bi-arrow-left-right"></i>
+
+                <span>Trocar de conta</span>
+
             </button>
 
+
+            <!-- Alterar foto -->
             <button class="opcao-menu" id="alterarFoto">
-                <span>📷</span>
-                Alterar foto
+
+                <i class="bi bi-camera"></i>
+
+                <span>Alterar foto</span>
+
             </button>
+
 
             <div class="separador"></div>
 
+
+            <!-- Sair -->
             <button class="opcao-menu sair" id="sair">
-                <span>↪</span>
-                Sair
+
+                <i class="bi bi-arrow-return-right"></i>
+
+                <span>Sair</span>
+
             </button>
 
         </div>
@@ -55,25 +79,26 @@
 
 </header>
 
-
 <script>
-    // =========================
-    // MENU ATIVO
-    // =========================
 
     const urlAtual = window.location.pathname;
+
     const links = document.querySelectorAll("nav a");
 
     links.forEach(link => {
+
         const urlLink = link.getAttribute("href");
 
         if (urlLink === urlAtual) {
+
             link.classList.add("ativo");
+
         }
+
     });
 
-
     const botaoUsuario = document.getElementById("botaoUsuario");
+
     const menuUsuario = document.getElementById("menuUsuario");
 
     botaoUsuario.addEventListener("click", function(event) {
@@ -86,8 +111,10 @@
 
     document.addEventListener("click", function(event) {
 
-        if (!menuUsuario.contains(event.target) &&
-            !botaoUsuario.contains(event.target)) {
+        if (
+            !menuUsuario.contains(event.target) &&
+            !botaoUsuario.contains(event.target)
+        ) {
 
             menuUsuario.classList.remove("aberto");
 
@@ -96,20 +123,23 @@
     });
 
     document.getElementById("trocarConta").addEventListener("click", function() {
+
         window.location.href = "/tela-login";
 
     });
 
+
     document.getElementById("alterarFoto").addEventListener("click", function() {
+
         alert("Aqui será possível alterar a foto de perfil.");
 
     });
-
 
     document.getElementById("sair").addEventListener("click", function() {
 
         window.location.href = "/";
 
     });
+
 </script>
 

@@ -1,21 +1,15 @@
-
 .navbar {
     width: 95%;
     height: 54px;
     margin: 16px auto 0;
     padding: 0 18px;
-
     background-color: #FFFDF7;
     border-radius: 7px;
-
     display: flex;
     align-items: center;
+
+    box-sizing: border-box;
 }
-
-
-/* =========================
-   LOGO
-========================= */
 
 .logo {
     width: 240px;
@@ -24,12 +18,9 @@
     font-weight: normal;
 
     color: #086B7A;
+
+    flex-shrink: 0;
 }
-
-
-/* =========================
-   MENU DE NAVEGAÇÃO
-========================= */
 
 nav {
     display: flex;
@@ -38,39 +29,25 @@ nav {
 }
 
 nav a {
-    color: #075F6E;
+    color:#075F6E;
     text-decoration: none;
-
     font-size: 21px;
     font-weight: normal;
-
     display: flex;
     align-items: center;
-
     position: relative;
+    white-space: nowrap;
 }
-
-
-/* Link ativo */
 
 nav a.ativo::after {
     content: "";
-
     position: absolute;
-
     bottom: 7px;
     left: 0;
-
     width: 100%;
     height: 2px;
-
     background-color: #087183;
 }
-
-
-/* =========================
-   ÁREA DO USUÁRIO
-========================= */
 
 .usuario-container {
     position: relative;
@@ -79,14 +56,11 @@ nav a.ativo::after {
 }
 
 
-/* =========================
-   BOTÃO / FOTO DO USUÁRIO
-========================= */
-
 .usuario {
     width: 42px;
     height: 42px;
 
+    margin: 0;
     padding: 0;
 
     border: none;
@@ -105,15 +79,13 @@ nav a.ativo::after {
     width: 100%;
     height: 100%;
 
+    margin: 0;
+    padding: 0;
+
     object-fit: cover;
 
     display: block;
 }
-
-
-/* =========================
-   MENU DROPDOWN
-========================= */
 
 .menu-usuario {
     position: absolute;
@@ -142,6 +114,8 @@ nav a.ativo::after {
         visibility 0.2s;
 
     z-index: 1000;
+
+    box-sizing: border-box;
 }
 
 .menu-usuario.aberto {
@@ -172,7 +146,6 @@ nav a.ativo::after {
     flex-shrink: 0;
 }
 
-
 .perfil-info div {
     display: flex;
     flex-direction: column;
@@ -186,7 +159,9 @@ nav a.ativo::after {
     font-size: 15px;
 
     white-space: nowrap;
+
     overflow: hidden;
+
     text-overflow: ellipsis;
 }
 
@@ -196,10 +171,11 @@ nav a.ativo::after {
     font-size: 12px;
 
     white-space: nowrap;
+
     overflow: hidden;
+
     text-overflow: ellipsis;
 }
-
 
 .separador {
     width: 100%;
@@ -229,6 +205,7 @@ nav a.ativo::after {
     color: #075F6E;
 
     font-family: inherit;
+
     font-size: 15px;
 
     text-align: left;
@@ -242,14 +219,24 @@ nav a.ativo::after {
     background-color: #EAF4F3;
 }
 
-
-.opcao-menu span {
+.opcao-menu i {
     width: 20px;
 
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     font-size: 17px;
+
+    flex-shrink: 0;
 }
+
+
+.opcao-menu span {
+    margin: 0;
+    padding: 0;
+}
+
 
 .opcao-menu.sair {
     color: #B34242;
@@ -257,4 +244,5 @@ nav a.ativo::after {
 
 .opcao-menu.sair:hover {
     background-color: #FBEAEA;
+
 }

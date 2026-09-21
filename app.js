@@ -88,6 +88,66 @@ app.get("/materiais", async function (req, res) {
 
 app.get("/tela-login", async function (req, res) {
     res.render("indexTelaLogin", { layout: "/layouts/main", query: req.query });
+
+app.post("/login", async function (req, res) {
+
+    try {const { email, senha } = req.body;
+        if (!email || !senha) {
+            return res.redirect(
+                "/tela-login?error=Informe o e-mail e a senha."
+            );
+        }
+        const [usuarios] = await conn.query(
+            `
+            SELECT
+                id_usuario,
+                nome,
+                email,
+                senha,
+                tipo_usuario
+            FROM Usuarios_Administradores_Estudantes
+            WHERE email = ?
+            `,
+            [email]
+        );
+
+        if (usuarios.length === 0) {
+
+            return res.redirect(
+                "/tela-login?error=E-mail ou senha incorretos."
+            );
+
+        }
+
+
+        const usuario = usuarios[0];
+
+        const senhaCorreta = await bcrypt.compare(
+            senha,
+            usuario.senha
+        );
+
+        if (!senhaCorreta) {
+
+            return res.redirect(
+                "/tela-login?error=E-mail ou senha incorretos."
+            );
+
+        }
+
+        console.log("Login realizado:", usuario.email);
+
+        return res.redirect("/tela-inicial");
+
+    } catch (error) {
+
+        console.error("Erro ao realizar login:", error);
+
+        return res.redirect("/tela-login?error=Erro ao realizar login.");
+    }
+
+});
+
 });
 
 app.get("/questoes", async function (req, res) {
