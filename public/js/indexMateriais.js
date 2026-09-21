@@ -1,27 +1,55 @@
-const fileInput = document.getElementById('fileInput');
-const arquivoSelecionado = document.getElementById('arquivoSelecionado');
-const arquivoSelecionadoTexto = document.getElementById('arquivoSelecionadoTexto');
-const arquivoSelecionadoLink = document.getElementById('arquivoSelecionadoLink');
+const btnCadastrar = document.getElementById("btnCadastrar");
+const fileInput = document.getElementById("fileInput");
+const listaMateriais = document.getElementById("listaMateriais");
 
-fileInput.addEventListener('change', function () {
 
-    // Verifica se algum arquivo foi selecionado
+// Quando clicar no botão +
+btnCadastrar.addEventListener("click", function () {
+    fileInput.click();
+});
+
+
+// Quando escolher um arquivo
+fileInput.addEventListener("change", function () {
+
     if (fileInput.files.length === 0) {
         return;
     }
 
-    // Pega o arquivo escolhido pelo usuário
     const arquivo = fileInput.files[0];
 
-    // Mostra o nome do arquivo
-    arquivoSelecionadoTexto.innerText = arquivo.name;
-
-    // Cria um link temporário para o arquivo selecionado
+    // Cria um endereço temporário para o arquivo
     const url = URL.createObjectURL(arquivo);
 
-    arquivoSelecionadoLink.href = url;
-    arquivoSelecionadoLink.download = arquivo.name;
+    // Cria uma nova linha
+    const linha = document.createElement("tr");
 
-    // Mostra o arquivo selecionado
-    arquivoSelecionado.removeAttribute('hidden');
+    // Nome do arquivo
+    const colunaNome = document.createElement("td");
+    colunaNome.textContent = arquivo.name;
+
+    // Coluna do botão
+    const colunaBotao = document.createElement("td");
+
+    // Botão baixar
+    const botaoBaixar = document.createElement("a");
+
+    botaoBaixar.textContent = "Baixar";
+    botaoBaixar.href = url;
+    botaoBaixar.download = arquivo.name;
+    botaoBaixar.classList.add("botaoBaixar");
+
+    // Coloca o botão dentro da coluna
+    colunaBotao.appendChild(botaoBaixar);
+
+    // Coloca as colunas na linha
+    linha.appendChild(colunaNome);
+    linha.appendChild(colunaBotao);
+
+    // Coloca a linha na tabela
+    listaMateriais.appendChild(linha);
+
+    // Limpa o input para permitir escolher novamente o mesmo arquivo
+    fileInput.value = "";
+
 });

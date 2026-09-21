@@ -44,60 +44,59 @@
 
     <section class="atalhos2">
 
-        <div class="Questoes">
-            <h2>Questões</h2>
-            <p>Exercite seu cérebro</p>
-        </div>
+    <div class="Materiais">
+        <h2>Materiais</h2>
+        <p>Exercite seu cérebro</p>
+    </div>
 
-        <div class="fundoQuestoes">
+    <div class="fundoQuestoes">
 
-            <div class="resolverQuestoes">
-                {{!-- Arquivo selevionado --}}
-                <div id="arquivoSelecionado" hidden>
-                    <i class="bi bi-file-earmark-text"></i>
+        <!-- LADO ESQUERDO -->
+        <div class="resolverQuestoes">
 
-                    <a id="arquivoSelecionadoLink" href="#" download>
-                        <span id="arquivoSelecionadoTexto"></span>
-                    </a>
-                </div>
-                <div>
-                    <form action="/materiais" method="post" enctype="multipart/form-data">
-                        <input type="file" name="arquivo" id="fileInput" hidden>
+            <div class="botaoCadastro">
 
-                        <button type="button" class="btn btn-dark btn-lg"
-                         onclick="document.getElementById('fileInput').click()">
-                         <h1>+</h1>
-                        </button>
-                    </form>
-                </div>
+                <input type="file" id="fileInput" hidden>
 
-                <div>
-                    <h2>Cadastrar material</h2>
-                    <p>Compartilhe seus conhecimentos <br>e ajude outros
-                        usuários</p>
-                </div>
-            </div>
-
-            <div class="divisor"></div>
-
-            <div class="simulado">
-                <h2>Simulados</h2>
-                <div class="bolaSimulado">
-                    <div class="icone" id="folha">
-
-                        <img src="imagens/folhaSimulado.png" alt>
-
-                    </div>
-                </div>
-                <p>Você ainda não resolveu nenhum simulado.</p>
-                <div>
-                    <button type="button2" class="btn2 btn-dark btn-lg">
-                        <h1>+</h1>
-                    </button>
-                </div>
-                <span class="novoSimulado">Iniciar novo simulado</span>
-            </div>
+                <button type="button" class="btn" id="btnCadastrar">
+                    <h1>+</h1>
+                </button>
 
         </div>
+            <div class="textoCadastro">
 
-    </section>
+                <h2>Cadastrar material</h2>
+
+                <p>Compartilhe seus conhecimentos<br>
+                e ajude outros usuários</p>
+
+            </div>
+        </div>
+
+
+        <!-- DIVISOR -->
+        <div class="divisor"></div>
+
+
+        <!-- LADO DIREITO -->
+        <div class="materiaisCadastrados">
+
+            <h2>Materiais Cadastrados</h2>
+
+            <table class="tabelaMateriais">
+            <thead>
+                <tr>
+                    <th>Nome do material</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody id="listaMateriais">
+
+            </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</section>
