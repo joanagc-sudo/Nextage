@@ -1,5 +1,5 @@
     document.addEventListener("DOMContentLoaded", function () {
-        
+
     // elementos do html
 
     const btnCadastrar = document.getElementById("btnCadastrar");
@@ -148,10 +148,10 @@
         linha.appendChild(colunaNome);
         linha.appendChild(colunaBotao);
         listaMateriais.appendChild(linha);
-
+                
     }
 
-    // carrega materiais salvos
+    // carrega materiais salvos so p salva a branch
 
     function carregarMateriais() {
 
