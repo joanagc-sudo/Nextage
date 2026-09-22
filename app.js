@@ -87,7 +87,7 @@ app.get("/materiais", async function (req, res) {
 });
 
 app.get("/tela-login", async function (req, res) {
-    res.render("indexTelaLogin", { layout: "/layouts/main", query: req.query });
+    res.render("indexTelaLogin", { layout: "/layouts/simples", query: req.query });
 });
 
 // ---------- LISTAGEM ----------
