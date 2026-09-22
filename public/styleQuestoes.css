@@ -12,25 +12,54 @@ body{
     color: #428591 ;
 }
 
-.filtro{
-    border-radius: 9px;
+.filtro {
+    border-radius: 10px;
     margin: 1.6em;
     padding: 1em;
     background-color: #BAD8DE;
 }
 
-h1{
+.containerFiltro {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 17px;
+}
+
+/* Faz o form não ocupar uma única célula do grid */
+#filtrarQuestoes {
+    display: contents;
+}
+
+/* Faz os campos gerados pelo JS entrarem no grid */
+#containerFiltros {
+    display: contents;
+}
+
+.campo-filtro {
+    width: 100%;
+}
+
+.questoes-filtro {
+    width: 100%;
+}
+
+.questoes-filtro .btn-group {
+    display: flex;
+    width: 100%;
+}
+
+.questoes-filtro .btn {
+    flex: 1;
+}
+
+h1 {
     color: #0C6878;
 }
 
-label{
+label {
     color: #428591;
 }
 
-input::placeholder{
+input::placeholder {
     color: #ABB3B4 !important;
-}
-
-.botao-filtro{
-    color: #ABB3B4;
 }

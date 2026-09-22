@@ -2,55 +2,69 @@
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="styleQuestoes.css">
 
-
 <div class="filtro">
+
     <h1>Filtrar Questões</h1>
-    
-    <form id="filtrarQuestoes">
 
-        <!-- PALAVRA-CHAVE -->
-        <div class="my-3">
+    <div class="containerFiltro">
 
-            <label for="palavra-chave" class="form-label">
-                Palavra-chave
-            </label>
+        <form id="filtrarQuestoes">
 
-            <input
-                class="form-control"
-                type="text"
-                id="palavra-chave"
-                name="palavra-chave"
-                placeholder="Busque por palavra-chave">
+            <!-- PALAVRA-CHAVE -->
+            <div class="campo-filtro">
+
+                <label for="palavra-chave" class="form-label">
+                    Palavra-chave
+                </label>
+
+                <input
+                    class="form-control"
+                    type="text"
+                    id="palavra-chave"
+                    name="palavra-chave"
+                    placeholder="Busque por palavra-chave">
+
+            </div>
+
+            <!-- CAMPOS CRIADOS PELO JAVASCRIPT -->
+            <div id="containerFiltros"></div>
+
+        </form>
+
+
+        <!-- QUESTÕES QUE -->
+        <div class="campo-filtro questoes-filtro">
+
+            <p>Questões que</p>
+
+            <div class="btn-group" role="group">
+
+                <input type="checkbox" class="btn-check" id="btncheck1">
+                <label class="btn btn-outline-primary" for="btncheck1">
+                    Não resolvi
+                </label>
+
+                <input type="checkbox" class="btn-check" id="btncheck2">
+                <label class="btn btn-outline-primary" for="btncheck2">
+                    Resolvi
+                </label>
+
+                <input type="checkbox" class="btn-check" id="btncheck3">
+                <label class="btn btn-outline-primary" for="btncheck3">
+                    Acertei
+                </label>
+
+                <input type="checkbox" class="btn-check" id="btncheck4">
+                <label class="btn btn-outline-primary" for="btncheck4">
+                    Errei
+                </label>
+
+            </div>
 
         </div>
 
-        <!-- TODOS OS CAMPOS SERÃO CRIADOS AQUI -->
-        <div id="containerFiltros"></div>
-
-    </form>
-
-    <p>Questões que</p>
-
-    <div class="btn-group" role="group"
-        aria-label="Basic checkbox toggle button group">
-
-        <input type="checkbox" class="btn-check" id="btncheck1"
-            autocomplete="off">
-        <label class="btn btn-outline-primary" for="btncheck1">Não
-            resolvi</label>
-
-        <input type="checkbox" class="btn-check" id="btncheck2"
-            autocomplete="off">
-        <label class="btn btn-outline-primary" for="btncheck2">Resolvi</label>
-
-        <input type="checkbox" class="btn-check" id="btncheck3"
-            autocomplete="off">
-        <label class="btn btn-outline-primary" for="btncheck3">Acertei</label>
-
-        <input type="checkbox" class="btn-check" id="btncheck4"
-            autocomplete="off">
-        <label class="btn btn-outline-primary" for="btncheck4">Errei</label>
     </div>
+
 </div>
 <div class="questoes">
 
@@ -256,7 +270,7 @@ function criarCampoFiltro(config) {
         document.createElement("div");
 
     campo.className =
-        "my-3 campo-filtro";
+        "campo-filtro";
 
 
     campo.innerHTML = `
