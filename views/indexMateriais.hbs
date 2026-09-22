@@ -1,5 +1,5 @@
-
 <link rel="stylesheet" href="styleMateriais.css">
+<script src="/js/indexMateriais.js" defer></script>
 
 <br><h1>Conteúdos</h1> <br>
 
@@ -11,79 +11,92 @@
 
         <div class="assuntos">
             <divc class="icones">
-        <div class="assuntog1">Conceitos da Geografia
-            <img src="imagens/iconGeografia.png" alt="">
-        </div>
-        <div class="assuntog2">Terra
-            <img src="imagens/iconGeografia.png" alt="">
-        </div>
-        <div class="assuntog3">Cartografia 
-            <img src="imagens/iconGeografia.png" alt="">
-        </div>
-        <div class="assuntog4">Fuso Horário
-            <img src="imagens/iconGeografia.png" alt="">
-        </div>
-        <div class="assuntog5">Espaço Brasileiro
-            <img src="imagens/iconGeografia.png" alt="">
-        </div>
-        <div class="assuntog6">Geologia
-            <img src="imagens/iconGeografia.png" alt="">
-        </div>
-        <div class="assuntog7">Geomorfologia
-            <img src="imagens/iconGeografia.png" alt="">
-        </div>
-        <div class="assuntog8">Minérios e Minerais
-            <img src="imagens/iconGeografia.png" alt="">
+                <div class="assuntog1">Conceitos da Geografia
+                    <img src="imagens/iconGeografia.png" alt>
+                </div>
+                <div class="assuntog2">Terra
+                    <img src="imagens/iconGeografia.png" alt>
+                </div>
+                <div class="assuntog3">Cartografia
+                    <img src="imagens/iconGeografia.png" alt>
+                </div>
+                <div class="assuntog4">Fuso Horário
+                    <img src="imagens/iconGeografia.png" alt>
+                </div>
+                <div class="assuntog5">Espaço Brasileiro
+                    <img src="imagens/iconGeografia.png" alt>
+                </div>
+                <div class="assuntog6">Geologia
+                    <img src="imagens/iconGeografia.png" alt>
+                </div>
+                <div class="assuntog7">Geomorfologia
+                    <img src="imagens/iconGeografia.png" alt>
+                </div>
+                <div class="assuntog8">Minérios e Minerais
+                    <img src="imagens/iconGeografia.png" alt>
+                </div>
             </div>
         </div>
-    </div>
 
-    <button class="seta">&gt;</button>
+        <button class="seta">&gt;</button>
 
-</section>
+    </section>
 
-<section class="atalhos2">
+    <section class="atalhos2">
 
-    <div class="Questoes">
-        <h2>Questões</h2>
+    <div class="Materiais">
+        <h2>Materiais</h2>
         <p>Exercite seu cérebro</p>
     </div>
 
     <div class="fundoQuestoes">
 
+        <!-- LADO ESQUERDO -->
         <div class="resolverQuestoes">
-            <div>
-                <button type="button" class="btn btn-dark btn-lg">
-                        <h1>+</h1>
-                </button>
-            </div>
-           
-            <div>
-                <h2>Cadastrar material</h2> 
-                <p>Compartilhe seus conhecimentos <br>e ajude outros usuários</p>
-            </div>
-        </div>
 
-        <div class="divisor"></div>
+            <div class="botaoCadastro">
 
-        <div class="simulado">
-            <h2>Simulados</h2>
-            <div class="bolaSimulado">
-                <div class="icone" id="folha">
+                <input type="file" id="fileInput" hidden>
 
-                <img src="imagens/folhaSimulado.png" alt="">
-
-                </div>
-            </div>
-            <p>Você ainda não resolveu nenhum simulado.</p>
-            <div>
-                <button type="button2" class="btn2 btn-dark btn-lg">
+                <button type="button" class="btn" id="btnCadastrar">
                     <h1>+</h1>
                 </button>
+
+        </div>
+            <div class="textoCadastro">
+
+                <h2>Cadastrar material</h2>
+
+                <p>Compartilhe seus conhecimentos<br>
+                e ajude outros usuários</p>
+
             </div>
-            <span class="novoSimulado">Iniciar novo simulado</span>
         </div>
 
+
+        <!-- DIVISOR -->
+        <div class="divisor"></div>
+
+
+        <!-- LADO DIREITO -->
+        <div class="materiaisCadastrados">
+
+            <h2>Materiais Cadastrados</h2>
+
+            <table class="tabelaMateriais">
+            <thead>
+                <tr>
+                    <th>Nome do material</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody id="listaMateriais">
+
+            </tbody>
+            </table>
+
+        </div>
     </div>
 
 </section>

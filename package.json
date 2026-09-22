@@ -23,6 +23,7 @@
     "express": "^5.2.1",
     "hbs": "^4.3.0",
     "http": "^0.0.1-security",
+    "multer": "^2.4.0",
     "mysql2": "^3.24.4",
     "nextage": "github:joanagc-sudo/Nextage"
   },
