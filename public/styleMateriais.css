@@ -829,7 +829,6 @@ section {
 
 
 .divisor {
-
     width: 4px;
     height: 290px;
 
@@ -840,20 +839,17 @@ section {
 
 
 .materiaisCadastrados {
-
     width: 48%;
 
     display: flex;
     flex-direction: column;
 
     align-items: center;
-
     justify-content: center;
 }
 
 
 .materiaisCadastrados h2 {
-
     font-size: 25px;
     font-weight: normal;
 
@@ -896,22 +892,18 @@ section {
 }
 
 .tabelaMateriais th {
-
     font-weight: normal;
-
     background-color: #c5dce2;
 
 }
 
 .tabelaMateriais td:last-child,.tabelaMateriais th:last-child {
-
     width: 165px;
     text-align: center;
 
 }
 
 .botaoBaixar {
-
     display: inline-block;
 
     width: 140px;
@@ -933,15 +925,12 @@ section {
 }
 
 .botaoBaixar:hover {
-
     background-color: #08758A;
-
     color: white;
 }
 
 .modalMateria {
     display: none;
-
     position: fixed;
     z-index: 1000;
 
@@ -952,7 +941,6 @@ section {
     height: 100%;
 
     background-color: rgba(0, 0, 0, 0.45);
-
     align-items: center;
     justify-content: center;
 }
@@ -960,81 +948,63 @@ section {
 
 .conteudoModal {
     width: 400px;
-
     padding: 30px;
-
     background-color: #c5dce2;
-
     border-radius: 20px;
-
     text-align: center;
-
     color: #32818F;
 }
 
 
 .conteudoModal h2 {
     margin-bottom: 15px;
-
     font-size: 25px;
-
     font-weight: normal;
 }
 
 
 #nomeArquivo {
     margin-bottom: 20px;
-
     font-size: 16px;
-
     color: #428591;
-
     word-break: break-word;
 }
 
 
 #selectMateria {
     width: 100%;
-
     padding: 12px;
 
     border: 3px solid #32818F;
     border-radius: 10px;
 
     background-color: white;
-
     color: #32818F;
 
     font-family: inherit;
-
     font-size: 16px;
 }
 
 
 .botoesModal {
     display: flex;
-
     justify-content: center;
-
     gap: 15px;
-
     margin-top: 25px;
 }
 
 
 .botoesModal button {
     padding: 10px 20px;
-
+    
     border: none;
-
     border-radius: 10px;
 
     background-color: #32818F;
-
     color: white;
 
     font-family: inherit;
-
+    
     cursor: pointer;
 }
 
