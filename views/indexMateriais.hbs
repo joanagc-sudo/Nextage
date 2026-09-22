@@ -11,28 +11,28 @@
 
         <div class="assuntos">
             <divc class="icones">
-                <div class="assuntog1">Conceitos da Geografia
+                <div class="assuntog1" data-materia="Conceitos da Geografia">Conceitos da Geografia
                     <img src="imagens/iconGeografia.png" alt>
                 </div>
-                <div class="assuntog2">Terra
+                <div class="assuntog2" data-materia="Terra">Terra
                     <img src="imagens/iconGeografia.png" alt>
                 </div>
-                <div class="assuntog3">Cartografia
+                <div class="assuntog3" data-materia="Cartografia">Cartografia
                     <img src="imagens/iconGeografia.png" alt>
                 </div>
-                <div class="assuntog4">Fuso Horário
+                <div class="assuntog4" data-materia="Fuso Horário">Fuso Horário
                     <img src="imagens/iconGeografia.png" alt>
                 </div>
-                <div class="assuntog5">Espaço Brasileiro
+                <div class="assuntog5" data-materia="Espaço Brasileiro">Espaço Brasileiro
                     <img src="imagens/iconGeografia.png" alt>
                 </div>
-                <div class="assuntog6">Geologia
+                <div class="assuntog6" data-materia="Geologia">Geologia
                     <img src="imagens/iconGeografia.png" alt>
                 </div>
-                <div class="assuntog7">Geomorfologia
+                <div class="assuntog7" data-materia="Geomorfologia">Geomorfologia
                     <img src="imagens/iconGeografia.png" alt>
                 </div>
-                <div class="assuntog8">Minérios e Minerais
+                <div class="assuntog8" data-materia="Minérios e Minerais">Minérios e Minerais
                     <img src="imagens/iconGeografia.png" alt>
                 </div>
             </div>
@@ -51,16 +51,47 @@
 
     <div class="fundoQuestoes">
 
-        <!-- LADO ESQUERDO -->
         <div class="resolverQuestoes">
 
             <div class="botaoCadastro">
 
-                <input type="file" id="fileInput" hidden>
+            <div id="modalMateria" class="modalMateria">
+                <div class="conteudoModal">
+                    <h1>Selecione a matéria</h1>
+                    <p id="nomeArquivo"></p>
 
-                <button type="button" class="btn" id="btnCadastrar">
-                    <h1>+</h1>
-                </button>
+                    <select id="selectMateria">
+
+                        <option value="">Escolha uma matéria</option>
+
+                        <option value="Conceitos da Geografia">Conceitos da Geografia</option>
+                        <option value="Terra">Terra</option>
+                        <option value="Cartografia">Cartografia</option>
+                        <option value="Fuso Horário">Fuso Horário</option>
+                        <option value="Espaço Brasileiro">Espaço Brasileiro</option>
+                        <option value="Geologia">Geologia</option>
+                        <option value="Geomorfologia">Geomorfologia</option>
+                        <option value="Minérios e Minerais">Minérios e Minerais</option>
+
+                    </select>
+
+                    <div class="botoesModal">
+                        <button id="CancelarMateria">Cancelar</button>
+                        <button id="SalvarMateria">Salvar</button>
+                    </div>
+                </div>
+            </div>
+
+                
+        <div class="botaoCadastro">
+
+            <input type="file" id="fileInput" hidden>
+
+            <button type="button" class="btn" id="btnCadastrar">
+                 <h1>+</h1>
+            </button>
+
+        </div>
 
         </div>
             <div class="textoCadastro">
@@ -74,11 +105,9 @@
         </div>
 
 
-        <!-- DIVISOR -->
         <div class="divisor"></div>
 
 
-        <!-- LADO DIREITO -->
         <div class="materiaisCadastrados">
 
             <h2>Materiais Cadastrados</h2>
