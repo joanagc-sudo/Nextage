@@ -87,10 +87,7 @@ app.get("/materiais", async function (req, res) {
 });
 
 app.get("/tela-login", async function (req, res) {
-    res.render("indexTelaLogin", {
-        layout: "/layouts/simples",
-        query: req.query
-    });
+    res.render("indexTelaLogin", { layout: "/layouts/simples",query: req.query});
 });
 
 app.post("/login", async function (req, res) {
@@ -130,6 +127,8 @@ app.post("/login", async function (req, res) {
 
         console.log("Login realizado:", usuario.email);
         return res.redirect("/tela-inicial");
+        
+        req.session.usuario = { id: usuario.id_usuario, nome: usuario.nome, email: usuario.email};
 
     } catch (error) {
 
