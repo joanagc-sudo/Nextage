@@ -140,8 +140,7 @@ body {
     border-radius: 7px;
 }
 
-.cronograma h2,
-.lembretes h2 {
+.cronograma h2, .lembretes h2 {
     color: #08758A;
     font-size: 18px;
     font-weight: normal;
