@@ -18,128 +18,127 @@
 
         <!-- Botão do usuário -->
         <button class="usuario" id="botaoUsuario">
-            <img src="/imagens/usuario.png" alt="Perfil">
+            <img id="fotoPerfilNavbar" src="/imagens/usuario.png" alt="Perfil">
         </button>
 
-
-        <!-- MENU DO USUÁRIO -->
+        <!-- Menu do usuário -->
         <div class="menu-usuario" id="menuUsuario">
 
             <!-- Informações do perfil -->
             <div class="perfil-info">
-
-                <img src="/imagens/usuario.png" alt="Perfil">
-
+                <img id="fotoPerfilMenu" src="/imagens/usuario.png" alt="Perfil">
                 <div>
                     <strong>Nome do Usuário</strong>
                     <span>usuario@email.com</span>
                 </div>
-
             </div>
 
-
             <div class="separador"></div>
-
 
             <!-- Trocar conta -->
             <button class="opcao-menu" id="trocarConta">
-
                 <i class="bi bi-arrow-left-right"></i>
-
                 <span>Trocar de conta</span>
-
             </button>
-
 
             <!-- Alterar foto -->
             <button class="opcao-menu" id="alterarFoto">
-
                 <i class="bi bi-camera"></i>
-
                 <span>Alterar foto</span>
-
             </button>
 
+            <!-- Input escondido para selecionar a foto -->
+            <input type="file" id="inputFoto" accept="image/*" hidden>
 
             <div class="separador"></div>
 
-
             <!-- Sair -->
             <button class="opcao-menu sair" id="sair">
-
                 <i class="bi bi-arrow-return-right"></i>
-
                 <span>Sair</span>
-
             </button>
 
         </div>
-
     </div>
 
 </header>
 
 <script>
-
+    // Destaca a página atual no menu
     const urlAtual = window.location.pathname;
-
     const links = document.querySelectorAll("nav a");
 
     links.forEach(link => {
-
         const urlLink = link.getAttribute("href");
 
         if (urlLink === urlAtual) {
-
             link.classList.add("ativo");
-
         }
-
     });
 
+    // Abre e fecha o menu do usuário
     const botaoUsuario = document.getElementById("botaoUsuario");
-
     const menuUsuario = document.getElementById("menuUsuario");
 
-    botaoUsuario.addEventListener("click", function(event) {
-
+    botaoUsuario.addEventListener("click", function (event) {
         event.stopPropagation();
-
         menuUsuario.classList.toggle("aberto");
-
     });
 
-    document.addEventListener("click", function(event) {
-
+    document.addEventListener("click", function (event) {
         if (
             !menuUsuario.contains(event.target) &&
             !botaoUsuario.contains(event.target)
         ) {
-
             menuUsuario.classList.remove("aberto");
-
         }
-
     });
 
-    document.getElementById("trocarConta").addEventListener("click", function() {
-
+    // Trocar de conta
+    document.getElementById("trocarConta").addEventListener("click", function () {
         window.location.href = "/tela-login";
-
     });
 
+    // ===== FOTO DE PERFIL =====
+    const inputFoto = document.getElementById("inputFoto");
+    const fotoNavbar = document.getElementById("fotoPerfilNavbar");
+    const fotoMenu = document.getElementById("fotoPerfilMenu");
 
-    document.getElementById("alterarFoto").addEventListener("click", function() {
+    // Carrega foto salva
+    const fotoSalva = localStorage.getItem("fotoPerfil");
 
-        alert("Aqui será possível alterar a foto de perfil.");
+    if (fotoSalva) {
+        fotoNavbar.src = fotoSalva;
+        fotoMenu.src = fotoSalva;
+    }
 
+    // Abre o seletor de arquivos
+    document.getElementById("alterarFoto").addEventListener("click", function () {
+        inputFoto.click();
     });
 
-    document.getElementById("sair").addEventListener("click", function() {
+    // Atualiza a foto
+    inputFoto.addEventListener("change", function () {
+        const arquivo = this.files[0];
 
+        if (!arquivo) return;
+
+        const leitor = new FileReader();
+
+        leitor.onload = function (e) {
+            const imagem = e.target.result;
+
+            fotoNavbar.src = imagem;
+            fotoMenu.src = imagem;
+
+            localStorage.setItem("fotoPerfil", imagem);
+        };
+
+        leitor.readAsDataURL(arquivo);
+    });
+
+    // Sair
+    document.getElementById("sair").addEventListener("click", function () {
         window.location.href = "/";
-
     });
-
 </script>
-

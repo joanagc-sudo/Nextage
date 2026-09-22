@@ -16,9 +16,7 @@ body {
 .meio {
     width: 88%;
     min-height: 270px;
-
     margin: 28px auto 0;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -30,7 +28,6 @@ body {
 
 .meio h1 {
     margin-bottom: 8px;
-
     color: white;
     font-size: 35npx;
     line-height: 1.2;
@@ -39,7 +36,6 @@ body {
 
 .meio p {
     margin-bottom: 25px;
-
     color: #2C7E8D;
     font-size: 17px;
     line-height: 1.25;
@@ -48,7 +44,6 @@ body {
 
 .meio button {
     padding: 9px 20px;
-
     background-color: #08758A;
     color: white;
     border: none;
@@ -61,10 +56,8 @@ body {
     padding: 9px 20px;
     background-color: #08758A;
     color: white;
-
     border: none;
     border-radius: 25px;
-
     font-family: inherit;
     font-size: 20px;
 }
@@ -83,13 +76,10 @@ body {
 
 .atalhos {
     width: 92%;
-
     margin: 10px auto 20px;
     padding: 10px 14px;
-
     background-color: #FFFDF7;
     border-radius: 7px;
-
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 15px;
@@ -98,14 +88,11 @@ body {
 .card-atalho {
     height: 102px;
     padding: 10px;
-
     background-color: #7CBBC5;
     border-radius: 7px;
-
     display: flex;
     align-items: center;
     gap: 12px;
-
     color: #086B7A;
     font-size: 16px;
     font-weight: normal;
@@ -230,9 +217,11 @@ body {
 padding: 0.2em;
 }
 
-.card-atalho{transition:transform 0.2s ease;
+.card-atalho{
+    transition:transform 0.2s ease;
 }
-.card-atalho:hover{ transform: scale(1.05);
+.card-atalho:hover{ 
+    transform: scale(1.05);
 }
 
 .btn:hover{
