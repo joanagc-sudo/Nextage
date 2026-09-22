@@ -4,17 +4,33 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #9DC8CF;
 }
 
-body {
+body{
     background-color: #9DC8CF;
     font-family: 'Momo Trust Display', sans-serif;
-    color: #32818F;
-    font-weight: normal;
+    color: #428591 ;
 }
 
-.filtros{
+.filtro{
+    border-radius: 10px;
+    margin: 1.6em;
+    padding: 1em;
     background-color: #BAD8DE;
 }
 
+h1{
+    color: #0C6878;
+}
+
+label{
+    color: #428591;
+}
+
+input::placeholder{
+    color: #ABB3B4 !important;
+}
+
+.botao-filtro{
+    color: #ABB3B4;
+}
