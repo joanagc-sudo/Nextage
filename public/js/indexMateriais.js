@@ -1,5 +1,6 @@
     document.addEventListener("DOMContentLoaded", function () {
-    // ELEMENTOS DO HTML
+        
+    // elementos do html
 
     const btnCadastrar = document.getElementById("btnCadastrar");
     const fileInput = document.getElementById("fileInput");
@@ -11,7 +12,7 @@
     const cancelarMateria = document.getElementById("cancelarMateria");
     const nomeArquivo = document.getElementById("nomeArquivo");
 
-    // VERIFICA SE OS ELEMENTOS EXISTEM
+    // verifica se os coiso existem
 
     if (!btnCadastrar) {
         console.error("ERRO: botão #btnCadastrar não encontrado.");
@@ -23,11 +24,11 @@
         return;
     }
 
-    // MATERIAL QUE ESTÁ SENDO CADASTRADO
+    // material sendo cadastrado
 
     let arquivoSelecionado = null;
 
-    // ABRIR EXPLORADOR DE ARQUIVOS
+    // abre o explorador de arquivos
 
     btnCadastrar.addEventListener("click", function () {
 
@@ -36,7 +37,7 @@
 
     });
 
-    // QUANDO ESCOLHER O ARQUIVO
+    // escolher arquivo
 
     fileInput.addEventListener("change", function () {
 
@@ -49,7 +50,7 @@
         console.log("Arquivo escolhido:", arquivoSelecionado.name);
 
 
-        // Se o modal existir, abre o modal
+        // abre o modal
         if (modalMateria) {
 
             if (nomeArquivo) {
@@ -61,7 +62,7 @@
 
     });
 
-    // CANCELAR
+    // cancelar
 
     if (cancelarMateria) {
 
@@ -75,7 +76,7 @@
 
     }
 
-    // SALVAR MATERIAL
+    // salvar o material
 
     if (salvarMaterial) {
 
@@ -93,7 +94,7 @@
                 return;
             }
 
-            // SALVA OS DADOS NO LOCALSTORAGE
+            // salva os dados no local storage
 
             let materiais =
                 JSON.parse(localStorage.getItem("materiais")) || [];
@@ -111,11 +112,11 @@
                 JSON.stringify(materiais)
             );
 
-            // CRIA A LINHA NA TABELA
+            // cria uma nova linha na tabela
 
             adicionarMaterialNaTabela(material);
 
-            // FECHA O MODAL
+            // fecha o modal
 
             modalMateria.style.display = "none";
             selectMateria.value = "";
@@ -126,7 +127,7 @@
 
     }
 
-    // MOSTRAR MATERIAL NA TABELA
+    // mostra material na tabela
 
     function adicionarMaterialNaTabela(material) {
 
@@ -136,16 +137,13 @@
         const colunaNome = document.createElement("td");
         colunaNome.textContent = material.nome;
 
-
         const colunaBotao = document.createElement("td");
         const botaoBaixar = document.createElement("button");
 
         botaoBaixar.textContent = "Baixar";
         botaoBaixar.classList.add("botaoBaixar");
 
-
         colunaBotao.appendChild(botaoBaixar);
-
 
         linha.appendChild(colunaNome);
         linha.appendChild(colunaBotao);
@@ -153,13 +151,12 @@
 
     }
 
-    // CARREGAR MATERIAIS SALVOS
+    // carrega materiais salvos
 
     function carregarMateriais() {
 
         const materiais =
             JSON.parse(localStorage.getItem("materiais")) || [];
-
 
         materiais.forEach(function (material) {
             adicionarMaterialNaTabela(material);
@@ -168,11 +165,10 @@
 
     }
 
-    // CLICAR NAS MATÉRIAS
+    // clicar nas materias
 
     const assuntos =
         document.querySelectorAll("[data-materia]");
-
 
     assuntos.forEach(function (assunto) {
 
@@ -180,10 +176,8 @@
             const materiaSelecionada =
                 assunto.dataset.materia;
 
-
             const linhas =
                 listaMateriais.querySelectorAll("tr");
-
 
             linhas.forEach(function (linha) {
 
@@ -193,14 +187,13 @@
                     linha.style.display = "";
                 } else {
                     linha.style.display = "none";
-
                 }
 
             });
         });
     });
 
-    // CARREGA OS MATERIAIS AO ABRIR
+    // carrega os materiais
 
     carregarMateriais();
 
