@@ -99,17 +99,28 @@ app.get("/questoes", async function (req, res) {
             q.id_questao,
             q.enunciado,
             (q.imagem IS NOT NULL) AS tem_imagem,
-            v.nome  AS vestibular,
+            v.nome AS vestibular,
             v.banca,
             v.ano,
             GROUP_CONCAT(DISTINCT d.nome ORDER BY d.nome SEPARATOR ', ') AS disciplinas,
             GROUP_CONCAT(DISTINCT c.nome ORDER BY c.nome SEPARATOR ', ') AS conteudos
         FROM questoes q
-        JOIN vestibulares v          ON v.id_vestibular = q.id_vestibular
-        LEFT JOIN questoes_conteudos qc ON qc.id_questao = q.id_questao
-        LEFT JOIN conteudos c        ON c.id_conteudo = qc.id_conteudo
-        LEFT JOIN disciplinas d      ON d.id_disciplina = c.id_disciplina
-        GROUP BY q.id_questao, v.id_vestibular
+        JOIN vestibulares v
+            ON v.id_vestibular = q.id_vestibular
+        LEFT JOIN questoes_conteudos qc
+            ON qc.id_questao = q.id_questao
+        LEFT JOIN conteudos c
+            ON c.id_conteudo = qc.id_conteudo
+        LEFT JOIN disciplinas d
+            ON d.id_disciplina = c.id_disciplina
+        GROUP BY
+            q.id_questao,
+            q.enunciado,
+            q.imagem,
+            v.id_vestibular,
+            v.nome,
+            v.banca,
+            v.ano
         ORDER BY q.id_questao
     `);
 
