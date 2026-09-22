@@ -87,7 +87,11 @@ app.get("/materiais", async function (req, res) {
 });
 
 app.get("/tela-login", async function (req, res) {
-    res.render("indexTelaLogin", { layout: "/layouts/simples", query: req.query });
+    res.render("indexTelaLogin", {
+        layout: "/layouts/simples",
+        query: req.query
+    });
+});
 
 app.post("/login", async function (req, res) {
 
@@ -120,9 +124,7 @@ app.post("/login", async function (req, res) {
         );
 
         if (!senhaCorreta) {
-            return res.redirect(
-                "/tela-login?error=E-mail ou senha incorretos."
-            );
+            return res.redirect("/tela-login?error=E-mail ou senha incorretos.");
 
         }
 
@@ -135,8 +137,6 @@ app.post("/login", async function (req, res) {
 
         return res.redirect("/tela-login?error=Erro ao realizar login.");
     }
-
-});
 
 });
 
