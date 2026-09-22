@@ -1,5 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
-
+    document.addEventListener("DOMContentLoaded", function () {
     // ELEMENTOS DO HTML
 
     const btnCadastrar = document.getElementById("btnCadastrar");
@@ -33,7 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
     btnCadastrar.addEventListener("click", function () {
 
         console.log("Botão + clicado!");
-
         fileInput.click();
 
     });
@@ -58,7 +56,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 nomeArquivo.textContent =
                     "Arquivo: " + arquivoSelecionado.name;
             }
-
             modalMateria.style.display = "flex";
         }
 
@@ -69,13 +66,9 @@ document.addEventListener("DOMContentLoaded", function () {
     if (cancelarMateria) {
 
         cancelarMateria.addEventListener("click", function () {
-
             modalMateria.style.display = "none";
-
             selectMateria.value = "";
-
             arquivoSelecionado = null;
-
             fileInput.value = "";
 
         });
@@ -93,14 +86,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-
             const materia = selectMateria.value;
 
-
             if (materia === "") {
-
                 alert("Escolha uma matéria.");
-
                 return;
             }
 
@@ -111,16 +100,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             const material = {
-
                 nome: arquivoSelecionado.name,
-
                 materia: materia
 
             };
-
-
             materiais.push(material);
-
 
             localStorage.setItem(
                 "materiais",
@@ -134,11 +118,8 @@ document.addEventListener("DOMContentLoaded", function () {
             // FECHA O MODAL
 
             modalMateria.style.display = "none";
-
             selectMateria.value = "";
-
             arquivoSelecionado = null;
-
             fileInput.value = "";
 
         });
@@ -150,22 +131,16 @@ document.addEventListener("DOMContentLoaded", function () {
     function adicionarMaterialNaTabela(material) {
 
         const linha = document.createElement("tr");
-
         linha.dataset.materia = material.materia;
 
-
         const colunaNome = document.createElement("td");
-
         colunaNome.textContent = material.nome;
 
 
         const colunaBotao = document.createElement("td");
-
-
         const botaoBaixar = document.createElement("button");
 
         botaoBaixar.textContent = "Baixar";
-
         botaoBaixar.classList.add("botaoBaixar");
 
 
@@ -173,10 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         linha.appendChild(colunaNome);
-
         linha.appendChild(colunaBotao);
-
-
         listaMateriais.appendChild(linha);
 
     }
@@ -190,7 +162,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         materiais.forEach(function (material) {
-
             adicionarMaterialNaTabela(material);
 
         });
@@ -206,7 +177,6 @@ document.addEventListener("DOMContentLoaded", function () {
     assuntos.forEach(function (assunto) {
 
         assunto.addEventListener("click", function () {
-
             const materiaSelecionada =
                 assunto.dataset.materia;
 
@@ -220,19 +190,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (
                     linha.dataset.materia === materiaSelecionada
                 ) {
-
                     linha.style.display = "";
-
                 } else {
-
                     linha.style.display = "none";
 
                 }
 
             });
-
         });
-
     });
 
     // CARREGA OS MATERIAIS AO ABRIR
