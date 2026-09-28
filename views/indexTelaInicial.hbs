@@ -57,8 +57,6 @@
 
         <h2>Cronograma personalizado</h2>
 
-        <div class="maisinho"></div>
-
         <h3>Ainda não há nada por aqui...</h3>
 
         <p>Seus cronogramas criados aparecerão aqui.<br>Clique em
@@ -67,20 +65,72 @@
 
     <div class="lembretes">
 
-        <h2>Lembrete</h2>
+    <h2>Lembrete</h2>
 
-        <div class="maisinho"></div>
-
-        <div class="adicionar">
-
-            <div class="mais">+</div>
-
-            <span>Adicionar lembrete</span>
-
+    <div class="adicionar" id="abrirLembrete">
+        <div class="mais">
+            <i class="bi bi-plus"></i>
         </div>
-
+        <span>Adicionar lembrete</span>
     </div>
 
-</section>
+    <div class="novo-lembrete" id="novoLembrete">
+        <input type="text" id="textoLembrete" placeholder="Escreva um lembrete...">
+        <button id="salvarLembrete">Adicionar</button>
+    </div>
 
+    <div id="listaLembretes"></div>
+
+</div>
+</section>
+<script>
+    const abrir = document.getElementById("abrirLembrete");
+    const novo = document.getElementById("novoLembrete");
+    const input = document.getElementById("textoLembrete");
+    const salvar = document.getElementById("salvarLembrete");
+    const lista = document.getElementById("listaLembretes");
+
+    abrir.addEventListener("click", () => {
+        if (novo.style.display === "flex") {
+            novo.style.display = "none";
+        } else {
+            novo.style.display = "flex";
+            input.focus();
+        }
+    });
+
+    salvar.addEventListener("click", adicionarLembrete);
+
+    input.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+            adicionarLembrete();
+        }
+    });
+
+    function adicionarLembrete() {
+
+        const texto = input.value.trim();
+
+        if (texto === "") return;
+
+        const item = document.createElement("div");
+        item.className = "item-lembrete";
+
+        item.innerHTML = `
+            <span>${texto}</span>
+            <button class="apagar">
+                <i class="bi bi-trash"></i>
+            </button>
+        `;
+
+        item.querySelector(".apagar").addEventListener("click", () => {
+            item.remove();
+        });
+
+        lista.appendChild(item);
+
+        input.value = "";
+        novo.style.display = "none";
+    }
+</script>
 
