@@ -884,7 +884,7 @@ section {
 
 .tabelaMateriais th {
     font-weight: normal;
-    background-color: #c5dce2;
+    background-color: #6eb2beb2;
 
 }
 
@@ -906,7 +906,7 @@ section {
 .botaoBaixar {
     width: 90px;
     padding: 6px 10px;
-
+    
     background-color: #2C7E8D;
     color: white;
 
@@ -1048,4 +1048,227 @@ section {
 
 .tabelaMateriais:has(tbody tr) thead th {
     border-bottom: 2px solid #2C7E8D;
+}
+
+/* TABELA DE MATERIAIS COM 3 COLUNAS */
+
+.tabelaMateriais {
+    width: 100%;
+    table-layout: fixed;
+}
+
+/* NOME DO MATERIAL */
+
+.tabelaMateriais th:nth-child(1),
+.tabelaMateriais td:nth-child(1) {
+    width: 35%;
+    text-align: left;
+    overflow-wrap: anywhere;
+}
+
+/* CONTEÚDO */
+
+.tabelaMateriais th:nth-child(2),
+.tabelaMateriais td:nth-child(2) {
+    width: 30%;
+    text-align: left;
+    overflow-wrap: anywhere;
+}
+
+/* AÇÕES */
+
+.tabelaMateriais th:nth-child(3),
+.tabelaMateriais td:nth-child(3) {
+    width: 35%;
+    text-align: center;
+}
+
+/* BOTÕES */
+
+.tabelaMateriais td.acoesMaterial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* REMOVE DESLOCAMENTOS ANTIGOS */
+
+.tabelaMateriais .botaoBaixar,
+.tabelaMateriais .botaoExcluir {
+    transform: none;
+    margin: 0;
+    flex-shrink: 0;
+    width: 75px;
+    font-size: 13px;
+}
+
+.tabelaMateriais:not(:has(tbody tr)) thead th {
+    border-bottom: none;
+}
+
+.tabelaMateriais:has(tbody tr) thead th {
+    border-bottom: 2px solid #2C7E8D;
+}
+
+/* CORREÇÃO DEFINITIVA DOS BOTÕES */
+
+.tabelaMateriais td.acoesMaterial {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: center !important;
+
+    gap: 8px;
+    padding: 5px;
+
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box;
+}
+
+/* BAIXAR E EXCLUIR */
+
+.tabelaMateriais td.acoesMaterial .botaoBaixar,
+.tabelaMateriais td.acoesMaterial .botaoExcluir {
+    position: static !important;
+    transform: none !important;
+
+    width: 85px;
+    flex: 0 0 85px;
+
+    margin: 0 !important;
+    padding: 6px 4px;
+}
+
+/* LINHAS VERTICAIS ENTRE AS COLUNAS */
+
+.tabelaMateriais th:nth-child(1),
+.tabelaMateriais td:nth-child(1),
+.tabelaMateriais th:nth-child(2),
+.tabelaMateriais td:nth-child(2) {
+    border-right: 2px solid #2C7E8D;
+}
+
+/* NÃO ADICIONA LINHA DEPOIS DA ÚLTIMA COLUNA */
+
+.tabelaMateriais th:last-child,
+.tabelaMateriais td:last-child {
+    border-right: none;
+}
+
+/* MANTÉM AS COLUNAS ALINHADAS */
+
+.tabelaMateriais {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/* DISTRIBUIÇÃO DAS COLUNAS */
+
+.tabelaMateriais th:nth-child(1) {
+    width: 35%;
+}
+
+.tabelaMateriais th:nth-child(2) {
+    width: 30%;
+}
+
+.tabelaMateriais th:nth-child(3) {
+    width: 35%;
+}
+
+/* TODAS AS CÉLULAS ACOMPANHAM A ALTURA DA LINHA */
+
+.tabelaMateriais td {
+    display: table-cell;
+    vertical-align: middle;
+    overflow-wrap: anywhere;
+}
+
+/* LINHAS VERTICAIS */
+
+.tabelaMateriais th:not(:last-child),
+.tabelaMateriais td:not(:last-child) {
+    border-right: 2px solid #2C7E8D;
+}
+
+/* COLUNA DE AÇÕES */
+
+.tabelaMateriais td:last-child {
+    display: table-cell !important;
+    vertical-align: middle;
+    padding: 5px;
+}
+
+/* CENTRALIZA OS BOTÕES DENTRO DA CÉLULA */
+
+.acoesMaterial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* REMOVE DESLOCAMENTOS ANTIGOS */
+
+.acoesMaterial .botaoBaixar,
+.acoesMaterial .botaoExcluir {
+    transform: none !important;
+    position: static;
+    margin: 0;
+    width: 85px;
+    flex-shrink: 0;
+}
+
+/* ÁREA COM ROLAGEM DOS MATERIAIS */
+
+.rolagemMateriais {
+    width: 100%;
+    max-height: 220px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    border-radius: 12px;
+}
+
+/* TABELA */
+
+.rolagemMateriais .tabelaMateriais {
+    width: 100%;
+    margin: 0;
+}
+
+/* MANTÉM O CABEÇALHO VISÍVEL DURANTE A ROLAGEM */
+
+.tabelaMateriais thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+
+    background-color: #c5dce2;
+}
+
+/* PERSONALIZAÇÃO DA BARRA DE ROLAGEM */
+
+.rolagemMateriais::-webkit-scrollbar {
+    width: 7px;
+
+}
+
+.rolagemMateriais::-webkit-scrollbar-track {
+    background-color: #c5dce2;
+    border-radius: 10px;
+}
+
+.rolagemMateriais::-webkit-scrollbar-thumb {
+    background-color: #32818F;
+    border-radius: 10px;
+}
+
+.rolagemMateriais::-webkit-scrollbar-thumb:hover {
+    background-color: #205D68;
 }
