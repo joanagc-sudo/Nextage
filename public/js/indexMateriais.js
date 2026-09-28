@@ -388,6 +388,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         colunaNome.textContent = material.nome;
 
+        // CONTEÚDO DO MATERIAL
+
+        const colunaConteudo = document.createElement("td");
+
+        colunaConteudo.textContent = material.materia;
+
         // COLUNA DOS BOTÕES
 
         const colunaBotao = document.createElement("td");
@@ -495,11 +501,18 @@ document.addEventListener("DOMContentLoaded", function () {
         // ORGANIZA OS BOTÕES
         // ======================================
 
-        colunaBotao.appendChild(botaoBaixar);
+        const acoesMaterial = document.createElement("div");
 
-        colunaBotao.appendChild(botaoExcluir);
+        acoesMaterial.classList.add("acoesMaterial");
+
+        acoesMaterial.appendChild(botaoBaixar);
+        acoesMaterial.appendChild(botaoExcluir);
+
+        colunaBotao.appendChild(acoesMaterial);
 
         linha.appendChild(colunaNome);
+
+        linha.appendChild(colunaConteudo);
 
         linha.appendChild(colunaBotao);
 
