@@ -14,7 +14,9 @@ body{
 
 .filtro {
     border-radius: 10px;
-    margin: 1.6em;
+    margin-top: 2em;
+    margin-left: 3.5rem;
+    margin-right: 3.5rem;
     padding: 1em;
     background-color: #BAD8DE;
 }
@@ -65,13 +67,13 @@ input::placeholder {
 }
 
 .botao-filtro{
-    color: #ABB3B4;
+    color: #444746;
 }
 
 .questoes{
     border-radius: 10px;
-    padding-right: 1.7em;
-    padding-left: 1.7em;
+    padding-right: 3.5em;
+    padding-left: 3.5em;
 }
 
 .btn{
@@ -79,18 +81,65 @@ input::placeholder {
     color:white;
     border: 1px solid #BAD8DE;
 }
-
 .btn:hover{
-    background-color: #0C6878;
-    border-color:  #0C6878;
+    background-color: #39737e;
+    color:white;
+    border: 1px solid #BAD8DE;
 }
 
-.btn-outline-custom:hover{
-    border-color:  #0C6878;
+.btn-outline-custom {
+  background-color: #ffffff;
+  border-color: #DEE2E6;
+  color: #444746;
+;
 }
-.btn-check:checked + .btn-outline-custom{
+.btn-outline-custom:active,
+.btn-outline-custom:focus {
+    background-color: #fff !important;
+    border-color: #DEE2E6 !important;
+    color: #212529 !important;
+    box-shadow: none !important;
+}
+
+
+.btn-outline-custom:hover {
+  background-color: transparent;
+  border-color: #0C6878 !important;
+  color: #0C6878;
+}
+
+
+
+.btn-check:checked + .btn-outline-custom {
   background-color: #0C6878;
   border-color: #0C6878;
   color: #ffffff;
 }
 
+.btn-check:checked + .btn-outline-custom:hover {
+  background-color: #0C6878;
+  border-color: #0C6878;
+  color: #ffffff;
+}
+
+
+.card{
+    background-color: #FFFDF5;
+}
+
+.identificacao{
+    padding: 0.3em;
+    padding-left: 1em;
+    background-color: #84B2B9;
+    color: #FFFDF5 !important;
+    border-radius: 5px;
+}
+
+.altern{
+    color:#6e6f70 ;
+}
+
+.form-check-input[type="radio"]:checked {
+    background-color: #0C6878 !important;
+    border-color: #0C6878 !important;
+}

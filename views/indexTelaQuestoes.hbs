@@ -31,27 +31,40 @@
 
         </form>
 
-    <p>Questões que</p>
 
-    <div class="btn-group" role="group"
-        aria-label="Basic checkbox toggle button group">
-        
-        <input type="checkbox" class="btn-check" id="btncheck1"
-            autocomplete="off">
-        <label class="btn btn-outline-custom" for="btncheck1">Não
-            resolvi</label>
+        <!-- QUESTÕES QUE -->
+        <div class="campo-filtro questoes-filtro">
 
-        <input type="checkbox" class="btn-check" id="btncheck2"
-            autocomplete="off">
-        <label class="btn btn-outline-custom" for="btncheck2">Resolvi</label>
+            
+        <label for="questoes-que" class="form-label">
+                    Questões que:
+                </label>
+            <div class="btn-group" role="group">
+            
+                <input type="checkbox" class="btn-check" id="btncheck1">
+                <label class="btn btn-outline-custom" for="btncheck1">
+                    Não resolvi
+                </label>
 
-        <input type="checkbox" class="btn-check" id="btncheck3"
-            autocomplete="off">
-        <label class="btn btn-outline-custom" for="btncheck3">Acertei</label>
+                <input type="checkbox" class="btn-check" id="btncheck2">
+                <label class="btn btn-outline-custom" for="btncheck2">
+                    Resolvi
+                </label>
 
-        <input type="checkbox" class="btn-check" id="btncheck4"
-            autocomplete="off">
-        <label class="btn btn-outline-custom" for="btncheck4">Errei</label>
+                <input type="checkbox" class="btn-check" id="btncheck3">
+                <label class="btn btn-outline-custom" for="btncheck3">
+                    Acertei
+                </label>
+
+                <input type="checkbox" class="btn-check" id="btncheck4">
+                <label class="btn btn-outline-custom" for="btncheck4">
+                    Errei
+                </label>
+
+            </div>
+
+        </div>
+
     </div>
 
 </div>
@@ -85,7 +98,7 @@
                     id="q{{../id_questao}}-{{id_alternativas}}"
                     value="{{id_alternativas}}">
 
-                <label class="form-check-label"
+                <label class="altern form-check-label"
                     for="q{{../id_questao}}-{{id_alternativas}}">
                     <strong>{{letra}})</strong> {{texto}}
                 </label>
