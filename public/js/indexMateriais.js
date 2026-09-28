@@ -1,8 +1,14 @@
+<<<<<<< HEAD
 document.addEventListener("DOMContentLoaded", function () {
 
     // ==========================================
     // ELEMENTOS DO HTML
     // ==========================================
+=======
+    document.addEventListener("DOMContentLoaded", function () {
+
+    // elementos do html
+>>>>>>> branchDuda
 
     const btnCadastrar = document.getElementById("btnCadastrar");
     const fileInput = document.getElementById("fileInput");
@@ -517,6 +523,7 @@ document.addEventListener("DOMContentLoaded", function () {
         linha.appendChild(colunaBotao);
 
         listaMateriais.appendChild(linha);
+<<<<<<< HEAD
 
         // MANTÉM O FILTRO ATIVO
 
@@ -534,6 +541,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // ==========================================
     // CARREGAR MATERIAIS CADASTRADOS
     // ==========================================
+=======
+                
+    }
+
+    // carrega materiais salvos so p salva a branch
+>>>>>>> branchDuda
 
     function carregarMateriais() {
 
