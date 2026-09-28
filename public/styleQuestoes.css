@@ -34,3 +34,30 @@ input::placeholder{
 .botao-filtro{
     color: #ABB3B4;
 }
+
+.questoes{
+    border-radius: 10px;
+    padding-right: 1.7em;
+    padding-left: 1.7em;
+}
+
+.btn{
+    background-color: #428591;
+    color:white;
+    border: 1px solid #BAD8DE;
+}
+
+.btn:hover{
+    background-color: #0C6878;
+    border-color:  #0C6878;
+}
+
+.btn-outline-custom:hover{
+    border-color:  #0C6878;
+}
+.btn-check:checked + .btn-outline-custom{
+  background-color: #0C6878;
+  border-color: #0C6878;
+  color: #ffffff;
+}
+
