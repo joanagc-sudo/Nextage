@@ -1,14 +1,25 @@
-<<<<<<< HEAD
 document.addEventListener("DOMContentLoaded", function () {
+
+    // ==========================================
+    // DISCIPLINA RECEBIDA DA PÁGINA DISCIPLINAS
+    // ==========================================
+
+    const parametrosURL = new URLSearchParams(
+        window.location.search
+    );
+
+    const disciplinaSelecionada =
+        parametrosURL.get("materia");
+
+    console.log(
+        "Disciplina selecionada:",
+        disciplinaSelecionada
+    );
+
 
     // ==========================================
     // ELEMENTOS DO HTML
     // ==========================================
-=======
-    document.addEventListener("DOMContentLoaded", function () {
-
-    // elementos do html
->>>>>>> branchDuda
 
     const btnCadastrar = document.getElementById("btnCadastrar");
     const fileInput = document.getElementById("fileInput");
@@ -22,24 +33,60 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const assuntos = document.querySelectorAll("[data-materia]");
 
+
     // ==========================================
     // VERIFICAÇÃO DOS ELEMENTOS
     // ==========================================
 
-    if (!btnCadastrar || !fileInput || !listaMateriais ||
-        !modalMateria || !selectMateria || !salvarMaterial ||
-        !cancelarMateria || !nomeArquivo) {
-
+    if (
+        !btnCadastrar ||
+        !fileInput ||
+        !listaMateriais ||
+        !modalMateria ||
+        !selectMateria ||
+        !salvarMaterial ||
+        !cancelarMateria ||
+        !nomeArquivo
+    ) {
         console.error("Erro: elementos do HTML não encontrados.");
         return;
     }
+
 
     // ==========================================
     // VARIÁVEIS
     // ==========================================
 
     let arquivoSelecionado = null;
-    let materiaFiltrada = null;
+
+    // Se veio uma disciplina pela URL,
+    // ela já começa como filtro ativo.
+    let materiaFiltrada = disciplinaSelecionada || null;
+
+
+    // ==========================================
+    // CONFIGURAÇÃO DA PÁGINA
+    // ==========================================
+
+    // Se a página recebeu uma disciplina pela URL,
+    // seleciona essa disciplina no <select>.
+
+    if (disciplinaSelecionada) {
+
+        const opcaoExiste = Array.from(
+            selectMateria.options
+        ).some(function (opcao) {
+
+            return opcao.value === disciplinaSelecionada;
+
+        });
+
+        if (opcaoExiste) {
+            selectMateria.value = disciplinaSelecionada;
+        }
+
+    }
+
 
     // ==========================================
     // BANCO DE DADOS INDEXEDDB
@@ -49,29 +96,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return new Promise(function (resolve, reject) {
 
-            const request = indexedDB.open("MateriaisDB", 1);
+            const request = indexedDB.open(
+                "MateriaisDB",
+                1
+            );
 
             request.onupgradeneeded = function (event) {
 
                 const db = event.target.result;
 
                 if (!db.objectStoreNames.contains("arquivos")) {
+
                     db.createObjectStore("arquivos");
+
                 }
 
             };
 
             request.onsuccess = function () {
+
                 resolve(request.result);
+
             };
 
             request.onerror = function () {
+
                 reject(request.error);
+
             };
 
         });
 
     }
+
 
     // ==========================================
     // SALVAR ARQUIVO NO BANCO
@@ -88,26 +145,41 @@ document.addEventListener("DOMContentLoaded", function () {
                 "readwrite"
             );
 
-            transaction.objectStore("arquivos").put(arquivo, id);
+            transaction
+                .objectStore("arquivos")
+                .put(arquivo, id);
+
 
             transaction.oncomplete = function () {
+
                 db.close();
+
                 resolve();
+
             };
+
 
             transaction.onerror = function () {
+
                 db.close();
+
                 reject(transaction.error);
+
             };
 
+
             transaction.onabort = function () {
+
                 db.close();
+
                 reject(transaction.error);
+
             };
 
         });
 
     }
+
 
     // ==========================================
     // BAIXAR ARQUIVO
@@ -116,51 +188,83 @@ document.addEventListener("DOMContentLoaded", function () {
     async function baixarArquivo(material) {
 
         if (!material.id) {
-            alert("Este material é de um cadastro antigo. Cadastre o arquivo novamente.");
+
+            alert(
+                "Este material é de um cadastro antigo. " +
+                "Cadastre o arquivo novamente."
+            );
+
             return;
+
         }
+
 
         try {
 
             const db = await abrirBanco();
 
-            const arquivo = await new Promise(function (resolve, reject) {
 
-                const transaction = db.transaction(
-                    "arquivos",
-                    "readonly"
-                );
+            const arquivo = await new Promise(
+                function (resolve, reject) {
 
-                const request = transaction
-                    .objectStore("arquivos")
-                    .get(material.id);
+                    const transaction = db.transaction(
+                        "arquivos",
+                        "readonly"
+                    );
 
-                request.onsuccess = function () {
-                    resolve(request.result);
-                };
 
-                request.onerror = function () {
-                    reject(request.error);
-                };
+                    const request = transaction
+                        .objectStore("arquivos")
+                        .get(material.id);
 
-                transaction.oncomplete = function () {
-                    db.close();
-                };
 
-            });
+                    request.onsuccess = function () {
+
+                        resolve(request.result);
+
+                    };
+
+
+                    request.onerror = function () {
+
+                        reject(request.error);
+
+                    };
+
+
+                    transaction.oncomplete = function () {
+
+                        db.close();
+
+                    };
+
+                }
+            );
+
 
             if (!arquivo) {
-                alert("Arquivo não encontrado. Cadastre novamente.");
+
+                alert(
+                    "Arquivo não encontrado. " +
+                    "Cadastre novamente."
+                );
+
                 return;
+
             }
 
-            // CRIA LINK TEMPORÁRIO PARA DOWNLOAD
 
-            const url = URL.createObjectURL(arquivo);
+            // Cria URL temporária
+
+            const url = URL.createObjectURL(
+                arquivo
+            );
+
 
             const link = document.createElement("a");
 
             link.href = url;
+
             link.download = material.nome;
 
             document.body.appendChild(link);
@@ -169,20 +273,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
             link.remove();
 
-            // LIBERA A MEMÓRIA
+
+            // Libera memória
 
             setTimeout(function () {
+
                 URL.revokeObjectURL(url);
+
             }, 1000);
+
 
         } catch (erro) {
 
-            console.error("Erro ao baixar:", erro);
-            alert("Não foi possível baixar o material.");
+            console.error(
+                "Erro ao baixar:",
+                erro
+            );
+
+            alert(
+                "Não foi possível baixar o material."
+            );
 
         }
 
     }
+
 
     // ==========================================
     // EXCLUIR ARQUIVO DO BANCO
@@ -190,9 +305,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function excluirArquivo(id) {
 
-        if (!id) return;
+        if (!id) {
+            return;
+        }
+
 
         const db = await abrirBanco();
+
 
         return new Promise(function (resolve, reject) {
 
@@ -201,26 +320,42 @@ document.addEventListener("DOMContentLoaded", function () {
                 "readwrite"
             );
 
-            transaction.objectStore("arquivos").delete(id);
+
+            transaction
+                .objectStore("arquivos")
+                .delete(id);
+
 
             transaction.oncomplete = function () {
+
                 db.close();
+
                 resolve();
+
             };
+
 
             transaction.onerror = function () {
+
                 db.close();
+
                 reject(transaction.error);
+
             };
 
+
             transaction.onabort = function () {
+
                 db.close();
+
                 reject(transaction.error);
+
             };
 
         });
 
     }
+
 
     // ==========================================
     // LOCAL STORAGE
@@ -234,6 +369,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+
     function atualizarMateriais(materiais) {
 
         localStorage.setItem(
@@ -243,140 +379,238 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+
     // ==========================================
-    // BOTÃO + ABRE O EXPLORADOR DO WINDOWS
+    // BOTÃO +
     // ==========================================
 
-    btnCadastrar.addEventListener("click", function () {
+    btnCadastrar.addEventListener(
+        "click",
+        function () {
 
-        console.log("Botão + clicado!");
-        fileInput.click();
+            console.log(
+                "Botão + clicado!"
+            );
 
-    });
+            fileInput.click();
+
+        }
+    );
+
 
     // ==========================================
     // SELECIONAR ARQUIVO
     // ==========================================
 
-    fileInput.addEventListener("change", function () {
+    fileInput.addEventListener(
+        "change",
+        function () {
 
-        if (fileInput.files.length === 0) {
-            return;
+            if (fileInput.files.length === 0) {
+                return;
+            }
+
+
+            arquivoSelecionado =
+                fileInput.files[0];
+
+
+            console.log(
+                "Arquivo escolhido:",
+                arquivoSelecionado.name
+            );
+
+
+            nomeArquivo.textContent =
+                "Arquivo: " +
+                arquivoSelecionado.name;
+
+
+            // Se a página veio de uma disciplina,
+            // mantém essa disciplina selecionada.
+
+            if (disciplinaSelecionada) {
+
+                selectMateria.value =
+                    disciplinaSelecionada;
+
+            }
+
+
+            // Abre o modal
+
+            modalMateria.style.display =
+                "flex";
+
         }
+    );
 
-        arquivoSelecionado = fileInput.files[0];
-
-        console.log(
-            "Arquivo escolhido:",
-            arquivoSelecionado.name
-        );
-
-        nomeArquivo.textContent =
-            "Arquivo: " + arquivoSelecionado.name;
-
-        // ABRE O MODAL
-
-        modalMateria.style.display = "flex";
-
-    });
 
     // ==========================================
     // CANCELAR CADASTRO
     // ==========================================
 
-    cancelarMateria.addEventListener("click", function () {
+    cancelarMateria.addEventListener(
+        "click",
+        function () {
 
-        modalMateria.style.display = "none";
+            modalMateria.style.display =
+                "none";
 
-        selectMateria.value = "";
 
-        arquivoSelecionado = null;
+            selectMateria.value =
+                disciplinaSelecionada || "";
 
-        fileInput.value = "";
 
-    });
+            arquivoSelecionado =
+                null;
+
+
+            fileInput.value =
+                "";
+
+        }
+    );
+
 
     // ==========================================
     // SALVAR MATERIAL
     // ==========================================
 
-    salvarMaterial.addEventListener("click", async function () {
+    salvarMaterial.addEventListener(
+        "click",
+        async function () {
 
-        if (!arquivoSelecionado) {
+            if (!arquivoSelecionado) {
 
-            alert("Escolha um arquivo primeiro.");
-            return;
+                alert(
+                    "Escolha um arquivo primeiro."
+                );
+
+                return;
+
+            }
+
+
+            const materia =
+                selectMateria.value;
+
+
+            if (materia === "") {
+
+                alert(
+                    "Escolha uma matéria."
+                );
+
+                return;
+
+            }
+
+
+            // Impede vários cliques
+
+            salvarMaterial.disabled =
+                true;
+
+
+            try {
+
+                // Cria ID único
+
+                const id =
+                    crypto.randomUUID();
+
+
+                const material = {
+
+                    id: id,
+
+                    nome:
+                        arquivoSelecionado.name,
+
+                    materia:
+                        materia
+
+                };
+
+
+                // Salva o arquivo
+
+                await salvarArquivo(
+                    id,
+                    arquivoSelecionado
+                );
+
+
+                // Salva informações
+
+                const materiais =
+                    obterMateriais();
+
+
+                materiais.push(
+                    material
+                );
+
+
+                atualizarMateriais(
+                    materiais
+                );
+
+
+                // Adiciona na tabela
+
+                adicionarMaterialNaTabela(
+                    material
+                );
+
+
+                // Fecha modal
+
+                modalMateria.style.display =
+                    "none";
+
+
+                selectMateria.value =
+                    disciplinaSelecionada || "";
+
+
+                arquivoSelecionado =
+                    null;
+
+
+                fileInput.value =
+                    "";
+
+
+                console.log(
+                    "Material cadastrado com sucesso!"
+                );
+
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao cadastrar:",
+                    erro
+                );
+
+
+                alert(
+                    "Não foi possível salvar o material."
+                );
+
+
+            } finally {
+
+                salvarMaterial.disabled =
+                    false;
+
+            }
 
         }
+    );
 
-        const materia = selectMateria.value;
-
-        if (materia === "") {
-
-            alert("Escolha uma matéria.");
-            return;
-
-        }
-
-        // IMPEDE CADASTRO DUPLICADO POR CLIQUES RÁPIDOS
-
-        salvarMaterial.disabled = true;
-
-        try {
-
-            // CRIA IDENTIFICADOR ÚNICO
-
-            const id = crypto.randomUUID();
-
-            const material = {
-
-                id: id,
-                nome: arquivoSelecionado.name,
-                materia: materia
-
-            };
-
-            // SALVA PRIMEIRO O ARQUIVO ORIGINAL
-
-            await salvarArquivo(id, arquivoSelecionado);
-
-            // DEPOIS SALVA AS INFORMAÇÕES
-
-            const materiais = obterMateriais();
-
-            materiais.push(material);
-
-            atualizarMateriais(materiais);
-
-            // ATUALIZA A TABELA
-
-            adicionarMaterialNaTabela(material);
-
-            // LIMPA O CADASTRO
-
-            modalMateria.style.display = "none";
-
-            selectMateria.value = "";
-
-            arquivoSelecionado = null;
-
-            fileInput.value = "";
-
-            console.log("Material cadastrado com sucesso!");
-
-        } catch (erro) {
-
-            console.error("Erro ao cadastrar:", erro);
-
-            alert("Não foi possível salvar o material.");
-
-        } finally {
-
-            salvarMaterial.disabled = false;
-
-        }
-
-    });
 
     // ==========================================
     // ADICIONAR MATERIAL NA TABELA
@@ -384,153 +618,287 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function adicionarMaterialNaTabela(material) {
 
-        const linha = document.createElement("tr");
+        const linha =
+            document.createElement("tr");
 
-        linha.dataset.materia = material.materia;
 
+        // Guarda a matéria da linha
+
+        linha.dataset.materia =
+            material.materia;
+
+
+        // ======================================
         // NOME DO MATERIAL
+        // ======================================
 
-        const colunaNome = document.createElement("td");
+        const colunaNome =
+            document.createElement("td");
 
-        colunaNome.textContent = material.nome;
 
+        colunaNome.textContent =
+            material.nome;
+
+
+        // ======================================
         // CONTEÚDO DO MATERIAL
+        // ======================================
 
-        const colunaConteudo = document.createElement("td");
+        const colunaConteudo =
+            document.createElement("td");
 
-        colunaConteudo.textContent = material.materia;
 
+        colunaConteudo.textContent =
+            material.materia;
+
+
+        // ======================================
         // COLUNA DOS BOTÕES
+        // ======================================
 
-        const colunaBotao = document.createElement("td");
+        const colunaBotao =
+            document.createElement("td");
 
-        colunaBotao.classList.add("acoesMaterial");
+
+        // ======================================
+        // DIV DAS AÇÕES
+        // ======================================
+
+        const acoesMaterial =
+            document.createElement("div");
+
+
+        acoesMaterial.classList.add(
+            "acoesMaterial"
+        );
+
 
         // ======================================
         // BOTÃO BAIXAR
         // ======================================
 
-        const botaoBaixar = document.createElement("button");
+        const botaoBaixar =
+            document.createElement("button");
 
-        botaoBaixar.type = "button";
 
-        botaoBaixar.textContent = "Baixar";
+        botaoBaixar.type =
+            "button";
 
-        botaoBaixar.classList.add("botaoBaixar");
 
-        botaoBaixar.addEventListener("click", function () {
+        botaoBaixar.textContent =
+            "Baixar";
 
-            baixarArquivo(material);
 
-        });
+        botaoBaixar.classList.add(
+            "botaoBaixar"
+        );
+
+
+        botaoBaixar.addEventListener(
+            "click",
+            function () {
+
+                baixarArquivo(
+                    material
+                );
+
+            }
+        );
+
 
         // ======================================
         // BOTÃO EXCLUIR
         // ======================================
 
-        const botaoExcluir = document.createElement("button");
+        const botaoExcluir =
+            document.createElement("button");
 
-        botaoExcluir.type = "button";
 
-        botaoExcluir.textContent = "Excluir";
+        botaoExcluir.type =
+            "button";
 
-        botaoExcluir.classList.add("botaoExcluir");
 
-        botaoExcluir.addEventListener("click", async function () {
+        botaoExcluir.textContent =
+            "Excluir";
 
-            const confirmar = confirm(
-                "Deseja realmente excluir o material " +
-                material.nome + "?"
-            );
 
-            if (!confirmar) {
-                return;
-            }
+        botaoExcluir.classList.add(
+            "botaoExcluir"
+        );
 
-            botaoExcluir.disabled = true;
 
-            try {
+        botaoExcluir.addEventListener(
+            "click",
+            async function () {
 
-                // EXCLUI O ARQUIVO ORIGINAL
+                const confirmar =
+                    confirm(
+                        "Deseja realmente excluir o material " +
+                        material.nome +
+                        "?"
+                    );
 
-                await excluirArquivo(material.id);
 
-                // EXCLUI O REGISTRO DO LOCAL STORAGE
+                if (!confirmar) {
+                    return;
+                }
 
-                let materiais = obterMateriais();
 
-                if (material.id) {
+                botaoExcluir.disabled =
+                    true;
 
-                    materiais = materiais.filter(function (m) {
-                        return m.id !== material.id;
-                    });
 
-                } else {
+                try {
 
-                    // COMPATIBILIDADE COM CADASTROS ANTIGOS
+                    // Exclui arquivo
 
-                    const indice = materiais.findIndex(function (m) {
+                    await excluirArquivo(
+                        material.id
+                    );
 
-                        return !m.id &&
-                            m.nome === material.nome &&
-                            m.materia === material.materia;
 
-                    });
+                    // Exclui registro
 
-                    if (indice !== -1) {
-                        materiais.splice(indice, 1);
+                    let materiais =
+                        obterMateriais();
+
+
+                    if (material.id) {
+
+                        materiais =
+                            materiais.filter(
+                                function (m) {
+
+                                    return (
+                                        m.id !==
+                                        material.id
+                                    );
+
+                                }
+                            );
+
+                    } else {
+
+                        // Compatibilidade
+                        // com cadastros antigos
+
+                        const indice =
+                            materiais.findIndex(
+                                function (m) {
+
+                                    return (
+                                        !m.id &&
+                                        m.nome ===
+                                            material.nome &&
+                                        m.materia ===
+                                            material.materia
+                                    );
+
+                                }
+                            );
+
+
+                        if (indice !== -1) {
+
+                            materiais.splice(
+                                indice,
+                                1
+                            );
+
+                        }
+
                     }
+
+
+                    atualizarMateriais(
+                        materiais
+                    );
+
+
+                    // Remove da tabela
+
+                    linha.remove();
+
+
+                    console.log(
+                        "Material excluído!"
+                    );
+
+
+                } catch (erro) {
+
+                    console.error(
+                        "Erro ao excluir:",
+                        erro
+                    );
+
+
+                    alert(
+                        "Não foi possível excluir o material."
+                    );
+
+
+                    botaoExcluir.disabled =
+                        false;
 
                 }
 
-                atualizarMateriais(materiais);
-
-                // REMOVE A LINHA DA TABELA
-
-                linha.remove();
-
-                console.log("Material excluído!");
-
-            } catch (erro) {
-
-                console.error("Erro ao excluir:", erro);
-
-                alert("Não foi possível excluir o material.");
-
-                botaoExcluir.disabled = false;
-
             }
+        );
 
-        });
 
         // ======================================
         // ORGANIZA OS BOTÕES
         // ======================================
 
-        const acoesMaterial = document.createElement("div");
+        acoesMaterial.appendChild(
+            botaoBaixar
+        );
 
-        acoesMaterial.classList.add("acoesMaterial");
 
-        acoesMaterial.appendChild(botaoBaixar);
-        acoesMaterial.appendChild(botaoExcluir);
+        acoesMaterial.appendChild(
+            botaoExcluir
+        );
 
-        colunaBotao.appendChild(acoesMaterial);
 
-        linha.appendChild(colunaNome);
+        colunaBotao.appendChild(
+            acoesMaterial
+        );
 
-        linha.appendChild(colunaConteudo);
 
-        linha.appendChild(colunaBotao);
+        // ======================================
+        // MONTA A LINHA
+        // ======================================
 
-        listaMateriais.appendChild(linha);
-<<<<<<< HEAD
+        linha.appendChild(
+            colunaNome
+        );
 
+
+        linha.appendChild(
+            colunaConteudo
+        );
+
+
+        linha.appendChild(
+            colunaBotao
+        );
+
+
+        listaMateriais.appendChild(
+            linha
+        );
+
+
+        // ======================================
         // MANTÉM O FILTRO ATIVO
+        // ======================================
 
         if (materiaFiltrada !== null) {
 
             linha.style.display =
-                material.materia === materiaFiltrada
+                material.materia ===
+                materiaFiltrada
                     ? ""
                     : "none";
 
@@ -538,74 +906,103 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+
     // ==========================================
     // CARREGAR MATERIAIS CADASTRADOS
     // ==========================================
-=======
-                
-    }
-
-    // carrega materiais salvos so p salva a branch
->>>>>>> branchDuda
 
     function carregarMateriais() {
 
-        listaMateriais.innerHTML = "";
+        listaMateriais.innerHTML =
+            "";
 
-        const materiais = obterMateriais();
 
-        materiais.forEach(function (material) {
+        const materiais =
+            obterMateriais();
 
-            adicionarMaterialNaTabela(material);
 
-        });
+        materiais.forEach(
+            function (material) {
+
+                adicionarMaterialNaTabela(
+                    material
+                );
+
+            }
+        );
 
     }
+
 
     // ==========================================
     // FILTRAR MATERIAIS POR ASSUNTO
     // ==========================================
 
-    assuntos.forEach(function (assunto) {
+    assuntos.forEach(
+        function (assunto) {
 
-        assunto.addEventListener("click", function () {
+            assunto.addEventListener(
+                "click",
+                function () {
 
-            const materiaSelecionada = assunto.dataset.materia;
+                    const materiaSelecionada =
+                        assunto.dataset.materia;
 
-            // CLICAR NOVAMENTE REMOVE O FILTRO
 
-            if (materiaFiltrada === materiaSelecionada) {
+                    // Se clicar novamente,
+                    // remove o filtro
 
-                materiaFiltrada = null;
+                    if (
+                        materiaFiltrada ===
+                        materiaSelecionada
+                    ) {
 
-            } else {
+                        materiaFiltrada =
+                            null;
 
-                materiaFiltrada = materiaSelecionada;
+                    } else {
 
-            }
+                        materiaFiltrada =
+                            materiaSelecionada;
 
-            const linhas = listaMateriais.querySelectorAll("tr");
+                    }
 
-            linhas.forEach(function (linha) {
 
-                if (
-                    materiaFiltrada === null ||
-                    linha.dataset.materia === materiaFiltrada
-                ) {
+                    const linhas =
+                        listaMateriais.querySelectorAll(
+                            "tr"
+                        );
 
-                    linha.style.display = "";
 
-                } else {
+                    linhas.forEach(
+                        function (linha) {
 
-                    linha.style.display = "none";
+                            if (
+                                materiaFiltrada ===
+                                    null ||
+                                linha.dataset.materia ===
+                                    materiaFiltrada
+                            ) {
+
+                                linha.style.display =
+                                    "";
+
+                            } else {
+
+                                linha.style.display =
+                                    "none";
+
+                            }
+
+                        }
+                    );
 
                 }
+            );
 
-            });
+        }
+    );
 
-        });
-
-    });
 
     // ==========================================
     // INICIALIZAÇÃO

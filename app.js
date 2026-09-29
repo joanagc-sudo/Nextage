@@ -85,6 +85,9 @@ app.get("/tela-inicial", async function (req, res) {
 app.get("/materiais", async function (req, res) {
     res.render("indexMateriais", { layout: "/layouts/main", query: req.query });
 });
+app.get("/disciplinas", function (req, res) {
+    res.render("indexDisciplinas", { layout: "/layouts/main", query: req.query });
+});
 
 app.get("/tela-login", async function (req, res) {
     res.render("indexTelaLogin", { layout: "/layouts/main", query: req.query });
