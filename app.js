@@ -5,9 +5,7 @@ const hbs = require("hbs");
 const bcrypt = require("bcrypt");
 const session = require("express-session");
 const multer = require("multer");
-
 const conn = require("./database");
-
 const app = express();
 
 app.set("view engine", "hbs");
@@ -26,7 +24,6 @@ app.use(
         }
     })
 );
-
 
 app.use((req, res, next) => {
 res.locals.usuario = req.session.usuario || null;
@@ -101,49 +98,59 @@ app.post("/", async (req, res) => {
 
         }
 
-
         // Criptografa a senha
 
         const senhaCriptografada = await bcrypt.hash(senha, 10);
 
-
         // Cadastra o usuário
 
-        const [resultado] = await conn.query(
-            `
-            INSERT INTO Usuarios_Administradores_Estudantes
-            (
-                nome,
-                email,
-                senha,
-                data_nascimento,
-                tipo_usuario
-            )
-            VALUES (?, ?, ?, ?, ?)
-            `,
-            [
-                nome,
-                email,
-                senhaCriptografada,
-                dataNascimento,
-                tipo_usuario
-            ]
-        );
+    const [resultado] = await conn.query(
+    `
+    INSERT INTO Usuarios_Administradores_Estudantes
+    (
+        nome,
+        email,
+        senha,
+        data_nascimento,
+        tipo_usuario
+    )
+    VALUES (?, ?, ?, ?, ?)
+    `,
+    [
+        nome,
+        email,
+        senhaCriptografada,
+        dataNascimento,
+        tipo_usuario
+    ]
+);
 
-        console.log("Usuário cadastrado:", resultado.insertId);
+    console.log(
+    "Usuário cadastrado:",
+    resultado.insertId
+);
 
-        return res.redirect(
-            "/tela-inicial?success=Cadastro Realizado"
-        );
+    req.session.usuario = {
+    id: resultado.insertId,
+    nome: nome,
+    email: email,
+    foto: null
+};
+
+    console.log(
+    "Usuário salvo na sessão:",
+    req.session.usuario
+);
+
+    return res.redirect(
+    "/tela-inicial?success=Cadastro Realizado"
+);
 
     } catch (error) {
 
-        console.error("Erro ao cadastrar usuário:", error);
+    console.error("Erro ao cadastrar usuário:", error);
 
-        return res.redirect(
-            "/?error=Erro ao cadastrar usuário."
-        );
-
+    return res.redirect("/?error=Erro ao cadastrar usuário.");
     }
 
 });
@@ -185,30 +192,19 @@ app.get("/tela-login", async function (req, res) {
 
 });
 
-
 app.post("/login", async function (req, res) {
-
     try {
 
-        const {
-            email,
-            senha
-        } = req.body;
-
+        const { email, senha } = req.body;
 
         // Verifica se os campos foram preenchidos
-
         if (!email || !senha) {
-
             return res.redirect(
                 "/tela-login?error=Informe o e-mail e a senha."
             );
-
         }
 
-
         // Procura o usuário no banco
-
         const [usuarios] = await conn.query(
             `
             SELECT
@@ -224,34 +220,29 @@ app.post("/login", async function (req, res) {
             [email]
         );
 
-
-        // Usuário não encontrado
-
+        // Se não encontrou o usuário
         if (usuarios.length === 0) {
-
             return res.redirect(
                 "/tela-login?error=E-mail ou senha incorretos."
             );
-
         }
 
         const usuario = usuarios[0];
 
-        // Compara a senha
-
+        // Confere a senha
         const senhaCorreta = await bcrypt.compare(
             senha,
             usuario.senha
         );
 
+        // Se a senha estiver errada
         if (!senhaCorreta) {
-
             return res.redirect(
                 "/tela-login?error=E-mail ou senha incorretos."
             );
-
         }
 
+        // SALVA O USUÁRIO NA SESSÃO
         req.session.usuario = {
             id: usuario.id_usuario,
             nome: usuario.nome,
@@ -259,96 +250,79 @@ app.post("/login", async function (req, res) {
             foto: usuario.foto
         };
 
+        console.log("Login realizado:", usuario.email);
+        console.log("Usuário salvo na sessão:", req.session.usuario);
 
-        console.log(
-            "Login realizado:",
-            usuario.email
-        );
-
+        // Vai para a tela inicial
         return res.redirect("/tela-inicial");
 
     } catch (error) {
+
         console.error("Erro ao realizar login:", error);
 
         return res.redirect(
             "/tela-login?error=Erro ao realizar login."
         );
-
     }
+});
 
+app.post("/alterar-foto", upload.single("foto"), async (req, res) => {
+    try {
+
+        console.log("alterarfoto");
+        console.log("Usuário da sessão:", req.session.usuario);
+        console.log("Arquivo recebido:", req.file);
+
+        if (!req.session.usuario) {
+            console.log("ERRO: usuário não está logado.");
+
+            return res.status(401).json({
+                erro: "Usuário não está logado."
+            });
+        }
+
+        if (!req.file) {
+            console.log("ERRO: nenhum arquivo recebido.");
+
+            return res.status(400).json({
+                erro: "Nenhuma foto foi enviada."
+            });
+        }
+
+        const foto = "/imagens/perfis/" + req.file.filename;
+        const idUsuario = req.session.usuario.id;
+
+        console.log("ID do usuário:", idUsuario);
+        console.log("Caminho da foto:", foto);
+
+        await conn.query(
+            `UPDATE Usuarios_Administradores_Estudantes
+             SET foto = ?
+             WHERE id_usuario = ?`,
+            [foto, idUsuario]
+        );
+
+        req.session.usuario.foto = foto;
+
+        console.log("foto salva com sucesso!");
+
+        return res.json({
+            sucesso: true,
+            foto: foto
+        });
+
+    } catch (error) {
+
+        console.error("erro ao alterar a foto");
+        console.error(error);
+
+        return res.status(500).json({
+            erro: error.message
+        });
+    }
 });
 
 
-app.post(
-    "/alterar-foto",
-    upload.single("foto"),
-    async (req, res) => {
-
-        try {
-            // Verifica se existe usuário logado
-            if (!req.session.usuario) {
-                return res.status(401).json({
-                    erro: "Usuário não está logado."
-                });
-
-            }
-
-            // Verifica se enviou uma foto
-            if (!req.file) {
-                return res.status(400).json({
-                    erro: "Nenhuma foto foi enviada."
-                });
-            }
-
-            // Caminho da foto
-            const foto =
-                "/imagens/perfis/" +
-                req.file.filename;
-
-            // ID do usuário logado
-            const idUsuario =
-                req.session.usuario.id;
-
-            // Salva a foto no banco
-            await conn.query(
-                `
-                UPDATE Usuarios_Administradores_Estudantes
-                SET foto = ?
-                WHERE id_usuario = ?
-                `,
-                [
-                    foto,
-                    idUsuario
-                ]
-            );
-            // Atualiza a foto da sessão
-
-            req.session.usuario.foto = foto;
-            console.log(
-                "Foto atualizada:",
-                foto
-            );
-
-            // Retorna para o JavaScript do header
-            return res.json({
-                sucesso: true,
-                foto: foto
-            });
-
-
-        } catch (error) {
-            console.error(
-                "Erro ao alterar foto:",
-                error
-            );
-
-
-            return res.status(500).json({
-                erro: "Erro ao alterar foto."
-            });
-        }
-    }
-);
 
 app.get("/logout", (req, res) => {
     req.session.destroy((erro) => {
