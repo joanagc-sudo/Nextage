@@ -149,6 +149,8 @@ app.get("/questoes", async function (req, res) {
     
     //console.log(result);
 
+    //testar se o commit ta funcionamento
+
     res.render("indexTelaQuestoes", { layout: "/layouts/main", query: req.query, result: result });
 });
 
