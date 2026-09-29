@@ -79,6 +79,7 @@ section {
     height: 215px;
 
     margin: 1px auto 20px;
+    margin-top: -30px;
     padding: 5px 10px;
 
     background-color: #7DB2BC;
@@ -1271,4 +1272,146 @@ section {
 
 .rolagemMateriais::-webkit-scrollbar-thumb:hover {
     background-color: #205D68;
+}
+
+/* SELETOR DE DISCIPLINAS */
+
+.seletorDisciplina {
+    position: relative;
+    top: -30px;
+    left: 1580px;
+
+    width: 185px;
+
+    z-index: 1000;
+}
+
+/* BOTÃO PRINCIPAL */
+
+.btnDisciplina {
+    width: 200px;
+    height: 50px;
+
+    padding: 0 15px;
+
+    border: none;
+    border-radius: 12px;
+
+    background-color: #08758A;
+    color: #FFFDF5;
+
+    font-family: 'Momo Trust Display', sans-serif;
+    font-size: 17px;
+    font-weight: normal;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    cursor: pointer;
+}
+
+
+/* QUANDO ABRIR */
+
+.seletorDisciplina.aberto .btnDisciplina {
+    border-radius: 12px;
+}
+
+
+/* SETA */
+
+#setaDisciplina {
+    font-size: 16px;
+
+    transition: transform 0.2s ease;
+}
+
+
+/* GIRA A SETA */
+
+.seletorDisciplina.aberto #setaDisciplina {
+    transform: rotate(180deg);
+}
+
+
+/* LISTA */
+
+.listaDisciplinas {
+    position: absolute;
+
+    top: 42px;
+    left: 0;
+
+    width: 200px;
+
+    display: none;
+
+    background-color: #b4dbe2;
+
+    border-radius: 0 0 18px 18px;
+
+    overflow: hidden;
+
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.08);
+}
+
+
+/* LISTA ABERTA */
+
+.seletorDisciplina.aberto .listaDisciplinas {
+    display: block;
+}
+
+
+/* CADA DISCIPLINA */
+
+.listaDisciplinas button {
+    width: 100%;
+    height: 37px;
+
+    padding: 0 15px;
+
+    border: none;
+    border-top: 3px solid #2C7E8D;
+
+    background-color: #9dd1db;
+
+    color: #086B7A;
+
+    font-family: 'Momo Trust Display', sans-serif;
+    font-size: 17px;
+    font-weight: normal;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease;
+}
+
+
+/* PRIMEIRO ITEM */
+
+.listaDisciplinas button:first-child {
+    border-top: none;
+}
+
+
+/* HOVER */
+
+.listaDisciplinas button:hover {
+    background-color: #c6f7ff;
+    color: #08758A;
+}
+
+
+/* DISCIPLINA SELECIONADA */
+
+.listaDisciplinas button.selecionada {
+    background-color: #d1f2f7;
+    color: #08758A;
+    font-weight: bold;
 }

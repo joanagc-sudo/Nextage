@@ -2,13 +2,14 @@
 
 <header class="navbar">
 
+    <!-- LOGO -->
     <div class="logo">
         <span>Nextage</span>
     </div>
 
     <nav>
         <a href="/tela-inicial">Início</a>
-        <a href="#">Disciplinas</a>
+        <a href="/disciplinas">Disciplinas</a>
         <a href="/materiais">Materiais</a>
         <a href="#">Fórum</a>
         <a href="/questoes">Questões</a>
@@ -18,44 +19,97 @@
 
         <!-- Botão do usuário -->
         <button class="usuario" id="botaoUsuario">
-            <img id="fotoPerfilNavbar" src="/imagens/usuario.png" alt="Perfil">
+
+            <img
+                id="fotoPerfilNavbar"
+                src="{{#if usuario.foto}}{{usuario.foto}}{{else}}/imagens/usuario.png{{/if}}"
+                alt="Perfil"
+            >
+
         </button>
 
-        <!-- Menu do usuário -->
         <div class="menu-usuario" id="menuUsuario">
 
-            <!-- Informações do perfil -->
+
+            <!-- INFORMAÇÕES DO PERFIL -->
             <div class="perfil-info">
-                <img id="fotoPerfilMenu" src="/imagens/usuario.png" alt="Perfil">
+
+                <img
+                    id="fotoPerfilMenu"
+                    src="{{#if usuario.foto}}{{usuario.foto}}{{else}}/imagens/usuario.png{{/if}}"
+                    alt="Perfil"
+                >
                 <div>
-                    <strong>Nome do Usuário</strong>
-                    <span>usuario@email.com</span>
+
+                    <strong>
+                        {{#if usuario}}
+                            {{usuario.nome}}
+                        {{else}}
+                            Usuário
+                        {{/if}}
+                    </strong>
+
+                    <span>
+                        {{#if usuario}}
+                            {{usuario.email}}
+                        {{else}}
+                            usuario@email.com
+                        {{/if}}
+                    </span>
+
                 </div>
+
             </div>
 
+
             <div class="separador"></div>
 
-            <!-- Trocar conta -->
-            <button class="opcao-menu" id="trocarConta">
+            <button
+                class="opcao-menu"
+                id="trocarConta"
+            >
+
                 <i class="bi bi-arrow-left-right"></i>
-                <span>Trocar de conta</span>
+
+                <span>
+                    Trocar de conta
+                </span>
+
             </button>
 
-            <!-- Alterar foto -->
-            <button class="opcao-menu" id="alterarFoto">
+            <button
+                class="opcao-menu"
+                id="alterarFoto"
+            >
+
                 <i class="bi bi-camera"></i>
-                <span>Alterar foto</span>
+
+                <span>
+                    Alterar foto
+                </span>
+
             </button>
 
-            <!-- Input escondido para selecionar a foto -->
-            <input type="file" id="inputFoto" accept="image/*" hidden>
+            <input
+                type="file"
+                id="inputFoto"
+                accept="image/*"
+                hidden
+            >
+
 
             <div class="separador"></div>
 
-            <!-- Sair -->
-            <button class="opcao-menu sair" id="sair">
+            <button
+                class="opcao-menu sair"
+                id="sair"
+            >
+
                 <i class="bi bi-arrow-return-right"></i>
-                <span>Sair</span>
+                <span>
+                    Sair
+                </span>
+
             </button>
 
         </div>
@@ -64,81 +118,142 @@
 </header>
 
 <script>
-    // Destaca a página atual no menu
-    const urlAtual = window.location.pathname;
-    const links = document.querySelectorAll("nav a");
 
-    links.forEach(link => {
-        const urlLink = link.getAttribute("href");
+const urlAtual = window.location.pathname;
 
-        if (urlLink === urlAtual) {
-            link.classList.add("ativo");
-        }
-    });
+const links = document.querySelectorAll("nav a");
 
-    // Abre e fecha o menu do usuário
-    const botaoUsuario = document.getElementById("botaoUsuario");
-    const menuUsuario = document.getElementById("menuUsuario");
+links.forEach(link => {
 
-    botaoUsuario.addEventListener("click", function (event) {
-        event.stopPropagation();
-        menuUsuario.classList.toggle("aberto");
-    });
+    const urlLink = link.getAttribute("href");
 
-    document.addEventListener("click", function (event) {
-        if (
-            !menuUsuario.contains(event.target) &&
-            !botaoUsuario.contains(event.target)
-        ) {
-            menuUsuario.classList.remove("aberto");
-        }
-    });
+    if (urlLink === urlAtual) {
 
-    // Trocar de conta
-    document.getElementById("trocarConta").addEventListener("click", function () {
-        window.location.href = "/tela-login";
-    });
+        link.classList.add("ativo");
 
-    // ===== FOTO DE PERFIL =====
-    const inputFoto = document.getElementById("inputFoto");
-    const fotoNavbar = document.getElementById("fotoPerfilNavbar");
-    const fotoMenu = document.getElementById("fotoPerfilMenu");
-
-    // Carrega foto salva
-    const fotoSalva = localStorage.getItem("fotoPerfil");
-
-    if (fotoSalva) {
-        fotoNavbar.src = fotoSalva;
-        fotoMenu.src = fotoSalva;
     }
 
-    // Abre o seletor de arquivos
-    document.getElementById("alterarFoto").addEventListener("click", function () {
+});
+
+const botaoUsuario =
+    document.getElementById("botaoUsuario");
+
+const menuUsuario =
+    document.getElementById("menuUsuario");
+
+
+botaoUsuario.addEventListener("click", function(event) {
+
+    event.stopPropagation();
+
+    menuUsuario.classList.toggle("aberto");
+
+});
+
+document.addEventListener("click", function(event) {
+
+    if (
+        !menuUsuario.contains(event.target) &&
+        !botaoUsuario.contains(event.target)
+    ) {
+
+        menuUsuario.classList.remove("aberto");
+
+    }
+
+});
+
+
+document
+    .getElementById("trocarConta")
+    .addEventListener("click", function() {
+
+        window.location.href = "/tela-login";
+
+    });
+
+const inputFoto =
+    document.getElementById("inputFoto");
+
+const fotoNavbar =
+    document.getElementById("fotoPerfilNavbar");
+
+const fotoMenu =
+    document.getElementById("fotoPerfilMenu");
+
+document
+    .getElementById("alterarFoto")
+    .addEventListener("click", function() {
+
         inputFoto.click();
+
     });
 
-    // Atualiza a foto
-    inputFoto.addEventListener("change", function () {
-        const arquivo = this.files[0];
+inputFoto.addEventListener("change", async function() {
 
-        if (!arquivo) return;
+    const arquivo = this.files[0];
 
-        const leitor = new FileReader();
+    if (!arquivo) {
+        return;
+    }
 
-        leitor.onload = function (e) {
-            const imagem = e.target.result;
+    const formulario = new FormData();
 
-            fotoNavbar.src = imagem;
-            fotoMenu.src = imagem;
+    formulario.append("foto", arquivo);
 
-            localStorage.setItem("fotoPerfil", imagem);
-        };
 
-        leitor.readAsDataURL(arquivo);
+    try {
+
+        const resposta = await fetch(
+            "/alterar-foto",
+            {
+                method: "POST",
+                body: formulario
+            }
+        );
+
+
+        const resultado =
+            await resposta.json();
+
+
+        if (resultado.sucesso) {
+            fotoNavbar.src =
+                resultado.foto;
+
+            fotoMenu.src =
+                resultado.foto;
+
+
+        } else {
+
+            alert(
+                "Não foi possível alterar a foto."
+            );
+
+        }
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao enviar foto:",
+            erro
+        );
+
+        alert(
+            "Erro ao enviar a foto."
+        );
+
+    }
+
+});
+
+document
+    .getElementById("sair")
+    .addEventListener("click", function() {
+
+        window.location.href = "/logout";
+
     });
 
-    // Sair
-    document.getElementById("sair").addEventListener("click", function () {
-        window.location.href = "/";
-    });
 </script>

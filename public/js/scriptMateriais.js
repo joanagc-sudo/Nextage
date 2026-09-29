@@ -1,4 +1,128 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // ==========================================
+    // SELETOR DE DISCIPLINAS
+    // ==========================================
+
+    const seletorDisciplina =
+        document.querySelector(".seletorDisciplina");
+
+    const btnDisciplina =
+        document.getElementById("btnDisciplina");
+
+    const listaDisciplinas =
+        document.getElementById("listaDisciplinas");
+
+    const disciplinaAtual =
+        document.getElementById("disciplinaAtual");
+
+    const disciplinas =
+        document.querySelectorAll(
+            "#listaDisciplinas button"
+    );
+
+    // ==========================================
+    // ABRIR / FECHAR SELETOR
+    // ==========================================
+
+    if (btnDisciplina) {
+
+        btnDisciplina.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+                seletorDisciplina.classList.toggle(
+                    "aberto"
+                );
+
+            }
+        );
+
+    }
+
+
+    // ==========================================
+    // SELECIONAR DISCIPLINA
+    // ==========================================
+
+    disciplinas.forEach(
+        function (botao) {
+
+            botao.addEventListener(
+                "click",
+                function () {
+
+                    const disciplina =
+                        botao.dataset.disciplina;
+
+
+                    // Muda o texto do botão
+
+                    disciplinaAtual.textContent =
+                        disciplina;
+
+
+                    // Remove seleção anterior
+
+                    disciplinas.forEach(
+                        function (item) {
+
+                            item.classList.remove(
+                                "selecionada"
+                            );
+
+                        }
+                    );
+
+
+                    // Marca selecionada
+
+                    botao.classList.add(
+                        "selecionada"
+                    );
+
+
+                    // Fecha o menu
+
+                    seletorDisciplina.classList.remove(
+                        "aberto"
+                    );
+
+
+                    console.log(
+                        "Disciplina selecionada:",
+                        disciplina
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    // ==========================================
+    // FECHAR AO CLICAR FORA
+    // ==========================================
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                seletorDisciplina &&
+                !seletorDisciplina.contains(event.target)
+            ) {
+
+                seletorDisciplina.classList.remove(
+                    "aberto"
+                );
+
+            }
+
+    }
+);
 
     // ==========================================
     // DISCIPLINA RECEBIDA DA PÁGINA DISCIPLINAS
