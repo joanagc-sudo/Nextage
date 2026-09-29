@@ -143,3 +143,12 @@ input::placeholder {
     background-color: #0C6878 !important;
     border-color: #0C6878 !important;
 }
+.btn:focus,
+.btn:active,
+.btn:focus-visible {
+    background-color: #428591 !important;
+    color: white !important;
+    border-color: #BAD8DE !important;
+    box-shadow: none !important;
+    outline: none !important;
+}

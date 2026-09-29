@@ -136,7 +136,7 @@ app.get("/questoes", async function (req, res) {
     // 2) Alternativas de todas essas questões (id_alternativa_correta NÃO é enviado)
     if (questoes.length > 0) {
         const ids = questoes.map(q => q.id_questao);
-
+        
         const [alternativas] = await conn.query(
             `SELECT id_alternativas, questoes_id_questao, texto
              FROM alternativas
@@ -217,6 +217,32 @@ app.post("/questoes/:id/responder", express.json(), async function (req, res) {
         acertou,
         id_correta: questao.id_alternativa_correta,
         explicacao: questao.explicacao
+    });
+});
+
+app.get("/api/filtros", async function (req, res) {
+    const [disciplinas] = await conn.query(
+        "SELECT id_disciplina AS id, nome FROM disciplinas ORDER BY nome"
+    );
+
+    const [conteudos] = await conn.query(
+        "SELECT id_conteudo AS id, nome, id_disciplina FROM conteudos ORDER BY nome"
+    );
+
+    const [bancas] = await conn.query(
+        "SELECT DISTINCT banca AS nome FROM vestibulares ORDER BY banca"
+    );
+
+    const [anos] = await conn.query(
+        "SELECT DISTINCT ano AS nome FROM vestibulares ORDER BY ano DESC"
+    );
+
+    res.json({
+        disciplinas,
+        conteudos,
+        // banca e ano não têm tabela própria, então o valor é o próprio nome
+        bancas: bancas.map(b => ({ id: b.nome, nome: b.nome })),
+        anos: anos.map(a => ({ id: a.nome, nome: String(a.nome) }))
     });
 });
 

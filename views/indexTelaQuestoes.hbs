@@ -1,5 +1,4 @@
-<script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="styleQuestoes.css">
 
 <div class="filtro">
@@ -17,11 +16,7 @@
                     Palavra-chave
                 </label>
 
-                <input
-                    class="form-control"
-                    type="text"
-                    id="palavra-chave"
-                    name="palavra-chave"
+                <input class="form-control" type="text" id="palavra-chave" name="palavra-chave"
                     placeholder="Busque por palavra-chave">
 
             </div>
@@ -31,16 +26,14 @@
 
         </form>
 
-
         <!-- QUESTÕES QUE -->
         <div class="campo-filtro questoes-filtro">
 
-            
-        <label for="questoes-que" class="form-label">
-                    Questões que:
-                </label>
+            <label for="questoes-que" class="form-label">
+                Questões que:
+            </label>
             <div class="btn-group" role="group">
-            
+
                 <input type="checkbox" class="btn-check" id="btncheck1">
                 <label class="btn btn-outline-custom" for="btncheck1">
                     Não resolvi
@@ -82,24 +75,17 @@
         <p class="enunciado">{{enunciado}}</p>
 
         {{#if tem_imagem}}
-        <img src="/questoes/{{id_questao}}/imagem"
-            class="img-fluid mb-3"
-            loading="lazy"
+        <img src="/questoes/{{id_questao}}/imagem" class="img-fluid mb-3" loading="lazy"
             alt="Imagem da questão {{id_questao}}">
         {{/if}}
 
         <div class="alternativas">
             {{#each alternativas}}
             <div class="form-check">
-                <input
-                    class="form-check-input"
-                    type="radio"
-                    name="questao-{{../id_questao}}"
-                    id="q{{../id_questao}}-{{id_alternativas}}"
-                    value="{{id_alternativas}}">
+                <input class="form-check-input" type="radio" name="questao-{{../id_questao}}"
+                    id="q{{../id_questao}}-{{id_alternativas}}" value="{{id_alternativas}}">
 
-                <label class="altern form-check-label"
-                    for="q{{../id_questao}}-{{id_alternativas}}">
+                <label class="altern form-check-label" for="q{{../id_questao}}-{{id_alternativas}}">
                     <strong>{{letra}})</strong> {{texto}}
                 </label>
             </div>
@@ -107,8 +93,7 @@
         </div>
 
         <div class="mt-3">
-            <button type="button" class="btn btn-primary btn-verificar"
-                data-questao="{{id_questao}}">
+            <button type="button" class="btn btn-primary btn-verificar" data-questao="{{id_questao}}">
                 Verificar resposta
             </button>
         </div>
@@ -123,159 +108,78 @@
 
 <script>
 
-// Javascript para verificar questões corretas
-document.querySelectorAll(".btn-verificar").forEach(btn => {
-    btn.addEventListener("click", async () => {
-        const id = btn.dataset.questao;
-        const card = btn.closest(".questao");
-        const marcada = card.querySelector(`input[name="questao-${id}"]:checked`);
-        const resultado = card.querySelector(".resultado");
+    // Javascript para verificar questões corretas
+    document.querySelectorAll(".btn-verificar").forEach(btn => {
+        btn.addEventListener("click", async () => {
+            const id = btn.dataset.questao;
+            const card = btn.closest(".questao");
+            const marcada = card.querySelector(`input[name="questao-${id}"]:checked`);
+            const resultado = card.querySelector(".resultado");
 
-        resultado.replaceChildren();
+            resultado.replaceChildren();
 
-        if (!marcada) {
-            resultado.textContent = "Selecione uma alternativa.";
-            resultado.className = "resultado mt-2 text-warning";
-            return;
-        }
+            if (!marcada) {
+                resultado.textContent = "Selecione uma alternativa.";
+                resultado.className = "resultado mt-2 text-warning";
+                return;
+            }
 
-        const resp = await fetch(`/questoes/${id}/responder`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id_alternativa: marcada.value })
+            const resp = await fetch(`/questoes/${id}/responder`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id_alternativa: marcada.value })
+            });
+            const dados = await resp.json();
+
+            // Limpa marcações anteriores e destaca correta/errada
+            card.querySelectorAll(".form-check-label")
+                .forEach(l => l.classList.remove("text-success", "text-danger", "fw-bold"));
+
+            card.querySelector(`label[for="q${id}-${dados.id_correta}"]`)
+                .classList.add("text-success", "fw-bold");
+
+            if (!dados.acertou) {
+                card.querySelector(`label[for="${marcada.id}"]`).classList.add("text-danger");
+            }
+
+            const msg = document.createElement("strong");
+            msg.className = dados.acertou ? "text-success" : "text-danger";
+            msg.textContent = dados.acertou ? "Acertou!" : "Errou.";
+            resultado.className = "resultado mt-2";
+            resultado.append(msg);
+
+            if (dados.explicacao) {
+                const p = document.createElement("p");
+                p.className = "mt-2 mb-0";
+                p.textContent = dados.explicacao;
+                resultado.append(p);
+            }
         });
-        const dados = await resp.json();
-
-        // Limpa marcações anteriores e destaca correta/errada
-        card.querySelectorAll(".form-check-label")
-            .forEach(l => l.classList.remove("text-success", "text-danger", "fw-bold"));
-
-        card.querySelector(`label[for="q${id}-${dados.id_correta}"]`)
-            .classList.add("text-success", "fw-bold");
-
-        if (!dados.acertou) {
-            card.querySelector(`label[for="${marcada.id}"]`).classList.add("text-danger");
-        }
-
-        const msg = document.createElement("strong");
-        msg.className = dados.acertou ? "text-success" : "text-danger";
-        msg.textContent = dados.acertou ? "Acertou!" : "Errou.";
-        resultado.className = "resultado mt-2";
-        resultado.append(msg);
-
-        if (dados.explicacao) {
-            const p = document.createElement("p");
-            p.className = "mt-2 mb-0";
-            p.textContent = dados.explicacao;
-            resultado.append(p);
-        }
     });
-});
 
 
-// LISTAS
-
-const disciplinas = [
-
-    "Biologia",
-    "Espanhol",
-    "Física",
-    "Filosofia",
-    "Geografia",
-    "História",
-    "Inglês",
-    "Matemática",
-    "Português",
-    "Química",
-    "Redação",
-    "Sociologia"
-
-];
+    // LISTAS
 
 
-const conteudos = [
 
-    "Álgebra",
-    "Geometria",
-    "Trigonometria",
-    "Funções",
-    "Equações",
-    "Probabilidade",
-    "Estatística"
+    // CONTAINER
 
-];
+    const container =
+        document.getElementById("containerFiltros");
+
+    // FUNÇÃO GENÉRICA
 
 
-const bancas = [
+    function criarCampoFiltro(config) {
 
-    "CEBRASPE",
-    "FCC",
-    "FGV",
-    "VUNESP",
-    "AOCP"
+        const campo =
+            document.createElement("div");
 
-];
+        campo.className =
+            "campo-filtro";
 
 
-const anos = [
-
-    "2026",
-    "2025",
-    "2024",
-    "2023",
-    "2022"
-
-];
-
-
-// CONFIGURAÇÃO DOS CAMPOS
-
-const filtros = [
-
-    {
-        nome: "Disciplina",
-        lista: disciplinas,
-        multiplo: true
-    },
-
-    {
-        nome: "Conteúdo",
-        lista: conteudos,
-        multiplo: true
-    },
-
-    {
-        nome: "Banca",
-        lista: bancas,
-        multiplo: true
-    },
-
-    {
-        nome: "Ano",
-        lista: anos,
-        multiplo: true
-    }
-
-];
-
-// CONTAINER
-
-const container =
-    document.getElementById("containerFiltros");
-
-// FUNÇÃO GENÉRICA
-
-
-function criarCampoFiltro(config) {
-
-    const campo =
-        document.createElement("div");
-
-    campo.className =
-        "campo-filtro";
-
-
-    campo.innerHTML = `
+        campo.innerHTML = `
 
         <label class="form-label">
             ${config.nome}
@@ -325,30 +229,23 @@ function criarCampoFiltro(config) {
 
                 <!-- OPÇÕES -->
 
-                <div class="lista-filtro">
+                ${config.lista.map(opcao => `
+    <li class="item-filtro">
+        <div class="form-check">
+            <input
+                class="form-check-input checkbox-filtro"
+                type="checkbox"
+                value="${opcao.id}"
+                data-nome="${opcao.nome}">
 
-                    ${config.lista.map(opcao => `
+            <label class="form-check-label">
+                ${opcao.nome}
+            </label>
+        </div>
+    </li>
+`).join("")}
 
-                        <li class="item-filtro">
-
-                            <div class="form-check">
-
-                                <input
-                                    class="form-check-input checkbox-filtro"
-                                    type="checkbox"
-                                    value="${opcao}">
-
-                                <label class="form-check-label">
-                                    ${opcao}
-                                </label>
-
-                            </div>
-
-                        </li>
-
-                    `).join("")}
-
-                </div>
+            
 
             </ul>
 
@@ -357,108 +254,114 @@ function criarCampoFiltro(config) {
     `;
 
 
-    container.appendChild(campo);
+        container.appendChild(campo);
 
-    // ELEMENTOS
+        // ELEMENTOS
 
-    const botao =
-        campo.querySelector(".botao-filtro");
+        const botao =
+            campo.querySelector(".botao-filtro");
 
-    const pesquisa =
-        campo.querySelector(".pesquisa-filtro");
+        const pesquisa =
+            campo.querySelector(".pesquisa-filtro");
 
-    const itens =
-        campo.querySelectorAll(".item-filtro");
+        const itens =
+            campo.querySelectorAll(".item-filtro");
 
-    const checkboxes =
-        campo.querySelectorAll(".checkbox-filtro");
+        const checkboxes =
+            campo.querySelectorAll(".checkbox-filtro");
 
-    // PESQUISA
-
-
-    pesquisa.addEventListener("input", function () {
-
-        const texto =
-            this.value
-                .toLowerCase()
-                .trim();
+        // PESQUISA
 
 
-        itens.forEach(function (item) {
+        pesquisa.addEventListener("input", function () {
 
-            const nome =
-                item
-                    .querySelector(".form-check-label")
-                    .textContent
-                    .toLowerCase();
+            const texto =
+                this.value
+                    .toLowerCase()
+                    .trim();
 
 
-            item.style.display =
-                nome.includes(texto)
-                    ? ""
-                    : "none";
+            itens.forEach(function (item) {
+
+                const nome =
+                    item
+                        .querySelector(".form-check-label")
+                        .textContent
+                        .toLowerCase();
+
+
+                item.style.display =
+                    nome.includes(texto)
+                        ? ""
+                        : "none";
+
+            });
 
         });
 
-    });
+
+        // SELEÇÃO
 
 
-    // SELEÇÃO
+        checkboxes.forEach(function (checkbox) {
+
+            checkbox.addEventListener("change", function () {
+
+                const selecionadas = [];
 
 
-    checkboxes.forEach(function (checkbox) {
+                checkboxes.forEach(function (item) {
 
-        checkbox.addEventListener("change", function () {
+                    if (item.checked) {
+                        selecionadas.push(item.dataset.nome);
+                    }
 
-            const selecionadas = [];
+                });
 
 
-            checkboxes.forEach(function (item) {
+                // Nenhuma selecionada
 
-                if (item.checked) {
+                if (selecionadas.length === 0) {
 
-                    selecionadas.push(
-                        item.value
-                    );
+                    botao.textContent =
+                        `Selecione ${config.nome.toLowerCase()}`;
+
+                }
+
+
+                // Uma ou várias selecionadas
+
+                else {
+
+                    botao.textContent =
+                        selecionadas.join(", ");
 
                 }
 
             });
 
-
-            // Nenhuma selecionada
-
-            if (selecionadas.length === 0) {
-
-                botao.textContent =
-                    `Selecione ${config.nome.toLowerCase()}`;
-
-            }
-
-
-            // Uma ou várias selecionadas
-
-            else {
-
-                botao.textContent =
-                    selecionadas.join(", ");
-
-            }
-
         });
 
-    });
-
-}
+    }
 
 
-// CRIAR TODOS OS FILTROS
+    // CRIAR TODOS OS FILTROS
 
 
-filtros.forEach(function (filtro) {
+    async function iniciarFiltros() {
+        const resp = await fetch("/api/filtros");
+        const dados = await resp.json();
 
-    criarCampoFiltro(filtro);
+        const filtros = [
+            { nome: "Disciplina", lista: dados.disciplinas, multiplo: true },
+            { nome: "Conteúdo", lista: dados.conteudos, multiplo: true },
+            { nome: "Banca", lista: dados.bancas, multiplo: true },
+            { nome: "Ano", lista: dados.anos, multiplo: true }
+        ];
 
-});
+        filtros.forEach(criarCampoFiltro);
+    }
+
+    iniciarFiltros();
 
 </script>
