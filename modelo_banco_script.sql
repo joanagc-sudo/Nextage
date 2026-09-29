@@ -489,3 +489,5 @@ INSERT INTO `nextage`.`alternativas` (`id_alternativas`, `questoes_id_questao`, 
 
 COMMIT;
 
+ALTER TABLE Usuarios_Administradores_Estudantes
+ADD COLUMN foto VARCHAR(255);
