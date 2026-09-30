@@ -404,11 +404,7 @@ app.get("/questoes", async function (req, res) {
 
     if (questoes.length > 0) {
 
-        const ids =
-            questoes.map(q => q.id_questao);
-
-
-        const ids = questoes.map(q => q.id_questao);
+    const ids = questoes.map(q => q.id_questao);
         
         const [alternativas] = await conn.query(
             `
@@ -653,14 +649,7 @@ app.post(
 
         });
 
-    }
-);
-    res.json({
-        acertou,
-        id_correta: questao.id_alternativa_correta,
-        explicacao: questao.explicacao
     });
-});
 
 app.get("/api/filtros", async function (req, res) {
     const [disciplinas] = await conn.query(
