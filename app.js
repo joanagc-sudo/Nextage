@@ -174,6 +174,29 @@ app.get("/materiais", async function (req, res) {
 
 });
 
+app.post("/materiais", async (req, res) => {
+    try {
+        console.log(req.body);
+        
+        const {
+            id_material,
+            id_usuario,
+            titulo,
+            material_arquivo,
+            data_publicacao,
+            autor,
+            aprovado_publicacao,
+            descricao
+        } = req.body;
+
+        return res.status(201).json({ mensagem: "Material aceito!" });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ erro: "Erro interno do servidor" });
+    }
+});
+
 app.get("/disciplinas", function (req, res) {
 
     res.render("indexDisciplinas", {
