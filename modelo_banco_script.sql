@@ -29,7 +29,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
-
 -- -----------------------------------------------------
 -- Table `nextage`.`conteudos`
 -- -----------------------------------------------------
@@ -46,7 +45,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
-
 -- -----------------------------------------------------
 -- Table `nextage`.`usuarios_administradores_estudantes`
 -- -----------------------------------------------------
@@ -62,7 +60,6 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 5
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
-
 
 -- -----------------------------------------------------
 -- Table `nextage`.`materiais`
@@ -85,7 +82,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
-
 -- -----------------------------------------------------
 -- Table `nextage`.`conteudo_material`
 -- -----------------------------------------------------
@@ -103,7 +99,6 @@ CREATE TABLE IF NOT EXISTS `nextage`.`conteudo_material` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
-
 
 -- -----------------------------------------------------
 -- Table `nextage`.`topicos_forum`
@@ -123,7 +118,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
-
 -- -----------------------------------------------------
 -- Table `nextage`.`conteudos_topicosforum`
 -- -----------------------------------------------------
@@ -141,7 +135,6 @@ CREATE TABLE IF NOT EXISTS `nextage`.`conteudos_topicosforum` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
-
 
 -- -----------------------------------------------------
 -- Table `nextage`.`cronograma_estudos`
@@ -165,7 +158,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
-
 -- -----------------------------------------------------
 -- Table `nextage`.`cronometros`
 -- -----------------------------------------------------
@@ -183,7 +175,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
-
 -- -----------------------------------------------------
 -- Table `nextage`.`vestibulares`
 -- -----------------------------------------------------
@@ -197,7 +188,6 @@ CREATE TABLE IF NOT EXISTS `nextage`.`vestibulares` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
-
 
 -- -----------------------------------------------------
 -- Table `nextage`.`questoes`
@@ -218,7 +208,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
-
 -- -----------------------------------------------------
 -- Table `nextage`.`questoes_conteudos`
 -- -----------------------------------------------------
@@ -237,7 +226,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
-
 -- -----------------------------------------------------
 -- Table `nextage`.`relatorio_desempenho`
 -- -----------------------------------------------------
@@ -255,7 +243,6 @@ CREATE TABLE IF NOT EXISTS `nextage`.`relatorio_desempenho` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
-
 
 -- -----------------------------------------------------
 -- Table `nextage`.`responder`
@@ -277,7 +264,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
-
 -- -----------------------------------------------------
 -- Table `nextage`.`alternativas`
 -- -----------------------------------------------------
@@ -294,7 +280,6 @@ CREATE TABLE IF NOT EXISTS `nextage`.`alternativas` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
@@ -310,7 +295,6 @@ INSERT INTO `nextage`.`disciplinas` (`id_disciplina`, `nome`) VALUES (3, 'Biolog
 
 COMMIT;
 
-
 -- -----------------------------------------------------
 -- Data for table `nextage`.`conteudos`
 -- -----------------------------------------------------
@@ -321,7 +305,6 @@ INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUE
 INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (3, 3, 'Genética');
 
 COMMIT;
-
 
 -- -----------------------------------------------------
 -- Data for table `nextage`.`usuarios_administradores_estudantes`
@@ -334,7 +317,6 @@ INSERT INTO `nextage`.`usuarios_administradores_estudantes` (`id_usuario`, `nome
 
 COMMIT;
 
-
 -- -----------------------------------------------------
 -- Data for table `nextage`.`materiais`
 -- -----------------------------------------------------
@@ -345,7 +327,6 @@ INSERT INTO `nextage`.`materiais` (`id_material`, `id_usuario`, `titulo`, `mater
 INSERT INTO `nextage`.`materiais` (`id_material`, `id_usuario`, `titulo`, `material_arquivo`, `data_publicacao`, `autor`, `aprovado_publicacao`, `descricao`) VALUES (3, 3, 'Mapa Mental Genética', NULL, '2025-05-07', 'Carlos Lima', FALSE, 'Mapa mental para revisão.');
 
 COMMIT;
-
 
 -- -----------------------------------------------------
 -- Data for table `nextage`.`conteudo_material`
@@ -358,7 +339,6 @@ INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES 
 
 COMMIT;
 
-
 -- -----------------------------------------------------
 -- Data for table `nextage`.`topicos_forum`
 -- -----------------------------------------------------
@@ -369,7 +349,6 @@ INSERT INTO `nextage`.`topicos_forum` (`id_topico`, `id_usuario`, `titulo`, `des
 INSERT INTO `nextage`.`topicos_forum` (`id_topico`, `id_usuario`, `titulo`, `descricao`, `data_publicacao`) VALUES (3, 3, 'Mapa Mental Genética', 'Mapa Mental Genética', '2025-05-03');
 
 COMMIT;
-
 
 -- -----------------------------------------------------
 -- Data for table `nextage`.`conteudos_topicosforum`
@@ -382,7 +361,6 @@ INSERT INTO `nextage`.`conteudos_topicosforum` (`id_topico`, `id_conteudo`) VALU
 
 COMMIT;
 
-
 -- -----------------------------------------------------
 -- Data for table `nextage`.`cronograma_estudos`
 -- -----------------------------------------------------
@@ -393,7 +371,6 @@ INSERT INTO `nextage`.`cronograma_estudos` (`id_cronograma`, `id_usuario`, `domi
 INSERT INTO `nextage`.`cronograma_estudos` (`id_cronograma`, `id_usuario`, `domingo`, `segunda`, `terca`, `quarta`, `quinta`, `sexta`, `sabado`) VALUES (3, 3, 'Química', 'História', 'Matemática', 'Português', 'Biologia', 'Redação', 'Descanso');
 
 COMMIT;
-
 
 -- -----------------------------------------------------
 -- Data for table `nextage`.`cronometros`
@@ -406,7 +383,6 @@ INSERT INTO `nextage`.`cronometros` (`id_cronometro`, `id_usuario`, `data`, `tem
 
 COMMIT;
 
-
 -- -----------------------------------------------------
 -- Data for table `nextage`.`vestibulares`
 -- -----------------------------------------------------
@@ -417,7 +393,6 @@ INSERT INTO `nextage`.`vestibulares` (`id_vestibular`, `edicao`, `nome`, `banca`
 INSERT INTO `nextage`.`vestibulares` (`id_vestibular`, `edicao`, `nome`, `banca`, `ano`) VALUES (3, 1, 'UNICAMP', 'Comvest', 2025);
 
 COMMIT;
-
 
 -- -----------------------------------------------------
 -- Data for table `nextage`.`questoes`
@@ -430,7 +405,6 @@ INSERT INTO `nextage`.`questoes` (`id_questao`, `id_vestibular`, `id_alternativa
 
 COMMIT;
 
-
 -- -----------------------------------------------------
 -- Data for table `nextage`.`questoes_conteudos`
 -- -----------------------------------------------------
@@ -441,7 +415,6 @@ INSERT INTO `nextage`.`questoes_conteudos` (`id_questao`, `id_conteudo`) VALUES 
 INSERT INTO `nextage`.`questoes_conteudos` (`id_questao`, `id_conteudo`) VALUES (3, 3);
 
 COMMIT;
-
 
 -- -----------------------------------------------------
 -- Data for table `nextage`.`relatorio_desempenho`
@@ -454,7 +427,6 @@ INSERT INTO `nextage`.`relatorio_desempenho` (`id_relatorio`, `id_usuario`, `hor
 
 COMMIT;
 
-
 -- -----------------------------------------------------
 -- Data for table `nextage`.`responder`
 -- -----------------------------------------------------
@@ -465,7 +437,6 @@ INSERT INTO `nextage`.`responder` (`id_usuario`, `id_questao`, `data`, `certo`) 
 INSERT INTO `nextage`.`responder` (`id_usuario`, `id_questao`, `data`, `certo`) VALUES (3, 3, '2025-05-11', TRUE);
 
 COMMIT;
-
 
 -- -----------------------------------------------------
 -- Data for table `nextage`.`alternativas`

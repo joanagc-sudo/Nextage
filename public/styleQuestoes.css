@@ -152,3 +152,10 @@ input::placeholder {
     box-shadow: none !important;
     outline: none !important;
 }
+
+button#filtrar {
+    grid-column: 3;
+    justify-self: end;
+    width: 200px;
+    height: 50px;
+}
