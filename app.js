@@ -12,7 +12,7 @@ const usuarioRoutes = require("./routes/rotaUsuario");
 const paginasRoutes = require("./routes/rotaPaginas");
 const questoesRoutes = require("./routes/rotaQuestoes");
 const filtrosRoutes = require("./routes/rotaFiltros");
-
+const filtrosRoutes = require("./routes/rotaCronogramas");
 
 app.set("view engine", "hbs");
 
