@@ -174,6 +174,10 @@ app.get("/materiais", async function (req, res) {
 
 });
 
+app.get('/cronograma', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index'));
+});
+
 app.get("/disciplinas", function (req, res) {
 
     res.render("indexDisciplinas", {
