@@ -1,7 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // ==========================================
+
+    async function enviarMaterial(arquivo, materia) {
+        const formData = new FormData();
+
+        formData.append("arquivo", arquivo);
+        formData.append("titulo", arquivo.name);
+        formData.append("descricao", materia);
+
+        await fetch("/materiais", {
+            method: "POST",
+            body: formData
+        });
+        }
     // SELETOR DE DISCIPLINAS
-    // ==========================================
+    
 
     const seletorDisciplina =
         document.querySelector(".seletorDisciplina");
@@ -20,9 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "#listaDisciplinas button"
     );
 
-    // ==========================================
     // ABRIR / FECHAR SELETOR
-    // ==========================================
 
     if (btnDisciplina) {
 
@@ -41,10 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-
-    // ==========================================
     // SELECIONAR DISCIPLINA
-    // ==========================================
 
     disciplinas.forEach(
         function (botao) {
@@ -102,9 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 
-    // ==========================================
     // FECHAR AO CLICAR FORA
-    // ==========================================
 
     document.addEventListener(
         "click",
@@ -124,9 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 );
 
-    // ==========================================
     // DISCIPLINA RECEBIDA DA PÁGINA DISCIPLINAS
-    // ==========================================
 
     const parametrosURL = new URLSearchParams(
         window.location.search
@@ -140,10 +143,7 @@ document.addEventListener("DOMContentLoaded", function () {
         disciplinaSelecionada
     );
 
-
-    // ==========================================
     // ELEMENTOS DO HTML
-    // ==========================================
 
     const btnCadastrar = document.getElementById("btnCadastrar");
     const fileInput = document.getElementById("fileInput");
@@ -158,9 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const assuntos = document.querySelectorAll("[data-materia]");
 
 
-    // ==========================================
     // VERIFICAÇÃO DOS ELEMENTOS
-    // ==========================================
 
     if (
         !btnCadastrar ||
@@ -176,10 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-
-    // ==========================================
     // VARIÁVEIS
-    // ==========================================
 
     let arquivoSelecionado = null;
 
@@ -422,10 +417,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-
-    // ==========================================
-    // EXCLUIR ARQUIVO DO BANCO
-    // ==========================================
+    // EXCLUIR ARQUIVO DO BANCO=
 
     async function excluirArquivo(id) {
 
@@ -480,19 +472,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-
-    // ==========================================
-    // LOCAL STORAGE
-    // ==========================================
-
-    function obterMateriais() {
-
-        return JSON.parse(
-            localStorage.getItem("materiais")
-        ) || [];
-
-    }
-
+    // LOCAL STORAGE 
 
     function atualizarMateriais(materiais) {
 
@@ -503,10 +483,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-
-    // ==========================================
     // BOTÃO +
-    // ==========================================
 
     btnCadastrar.addEventListener(
         "click",
@@ -668,26 +645,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // Salva informações
 
-                const materiais =
-                    obterMateriais();
-
-
-                materiais.push(
-                    material
-                );
-
-
-                atualizarMateriais(
-                    materiais
-                );
-
-
-                // Adiciona na tabela
-
-                adicionarMaterialNaTabela(
-                    material
-                );
-
+                await enviarMaterial(arquivoSelecionado, materia);
 
                 // Fecha modal
 
