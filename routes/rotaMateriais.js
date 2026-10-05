@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-/* SALVAR MATERIAL */
+/* nodeSALVAR MATERIAL */
 router.post("/", upload.single("arquivo"), async (req, res) => {
     try {
         const titulo = req.body.titulo;
@@ -46,6 +46,7 @@ router.post("/", upload.single("arquivo"), async (req, res) => {
 });
 
 /* BUSCAR MATERIAIS */
+
 router.get("/", async (req, res) => {
     try {
         const [materiais] = await conn.query(`
