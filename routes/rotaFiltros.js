@@ -1,3 +1,16 @@
+/*
+ SELECT distinct q.* 
+FROM nextage.questoes q 
+join nextage.vestibulares v on v.id_vestibular = q.id_vestibular
+join nextage.questoes_conteudos qc on q.id_questao = qc.id_questao 
+join nextage.conteudos c on c.id_conteudo = qc.id_conteudo 
+join nextage.disciplinas d on d.id_disciplina = c.id_disciplina
+where d.id_disciplina in (1, 2) 
+and c.id_conteudo in (1,5) 
+and v.banca like ('FUVEST') 
+and v.ano in (2002,2003);
+ */
+
 const express = require("express");
 
 const conn = require("../database");
