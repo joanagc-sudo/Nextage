@@ -1,4 +1,4 @@
-<script>
+
 
 const urlAtual = window.location.pathname;
 
@@ -137,4 +137,3 @@ document
 
     });
 
-</script>

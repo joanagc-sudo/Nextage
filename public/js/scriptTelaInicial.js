@@ -1,4 +1,4 @@
-<script>
+
     const abrir = document.getElementById("abrirLembrete");
     const novo = document.getElementById("novoLembrete");
     const input = document.getElementById("textoLembrete");
@@ -47,4 +47,4 @@
         input.value = "";
         novo.style.display = "none";
     }
-</script>
+

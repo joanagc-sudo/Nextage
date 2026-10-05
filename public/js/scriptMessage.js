@@ -1,4 +1,4 @@
-<script>
+
 
     // Seleciona todas as mensagens que possuem role="alert"
     const alertas = document.querySelectorAll('[role="alert"]');
@@ -17,4 +17,3 @@
 
     });
 
-</script>
