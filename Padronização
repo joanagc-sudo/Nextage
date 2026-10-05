@@ -1,7 +1,151 @@
 Comando para iniciar:
-npm install 
+npm install
 npm install mysql2
 npm run dev
 
-
 Animação de aumentar escala: scale(1.05); - transform 0.2s ease;
+
+
+HTML
+<!--Container do carrossel-->
+<div class="container-slider">
+
+    <!--Botao do carrossel-->
+    <button class="prev-button"><img src="img/arrow.png"
+            alt="prev button"></button>
+    <div class="viewport">
+
+        <!--Imagens do carrossel-->
+        <div class="container-images">
+
+            <!--Divs expecíficas para cada um dos materias-->
+            <div class="conteudo" id="geografia">
+
+                <!--Foto de capa-->
+                <button>
+                    <img
+                        src="img/cartilhas/ALBÚM DE FIGURINHAS.png"
+                        height="350px" width="250px">
+                </button>
+
+            </div>
+        </div>
+        <button class="next-button"><img src="img/arrow.png"
+                alt="next button"></button>
+    </div>
+
+</div>
+
+JS
+<script>
+    const sliders = document.querySelectorAll(".container-slider");
+
+    sliders.forEach(function (slider) {
+        //divs do carrossel
+        const slides = slider.querySelectorAll(".conteudo");
+        //pega a fila que vai ser movida e devolve a primeira div
+        const track = slider.querySelector('.container-images');
+        //botao de voltar
+        const btnPrev = slider.querySelector('.prev-button');
+        //botão de proximo
+        const btnNext = slider.querySelector('.next-button');
+        //janela que esconde oq não é para ver
+        const viewport = slider.querySelector('.viewport');
+        //primeira opção da janela
+        let currentIndex = 0;
+
+        //maximo que as imagens rolam
+        function getMaxScroll() {return track.scrollWidth - viewport.clientWidth;}
+
+        // Primeiro índice que já encosta no final da fila
+        function getMaxIndex() {
+        const maxScroll = getMaxScroll();
+        const index = Array.from(slides).findIndex(s => s.offsetLeft >= maxScroll);
+        return index === -1 ? slides.length - 1 : index;
+        }
+
+        // Move a fila até a posição do material atual
+        function updateSlider() {
+            const x = Math.min(slides[currentIndex].offsetLeft, getMaxScroll());
+            track.style.transform = `translateX(-${Math.max(x, 0)}px)`;
+        }
+
+        //verifica o indice permitido e vai para direita
+        function nextSlider() {
+            const maxIndex = getMaxIndex();
+            //ternario: if/else resumido
+            //se for maior q o permitido retona 0, se não soma 1
+            currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
+            updateSlider();
+        }
+
+        //análogo ao anterior
+        function prevSlider() {
+            const maxIndex = getMaxIndex();
+            currentIndex = currentIndex <= 0 ? maxIndex : currentIndex - 1;
+            updateSlider();
+        }
+
+        //chama as funções após o clique nos botões
+        btnNext.addEventListener('click', nextSlider);
+        btnPrev.addEventListener('click', prevSlider);
+    });
+</script>
+
+CSS
+.container-slider {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/*mostra 3 cartilhas */
+.viewport {
+    width: 790px;
+    overflow: hidden;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+/* Fila que desliza */
+.container-images {
+  position: relative; 
+  display: flex;
+  gap: 20px;
+  transition: transform .4s ease;
+}
+
+.conteudo {
+    border-radius: 10px;
+    transition: transform .3s ease;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.conteudo:hover {
+    transform: scale(1.05);
+}
+
+/*estilização dos botões do carrossel*/
+.prev-button, .next-button {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.prev-button img, .next-button img {
+  width: 100%;
+  height: 100%;
+}
+
+/*muda a direção do botão de proximo*/
+.prev-button {
+  transform: rotate(180deg);
+}

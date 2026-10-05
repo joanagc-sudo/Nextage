@@ -462,7 +462,7 @@ app.get("/questoes", async function (req, res) {
 
 
     res.render(
-        "indexTelaQuestoes",
+        "indexQuestoes",
         {
 
             layout: "/layouts/main",
