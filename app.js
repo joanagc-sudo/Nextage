@@ -13,6 +13,7 @@ const paginasRoutes = require("./routes/rotaPaginas");
 const questoesRoutes = require("./routes/rotaQuestoes");
 const filtrosRoutes = require("./routes/rotaFiltros");
 const cronogramasRoutes = require("./routes/rotaCronogramas");
+const materiaisRoutes = require("./routes/rotaMateriais");
 
 app.set("view engine", "hbs");
 
@@ -64,7 +65,7 @@ console.log("paginasRoutes:", typeof paginasRoutes);
 console.log("questoesRoutes:", typeof questoesRoutes);
 console.log("filtrosRoutes:", typeof filtrosRoutes);
 console.log("cronogramasRoutes:", typeof cronogramasRoutes);
-
+console.log("materiaisRoutes:", typeof materiaisRoutes);
 
 app.use("/", cadastroRoutes);
 app.use("/", loginRoutes);
@@ -73,7 +74,7 @@ app.use("/", paginasRoutes);
 app.use("/", questoesRoutes);
 app.use("/", filtrosRoutes);
 app.use("/", cronogramasRoutes);
-
+app.use("/materiais", materiaisRoutes);
 
 http.createServer(app).listen(8080, () => {
 
