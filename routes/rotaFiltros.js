@@ -1,15 +1,4 @@
-/*
- SELECT distinct q.* 
-FROM nextage.questoes q 
-join nextage.vestibulares v on v.id_vestibular = q.id_vestibular
-join nextage.questoes_conteudos qc on q.id_questao = qc.id_questao 
-join nextage.conteudos c on c.id_conteudo = qc.id_conteudo 
-join nextage.disciplinas d on d.id_disciplina = c.id_disciplina
-where d.id_disciplina in (1, 2) 
-and c.id_conteudo in (1,5) 
-and v.banca like ('FUVEST') 
-and v.ano in (2002,2003);
- */
+
 
 const express = require("express");
 
@@ -17,20 +6,21 @@ const conn = require("../database");
 
 const router = express.Router();
 
-
+//quando acionar o metodo post, executa essa função
 router.post("/filtar", async function (req, res) {
 
     try {
 
-        // ============================================================
-        // 1. DADOS RECEBIDOS DO FORMULÁRIO
-        // ============================================================
-
+        //dados recebidos pelo formulario: seleções dos filtros
+        //ve oq o navegador enviou
         console.log("REQ.BODY:", req.body);
 
+        //garante que as opções selecionadas sempre sejam arrays
         const disciplinas = Array.isArray(req.body.Disciplina)
+            //se for array
             ? req.body.Disciplina
             : req.body.Disciplina
+                //se não for array
                 ? [req.body.Disciplina]
                 : [];
 
@@ -55,20 +45,21 @@ router.post("/filtar", async function (req, res) {
         const palavraChave = req.body["palavra-chave"] || "";
 
 
-        // ============================================================
-        // 2. MONTA OS FILTROS DA CONSULTA
-        // ============================================================
+        //montar filtros para consulta
 
+        //guarda partes do sql
         const filtros = [];
+
+        //guarda os valores
         const parametros = [];
 
 
-        // ------------------------------------------------------------
         // Disciplina
-        // ------------------------------------------------------------
 
+        //se selecionou pelo menos uma
         if (disciplinas.length > 0) {
 
+            //pega as selecionadas
             filtros.push(
                 `d.id_disciplina IN (${disciplinas.map(() => "?").join(", ")})`
             );
@@ -76,10 +67,7 @@ router.post("/filtar", async function (req, res) {
             parametros.push(...disciplinas);
         }
 
-
-        // ------------------------------------------------------------
         // Conteúdo
-        // ------------------------------------------------------------
 
         if (conteudos.length > 0) {
 
@@ -90,10 +78,7 @@ router.post("/filtar", async function (req, res) {
             parametros.push(...conteudos);
         }
 
-
-        // ------------------------------------------------------------
         // Banca
-        // ------------------------------------------------------------
 
         if (bancas.length > 0) {
 
@@ -104,10 +89,7 @@ router.post("/filtar", async function (req, res) {
             parametros.push(...bancas);
         }
 
-
-        // ------------------------------------------------------------
         // Ano
-        // ------------------------------------------------------------
 
         if (anos.length > 0) {
 
@@ -119,10 +101,8 @@ router.post("/filtar", async function (req, res) {
         }
 
 
-        // ------------------------------------------------------------
         // Palavra-chave
-        // ------------------------------------------------------------
-
+  
         if (palavraChave.trim() !== "") {
 
             filtros.push(
@@ -135,9 +115,8 @@ router.post("/filtar", async function (req, res) {
         }
 
 
-        // ============================================================
-        // 3. MONTA O WHERE
-        // ============================================================
+  
+        // converte os parametros para consulta no mysql com and entre cada um dos filtros
 
         const where = filtros.length > 0
             ? `WHERE ${filtros.join(" AND ")}`
