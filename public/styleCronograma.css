@@ -8,58 +8,88 @@
 
 body {
     background-color: #9bc9d2;
-    font-family: Arial, sans-serif;
     min-height: 100vh;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family: 'Momo Trust Display', sans-serif;
+    font-weight: normal;
+    padding: 30px 20px;
 }
 
-.cronograma {
-    width: 92%;
-    max-width: 1000px;
+.pagina-cronograma {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
-h2 {
+.pagina-cronograma h2 {
     text-align: center;
     color: #056477;
-    font-size: 22px;
-    margin-bottom: 10px;
+    font-size: 28px;
+    font-weight: normal;
+    margin-bottom: 12px;
 }
 
-table {
+.tabela-container {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
     background-color: #fffdf5;
     border-radius: 7px;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
-th {
-    height: 52px;
+
+/* Tabela */
+.tabela-cronograma {
+    width: 100%;
+    min-width: 850px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background-color: #fffdf5;
+}
+
+/* Cabeçalho */
+.tabela-cronograma th {
+    height: 50px;
     color: #056477;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: bold;
-    border-bottom: 2px solid #087487;
+    padding: 10px 6px;
     border-right: 2px solid #087487;
+    border-bottom: 2px solid #087487;
+    text-align: center;
+    vertical-align: middle;
 }
-th:last-child {
+
+.tabela-cronograma th:last-child {
     border-right: none;
 }
 
-td {
-    height: 78px;
-    border-right: 2px solid #087487;
-    border-bottom: 2px solid #087487;
-    vertical-align: top;
+/* Células */
+.tabela-cronograma td {
+    min-height: 80px;
+    height: 80px;
     padding: 10px;
+    color: #056477;
+    font-size: 14px;
+    line-height: 1.4;
+    vertical-align: top;
+    border-right: 2px solid #087487;
+    border-bottom: 2px solid #087487;
+
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
-td:last-child {
+.tabela-cronograma td:last-child {
     border-right: none;
 }
 
-tr:last-child td {
+.tabela-cronograma tbody tr:last-child td {
     border-bottom: none;
+}
+
+.tabela-cronograma td:focus {
+    outline: none;
+    background-color: #f4fbfa;
+}
+.tabela-cronograma td:empty::before {
+    content: "";
 }
