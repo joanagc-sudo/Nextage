@@ -3,67 +3,68 @@
 <link rel="stylesheet" href="styleQuestoes.css">
 
 <div class="filtro">
+    <form method="post" action="/filtar">
+        <h1>Filtrar Questões</h1>
 
-    <h1>Filtrar Questões</h1>
+        <div class="containerFiltro">
 
-    <div class="containerFiltro">
+            <form id="filtrarQuestoes">
 
-        <form id="filtrarQuestoes">
+                <!-- PALAVRA-CHAVE -->
+                <div class="campo-filtro">
 
-            <!-- PALAVRA-CHAVE -->
-            <div class="campo-filtro">
+                    <label for="palavra-chave" class="form-label">
+                        Palavra-chave
+                    </label>
 
-                <label for="palavra-chave" class="form-label">
-                    Palavra-chave
+                    <input class="form-control" type="text" id="palavra-chave"
+                        name="palavra-chave"
+                        placeholder="Busque por palavra-chave">
+
+                </div>
+
+                <!-- CAMPOS CRIADOS PELO JAVASCRIPT -->
+                <div id="containerFiltros"></div>
+
+            </form>
+
+            <!-- QUESTÕES QUE -->
+            <div class="campo-filtro questoes-filtro">
+
+                <label for="questoes-que" class="form-label">
+                    Questões que:
                 </label>
+                <div class="btn-group" role="group">
 
-                <input class="form-control" type="text" id="palavra-chave"
-                    name="palavra-chave"
-                    placeholder="Busque por palavra-chave">
+                    <input type="checkbox" class="btn-check" id="btncheck1">
+                    <label class="btn btn-outline-custom" for="btncheck1">
+                        Não resolvi
+                    </label>
+
+                    <input type="checkbox" class="btn-check" id="btncheck2">
+                    <label class="btn btn-outline-custom" for="btncheck2">
+                        Resolvi
+                    </label>
+
+                    <input type="checkbox" class="btn-check" id="btncheck3">
+                    <label class="btn btn-outline-custom" for="btncheck3">
+                        Acertei
+                    </label>
+
+                    <input type="checkbox" class="btn-check" id="btncheck4">
+                    <label class="btn btn-outline-custom" for="btncheck4">
+                        Errei
+                    </label>
+
+                </div>
 
             </div>
 
-            <!-- CAMPOS CRIADOS PELO JAVASCRIPT -->
-            <div id="containerFiltros"></div>
-
-        </form>
-
-        <!-- QUESTÕES QUE -->
-        <div class="campo-filtro questoes-filtro">
-
-            <label for="questoes-que" class="form-label">
-                Questões que:
-            </label>
-            <div class="btn-group" role="group">
-
-                <input type="checkbox" class="btn-check" id="btncheck1">
-                <label class="btn btn-outline-custom" for="btncheck1">
-                    Não resolvi
-                </label>
-
-                <input type="checkbox" class="btn-check" id="btncheck2">
-                <label class="btn btn-outline-custom" for="btncheck2">
-                    Resolvi
-                </label>
-
-                <input type="checkbox" class="btn-check" id="btncheck3">
-                <label class="btn btn-outline-custom" for="btncheck3">
-                    Acertei
-                </label>
-
-                <input type="checkbox" class="btn-check" id="btncheck4">
-                <label class="btn btn-outline-custom" for="btncheck4">
-                    Errei
-                </label>
-
-            </div>
-
-        </div>
-        <button type="button" class="btn btn-primary" id="filtrar">
-                <i class="bi bi-sort-down"></i>  FILTRAR
+            <button type="submit" class="btn btn-primary" id="filtrar">
+                <i class="bi bi-sort-down"></i> FILTRAR
             </button>
-    </div>
-
+        </div>
+    </form>
 </div>
 <div class="questoes">
 

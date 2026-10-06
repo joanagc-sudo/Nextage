@@ -57,16 +57,6 @@ app.use((req, res, next) => {
 
 hbs.registerPartials("./views/partials");
 
-// ROTAS
-console.log("cadastroRoutes:", typeof cadastroRoutes);
-console.log("loginRoutes:", typeof loginRoutes);
-console.log("usuarioRoutes:", typeof usuarioRoutes);
-console.log("paginasRoutes:", typeof paginasRoutes);
-console.log("questoesRoutes:", typeof questoesRoutes);
-console.log("filtrosRoutes:", typeof filtrosRoutes);
-console.log("cronogramasRoutes:", typeof cronogramasRoutes);
-console.log("materiaisRoutes:", typeof materiaisRoutes);
-
 app.use("/", cadastroRoutes);
 app.use("/", loginRoutes);
 app.use("/", usuarioRoutes);

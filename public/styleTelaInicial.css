@@ -42,7 +42,7 @@ body {
     font-weight: normal;
 }
 
-.meio button {
+.botao {
     padding: 9px 20px;
     background-color: #08758A;
     color: white;
@@ -50,17 +50,21 @@ body {
     border-radius: 25px;
     font-family: inherit;
     font-size: 20px;
+    text-decoration: none;
     
 }
 .botao:hover {
     padding: 9px 20px;
-    background-color: #08758A;
+    background-color: #075564;
     color: white;
     border: none;
     border-radius: 25px;
     font-family: inherit;
     font-size: 20px;
+
 }
+
+
 
 .imagemTelaInicio{
     width: 360px;
