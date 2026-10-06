@@ -1277,12 +1277,10 @@ section {
 /* SELETOR DE DISCIPLINAS */
 
 .seletorDisciplina {
+    display: flex;
     position: relative;
-    top: -30px;
-    left: 1580px;
-
+    margin-left: auto;
     width: 185px;
-
     z-index: 1000;
 }
 
