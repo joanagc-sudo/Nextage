@@ -59,12 +59,16 @@ const container = document.getElementById("containerFiltros");
 // Guarda os filtros criados para um poder consultar o outro
 const campos = {};
 
-// FUNÇÃO GENÉRICA
+// funçao genérica para filtros
 function criarCampoFiltro(config) {
 
+    console.log(config);
+
+    //cria o container
     const campo = document.createElement("div");
     campo.className = "campo-filtro";
 
+    //coloca o html dentro da div
     campo.innerHTML = `
         <label class="form-label">${config.nome}</label>
 
@@ -101,7 +105,9 @@ function criarCampoFiltro(config) {
                                 class="form-check-input checkbox-filtro"
                                 type="checkbox"
                                 value="${opcao.id}"
-                                data-nome="${opcao.nome}">
+                                data-nome="${opcao.nome}"
+                                name="${config.nome}"
+                                >
                             <label class="form-check-label">
                                 ${opcao.nome}
                             </label>
@@ -164,19 +170,23 @@ function criarCampoFiltro(config) {
 
 // MOSTRA SÓ OS CONTEÚDOS DAS DISCIPLINAS SELECIONADAS
 function filtrarConteudosPorDisciplina() {
+    //pega selecionados
     const disciplinasSel = campos.disciplina.getSelecionados();
     const conteudo = campos.conteudo;
 
+    //percorre tds os conteúdos
     conteudo.itens.forEach((item, i) => {
+        //pega o checkbos que corresponde
         const checkbox = conteudo.checkboxes[i];
 
+        //verifica se pertence a disciplina selecionada
         const pertence =
             disciplinasSel.length === 0 ||
             disciplinasSel.includes(item.dataset.disciplina);
 
         item.dataset.bloqueado = pertence ? "false" : "true";
 
-        // Se o conteúdo saiu da lista, desmarca
+        // Se o dataset está bloqueado, desmarca o checkbox
         if (!pertence && checkbox.checked) {
             checkbox.checked = false;
         }
