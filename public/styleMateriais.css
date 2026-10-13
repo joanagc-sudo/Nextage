@@ -1274,23 +1274,28 @@ section {
     background-color: #205D68;
 }
 
-/* SELETOR DE DISCIPLINAS */
+/* ÁREA DO SELETOR DE DISCIPLINAS */
 
 .seletorDisciplina {
-    display: flex;
     position: relative;
+    display: flex;
+    width: 200px;
     margin-left: auto;
-    width: 185px;
-    z-index: 1000;
+    z-index: 10;
 }
 
 /* BOTÃO PRINCIPAL */
 
 .btnDisciplina {
     width: 200px;
+    min-width: 200px;
     height: 50px;
-
     padding: 0 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
 
     border: none;
     border-radius: 12px;
@@ -1300,11 +1305,6 @@ section {
 
     font-family: 'Momo Trust Display', sans-serif;
     font-size: 17px;
-    font-weight: normal;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 
     cursor: pointer;
 }
@@ -1320,11 +1320,14 @@ section {
 /* SETA */
 
 #setaDisciplina {
+    flex-shrink: 0;
     font-size: 16px;
-
     transition: transform 0.2s ease;
 }
 
+.seletorDisciplina.aberto #setaDisciplina {
+    transform: rotate(180deg);
+}
 
 /* GIRA A SETA */
 
@@ -1332,84 +1335,62 @@ section {
     transform: rotate(180deg);
 }
 
-
-/* LISTA */
+/*Lista das disciplinas */
 
 .listaDisciplinas {
     position: absolute;
-
-    top: 42px;
-    left: 0;
+    top: 100%;
+    right: 0;
+    left: auto;
 
     width: 200px;
+    max-height: 260px;
+    overflow-y: auto;
 
     display: none;
 
-    background-color: #b4dbe2;
+    background-color: #B4DBE2;
+    border-radius: 0 0 12px 12px;
 
-    border-radius: 0 0 18px 18px;
-
-    overflow: hidden;
-
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
 }
-
-
-/* LISTA ABERTA */
 
 .seletorDisciplina.aberto .listaDisciplinas {
     display: block;
 }
 
-
-/* CADA DISCIPLINA */
+/* OPÇÕES */
 
 .listaDisciplinas button {
+    display: block;
     width: 100%;
-    height: 37px;
-
-    padding: 0 15px;
+    min-height: 37px;
+    padding: 8px 15px;
 
     border: none;
-    border-top: 3px solid #2C7E8D;
+    border-top: 1px solid #2C7E8D;
 
-    background-color: #9dd1db;
-
+    background-color: #9DD1DB;
     color: #086B7A;
 
     font-family: 'Momo Trust Display', sans-serif;
-    font-size: 17px;
-    font-weight: normal;
-
+    font-size: 16px;
     text-align: left;
 
     cursor: pointer;
-
-    transition:
-        background-color 0.15s ease,
-        color 0.15s ease;
 }
-
-
-/* PRIMEIRO ITEM */
 
 .listaDisciplinas button:first-child {
     border-top: none;
 }
 
-
-/* HOVER */
-
 .listaDisciplinas button:hover {
-    background-color: #c6f7ff;
+    background-color: #C6F7FF;
     color: #08758A;
 }
 
-
-/* DISCIPLINA SELECIONADA */
-
 .listaDisciplinas button.selecionada {
-    background-color: #d1f2f7;
+    background-color: #D1F2F7;
     color: #08758A;
     font-weight: bold;
 }
