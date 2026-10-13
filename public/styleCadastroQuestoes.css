@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #9DC8CF;
+    font-family: 'Momo Trust Display', sans-serif;
+    color: #428591 ;
+}
+
+
+.filtro {
+    border-radius: 10px;
+    margin-top: 2em;
+    margin-left: 3.5rem;
+    margin-right: 3.5rem;
+    padding: 1em;
+    background-color: #BAD8DE;
+}
+
+
+.containerFiltro {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 17px;
+}
+
+/* Faz o form não ocupar uma única célula do grid */
+#filtrarQuestoes {
+    display: contents;
+}
+
+/* Faz os campos gerados pelo JS entrarem no grid */
+#containerFiltros {
+    display: contents;
+}
+
+.campo-filtro {
+    width: 100%;
+}
+
+.questoes-filtro {
+    width: 100%;
+}
+
+.questoes-filtro .btn-group {
+    display: flex;
+    width: 100%;
+}
+
+.questoes-filtro .btn {
+    flex: 1;
+}
+
+h1 {
+    color: #0C6878;
+}
+
+label {
+    color: #428591;
+}
+
+input::placeholder {
+    color: #ABB3B4 !important;
+}
+
+.botao-filtro{
+    color: #444746;
+}
+
+.questoes{
+    border-radius: 10px;
+    padding-right: 3.5em;
+    padding-left: 3.5em;
+}
+
+.btn{
+    background-color: #428591;
+    color:white;
+    border: 1px solid #BAD8DE;
+}
+.btn:hover{
+    background-color: #39737e;
+    color:white;
+    border: 1px solid #BAD8DE;
+}
+
+.btn-outline-custom {
+  background-color: #ffffff;
+  border-color: #DEE2E6;
+  color: #444746;
+;
+}
+.btn-outline-custom:active,
+.btn-outline-custom:focus {
+    background-color: #fff !important;
+    border-color: #DEE2E6 !important;
+    color: #212529 !important;
+    box-shadow: none !important;
+}
+
+
+.btn-outline-custom:hover {
+  background-color: transparent;
+  border-color: #0C6878 !important;
+  color: #0C6878;
+}
+
+
+
+.btn-check:checked + .btn-outline-custom {
+  background-color: #0C6878;
+  border-color: #0C6878;
+  color: #ffffff;
+}
+
+.btn-check:checked + .btn-outline-custom:hover {
+  background-color: #0C6878;
+  border-color: #0C6878;
+  color: #ffffff;
+}
+
+
+.card{
+    background-color: #FFFDF5;
+}
+
+.identificacao{
+    padding: 0.3em;
+    padding-left: 1em;
+    background-color: #84B2B9;
+    color: #FFFDF5 !important;
+    border-radius: 5px;
+}
+
+.altern{
+    color:#6e6f70 ;
+}
+
+.form-check-input[type="radio"]:checked {
+    background-color: #0C6878 !important;
+    border-color: #0C6878 !important;
+}
+.btn:focus,
+.btn:active,
+.btn:focus-visible {
+    background-color: #428591 !important;
+    color: white !important;
+    border-color: #BAD8DE !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+button#filtrar {
+    grid-column: 3;
+    justify-self: end;
+    width: 200px;
+    height: 50px;
+}
