@@ -2,7 +2,7 @@
     
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing:border-box;
 
 }
 
@@ -10,7 +10,7 @@ body{
 
     background-color: #9DC8CF;
     font-family: 'Momo Trust Display', sans-serif;
-    color: #428591 ;
+    color: #428591;
 
 }
 
