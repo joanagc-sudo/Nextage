@@ -1,19 +1,23 @@
 
+document.addEventListener("DOMContentLoaded", function () {
 
-    // Seleciona todas as mensagens que possuem role="alert"
-    const alertas = document.querySelectorAll('[role="alert"]');
+    const alertas = document.querySelectorAll(
+        "#alerta-sucesso, #alerta-danger, #alerta-warning"
+    );
 
-
-    // Para cada alerta encontrado
     alertas.forEach(function (alerta) {
 
-        // Aguarda 2 segundos
         setTimeout(function () {
 
-            // Esconde o alerta
-            alerta.style.display = "none";
+            alerta.style.transition = "opacity 0.5s ease";
+            alerta.style.opacity = "0";
 
-        }, 2000);
+            setTimeout(function () {
+                alerta.remove();
+            }, 500);
+
+        }, 3000);
 
     });
 
+});
