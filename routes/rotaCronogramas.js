@@ -2,7 +2,6 @@ const express = require("express");
 const multer = require("multer");
 
 const conn = require("../database");
-
 const router = express.Router();
 
 router.get("/cronograma", function (req, res) {
@@ -11,5 +10,6 @@ router.get("/cronograma", function (req, res) {
         query: req.query
     });
 });
+
 
 module.exports = router;
