@@ -68,8 +68,8 @@ router.get("/questoes", async function (req, res) {
 
     if (questoes.length > 0) {
 
-    const ids = questoes.map(q => q.id_questao);
-        
+        const ids = questoes.map(q => q.id_questao);
+
         const [alternativas] = await conn.query(
             `
             SELECT
@@ -328,16 +328,28 @@ router.get("/api/filtros", async function (req, res) {
         "SELECT DISTINCT banca AS nome FROM vestibulares ORDER BY banca"
     );
 
-    const [anos] = await conn.query(
-        "SELECT DISTINCT ano AS nome FROM vestibulares ORDER BY ano DESC"
-    );
+    const [anos] = await conn.query(`
+    SELECT
+        ano AS nome,
+        GROUP_CONCAT(
+            DISTINCT banca
+            SEPARATOR '||'
+        ) AS bancas
+    FROM vestibulares
+    GROUP BY ano
+    ORDER BY ano DESC
+`);
 
     res.json({
         disciplinas,
         conteudos,
         // banca e ano não têm tabela própria, então o valor é o próprio nome
         bancas: bancas.map(b => ({ id: b.nome, nome: b.nome })),
-        anos: anos.map(a => ({ id: a.nome, nome: String(a.nome) }))
+        anos: anos.map(a => ({
+        id: String(a.nome),
+        nome: String(a.nome),
+        bancas: a.bancas ? a.bancas.split("||") : []
+        }))
     });
 });
 module.exports = router;

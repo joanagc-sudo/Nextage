@@ -98,8 +98,9 @@ function criarCampoFiltro(config) {
 
                 ${config.lista.map(opcao => `
                     <li class="item-filtro"
-                        data-disciplina="${opcao.id_disciplina ?? ""}"
-                        data-bloqueado="false">
+                    data-disciplina="${opcao.id_disciplina ?? ""}"
+                    data-bancas="${(opcao.bancas ?? []).join("||")}"
+                    data-bloqueado="false">
                         <div class="form-check">
                             <input
                                 class="form-check-input checkbox-filtro"
@@ -196,6 +197,37 @@ function filtrarConteudosPorDisciplina() {
     conteudo.aplicarVisibilidade();
 }
 
+    // MOSTRA SÓ OS ANOS DAS BANCAS SELECIONADAS
+function filtrarAnosPorBanca() {
+
+    const bancasSel = campos.banca.getSelecionados();
+    const anos = campos.ano;
+
+    anos.itens.forEach((item, i) => {
+
+        const checkbox = anos.checkboxes[i];
+
+        const bancasDoAno = item.dataset.bancas
+            ? item.dataset.bancas.split("||")
+            : [];
+
+        const pertence =
+            bancasSel.length === 0 ||
+            bancasSel.some(banca =>
+                bancasDoAno.includes(banca)
+            );
+
+        item.dataset.bloqueado = pertence ? "false" : "true";
+
+        if (!pertence && checkbox.checked) {
+            checkbox.checked = false;
+        }
+    });
+
+    anos.atualizarBotao();
+    anos.aplicarVisibilidade();
+}
+
 // CRIAR TODOS OS FILTROS
 async function iniciarFiltros() {
     const resp = await fetch("/api/filtros");
@@ -213,13 +245,14 @@ async function iniciarFiltros() {
     });
 
     campos.banca = criarCampoFiltro({
-        nome: "Banca",
-        lista: dados.bancas
+    nome: "Banca",
+    lista: dados.bancas,
+    onChange: filtrarAnosPorBanca
     });
 
     campos.ano = criarCampoFiltro({
-        nome: "Ano",
-        lista: dados.anos
+    nome: "Ano",
+    lista: dados.anos
     });
 }
 
