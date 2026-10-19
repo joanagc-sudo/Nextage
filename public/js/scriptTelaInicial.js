@@ -102,6 +102,7 @@ if (abrir && novo && input && salvar && lista) {
             return;
         }
 
+        //so pra ter certeza w ta cerrto
         if (texto.length > 500) {
             alert("O lembrete deve ter no máximo 500 caracteres.");
             return;
