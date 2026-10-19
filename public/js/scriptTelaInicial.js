@@ -1,62 +1,162 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    const abrir = document.getElementById("abrirLembrete");
-    const novo = document.getElementById("novoLembrete");
-    const inputLembrete = document.getElementById("textoLembrete");
-    const salvarLembrete = document.getElementById("salvarLembrete");
-    const listaLembretes = document.getElementById("listaLembretes");
+const abrir = document.getElementById("abrirLembrete");
+const novo = document.getElementById("novoLembrete");
+const input = document.getElementById("textoLembrete");
+const salvar = document.getElementById("salvarLembrete");
+const lista = document.getElementById("listaLembretes");
 
-    if (abrir && novo && inputLembrete && salvarLembrete && listaLembretes) {
+// Carrega os lembretes salvos no banco.
+async function carregarLembretes() {
+    if (!lista) return;
 
-        abrir.addEventListener("click", () => {
-            const aberto = novo.style.display === "flex";
+    try {
+        const resposta = await fetch("/api/lembretes");
 
-            novo.style.display = aberto ? "none" : "flex";
+        if (resposta.status === 401) {
+            lista.replaceChildren();
+            return;
+        }
 
-            if (!aberto) {
-                inputLembrete.focus();
-            }
-        });
+        if (!resposta.ok) {
+            throw new Error("Não foi possível carregar os lembretes.");
+        }
 
-        salvarLembrete.addEventListener("click", adicionarLembrete);
+        const dados = await resposta.json();
+        lista.replaceChildren();
 
-        inputLembrete.addEventListener("keydown", (evento) => {
-            if (evento.key === "Enter") {
-                adicionarLembrete();
-            }
-        });
+        dados.lembretes.forEach(criarItemLembrete);
 
-        function adicionarLembrete() {
-            const texto = inputLembrete.value.trim();
+    } catch (erro) {
+        console.error("Erro ao carregar lembretes:", erro);
+    }
+}
 
-            if (!texto) {
-                inputLembrete.focus();
+function criarItemLembrete(lembrete) {
+    const item = document.createElement("div");
+    item.className = "item-lembrete";
+    item.dataset.id = lembrete.id_lembrete;
+
+    const texto = document.createElement("span");
+    texto.textContent = lembrete.texto;
+
+    const apagar = document.createElement("button");
+    apagar.type = "button";
+    apagar.className = "apagar";
+    apagar.setAttribute("aria-label", "Excluir lembrete");
+    apagar.innerHTML = '<i class="bi bi-trash"></i>';
+
+    apagar.addEventListener("click", async () => {
+        if (!confirm("Deseja excluir este lembrete?")) return;
+
+        apagar.disabled = true;
+
+        try {
+            const resposta = await fetch(
+                `/api/lembretes/${lembrete.id_lembrete}`,
+                { method: "DELETE" }
+            );
+
+            const resultado = await resposta.json();
+
+            if (resposta.status === 401) {
+                alert("Sua sessão expirou. Faça login novamente.");
+                window.location.href = "/tela-login";
                 return;
             }
 
-            const item = document.createElement("div");
-            item.className = "item-lembrete";
+            if (!resposta.ok) {
+                throw new Error(
+                    resultado.erro || "Não foi possível excluir."
+                );
+            }
 
-            const textoElemento = document.createElement("span");
-            textoElemento.textContent = texto;
+            item.remove();
 
-            const botaoApagar = document.createElement("button");
-            botaoApagar.type = "button";
-            botaoApagar.className = "apagar";
-            botaoApagar.setAttribute("aria-label", "Apagar lembrete");
-            botaoApagar.innerHTML = '<i class="bi bi-trash"></i>';
+        } catch (erro) {
+            console.error("Erro ao excluir lembrete:", erro);
+            alert(erro.message);
+            apagar.disabled = false;
+        }
+    });
 
-            botaoApagar.addEventListener("click", () => {
-                item.remove();
+    item.append(texto, apagar);
+    lista.appendChild(item);
+}
+
+// Abre e fecha o campo de adicionar.
+if (abrir && novo && input && salvar && lista) {
+    abrir.addEventListener("click", () => {
+        const aberto = novo.style.display === "flex";
+        novo.style.display = aberto ? "none" : "flex";
+
+        if (!aberto) input.focus();
+    });
+
+    // Salva primeiro no banco; depois exibe na tela.
+    async function adicionarLembrete() {
+        const texto = input.value.trim();
+
+        if (!texto) {
+            input.focus();
+            return;
+        }
+
+        //so pra ter certeza w ta cerrto
+        if (texto.length > 500) {
+            alert("O lembrete deve ter no máximo 500 caracteres.");
+            return;
+        }
+
+        salvar.disabled = true;
+
+        try {
+            const resposta = await fetch("/api/lembretes", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ texto })
             });
 
-            item.append(textoElemento, botaoApagar);
-            listaLembretes.appendChild(item);
+            const resultado = await resposta.json();
 
-            inputLembrete.value = "";
+            if (resposta.status === 401) {
+                alert("Faça login para salvar seus lembretes.");
+                window.location.href = "/tela-login";
+                return;
+            }
+
+            if (!resposta.ok) {
+                throw new Error(
+                    resultado.erro || "Não foi possível salvar."
+                );
+            }
+
+            criarItemLembrete(resultado.lembrete);
+
+            input.value = "";
             novo.style.display = "none";
+
+        } catch (erro) {
+            console.error("Erro ao salvar lembrete:", erro);
+            alert(erro.message);
+
+        } finally {
+            salvar.disabled = false;
         }
     }
+
+    salvar.addEventListener("click", adicionarLembrete);
+
+    input.addEventListener("keydown", evento => {
+        if (evento.key === "Enter") {
+            adicionarLembrete();
+        }
+    });
+
+    carregarLembretes();
+}
 
     async function carregarCronogramaInicial() {
         const container = document.getElementById("conteudoCronograma");
