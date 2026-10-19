@@ -1,0 +1,259 @@
+<link rel="stylesheet" href="styleMateriais.css">
+<script src="/js/scriptMateriais.js" defer></script>
+
+<br>
+
+<h1>Conteúdos</h1>
+<div style="margin: 40px auto; width: 92%;">
+    <div class="seletorDisciplina">
+
+        <button type="button" id="btnDisciplina" class="btnDisciplina">
+            <span id="disciplinaAtual">Biologia</span>
+            <span id="setaDisciplina">▼</span>
+        </button>
+
+        <div id="listaDisciplinas" class="listaDisciplinas">
+
+            <button type="button" data-disciplina="Geografia">
+                Geografia
+            </button>
+
+            <button type="button" data-disciplina="Biologia">
+                Biologia
+            </button>
+
+            <button type="button" data-disciplina="Espanhol">
+                Espanhol
+            </button>
+
+            <button type="button" data-disciplina="Física">
+                Física
+            </button>
+
+            <button type="button" data-disciplina="Filosofia">
+                Filosofia
+            </button>
+
+            <button type="button" data-disciplina="História">
+                História
+            </button>
+
+            <button type="button" data-disciplina="Inglês">
+                Inglês
+            </button>
+
+            <button type="button" data-disciplina="Matemática">
+                Matemática
+            </button>
+
+            <button type="button" data-disciplina="Português">
+                Português
+            </button>
+
+            <button type="button" data-disciplina="Química">
+                Química
+            </button>
+
+            <button type="button" data-disciplina="Sociologia">
+                Sociologia
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+<section class="atalhos">
+
+    <button class="seta">&lt;</button>
+
+    <div class="atalhos1">
+
+        <div class="assuntos">
+            <div class="icones">
+                <div class="assuntog1"
+                    data-materia="Introdução à Língua Portuguesa">Introdução à Língua Portuguesa
+                    <img src="imagens/iconPortugues.png" alt>
+                </div>
+                <div class="assuntog2" data-materia="Classes Gramaticais">Classes Gramaticais
+                    <img src="imagens/iconPortugues.png" alt>
+                </div>
+                <div class="assuntog3" data-materia="Verbos">Verbos
+                    <img src="imagens/iconPortugues.png" alt>
+                </div>
+                <div class="assuntog4" data-materia="Pronomes">Pronomes
+                    <img src="imagens/iconPortugues.png" alt>
+                </div>
+                <div class="assuntog5" data-materia="Conjunções">Conjunções
+                    <img src="imagens/iconPortugues.png" alt>
+                </div>
+                <div class="assuntog6" data-materia="Análise Sintática">Análise Sintática
+                    <img src="imagens/iconPortugues.png" alt>
+                </div>
+                <div class="assuntog7"
+                    data-materia="Concordância">Concordância
+                    <img src="imagens/iconPortugues.png" alt>
+                </div>
+                <div class="assuntog8"
+                    data-materia="Regência e Crase">Regência e Crase
+                    <img src="imagens/iconPortugues.png" alt>
+                </div>
+                <div class="assuntog9"
+                    data-materia="Orações">Orações
+                    <img src="imagens/iconPortugues.png" alt>
+                </div>
+                <div class="assuntog10"
+                    data-materia="Vírgula">Vírgula
+                    <img src="imagens/iconPortugues.png" alt>
+                </div>
+                <div class="assuntog11"
+                    data-materia="Morfologia das Palavras">Morfologia das Palavras
+                    <img src="imagens/iconPortugues.png" alt>
+                </div>
+                <div class="assuntog12"
+                    data-materia="Fonologia e Ortografia">Fonologia e Ortografia
+                    <img src="imagens/iconPortugues.png" alt>
+                </div>
+                <div class="assuntog13"
+                    data-materia="Gramática e Interpretação">Gramática e Interpretação
+                    <img src="imagens/iconPortugues.png" alt>
+                </div>
+                <div class="assuntog14"
+                    data-materia="Funções da Linguagem">Funções da Linguagem
+                    <img src="imagens/iconPortugues.png" alt>
+                </div>
+                <div class="assuntog15"
+                    data-materia="Figuras de Linguagem">Figuras de Linguagem
+                    <img src="imagens/iconPortugues.png" alt>
+                </div>
+                <div class="assuntog16"
+                    data-materia="Linguagem Culta e Coloquial">Linguagem Culta e Coloquial
+                    <img src="imagens/iconPortugues.png" alt>
+                </div>
+                <div class="assuntog17"
+                    data-materia="Estratégias de Interpretação">Estratégias de Interpretação
+                    <img src="imagens/iconPortugues.png" alt>
+                </div>
+                <div class="assuntog18"
+                    data-materia="Texto e Contexto">Texto e Contexto
+                    <img src="imagens/iconPortugues.png" alt>
+                </div>
+                <div class="assuntog19"
+                    data-materia="Gêneros Textuais">Gêneros Textuais
+                    <img src="imagens/iconPortugues.png" alt>
+                </div>
+        
+            </div>
+        </div>
+
+        <button class="seta">&gt;</button>
+
+    </section>
+
+    <section class="atalhos2">
+
+        <div class="Materiais">
+            <h2>Materiais</h2>
+            <p>Exercite seu cérebro</p>
+        </div>
+
+        <div class="fundoQuestoes">
+
+            <div class="resolverQuestoes">
+
+                <div class="botaoCadastro">
+
+                    <div id="modalMateria" class="modalMateria">
+                        <div class="conteudoModal">
+                            <h1>Selecione a matéria</h1>
+                            <p id="nomeArquivo"></p>
+
+                            <select id="selectMateria">
+
+                                <option value>Escolha uma matéria</option>
+
+                                <option value="Introdução à Língua Portuguesa">Introdução à Língua Portuguesa</option>
+                                <option value="Classes Gramaticais">Classes Gramaticais</option>
+                                <option value="Verbos">Verbos</option>
+                                <option value="Pronomes">Pronomes</option>
+                                <option value="Conjunções">Conjunções</option>
+                                <option value="Análise Sintática">Análise Sintática</option>
+                                <option value="Concordância">Concordância</option>
+                                <option value="Regência e Crase">Regência e Crase</option>
+                                <option value="Orações">Orações</option>
+                                <option value="Vírgula">Vírgula</option>
+                                <option value="Morfologia das Palavras">Morfologia das Palavras</option>
+                                <option value="Fonologia e Ortografia">Fonologia e Ortografia</option>
+                                <option value="Gramática e Interpretação">Gramática e Interpretação</option>
+                                <option value="Funções da Linguagem">Funções da Linguagem</option>
+                                <option value="Figuras de Linguagem">Figuras de Linguagem</option>
+                                <option value="Linguagem Culta e Coloquial">Linguagem Culta e Coloquial</option>
+                                <option value="Estratégias de Interpretação">Estratégias de Interpretação</option>
+                                <option value="Texto e Contexto">Texto e Contexto</option>
+                                <option value="Gêneros Textuais">Gêneros Textuais</option>
+
+                            </select>
+
+                            <div class="botoesModal">
+
+                                <button type="button"
+                                    id="cancelarMateria">Cancelar</button>
+                                <button type="button"
+                                    id="salvarMaterial">Salvar</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="botaoCadastro">
+
+                        <input type="file" id="fileInput" hidden>
+
+                        <button type="button" class="btn"
+                            id="btnCadastrar">+</button>
+
+                    </div>
+
+                </div>
+                <div class="textoCadastro">
+
+                    <h2>Cadastrar material</h2>
+
+                    <p>Compartilhe seus conhecimentos<br>
+                        e ajude outros usuários</p>
+
+                </div>
+            </div>
+
+            <div class="divisor"></div>
+
+            <div class="materiaisCadastrados">
+
+                <h2>Materiais Cadastrados</h2>
+
+                <div class="rolagemMateriais">
+
+                    <table class="tabelaMateriais">
+
+                        <thead>
+
+                            <tr>
+                                <th>Nome do material</th>
+                                <th>Conteúdo</th>
+                                <th>Ações</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="listaMateriais">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+
+    </section>
