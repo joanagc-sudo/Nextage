@@ -1,148 +1,188 @@
+document.addEventListener("DOMContentLoaded", () => {
 
     const abrir = document.getElementById("abrirLembrete");
     const novo = document.getElementById("novoLembrete");
-    const input = document.getElementById("textoLembrete");
-    const salvar = document.getElementById("salvarLembrete");
-    const lista = document.getElementById("listaLembretes");
+    const inputLembrete = document.getElementById("textoLembrete");
+    const salvarLembrete = document.getElementById("salvarLembrete");
+    const listaLembretes = document.getElementById("listaLembretes");
 
-    abrir.addEventListener("click", () => {
-        if (novo.style.display === "flex") {
-            novo.style.display = "none";
-        } else {
-            novo.style.display = "flex";
-            input.focus();
-        }
-    });
+    if (abrir && novo && inputLembrete && salvarLembrete && listaLembretes) {
 
-    salvar.addEventListener("click", adicionarLembrete);
+        abrir.addEventListener("click", () => {
+            const aberto = novo.style.display === "flex";
 
-    input.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") {
-            adicionarLembrete();
-        }
-    });
+            novo.style.display = aberto ? "none" : "flex";
 
-    function adicionarLembrete() {
-
-        const texto = input.value.trim();
-
-        if (texto === "") return;
-
-        const item = document.createElement("div");
-        item.className = "item-lembrete";
-
-        item.innerHTML = `
-            <span>${texto}</span>
-            <button class="apagar">
-                <i class="bi bi-trash"></i>
-            </button>
-        `;
-
-        item.querySelector(".apagar").addEventListener("click", () => {
-            item.remove();
+            if (!aberto) {
+                inputLembrete.focus();
+            }
         });
 
-        lista.appendChild(item);
+        salvarLembrete.addEventListener("click", adicionarLembrete);
 
-        input.value = "";
-        novo.style.display = "none";
-    }
-async function carregarCronogramaInicial() {
-    const container = document.getElementById("conteudoCronograma");
+        inputLembrete.addEventListener("keydown", (evento) => {
+            if (evento.key === "Enter") {
+                adicionarLembrete();
+            }
+        });
 
-    if (!container) return;
+        function adicionarLembrete() {
+            const texto = inputLembrete.value.trim();
 
-    try {
-        const resposta = await fetch("/api/cronograma");
-
-        if (!resposta.ok) {
-            if (resposta.status === 401) {
-                container.replaceChildren();
-
-                const mensagem = document.createElement("p");
-                mensagem.textContent = "Faça login para visualizar seus cronogramas.";
-                container.appendChild(mensagem);
+            if (!texto) {
+                inputLembrete.focus();
                 return;
             }
 
-            throw new Error("Erro ao buscar cronograma.");
+            const item = document.createElement("div");
+            item.className = "item-lembrete";
+
+            const textoElemento = document.createElement("span");
+            textoElemento.textContent = texto;
+
+            const botaoApagar = document.createElement("button");
+            botaoApagar.type = "button";
+            botaoApagar.className = "apagar";
+            botaoApagar.setAttribute("aria-label", "Apagar lembrete");
+            botaoApagar.innerHTML = '<i class="bi bi-trash"></i>';
+
+            botaoApagar.addEventListener("click", () => {
+                item.remove();
+            });
+
+            item.append(textoElemento, botaoApagar);
+            listaLembretes.appendChild(item);
+
+            inputLembrete.value = "";
+            novo.style.display = "none";
         }
+    }
 
-        const dados = await resposta.json();
-        container.replaceChildren();
+    async function carregarCronogramaInicial() {
+        const container = document.getElementById("conteudoCronograma");
 
-        if (!dados.cronograma) {
-            const titulo = document.createElement("h3");
-            titulo.textContent = "Ainda não há nada por aqui...";
-
-            const texto = document.createElement("p");
-            texto.textContent =
-                'Seus cronogramas criados aparecerão aqui. Clique em "Começar a estudar" e inicie seus estudos!';
-
-            container.append(titulo, texto);
+        if (!container) {
+            console.error(
+                'Não foi encontrado o elemento com id "conteudoCronograma".'
+            );
             return;
         }
 
-        const cronograma = dados.cronograma;
+        try {
+            const resposta = await fetch("/api/cronograma");
 
-        const dias = [
-            ["segunda", "Segunda-feira"],
-            ["terca", "Terça-feira"],
-            ["quarta", "Quarta-feira"],
-            ["quinta", "Quinta-feira"],
-            ["sexta", "Sexta-feira"],
-            ["sabado", "Sábado"],
-            ["domingo", "Domingo"]
-        ];
+            if (resposta.status === 401) {
+                mostrarMensagem(
+                    "Faça login para visualizar seus cronogramas."
+                );
+                return;
+            }
 
-        const titulo = document.createElement("h3");
-        titulo.textContent = "Seu cronograma de estudos";
-        container.appendChild(titulo);
+            if (!resposta.ok) {
+                throw new Error("Erro ao buscar cronograma.");
+            }
 
-        const lista = document.createElement("div");
-        lista.className = "resumo-cronograma";
+            const dados = await resposta.json();
+            const cronograma = dados.cronograma;
 
-        dias.forEach(([chave, nome]) => {
-            const atividade = cronograma[chave];
+            container.replaceChildren();
 
-            if (!atividade) return;
+            // Se o usuário ainda não salvou um cronograma.
+            if (!cronograma) {
+                const titulo = document.createElement("h3");
+                titulo.textContent = "Ainda não há nada por aqui...";
 
-            const item = document.createElement("p");
-            const dia = document.createElement("strong");
+                const texto = document.createElement("p");
+                texto.textContent =
+                    'Seus cronogramas criados aparecerão aqui. Clique em "Começar a estudar" e inicie seus estudos!';
 
-            dia.textContent = nome + ": ";
-            item.append(dia, document.createTextNode(atividade));
-            lista.appendChild(item);
-        });
+                container.append(titulo, texto);
+                return;
+            }
 
-        if (!lista.hasChildNodes()) {
-            const texto = document.createElement("p");
-            texto.textContent = "Seu cronograma ainda não tem atividades.";
-            lista.appendChild(texto);
+            const dias = [
+                ["segunda", "Segunda-feira"],
+                ["terca", "Terça-feira"],
+                ["quarta", "Quarta-feira"],
+                ["quinta", "Quinta-feira"],
+                ["sexta", "Sexta-feira"],
+                ["sabado", "Sábado"],
+                ["domingo", "Domingo"]
+            ];
+
+            const titulo = document.createElement("h3");
+            titulo.textContent = "Seu cronograma de estudos";
+            container.appendChild(titulo);
+
+            // Cria a tabela.
+            const tabela = document.createElement("table");
+            tabela.className = "tabela-resumo-cronograma";
+
+            // Cabeçalho com os dias da semana.
+            const cabecalho = document.createElement("thead");
+            const linhaCabecalho = document.createElement("tr");
+
+            dias.forEach(([chave, nome]) => {
+                const th = document.createElement("th");
+                th.textContent = nome;
+                linhaCabecalho.appendChild(th);
+            });
+
+            cabecalho.appendChild(linhaCabecalho);
+
+            // Linha com as atividades de cada dia.
+            const corpo = document.createElement("tbody");
+            const linhaAtividades = document.createElement("tr");
+
+            dias.forEach(([chave]) => {
+                const td = document.createElement("td");
+                const atividade = cronograma[chave];
+
+                td.textContent =
+                    atividade && atividade.trim()
+                        ? atividade
+                        : "—";
+
+                linhaAtividades.appendChild(td);
+            });
+
+            corpo.appendChild(linhaAtividades);
+            tabela.append(cabecalho, corpo);
+
+            // Permite rolagem horizontal em telas menores.
+            const wrapper = document.createElement("div");
+            wrapper.className = "tabela-resumo-container";
+            wrapper.appendChild(tabela);
+
+            container.appendChild(wrapper);
+
+            // Botão para abrir e editar o cronograma.
+            const link = document.createElement("a");
+            link.href = "/cronograma";
+            link.className = "botao-cronograma";
+            link.textContent = "Ver cronograma";
+
+            container.appendChild(link);
+
+        } catch (erro) {
+            console.error("Erro ao carregar cronograma:", erro);
+
+            mostrarMensagem(
+                "Não foi possível carregar seu cronograma. Tente novamente."
+            );
         }
 
-        container.appendChild(lista);
+        function mostrarMensagem(texto) {
+            container.replaceChildren();
 
-        const link = document.createElement("a");
-        link.href = "/cronograma";
-        link.className = "botao";
-        link.textContent = "Ver cronograma";
-        container.appendChild(link);
+            const mensagem = document.createElement("p");
+            mensagem.textContent = texto;
 
-    } catch (erro) {
-        console.error("Erro ao carregar cronograma:", erro);
-
-        container.replaceChildren();
-
-        const mensagem = document.createElement("p");
-        mensagem.textContent =
-            "Não foi possível carregar seu cronograma. Tente novamente.";
-
-        container.appendChild(mensagem);
+            container.appendChild(mensagem);
+        }
     }
-}
 
-document.addEventListener(
-    "DOMContentLoaded",
-    carregarCronogramaInicial
-);
+    // Carrega o cronograma ao abrir a tela inicial.
+    carregarCronogramaInicial();
+
+});
