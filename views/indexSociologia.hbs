@@ -1,0 +1,210 @@
+<link rel="stylesheet" href="styleMateriais.css">
+<script src="/js/scriptMateriais.js" defer></script>
+
+<br>
+
+<h1>Conteúdos</h1>
+<div style="margin: 40px auto; width: 92%;">
+    <div class="seletorDisciplina">
+
+        <button type="button" id="btnDisciplina" class="btnDisciplina">
+            <span id="disciplinaAtual">Sociologia</span>
+            <span id="setaDisciplina">▼</span>
+        </button>
+
+        <div id="listaDisciplinas" class="listaDisciplinas">
+
+            <button type="button" data-disciplina="Geografia">
+                Geografia
+            </button>
+
+            <button type="button" data-disciplina="Biologia">
+                Biologia
+            </button>
+
+            <button type="button" data-disciplina="Espanhol">
+                Espanhol
+            </button>
+
+            <button type="button" data-disciplina="Física">
+                Física
+            </button>
+
+            <button type="button" data-disciplina="Filosofia">
+                Filosofia
+            </button>
+
+            <button type="button" data-disciplina="História">
+                História
+            </button>
+
+            <button type="button" data-disciplina="Inglês">
+                Inglês
+            </button>
+
+            <button type="button" data-disciplina="Matemática">
+                Matemática
+            </button>
+
+            <button type="button" data-disciplina="Português">
+                Português
+            </button>
+
+            <button type="button" data-disciplina="Química">
+                Química
+            </button>
+
+            <button type="button" data-disciplina="Sociologia">
+                Sociologia
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+<section class="atalhos">
+
+    <button class="seta">&lt;</button>
+
+    <div class="atalhos1">
+
+        <div class="assuntos">
+            <div class="icones">
+                <div class="assuntog1" data-materia="As Ciências Sociais">As Ciências Sociais
+                    <img src="imagens/iconSociologia.png" alt>
+                </div>
+                <div class="assuntog2" data-materia="Teoria Sociológica">Teoria Sociológica
+                    <img src="imagens/iconSociologia.png" alt>
+                </div>
+                <div class="assuntog3" data-materia="Sociologia no Trabalho">Sociologia no Trabalho
+                    <img src="imagens/iconSociologia.png" alt>
+                </div>
+                <div class="assuntog4" data-materia="Cultura e Sociedade">Cultura e Sociedade
+                    <img src="imagens/iconSociologia.png" alt>
+                </div>
+                <div class="assuntog5" data-materia="Sociologia Brasileira">Sociologia Brasileira
+                    <img src="imagens/iconSociologia.png" alt>
+                </div>
+                <div class="assuntog6" data-materia="Estado e Cidadania">Estado e Cidadania
+                    <img src="imagens/iconSociologia.png" alt>
+                </div>
+                <div class="assuntog7" data-materia="Sociologia Política">Sociologia Política
+                    <img src="imagens/iconSociologia.png" alt>
+                </div>
+                <div class="assuntog8" data-materia="Movimentos Sociais">Movimentos Sociais
+                    <img src="imagens/iconSociologia.png" alt>
+                </div>
+                <div class="assuntog9"data-materia="Meio Ambiente, Sociedade e Comunicação">Meio Ambiente, Sociedade e Comunicação
+                    <img src="imagens/iconSociologia.png" alt>
+                </div>
+                <div class="assuntog10" data-materia="Sociologia Contemporânea">Sociologia Contemporânea
+                    <img src="imagens/iconSociologia.png" alt>
+                </div>
+                <div class="assuntog11" data-materia="Obras Sociológicas">Obras Sociológicas
+                    <img src="imagens/iconSociologia.png" alt>
+                </div>
+            </div>
+        </div>
+
+        <button class="seta">&gt;</button>
+
+    </section>
+
+    <section class="atalhos2">
+
+        <div class="Materiais">
+            <h2>Materiais</h2>
+            <p>Exercite seu cérebro</p>
+        </div>
+
+        <div class="fundoQuestoes">
+
+            <div class="resolverQuestoes">
+
+                <div class="botaoCadastro">
+
+                    <div id="modalMateria" class="modalMateria">
+                        <div class="conteudoModal">
+                            <h1>Selecione a matéria</h1>
+                            <p id="nomeArquivo"></p>
+
+                            <select id="selectMateria">
+
+                                <option value>Escolha uma matéria</option>
+
+                                <option value="As Ciências Sociais">As Ciências Sociais</option>
+                                <option value="Teoria Sociológica">Teoria Sociológica</option>
+                                <option value="Sociologia no Trabalho">Sociologia no Trabalho</option>
+                                <option value="Cultura e Sociedade">Cultura e Sociedade</option>
+                                <option value="Sociologia Brasileira">Sociologia Brasileira</option>
+                                <option value="Estado e Cidadania">Estado e Cidadania</option>
+                                <option value="Sociologia Política">Sociologia Política</option>
+                                <option value="Movimentos Sociais">Movimentos Sociais</option>
+                                <option value="Meio Ambiente, Sociedade e Comunicação">Meio Ambiente, Sociedade e Comunicação</option>
+                                <option value="Sociologia Contemporânea">Sociologia Contemporânea</option>
+                                <option value="Obras Sociológicas">Obras Sociológicas</option>
+
+                            </select>
+
+                            <div class="botoesModal">
+
+                                <button type="button"
+                                    id="cancelarMateria">Cancelar</button>
+                                <button type="button"
+                                    id="salvarMaterial">Salvar</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="botaoCadastro">
+
+                        <input type="file" id="fileInput" hidden>
+
+                        <button type="button" class="btn"
+                            id="btnCadastrar">+</button>
+
+                    </div>
+
+                </div>
+                <div class="textoCadastro">
+
+                    <h2>Cadastrar material</h2>
+
+                    <p>Compartilhe seus conhecimentos<br>
+                        e ajude outros usuários</p>
+
+                </div>
+            </div>
+
+            <div class="divisor"></div>
+
+            <div class="materiaisCadastrados">
+
+                <h2>Materiais Cadastrados</h2>
+
+                <div class="rolagemMateriais">
+
+                    <table class="tabelaMateriais">
+
+                        <thead>
+
+                            <tr>
+                                <th>Nome do material</th>
+                                <th>Conteúdo</th>
+                                <th>Ações</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="listaMateriais">
+                        </tbody>
+                        
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </section>

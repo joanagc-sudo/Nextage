@@ -231,3 +231,124 @@ padding: 0.2em;
 .btn:hover{
     background-color: #094e5a;
 } 
+.botao-cronograma {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 16px;
+
+    background-color: #087f98;
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+
+    border-radius: 20px;
+    transition: background-color 0.2s ease;
+}
+
+.botao-cronograma:hover {
+    background-color: #06677b;
+     
+}
+
+
+/* Esconde o botão quando não existe cronograma */
+.botao-cronograma.oculto {
+    display: none;
+}
+
+/* Tabela na tela inicial */
+.tabela-resumo-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 12px;
+}
+
+.tabela-resumo-cronograma {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.tabela-resumo-cronograma th,
+.tabela-resumo-cronograma td {
+    padding: 10px 7px;
+    border: 1px solid #d8e5e7;
+    text-align: center;
+    vertical-align: top;
+    overflow-wrap: anywhere;
+    font-size: 12px;
+}
+
+.tabela-resumo-cronograma th {
+    background-color: #7dbbc4;
+    color: #075d70;
+    font-weight: 700;
+}
+
+.tabela-resumo-cronograma td {
+    background-color: #ffffff;
+    color: #365d64;
+    height: 55px;
+}
+
+.cronograma h2 {
+    margin-bottom: 10px;
+}
+
+.cronograma #conteudoCronograma h3 {
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+.cronograma #conteudoCronograma p {
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/*arredondar as ordinhas  */
+.tabela-resumo-cronograma {
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #d5e5e8;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Bordas internas */
+.tabela-resumo-cronograma th,
+.tabela-resumo-cronograma td {
+    border-right: 1px solid #d5e5e8;
+    border-bottom: 1px solid #d5e5e8;
+}
+
+/* Remove borda direita da última coluna */
+.tabela-resumo-cronograma th:last-child,
+.tabela-resumo-cronograma td:last-child {
+    border-right: none;
+}
+
+/* Remove borda inferior da última linha */
+.tabela-resumo-cronograma tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Arredonda os cantos superiores */
+.tabela-resumo-cronograma thead tr:first-child th:first-child {
+    border-top-left-radius: 11px;
+}
+
+.tabela-resumo-cronograma thead tr:first-child th:last-child {
+    border-top-right-radius: 11px;
+}
+
+/* Arredonda os cantos inferiores */
+.tabela-resumo-cronograma tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 11px;
+}
+
+.tabela-resumo-cronograma tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 11px;
+}
