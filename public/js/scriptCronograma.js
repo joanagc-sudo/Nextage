@@ -2,6 +2,7 @@
     const btnEditar = document.getElementById("btnEditar");
     const btnExcluir = document.getElementById("btnExcluir");
     const btnSalvar = document.getElementById("btnSalvar");
+    const botao = document.getElementById("botaoVoltar");
 
     const celulas = document.querySelectorAll(".tabela-cronograma tbody td");
 
@@ -64,3 +65,7 @@
 
     });
 
+
+    botao.addEventListener("click", function() {
+    window.location.href = "indexTelaInicial.hbs";
+    });
