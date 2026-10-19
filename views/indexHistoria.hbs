@@ -1,0 +1,226 @@
+<link rel="stylesheet" href="styleMateriais.css">
+<script src="/js/scriptMateriais.js" defer></script>
+
+<br>
+
+<h1>Conteúdos</h1>
+<div style="margin: 40px auto; width: 92%;">
+    <div class="seletorDisciplina">
+
+        <button type="button" id="btnDisciplina" class="btnDisciplina">
+            <span id="disciplinaAtual">Biologia</span>
+            <span id="setaDisciplina">▼</span>
+        </button>
+
+        <div id="listaDisciplinas" class="listaDisciplinas">
+
+            <button type="button" data-disciplina="Geografia">
+                Geografia
+            </button>
+
+            <button type="button" data-disciplina="Biologia">
+                Biologia
+            </button>
+
+            <button type="button" data-disciplina="Espanhol">
+                Espanhol
+            </button>
+
+            <button type="button" data-disciplina="Física">
+                Física
+            </button>
+
+            <button type="button" data-disciplina="Filosofia">
+                Filosofia
+            </button>
+
+            <button type="button" data-disciplina="História">
+                História
+            </button>
+
+            <button type="button" data-disciplina="Inglês">
+                Inglês
+            </button>
+
+            <button type="button" data-disciplina="Matemática">
+                Matemática
+            </button>
+
+            <button type="button" data-disciplina="Português">
+                Português
+            </button>
+
+            <button type="button" data-disciplina="Química">
+                Química
+            </button>
+
+            <button type="button" data-disciplina="Sociologia">
+                Sociologia
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+<section class="atalhos">
+
+    <button class="seta">&lt;</button>
+
+    <div class="atalhos1">
+
+        <div class="assuntos">
+            <div class="icones">
+                <div class="assuntog1" data-materia="Introdução à História Geral">Introdução à História Geral
+                    <img src="imagens/iconHistoria.png" alt>
+                </div>
+                <div class="assuntog2" data-materia="Idade Antiga">Idade Antiga
+                    <img src="imagens/iconHistoria.png" alt>
+                </div>
+                <div class="assuntog3" data-materia="Idade Média">Idade Média
+                    <img src="imagens/iconHistoria.png" alt>
+                </div>
+                <div class="assuntog4" data-materia="Idade Moderna">Idade Moderna
+                    <img src="imagens/iconHistoria.png" alt>
+                </div>
+                <div class="assuntog5" data-materia="Brasil Colônia">Brasil Colônia
+                    <img src="imagens/iconHistoria.png" alt>
+                </div>
+                <div class="assuntog6" data-materia="Idade Contemporânea">Idade Contemporânea
+                    <img src="imagens/iconHistoria.png" alt>
+                </div>
+                <div class="assuntog7" data-materia="Brasil Monárquico">Brasil Monárquico
+                    <img src="imagens/iconHistoria.png" alt>
+                </div>
+                <div class="assuntog8" data-materia="Século XX">Século XX
+                    <img src="imagens/iconHistoria.png" alt>
+                </div>
+                <div class="assuntog9"data-materia="Conflitos do Século XX">Conflitos do Século XX
+                    <img src="imagens/iconHistoria.png" alt>
+                </div>
+                <div class="assuntog10" data-materia="Primeira República">Primeira República
+                    <img src="imagens/iconHistoria.png" alt>
+                </div>
+                <div class="assuntog11" data-materia="Estado Novo e Populismo">Estado Novo e Populismo
+                    <img src="imagens/iconHistoria.png" alt>
+                </div>
+                <div class="assuntog12" data-materia="Ditadura Militar Brasileira">Ditadura Militar Brasileira
+                    <img src="imagens/iconHistoria.png" alt>
+                </div>
+                <div class="assuntog13" data-materia="Nova República">Nova República
+                    <img src="imagens/iconHistoria.png" alt>
+                </div>
+                <div class="assuntog14" data-materia="Tempo Presente">Tempo Presente
+                    <img src="imagens/iconHistoria.png" alt>
+                </div>
+                <div class="assuntog14" data-materia="História da Arte">História da Arte
+                    <img src="imagens/iconHistoria.png" alt>
+                </div>
+            </div>
+        </div>
+
+        <button class="seta">&gt;</button>
+
+    </section>
+
+    <section class="atalhos2">
+
+        <div class="Materiais">
+            <h2>Materiais</h2>
+            <p>Exercite seu cérebro</p>
+        </div>
+
+        <div class="fundoQuestoes">
+
+            <div class="resolverQuestoes">
+
+                <div class="botaoCadastro">
+
+                    <div id="modalMateria" class="modalMateria">
+                        <div class="conteudoModal">
+                            <h1>Selecione a matéria</h1>
+                            <p id="nomeArquivo"></p>
+
+                            <select id="selectMateria">
+
+                                <option value>Escolha uma matéria</option>
+
+                                <option value="Introdução à História Geral">Introdução à História Geral</option>
+                                <option value="Idade Antiga">Idade Antiga</option>
+                                <option value="Idade Média">Idade Média</option>
+                                <option value="Idade Moderna">Idade Moderna</option>
+                                <option value="Brasil Colônia">Brasil Colônia</option>
+                                <option value="Idade Contemporânea">Idade Contemporânea</option>
+                                <option value="Brasil Monárquico">Brasil Monárquico</option>
+                                <option value="Século XX">Século XX</option>
+                                <option value="Conflitos do Século XX">Conflitos do Século XX</option>
+                                <option value="Primeira República">Primeira República</option>
+                                <option value="Estado Novo e Populismo">Estado Novo e Populismo</option>
+                                <option value="Ditadura Militar Brasileira">Ditadura Militar Brasileira</option>
+                                <option value="Nova República">Nova República</option>
+                                <option value="Eletrodinâmica">Tempo Presente</option>
+                                <option value="Eletrodinâmica">História da Arte</option>
+
+                            </select>
+
+                            <div class="botoesModal">
+
+                                <button type="button"
+                                    id="cancelarMateria">Cancelar</button>
+                                <button type="button"
+                                    id="salvarMaterial">Salvar</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="botaoCadastro">
+
+                        <input type="file" id="fileInput" hidden>
+
+                        <button type="button" class="btn"
+                            id="btnCadastrar">+</button>
+
+                    </div>
+
+                </div>
+                <div class="textoCadastro">
+
+                    <h2>Cadastrar material</h2>
+
+                    <p>Compartilhe seus conhecimentos<br>
+                        e ajude outros usuários</p>
+
+                </div>
+            </div>
+
+            <div class="divisor"></div>
+
+            <div class="materiaisCadastrados">
+
+                <h2>Materiais Cadastrados</h2>
+
+                <div class="rolagemMateriais">
+
+                    <table class="tabelaMateriais">
+
+                        <thead>
+
+                            <tr>
+                                <th>Nome do material</th>
+                                <th>Conteúdo</th>
+                                <th>Ações</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="listaMateriais">
+                        </tbody>
+                        
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
