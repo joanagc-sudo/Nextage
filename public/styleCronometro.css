@@ -1,1 +1,226 @@
-/*CRONOMETRO*/
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
+
+
+#cronometro-flutuante {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 9999;
+    font-family: Arial, sans-serif;
+}
+
+/* Botão flutuante */
+.botao-cronometro {
+    width: 62px;
+    height: 62px;
+    border: none;
+    border-radius: 50%;
+    background: #08788A;
+    color: white;
+    font-size: 34px;
+    cursor: pointer;
+    box-shadow: 0 5px 18px rgba(0, 65, 80, 0.25);
+    transition: transform 0.2s, background 0.2s;
+}
+
+.botao-cronometro:hover {
+    background: #066575;
+    transform: scale(1.06);
+}
+
+.icone-relogio {
+    font-size: 30px;
+    line-height: 1;
+}
+
+/* Painel */
+.painel-cronometro {
+    position: absolute;
+    right: 0;
+    bottom: 76px;
+    width: 310px;
+    max-height: 75vh;
+    overflow-y: auto;
+    padding: 22px;
+    box-sizing: border-box;
+    background: #FFFDFA;
+    border: 1px solid #D7EBED;
+    border-radius: 22px;
+    box-shadow: 0 8px 30px rgba(0, 65, 80, 0.18);
+    color: #0C6878;
+}
+
+.painel-cronometro[hidden] {
+    display: none;
+}
+
+/* Cabeçalho */
+.cabecalho-cronometro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.titulo-cronometro {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.titulo-cronometro .icone-relogio {
+    font-size: 27px;
+}
+
+.fechar-cronometro {
+    border: none;
+    background: transparent;
+    color: #0C6878;
+    font-size: 30px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.subtitulo-cronometro {
+    margin: 18px 0 8px;
+    text-align: center;
+    color: #739DA4;
+    font-size: 13px;
+}
+
+/* Tempo */
+.tempo-cronometro {
+    margin: 8px 0;
+    text-align: center;
+    font-size: 37px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-variant-numeric: tabular-nums;
+    color: #08788A;
+}
+
+.estado-cronometro {
+    min-height: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 12px;
+    color: #7199A0;
+}
+
+/* Botões de controle */
+.controles-cronometro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.controle {
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    background: #EDF6F6;
+    color: #08788A;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0, 65, 80, 0.08);
+    transition: transform 0.2s, background 0.2s;
+}
+
+.controle:hover:not(:disabled) {
+    transform: translateY(-2px);
+    background: #D9EEEE;
+}
+
+.controle.iniciar {
+    width: 55px;
+    height: 55px;
+    background: #08788A;
+    color: white;
+}
+
+.controle.iniciar:hover:not(:disabled) {
+    background: #066575;
+}
+
+.controle:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Lista de marcações */
+.titulo-marcacoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 24px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #E1EEEE;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#quantidadeMarcacoes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 24px;
+    padding: 0 5px;
+    box-sizing: border-box;
+    border-radius: 12px;
+    background: #DDF1F3;
+}
+
+.lista-marcacoes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.sem-marcacoes {
+    margin: 5px 0;
+    color: #91ADB1;
+    font-size: 12px;
+    text-align: center;
+}
+
+.item-marcacao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: #EFF7F7;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.item-marcacao strong {
+    color: #08788A;
+}
+
+.excluir-marcacao {
+    border: none;
+    background: transparent;
+    color: #779DA3;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Telas menores */
+@media (max-width: 480px) {
+    #cronometro-flutuante {
+        right: 15px;
+        bottom: 15px;
+    }
+
+    .painel-cronometro {
+        width: min(310px, calc(100vw - 30px));
+        max-height: 70vh;
+    }
+}
