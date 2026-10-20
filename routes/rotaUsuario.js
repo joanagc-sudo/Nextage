@@ -5,11 +5,6 @@ const conn = require("../database");
 
 const router = express.Router();
 
-
-// ============================
-// CONFIGURAÇÃO DA FOTO
-// ============================
-
 const storage = multer.diskStorage({
 
     destination: function (req, file, cb) {
@@ -43,9 +38,6 @@ const upload = multer({
 });
 
 
-// ============================
-// ALTERAR FOTO
-// ============================
 
 router.post(
     "/alterar-foto",

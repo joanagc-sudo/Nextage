@@ -16,6 +16,7 @@ const cronogramasRoutes = require("./routes/rotaCronogramas");
 const materiaisRoutes = require("./routes/rotaMateriais");
 const cadastroQuestoesRoutes = require("./routes/rotaCadastroQuestoes");
 const lembretesRoutes = require("./routes/rotaLembretes");
+const cronometroRoutes = require("./routes/rotaCronometro");
 
 app.set("view engine", "hbs");
 
@@ -68,7 +69,8 @@ app.use("/", filtrosRoutes);
 app.use("/", cronogramasRoutes);
 app.use("/materiais", materiaisRoutes);
 app.use("/", cadastroQuestoesRoutes);
-app.use("/" ,lembretesRoutes)
+app.use("/" ,lembretesRoutes);
+app.use("/" ,cronometroRoutes);
 
 http.createServer(app).listen(8080, () => {
 
