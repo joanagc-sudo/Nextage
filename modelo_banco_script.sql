@@ -462,3 +462,9 @@ COMMIT;
 
 ALTER TABLE Usuarios_Administradores_Estudantes
 ADD COLUMN foto VARCHAR(255);
+
+ALTER TABLE cronograma_estudos
+MODIFY id_cronograma INT NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE cronograma_estudos
+ADD UNIQUE INDEX uk_cronograma_usuario (id_usuario);
