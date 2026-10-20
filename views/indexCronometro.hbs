@@ -1,0 +1,76 @@
+<link rel="stylesheet" href="/styleCronometro.css">
+
+<div id="cronometro-flutuante">
+
+    <!-- Botão flutuante -->
+    <button type="button" id="botaoCronometro"
+        class="botao-cronometro"
+        aria-label="Abrir cronômetro"
+        title="Cronômetro de estudos">
+        <i class="bi bi-clock"></i>
+    </button>
+
+    <!-- Painel do cronômetro -->
+    <div id="painelCronometro" class="painel-cronometro" hidden>
+
+        <div class="cabecalho-cronometro">
+            <div class="titulo-cronometro">
+                <i class="bi bi-clock"></i>
+                <span>Cronômetro</span>
+            </div>
+
+            <button type="button" id="fecharCronometro"
+                class="fechar-cronometro"
+                aria-label="Minimizar cronômetro">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <p class="subtitulo-cronometro">Seu tempo de estudo</p>
+
+        <div id="tempoCronometro" class="tempo-cronometro"
+            role="timer" aria-live="off">
+            00:00:00
+        </div>
+
+        <div id="estadoCronometro" class="estado-cronometro">
+            Pronto para começar?
+        </div>
+
+        <div class="controles-cronometro">
+
+            <button type="button" id="iniciarPausar"
+                class="controle iniciar"
+                aria-label="Iniciar cronômetro">
+                <span id="iconeIniciarPausar"><i class="bi bi-play"></i></span>
+            </button>
+
+            <button type="button" id="marcarVolta"
+                class="controle marcar"
+                aria-label="Marcar tempo" disabled>
+                <i class="bi bi-flag"></i>
+            </button>
+
+            <button type="button" id="zerarCronometro"
+                class="controle zerar"
+                aria-label="Zerar cronômetro">
+                <i class="bi bi-arrow-clockwise"></i>
+            </button>
+
+        </div>
+
+        <div class="titulo-marcacoes">
+            <span>Marcações</span>
+            <span id="quantidadeMarcacoes">0</span>
+        </div>
+
+        <div id="listaMarcacoes" class="lista-marcacoes">
+            <p class="sem-marcacoes">
+                Suas marcações aparecerão aqui.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<script src="/js/scriptCronometro.js"></script>
