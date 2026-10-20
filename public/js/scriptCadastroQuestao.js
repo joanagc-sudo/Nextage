@@ -1,70 +1,69 @@
+
+    
+
+    // LISTAS
 const container = document.getElementById("containerFiltros");
 
-// Guarda os filtros criados (chave = atributo name do campo)
+// Guarda os filtros criados para um poder consultar o outro
 const campos = {};
 
-function escapar(texto) {
-    return String(texto)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;");
-}
-
-/*
-config = {
-    nome: "Vestibular",          // texto exibido
-    name: "id_vestibular",       // name enviado no formulário
-    multiplo: false,             // false = escolha única
-    obrigatorio: true,
-    lista: [{ id, nome, id_disciplina? }],
-    onChange: () => {}
-}
-*/
+// funçao genérica para filtros
 function criarCampoFiltro(config) {
 
-    const multiplo = config.multiplo ?? true;
-    const tipoInput = multiplo ? "checkbox" : "radio";
+    console.log(config);
 
+    //cria o container
     const campo = document.createElement("div");
     campo.className = "campo-filtro";
 
+    //coloca o html dentro da div
     campo.innerHTML = `
-        <label class="form-label">${escapar(config.nome)}</label>
+        <label class="form-label">${config.nome}</label>
 
         <div class="dropdown w-100">
+
             <button
                 type="button"
                 class="form-select text-start botao-filtro"
                 data-bs-toggle="dropdown"
-                data-bs-auto-close="${multiplo ? "outside" : "true"}">
-                Selecione ${escapar(config.nome.toLowerCase())}
+                data-bs-auto-close="outside">
+                <span class="texto-selecione">
+                    Selecione ${config.nome.toLowerCase()}
+                </span>
             </button>
 
             <ul class="dropdown-menu w-100 p-2">
+
                 <li class="campo-pesquisa">
-                    <input type="text" class="form-control pesquisa-filtro"
-                           placeholder="Pesquisar..." autocomplete="off">
+                    <input
+                        type="text"
+                        class="form-control pesquisa-filtro"
+                        placeholder="Pesquisar..."
+                        autocomplete="off">
                 </li>
+
                 <li><hr class="dropdown-divider"></li>
 
                 ${config.lista.map(opcao => `
                     <li class="item-filtro"
-                        data-disciplina="${opcao.id_disciplina ?? ""}"
-                        data-bloqueado="false">
+                    data-disciplina="${opcao.id_disciplina ?? ""}"
+                    data-bancas="${(opcao.bancas ?? []).join("||")}"
+                    data-bloqueado="false">
                         <div class="form-check">
                             <input
                                 class="form-check-input checkbox-filtro"
-                                type="${tipoInput}"
-                                value="${escapar(opcao.id)}"
-                                data-nome="${escapar(opcao.nome)}"
-                                name="${escapar(config.name)}">
+                                type="${config.tipo ?? "checkbox"}"
+                                value="${opcao.id}"
+                                data-nome="${opcao.nome}"
+                                name="${config.name ?? config.nome}">
+                                >
                             <label class="form-check-label">
-                                ${escapar(opcao.nome)}
+                                ${opcao.nome}
                             </label>
                         </div>
                     </li>
                 `).join("")}
+
             </ul>
         </div>
     `;
@@ -76,23 +75,32 @@ function criarCampoFiltro(config) {
     const itens = [...campo.querySelectorAll(".item-filtro")];
     const checkboxes = [...campo.querySelectorAll(".checkbox-filtro")];
 
+    // Retorna os valores (ids) marcados, como string
     function getSelecionados() {
         return checkboxes.filter(c => c.checked).map(c => c.value);
     }
 
     function atualizarBotao() {
-        const nomes = checkboxes.filter(c => c.checked).map(c => c.dataset.nome);
+        const nomes = checkboxes
+            .filter(c => c.checked)
+            .map(c => c.dataset.nome);
+
         botao.textContent = nomes.length === 0
             ? `Selecione ${config.nome.toLowerCase()}`
             : nomes.join(", ");
     }
 
+    // Combina a pesquisa por texto com o bloqueio por disciplina
     function aplicarVisibilidade() {
         const texto = pesquisa.value.toLowerCase().trim();
+
         itens.forEach(item => {
-            const nome = item.querySelector(".form-check-label").textContent.toLowerCase();
+            const nome = item.querySelector(".form-check-label")
+                .textContent.toLowerCase();
+
             const passaPesquisa = nome.includes(texto);
             const passaDisciplina = item.dataset.bloqueado !== "true";
+
             item.style.display = (passaPesquisa && passaDisciplina) ? "" : "none";
         });
     }
@@ -106,67 +114,100 @@ function criarCampoFiltro(config) {
         });
     });
 
-    const campoCriado = {
-        itens, checkboxes, getSelecionados, atualizarBotao, aplicarVisibilidade,
-        obrigatorio: config.obrigatorio ?? false,
-        nome: config.nome
-    };
-
-    campos[config.name] = campoCriado;
-    return campoCriado;
+    return { itens, checkboxes, getSelecionados, atualizarBotao, aplicarVisibilidade };
 }
 
-// ---------- Carrega os dados do banco e cria os filtros ----------
-async function iniciar() {
-    try {
-        const [vestibulares, conteudos] = await Promise.all([
-            fetch("/api/vestibulares").then(r => r.json()),
-            fetch("/api/conteudos").then(r => r.json())
-        ]);
+// MOSTRA SÓ OS CONTEÚDOS DAS DISCIPLINAS SELECIONADAS
+function filtrarConteudosPorDisciplina() {
+    //pega selecionados
+    const disciplinasSel = campos.disciplina.getSelecionados();
+    const conteudo = campos.conteudo;
 
-        criarCampoFiltro({
-            nome: "Vestibular",
-            name: "id_vestibular",
-            multiplo: false,
-            obrigatorio: true,
-            lista: vestibulares
-        });
+    //percorre tds os conteúdos
+    conteudo.itens.forEach((item, i) => {
+        //pega o checkbos que corresponde
+        const checkbox = conteudo.checkboxes[i];
 
-        criarCampoFiltro({
-            nome: "Conteúdo",
-            name: "id_conteudo",
-            multiplo: true,
-            obrigatorio: true,
-            lista: conteudos
-        });
-    } catch (err) {
-        console.error(err);
-        container.textContent = "Erro ao carregar vestibulares e conteúdos.";
-    }
+        //verifica se pertence a disciplina selecionada
+        const pertence =
+            disciplinasSel.length === 0 ||
+            disciplinasSel.includes(item.dataset.disciplina);
+
+        item.dataset.bloqueado = pertence ? "false" : "true";
+
+        // Se o dataset está bloqueado, desmarca o checkbox
+        if (!pertence && checkbox.checked) {
+            checkbox.checked = false;
+        }
+    });
+
+    conteudo.atualizarBotao();
+    conteudo.aplicarVisibilidade();
 }
 
-iniciar();
+    // MOSTRA SÓ OS ANOS DAS BANCAS SELECIONADAS
+function filtrarAnosPorBanca() {
 
-// ---------- Validação antes de enviar ----------
-document.querySelector("form").addEventListener("submit", e => {
+    const bancasSel = campos.banca.getSelecionados();
+    const anos = campos.ano;
 
-    for (const campo of Object.values(campos)) {
-        if (campo.obrigatorio && campo.getSelecionados().length === 0) {
-            e.preventDefault();
-            alert(`Selecione pelo menos um(a) ${campo.nome.toLowerCase()}.`);
-            return;
+    anos.itens.forEach((item, i) => {
+
+        const checkbox = anos.checkboxes[i];
+
+        const bancasDoAno = item.dataset.bancas
+            ? item.dataset.bancas.split("||")
+            : [];
+
+        const pertence =
+            bancasSel.length === 0 ||
+            bancasSel.some(banca =>
+                bancasDoAno.includes(banca)
+            );
+
+        item.dataset.bloqueado = pertence ? "false" : "true";
+
+        if (!pertence && checkbox.checked) {
+            checkbox.checked = false;
         }
-    }
+    });
 
-    const form = e.target;
-    const obrigatorios = ["nameEnunciado", "nameA", "nameB", "nameC", "nameD", "nameE", "nameAlt"];
+    anos.atualizarBotao();
+    anos.aplicarVisibilidade();
+}
 
-    for (const nome of obrigatorios) {
-        if (!form.elements[nome].value.trim()) {
-            e.preventDefault();
-            alert("Preencha o enunciado, as 5 alternativas e a alternativa correta.");
-            form.elements[nome].focus();
-            return;
-        }
-    }
-});
+// CRIAR TODOS OS FILTROS
+async function iniciarFiltros() {
+    const resp = await fetch("/api/filtros");
+    const dados = await resp.json();
+
+    campos.disciplina = criarCampoFiltro({
+        nome: "Disciplina",
+        name: "disciplina",          // só filtra, a rota ignora
+        lista: dados.disciplinas,
+        onChange: filtrarConteudosPorDisciplina
+    });
+
+    campos.conteudo = criarCampoFiltro({
+        nome: "Conteúdo",
+        name: "id_conteudo",         // vários permitidos
+        lista: dados.conteudos
+    });
+
+    campos.banca = criarCampoFiltro({
+        nome: "Banca",
+        name: "banca",
+        tipo: "radio",               // só uma
+        lista: dados.bancas,
+        onChange: filtrarAnosPorBanca
+    });
+
+    campos.ano = criarCampoFiltro({
+        nome: "Ano",
+        name: "ano",
+        tipo: "radio",               // só um
+        lista: dados.anos
+    });
+}
+
+iniciarFiltros();

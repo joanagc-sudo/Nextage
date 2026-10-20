@@ -4,57 +4,32 @@
 
 <h1 class="titulo">Cadastro de Questões</h1>
 
-<form method="post" action="/cadastrar" enctype="multipart/form-data"> <!--fazer a rota-->
-    
-        <div class="filtro containerFiltro" id="filtro">
-            
-                <!-- CAMPOS CRIADOS PELO JAVASCRIPT -->
-                <div id="containerFiltros"></div>
+<form action="/cadastro-questoes" method="POST" enctype="multipart/form-data">
 
-        </div>
-        <div class="filtro" id="questao">
+    <!-- aqui entram os filtros (Vestibular e Conteúdo) -->
+    <div id="containerFiltros"></div>
 
-            <label>Enunciado</label><br>
-            <textarea placeholder="Digite o enunciado..." name="nameEnunciado"></textarea><br>
+    <label>Enunciado</label>
+    <textarea name="enunciado" class="form-control" required></textarea>
 
-            <label for="imageInput">Imagem</label><br>
-            <input type="file" id="imageInput" accept="image/*" name="nameImagem"><br>
+    <input name="alt_a" class="form-control" placeholder="Alternativa A">
+    <input name="alt_b" class="form-control" placeholder="Alternativa B">
+    <input name="alt_c" class="form-control" placeholder="Alternativa C">
+    <input name="alt_d" class="form-control" placeholder="Alternativa D">
+    <input name="alt_e" class="form-control" placeholder="Alternativa E">
 
-            <label for="alternativa">Alternativas</label><br>
-            <label class="letraAlt">A</label>
-            <input type="text" id = "A" placeholder = "Digite a alternativa..." name="nameA"><br>
+    <select name="correta" class="form-select" required>
+        <option value>Selecione...</option>
+        <option value="a">A</option>
+        <option value="b">B</option>
+        <option value="c">C</option>
+        <option value="d">D</option>
+        <option value="e">E</option>
+    </select>
 
-            <label class="letraAlt">B</label>
-            <input type="text" id = "B" placeholder = "Digite a alternativa..." name="nameB"><br>
+    <input type="file" name="imagem" accept="image/*">
 
-            <label class="letraAlt">C</label>
-            <input type="text" id = "C" placeholder = "Digite a alternativa..."name="nameC"><br>
-
-            <label class="letraAlt">D</label>
-            <input type="text" id = "D" placeholder = "Digite a alternativa..."name="nameD"><br>
-
-            <label class="letraAlt">E</label>
-            <input type="text" id = "E" placeholder = "Digite a alternativa..." name="nameE"><br>
-        </div>
-
-        <div class="filtro" id="alternativa">
-            <label>Alternativa correta</label><br>
-            <select id="selecioneAlt" name="nameAlt">
-                
-                <option value="" disabled selected>Selecione uma opção...</option>
-                <option value="a" name="opA">a</option>
-                <option value="b" name="opB">b</option>
-                <option value="c" name="opC">c</option>
-                <option value="d" name="opD">d</option>
-                <option value="e" name="opE">e</option>
-
-            </select>
-
-        </div>
-        <button type="submit" class="btn btn-primary" id="cadastrar-questao">
-                CADASTRAR
-            </button>
-    </form>
-</div>
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+</form>
 
 <script src="/js/scriptCadastroQuestao.js"></script>
