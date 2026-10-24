@@ -72,6 +72,7 @@ app.use("/", cadastroQuestoesRoutes);
 app.use("/" ,lembretesRoutes);
 app.use("/" ,cronometroRoutes);
 
+
 http.createServer(app).listen(8080, () => {
 
     console.log(

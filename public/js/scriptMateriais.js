@@ -109,47 +109,38 @@ function () {
 
     }
 
-    // selecionar disciplina
-    disciplinas.forEach(
-        function (botao) {
+    
+    // Selecionar disciplina e abrir a tela correspondente
+    const rotasDisciplinas = {
+        "Geografia": "/materiais",
+        "Biologia": "/biologia",
+        "Espanhol": "/espanhol",
+        "Física": "/fisica",
+        "Filosofia": "/filosofia",
+        "História": "/historia",
+        "Inglês": "/ingles",
+        "Matemática": "/matematica",
+        "Português": "/portugues",
+        "Química": "/quimica",
+        "Sociologia": "/sociologia"
+    };
 
-            botao.addEventListener(
-                "click",
-                function () {
+    disciplinas.forEach(function (botao) {
+        botao.addEventListener("click", function () {
+            const disciplina = botao.dataset.disciplina;
+            const rota = rotasDisciplinas[disciplina];
 
-                    const disciplina =
-                        botao.dataset.disciplina;
+            if (!rota) {
+                console.error(
+                    "Não existe uma rota para:",
+                    disciplina
+                );
+                return;
+            }
 
-                    disciplinaAtual.textContent =
-                        disciplina;
-
-                    disciplinas.forEach(
-                        function (item) {
-
-                            item.classList.remove(
-                                "selecionada"
-                            );
-                        }
-                    );
-
-                    botao.classList.add(
-                        "selecionada"
-                    );
-
-                    seletorDisciplina.classList.remove(
-                        "aberto"
-                    );
-
-                    console.log(
-                        "Disciplina selecionada:",
-                        disciplina
-                    );
-
-                }
-            );
-
-        }
-    );
+            window.location.href = rota;
+        });
+    });
 
     // fechar ao clicar fora do modal (nao ta funcionando)
     document.addEventListener(
