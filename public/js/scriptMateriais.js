@@ -810,3 +810,115 @@ function () {
 }
 
 );
+
+
+/* ===== CARROSSEL DE TODAS AS DISCIPLINAS ===== */
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".atalhos").forEach(function (atalhos) {
+        const faixa = atalhos.querySelector(".icones");
+        const area = atalhos.querySelector(".atalhos1");
+        const setas = atalhos.querySelectorAll(".seta");
+
+        if (!faixa || !area || setas.length < 2) return;
+
+        const setaEsquerda = setas[0];
+        const setaDireita = setas[setas.length - 1];
+
+        /*
+         * Coloca as duas setas nas laterais da área
+         * sem precisar editar os arquivos HBS individualmente.
+         */
+        atalhos.insertBefore(setaEsquerda, area);
+        atalhos.appendChild(setaDireita);
+
+        setaEsquerda.type = "button";
+        setaDireita.type = "button";
+
+        setaEsquerda.setAttribute("aria-label", "Conteúdos anteriores");
+        setaDireita.setAttribute("aria-label", "Próximos conteúdos");
+
+        function atualizarSetas() {
+            const limite = faixa.scrollWidth - faixa.clientWidth;
+
+            setaEsquerda.disabled = faixa.scrollLeft <= 1;
+            setaDireita.disabled = faixa.scrollLeft >= limite - 1;
+        }
+
+        function mover(direcao) {
+            const card = faixa.querySelector('[class^="assuntog"]');
+            const larguraCard = card
+                ? card.getBoundingClientRect().width
+                : 152;
+
+            const gap = parseFloat(getComputedStyle(faixa).gap) || 18;
+
+            faixa.scrollBy({
+                left: direcao * (larguraCard + gap) * 2,
+                behavior: "smooth"
+            });
+        }
+
+        setaEsquerda.addEventListener("click", function () {
+            mover(-1);
+        });
+
+        setaDireita.addEventListener("click", function () {
+            mover(1);
+        });
+
+        /* Arrastar com o mouse */
+        let pressionado = false;
+        let inicioX = 0;
+        let scrollInicial = 0;
+        let arrastou = false;
+
+        faixa.addEventListener("pointerdown", function (evento) {
+            if (evento.pointerType !== "mouse" || evento.button !== 0) return;
+
+            pressionado = true;
+            arrastou = false;
+            inicioX = evento.clientX;
+            scrollInicial = faixa.scrollLeft;
+
+            faixa.classList.add("arrastando");
+            faixa.setPointerCapture(evento.pointerId);
+        });
+
+        faixa.addEventListener("pointermove", function (evento) {
+            if (!pressionado) return;
+
+            const distancia = evento.clientX - inicioX;
+
+            if (Math.abs(distancia) > 4) {
+                arrastou = true;
+            }
+
+            if (arrastou) {
+                faixa.scrollLeft = scrollInicial - distancia;
+            }
+        });
+
+        function pararArraste() {
+            pressionado = false;
+            faixa.classList.remove("arrastando");
+        }
+
+        faixa.addEventListener("pointerup", pararArraste);
+        faixa.addEventListener("pointercancel", pararArraste);
+        faixa.addEventListener("lostpointercapture", pararArraste);
+
+        faixa.addEventListener("click", function (evento) {
+            if (!arrastou) return;
+
+            evento.preventDefault();
+            evento.stopPropagation();
+            arrastou = false;
+        }, true);
+
+        faixa.addEventListener("scroll", atualizarSetas);
+        window.addEventListener("resize", atualizarSetas);
+
+        atualizarSetas();
+    });
+});

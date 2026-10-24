@@ -1359,7 +1359,7 @@ section {
     display: block;
 }
 
-/* OPÇÕES */
+/* select opcoes */
 
 .listaDisciplinas button {
     display: block;
@@ -1393,4 +1393,337 @@ section {
     background-color: #D1F2F7;
     color: #08758A;
     font-weight: bold;
+}
+
+/* Carrossel */
+
+.atalhos {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    width: 92%;
+    height: 220px;
+    box-sizing: border-box;
+    margin: -30px auto 20px;
+    padding: 12px;
+
+    background-color: #7DB2BC;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.atalhos1 {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 100%;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+}
+
+.atalhos > .seta {
+    flex: 0 0 32px;
+    width: 32px;
+    height: 48px;
+
+    padding: 0;
+    border: none;
+    background: transparent;
+
+    color: #086B7A;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.atalhos > .seta:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.atalhos .assuntos {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    transform: none;
+}
+
+.atalhos .icones {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 18px;
+
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 8px 5px;
+
+    position: static;
+    transform: none;
+    transition: none;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    cursor: grab;
+}
+
+.atalhos .icones::-webkit-scrollbar {
+    display: none;
+}
+
+.atalhos .icones.arrastando {
+    cursor: grabbing;
+    scroll-behavior: auto;
+    user-select: none;
+}
+
+.atalhos .icones > [class^="assuntog"] {
+    position: relative;
+
+    flex: 0 0 152px;
+    width: 152px;
+    min-width: 152px;
+    height: 178px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+
+    margin: 0;
+    padding: 12px 9px;
+    padding-top: 90px;
+
+    background-color: #A9E460;
+    border-radius: 25px;
+    overflow: hidden;
+
+    color: #FFFDF5;
+    text-align: center;
+    overflow-wrap: anywhere;
+    cursor: pointer;
+}
+
+.atalhos .icones > [class^="assuntog"] img {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 65px;
+    height: 65px;
+    max-width: 80%;
+    object-fit: contain;
+    margin: 0;
+}
+
+.atalhos .icones > [class^="assuntog"]:hover {
+    transform: scale(1.02);
+}
+
+@media (max-width: 600px) {
+    .atalhos {
+        width: 96%;
+        gap: 5px;
+        padding: 8px 5px;
+    }
+
+    .atalhos > .seta {
+        flex-basis: 25px;
+        width: 25px;
+        font-size: 25px;
+    }
+
+    .atalhos .icones {
+        gap: 12px;
+    }
+
+    .atalhos .icones > [class^="assuntog"] {
+        flex-basis: 135px;
+        width: 135px;
+        min-width: 135px;
+    }
+}
+
+.atalhos {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+.atalhos1 {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+}
+
+.atalhos .assuntos {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+.atalhos .icones {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    gap: 20px !important;
+
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
+
+    margin: 0 !important;
+    padding: 8px 5px !important;
+
+    position: static !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scrollbar-width: none;
+}
+
+.atalhos .icones::-webkit-scrollbar {
+    display: none;
+}
+
+.atalhos .icones > [class^="assuntog"] {
+    position: relative !important;
+
+    flex: 0 0 145px !important;
+    width: 145px !important;
+    min-width: 145px !important;
+    max-width: 145px !important;
+
+    height: 178px !important;
+    min-height: 178px !important;
+    box-sizing: border-box !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+
+    margin: 0 !important;
+    padding: 12px 8px !important;
+    padding-top: 88px !important;
+
+    overflow: hidden !important;
+    text-align: center !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+}
+
+/* centralização das imagens nos cards */
+.atalhos .icones > [class^="assuntog"] img {
+    position: absolute !important;
+
+    top: 14px !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+
+    transform: translateX(-50%) !important;
+
+    display: block !important;
+    width: 65px !important;
+    height: 65px !important;
+    max-width: 75% !important;
+    max-height: 65px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+    object-fit: contain !important;
+}
+
+/* setas do carrosel */
+.atalhos > .seta {
+    flex: 0 0 32px !important;
+    width: 32px !important;
+    min-width: 32px !important;
+    height: 48px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    position: static !important;
+    transform: none !important;
+}
+
+.atalhos > .seta:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+@media (max-width: 700px) {
+    .atalhos {
+        gap: 5px !important;
+        padding: 8px 5px !important;
+    }
+
+    .atalhos > .seta {
+        flex-basis: 25px !important;
+        width: 25px !important;
+        min-width: 25px !important;
+    }
+
+    .atalhos .icones {
+        gap: 12px !important;
+    }
+
+    .atalhos .icones > [class^="assuntog"] {
+        flex-basis: 130px !important;
+        width: 130px !important;
+        min-width: 130px !important;
+        max-width: 130px !important;
+    }
+}
+
+
+/* nao deixa os cards ficarem grudados um no outreo */
+.atalhos .icones {
+    display: flex !important;
+    gap: 20px !important;
+    column-gap: 20px !important;
+}
+
+.atalhos .icones > [class^="assuntog"] {
+    flex: 0 0 145px !important;
+    width: 145px !important;
+    min-width: 145px !important;
+    max-width: 145px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    transform: none !important;
+}
+
+.atalhos .icones > [class^="assuntog"] + [class^="assuntog"] {
+    margin-left: 0 !important;
 }
