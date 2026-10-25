@@ -2,34 +2,81 @@
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="styleCadastroQuestoes.css">
 
-<h1 class="titulo">Cadastro de Questões</h1>
 
-<form action="/cadastro-questoes" method="POST" enctype="multipart/form-data">
+<h1 class="titulo my-4">Cadastro de Questões</h1>
 
-    <!-- aqui entram os filtros (Vestibular e Conteúdo) -->
-    <div id="containerFiltros"></div>
+<form action="/cadastro-questoes" method="POST" enctype="multipart/form-data" class="container-cadastro">
 
-    <label>Enunciado</label>
-    <textarea name="enunciado" class="form-control" required></textarea>
+    <!-- filtros -->
+    
+    <div class="secao-card filtro mb-4">
+        <div class="containerFiltro">
+        <div class="containerFiltro" id="containerFiltros"></div>
+    </div>
+    </div>
 
-    <input name="alt_a" class="form-control" placeholder="Alternativa A">
-    <input name="alt_b" class="form-control" placeholder="Alternativa B">
-    <input name="alt_c" class="form-control" placeholder="Alternativa C">
-    <input name="alt_d" class="form-control" placeholder="Alternativa D">
-    <input name="alt_e" class="form-control" placeholder="Alternativa E">
+    <!-- enunciado -->
+    <div class="secao-card mb-4">
+        <label class="form-label fw-bold mb-2">Enunciado</label>
+        <textarea name="enunciado" class="form-control" placeholder="Digite aqui o enunciado..." rows="5" required></textarea>
+    </div>
 
-    <select name="correta" class="form-select" required>
-        <option value>Selecione...</option>
-        <option value="a">A</option>
-        <option value="b">B</option>
-        <option value="c">C</option>
-        <option value="d">D</option>
-        <option value="e">E</option>
-    </select>
+    <!-- imagem -->
+    <div class="secao-card mb-4">
+        <label class="form-label fw-bold mb-2">Imagem</label>
+        <input type="file" name="imagem" class="form-control" accept="image/*">
+    </div>
 
-    <input type="file" name="imagem" accept="image/*">
+    <div class="secao-card mb-4">
+        <p class="fw-bold mb-3 secao-titulo">Alternativas</p>
+        
+        <div class="d-flex flex-column gap-3">
 
-    <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <div class="d-flex align-items-center gap-2 linha-alternativa">
+                <span class="letra-indicador">A</span>
+                <input name="alt_a" class="form-control" placeholder="Digite aqui a alternativa...">
+            </div>
+
+            <div class="d-flex align-items-center gap-2 linha-alternativa">
+                <span class="letra-indicador">B</span>
+                <input name="alt_b" class="form-control" placeholder="Digite aqui a alternativa...">
+            </div>
+
+            <div class="d-flex align-items-center gap-2 linha-alternativa">
+                <span class="letra-indicador">C</span>
+                <input name="alt_c" class="form-control" placeholder="Digite aqui a alternativa...">
+            </div>
+
+            <div class="d-flex align-items-center gap-2 linha-alternativa">
+                <span class="letra-indicador">D</span>
+                <input name="alt_d" class="form-control" placeholder="Digite aqui a alternativa...">
+            </div>
+
+            <div class="d-flex align-items-center gap-2 linha-alternativa">
+                <span class="letra-indicador">E</span>
+                <input name="alt_e" class="form-control" placeholder="Digite aqui a alternativa...">
+            </div>
+        </div>
+    </div>
+
+    <!-- resposta correta -->
+    <div class="secao-card mb-4">
+        <label class="form-label fw-bold mb-2">Alternativa correta</label>
+        <select name="correta" class="form-select" required>
+            <option value="">selecione a letra...</option>
+            <option value="a">A</option>
+            <option value="b">B</option>
+            <option value="c">C</option>
+            <option value="d">D</option>
+            <option value="e">E</option>
+        </select>
+    </div>
+
+    <!-- botão de envio-->
+    <div class="d-flex justify-content-center mt-5 mb-4">
+        <button type="submit" class="btn btn-cadastrar">CADASTRAR QUESTÃO</button>
+    </div>
 </form>
+
 
 <script src="/js/scriptCadastroQuestao.js"></script>
