@@ -204,3 +204,18 @@ nav a.ativo::after {
 .opcao-menu.sair:hover {
     background-color: #FBEAEA;
 }
+
+/*layput da parte do administrador*/
+
+.administrador {
+    color: #056477;
+    text-decoration: none;
+}
+
+.administrador i {
+    color: #056477;
+}
+
+.administrador:hover {
+    background-color: #e8f5f7;
+}

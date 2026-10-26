@@ -18,9 +18,7 @@ router.post("/login", async function (req, res) {
 
     try {
 
-        const {
-            email,
-            senha
+        const {email, senha
         } = req.body;
 
 
@@ -61,7 +59,6 @@ router.post("/login", async function (req, res) {
 
         const usuario = usuarios[0];
 
-
         const senhaCorreta =
             await bcrypt.compare(
                 senha,
@@ -88,24 +85,19 @@ router.post("/login", async function (req, res) {
 
         };
 
-
+        if (usuario.tipo_usuario === "administrador") {
+        return res.redirect("/admin");
+}
         return res.redirect("/tela-inicial");
 
-
     } catch (error) {
-
         console.error(
             "Erro ao realizar login:",
-            error
-        );
-
+            error);
 
         return res.redirect(
-            "/tela-login?error=Erro ao realizar login."
-        );
-
+            "/tela-login?error=Erro ao realizar login.");
     }
-
 });
 
 router.get("/api/cronograma", async (req, res) => {
@@ -138,9 +130,7 @@ router.get("/api/cronograma", async (req, res) => {
         });
     }
 });
-//CRONOGRAMA
 
-// Salvar ou atualizar o cronograma do usuário logado
 router.post("/api/cronograma", async (req, res) => {
     try {
         if (!req.session.usuario) {

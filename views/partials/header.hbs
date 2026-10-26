@@ -1,12 +1,14 @@
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <header class="navbar">
 
-    <!-- LOGO -->
+    <!--logo teoricamente, fazer uma -->
     <div class="logo">
         <span>Nextage</span>
     </div>
 
+    <!--menu -->
     <nav>
         <a href="/tela-inicial">Início</a>
         <a href="/materiais">Materiais</a>
@@ -15,28 +17,24 @@
 
     <div class="usuario-container">
 
-        <!-- Botão do usuário -->
-        <button class="usuario" id="botaoUsuario">
+        <!-- perfil -->
+        <button class="usuario" id="botaoUsuario" type="button"
+            aria-label="Abrir menu do usuário">
 
-            <img
-                id="fotoPerfilNavbar"
-                src="{{#if usuario.foto}}{{usuario.foto}}{{else}}/imagens/usuario.png{{/if}}"
-                alt="Perfil"
-            >
+            <img id="fotoPerfilNavbar"
+                src="{{#if usuario.foto}}{{usuario.foto}}{{else}}/imagens/usuario.png{{/if}}"alt="Perfil">
 
         </button>
 
+        <!-- parte do menu do usuário -->
         <div class="menu-usuario" id="menuUsuario">
 
-
-            <!-- INFORMAÇÕES DO PERFIL -->
+            <!-- info do perfil -->
             <div class="perfil-info">
 
-                <img
-                    id="fotoPerfilMenu"
-                    src="{{#if usuario.foto}}{{usuario.foto}}{{else}}/imagens/usuario.png{{/if}}"
-                    alt="Perfil"
-                >
+                <img id="fotoPerfilMenu"
+                    src="{{#if usuario.foto}}{{usuario.foto}}{{else}}/imagens/usuario.png{{/if}}"alt="Perfil">
+
                 <div>
 
                     <strong>
@@ -59,58 +57,49 @@
 
             </div>
 
-
             <div class="separador"></div>
 
-            <button
-                class="opcao-menu"
-                id="trocarConta"
-            >
-
+            <!-- trocar de conta -->
+            <button class="opcao-menu" id="trocarConta" type="button">
                 <i class="bi bi-arrow-left-right"></i>
 
-                <span>
-                    Trocar de conta
-                </span>
+                <span>Trocar de conta</span>
 
             </button>
 
-            <button
-                class="opcao-menu"
-                id="alterarFoto"
-            >
+            <!-- altera a foto de perfil -->
+            <button class="opcao-menu" id="alterarFoto" type="button">
 
                 <i class="bi bi-camera"></i>
 
-                <span>
-                    Alterar foto
-                </span>
+                <span>Alterar foto</span>
 
             </button>
 
-            <input
-                type="file"
-                id="inputFoto"
-                accept="image/*"
-                hidden
-            >
+            <input type="file" id="inputFoto" accept="image/*" hidden >
 
+            <!-- espaço do amins -->
 
+        <div class="separador"></div>
+
+        <a href="/admin/login" class="opcao-menu administrador" id="espacoAdmin">
+        <i class="bi bi-shield-lock"></i>
+
+        <span>Espaço do administrador </span>
+        
+        </a>
             <div class="separador"></div>
 
-            <button
-                class="opcao-menu sair"
-                id="sair"
-            >
+            <!-- botao de sair -->
+            <button class="opcao-menu sair" id="sair" type="button">
+                <i class="bi bi-box-arrow-right"></i>
 
-                <i class="bi bi-arrow-return-right"></i>
-                <span>
-                    Sair
-                </span>
+                <span>Sair</span>
 
             </button>
 
         </div>
+
     </div>
 
 </header>

@@ -468,3 +468,4 @@ MODIFY id_cronograma INT NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE cronograma_estudos
 ADD UNIQUE INDEX uk_cronograma_usuario (id_usuario);
+

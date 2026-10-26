@@ -17,6 +17,7 @@ const materiaisRoutes = require("./routes/rotaMateriais");
 const cadastroQuestoesRoutes = require("./routes/rotaCadastroQuestoes");
 const lembretesRoutes = require("./routes/rotaLembretes");
 const cronometroRoutes = require("./routes/rotaCronometro");
+const adminRoutes = require("./routes/rotaAdmin");
 
 app.set("view engine", "hbs");
 
@@ -50,8 +51,14 @@ app.use(
 // Usuário disponível nas views
 app.use((req, res, next) => {
 
-    res.locals.usuario =
-        req.session.usuario || null;
+    const usuario = req.session.usuario || null;
+
+    res.locals.usuario = usuario;
+
+    res.locals.ehAdministrador =
+        usuario
+            ? Number(usuario.tipo_usuario) === 1
+            : false;
 
     next();
 
@@ -71,6 +78,7 @@ app.use("/materiais", materiaisRoutes);
 app.use("/", cadastroQuestoesRoutes);
 app.use("/" ,lembretesRoutes);
 app.use("/" ,cronometroRoutes);
+app.use("/" ,adminRoutes);
 
 
 http.createServer(app).listen(8080, () => {
