@@ -83,7 +83,8 @@ router.post("/login", async function (req, res) {
             id: usuario.id_usuario,
             nome: usuario.nome,
             email: usuario.email,
-            foto: usuario.foto
+            foto: usuario.foto,
+            tipo_usuario: usuario.tipo_usuario
 
         };
 

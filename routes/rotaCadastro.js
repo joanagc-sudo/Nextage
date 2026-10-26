@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
         } = req.body;
 
 
-        const tipo_usuario = 1;
+        const tipo_usuario = 0;
 
 
         if (!nome || !email || !senha || !confirmarSenha) {

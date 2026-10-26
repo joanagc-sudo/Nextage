@@ -13,6 +13,19 @@ const upload = multer({
 
 // ---------- Página ----------
 router.get("/cadastro-questoes", function (req, res) {
+    if (!req.session.usuario) {
+        return res.status(401).json({
+            erro: "Faça login para salvar seu cronograma."
+        });
+    }
+
+    if (req.session.usuario.tipo_usuario != 1) {
+        return res.status(401).json({
+            erro: "Acesso permitido apenas para administradores."
+        });
+    }
+
+
     res.render("indexCadastroQuestoes", {
         layout: "/layouts/main",
         query: req.query
@@ -59,7 +72,7 @@ router.post("/cadastro-questoes", upload.single("imagem"), async (req, res) => {
     const { banca, ano, id_conteudo, enunciado, correta,
         alt_a, alt_b, alt_c, alt_d, alt_e } = req.body;
 
-   // console.log(req.body);
+    // console.log(req.body);
 
     const letras = ["a", "b", "c", "d", "e"];
     const textos = { a: alt_a, b: alt_b, c: alt_c, d: alt_d, e: alt_e };
@@ -79,14 +92,14 @@ router.post("/cadastro-questoes", upload.single("imagem"), async (req, res) => {
         connection = await db.getConnection();
         await connection.beginTransaction();
         const [vest] = await connection.query(
-    `SELECT id_vestibular FROM vestibulares WHERE banca = ? AND ano = ? LIMIT 1`,
-    [banca, ano]
-);
-if (vest.length === 0) {
-    await connection.rollback();
-    return res.status(400).send("Não existe vestibular com essa banca e ano.");
-}
-const id_vestibular = vest[0].id_vestibular;
+            `SELECT id_vestibular FROM vestibulares WHERE banca = ? AND ano = ? LIMIT 1`,
+            [banca, ano]
+        );
+        if (vest.length === 0) {
+            await connection.rollback();
+            return res.status(400).send("Não existe vestibular com essa banca e ano.");
+        }
+        const id_vestibular = vest[0].id_vestibular;
         const [q] = await connection.query(
             `INSERT INTO questoes (id_vestibular, id_alternativa_correta, enunciado, imagem)
              VALUES (?, 0, ?, ?)`,
