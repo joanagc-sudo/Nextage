@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #9DC8CF;
+    font-family: 'Momo Trust Display', sans-serif;
+    color: #428591;
+}
+
+.container-cadastro {
+    max-width: 1420px;
+    padding: 0 1rem;
+    margin: 0 auto;
+}
+.secao-card {
+    background-color: #BAD8DE;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+.containerFiltro {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px 17px;
+}
+
+.secao-card label, 
+.secao-card .secao-titulo {
+    color: #0C6878 !important;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+}
+
+
+.secao-card .form-control,
+.secao-card .form-select,
+.secao-card textarea {
+    background-color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 0.6rem 1rem;
+    color: #428591;
+}
+
+.secao-card .form-control::placeholder {
+    color: #ABB3B4 !important;
+}
+
+
+.containerFiltro {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+#containerFiltros {
+    display: contents;
+}
+
+.campo-filtro {
+    width: 100%;
+}
+
+.botao-filtro {
+    color: #444746;
+    background-color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 8px !important;
+}
+
+
+.linha-alternativa {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.letra-indicador {
+    color: #0C6878;
+    border: 2px solid #0C6878;
+    border-radius: 50%;
+    min-width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.95rem;
+    background-color: transparent;
+}
+
+.badge-id {
+    background-color: #84B2B9;
+    color: #FFFDF5;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+
+.btn-cadastrar {
+    background-color: #2F7E8E !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 6px;
+    padding: 0.75rem 3.5rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.btn-cadastrar:hover {
+    background-color: #225D69 !important;
+}
+
+h1{
+    padding-left: 4rem;
+    color: #0C6878;
+}
