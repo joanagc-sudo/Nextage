@@ -1,51 +1,58 @@
 
+<link rel="stylesheet" href="/stylePainelAdmin.css">
+
 <div class="painel-admin">
 
-    <div class="painel-admin-header">
+    <div class="painel-admin-container">
 
-        <div>
+        <div class="painel-admin-header">
+            <div>
+                <h1>Espaço do administrador</h1>
+                <p>Bem-vindo, {{admin.nome}}!</p>
+            </div>
 
-            <h1>Espaço do administrador</h1>
+            <a href="/admin/logout" class="botao-sair">Sair</a>
+        </div>
 
-            <p>Bem-vindo, {{admin.nome}}!</p>
+        <div class="painel-admin-introducao">
+            <h2>O que deseja gerenciar?</h2>
+            <p>Escolha uma das opções abaixo para organizar os conteúdos do Nextage.</p>
+        </div>
+
+        <div class="painel-admin-conteudo">
+
+            <div class="card-admin">
+                <div class="icone-admin">
+                    <i class="bi bi-journal-bookmark"></i>
+                </div>
+
+                <h2>Materiais de estudo</h2>
+
+                <p>
+                    Cadastre, edite e exclua materiais
+                    para ajudar os alunos na preparação.
+                </p>
+
+                <a href="/admin/materiais">Gerenciar materiais</a>
+            </div>
+
+            <div class="card-admin">
+                <div class="icone-admin">
+                    <i class="bi bi-question-circle"></i>
+                </div>
+
+                <h2>Questões</h2>
+
+                <p>
+                    Cadastre, edite e exclua questões,
+                    alternativas e respostas corretas.
+                </p>
+
+                <a href="/cadastro-questoes">Gerenciar questões</a>
+            </div>
 
         </div>
 
-        <a href="/admin/logout">Sair da administração </a>
-
-    </div>
-
-    <div class="painel-admin-conteudo">
-
-        <!-- Gerenciamento de materiais -->
-
-        <div class="card-admin">
-
-            <i class="bi bi-journal-bookmark"></i>
-
-            <h2>Materiais</h2>
-
-            <p>Adicione, edite e organize os materiais de estudo da plataforma.</p>
-
-            <a href="/admin/materiais">
-                Gerenciar materiais
-            </a>
-
-        </div>
-
-        <!-- Gerenciamento de questões -->
-
-        <div class="card-admin">
-
-            <i class="bi bi-question-circle"></i>
-
-            <h2>Questões</h2>
-
-            <p>Cadastre questões, alternativas e respostas corretas.</p>
-
-            <a href="/admin/questoes">Gerenciar questões</a>
-
-        </div>
     </div>
 
 </div>
