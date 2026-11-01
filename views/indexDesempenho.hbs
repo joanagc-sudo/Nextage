@@ -1,0 +1,95 @@
+<link rel="stylesheet" href="/styles/styleDesempenho.css">
+
+<div class="desempenho">
+
+    <h1>Meu desempenho</h1>
+
+    <!-- cards de resumo-->
+    <div class="resumo">
+
+        <div class="card-desempenho">
+            <h3>Acertos</h3>
+            <p>{{totais.certas}}</p>
+        </div>
+
+        <div class="card-desempenho">
+            <h3>Erros</h3>
+            <p>{{totais.erradas}}</p>
+        </div>
+
+        <div class="card-desempenho">
+            <h3>Questões respondidas</h3>
+            <p>{{totais.total}}</p>
+        </div>
+
+        <div class="card-desempenho">
+            <h3>Taxa de acertos</h3>
+            <p>{{totais.porcentagem}}%</p>
+        </div>
+
+    </div>
+
+    <!-- relatorio por disciplina -->
+    <div class="tabela-container">
+
+        <h2>Desempenho por disciplina</h2>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Disciplina</th>
+                    <th>Respondidas</th>
+                    <th>Acertos</th>
+                    <th>Erros</th>
+                    <th>Porcentagem</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {{#each estatisticas}}
+
+                    <tr>
+                        <td>{{this.disciplina}}</td>
+                        <td>{{this.total}}</td>
+                        <td>{{this.certas}}</td>
+                        <td>{{this.erradas}}</td>
+                        <td>{{this.porcentagem}}%</td>
+                    </tr>
+
+                {{else}}
+
+                    <tr>
+                        <td colspan="5">
+                            Nenhuma questão respondida ainda.
+                        </td>
+                    </tr>
+
+                {{/each}}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- grafico -->
+    <div class="grafico-container">
+
+        <h2>Seu desempenho por disciplina</h2>
+
+        <canvas id="graficoDesempenho"></canvas>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- disponibiliza os dados -->
+<script>
+    const estatisticas = {{{estatisticasJSON}}};
+</script>
+
+<script src="/js/scriptDesempenho.js"></script>

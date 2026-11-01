@@ -469,3 +469,5 @@ MODIFY id_cronograma INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE cronograma_estudos
 ADD UNIQUE INDEX uk_cronograma_usuario (id_usuario);
 
+ALTER TABLE questoes
+ADD COLUMN tipo_imagem VARCHAR(100) NULL;

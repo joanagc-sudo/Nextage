@@ -19,6 +19,7 @@ const lembretesRoutes = require("./routes/rotaLembretes");
 const cronometroRoutes = require("./routes/rotaCronometro");
 const adminRoutes = require("./routes/rotaAdmin");
 const alterarQuestoesRoutes = require("./routes/rotaAlterarQuestoes");
+const desempenhoRoutes = require("./routes/rotaDesempenho");
 
 app.set("view engine", "hbs");
 
@@ -81,6 +82,7 @@ app.use("/" ,lembretesRoutes);
 app.use("/" ,cronometroRoutes);
 app.use("/" ,adminRoutes);
 app.use("/" ,alterarQuestoesRoutes);
+app.use("/" ,desempenhoRoutes);
 
 
 http.createServer(app).listen(8080, () => {

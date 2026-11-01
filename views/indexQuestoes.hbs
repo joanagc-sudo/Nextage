@@ -26,7 +26,7 @@
     <div class="questao card p-3 my-4" data-id-questao="{{id_questao}}">
 
         <p class="identificacao text-muted">
-            ID: {{id_questao}}
+            ID: {{id_questao}}<i class="fa fa-xing" aria-hidden="true"></i>
             | {{vestibular}} ({{banca}}) {{ano}}
             {{#if disciplinas}} - {{disciplinas}}{{/if}}
             {{#if conteudos}} - {{conteudos}}{{/if}}
@@ -35,7 +35,7 @@
         <p class="enunciado">{{enunciado}}</p>
 
         {{#if tem_imagem}}
-        <img src="/questoes/{{id_questao}}/imagem" class="img-fluid mb-3" loading="lazy"
+        <img src="/questoes/{{id_questao}}/imagem" class="imagem-questao mb-3" loading="lazy"
             alt="Imagem da questão {{id_questao}}">
         {{/if}}
 
