@@ -85,10 +85,11 @@ router.post("/login", async function (req, res) {
 
         };
 
-        if (usuario.tipo_usuario === "administrador") {
-        return res.redirect("/admin");
+if (Number(usuario.tipo_usuario) === 1) {
+    return res.redirect("/admin/login");
 }
-        return res.redirect("/tela-inicial");
+
+return res.redirect("/tela-inicial");
 
     } catch (error) {
         console.error(

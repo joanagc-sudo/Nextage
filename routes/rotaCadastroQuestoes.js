@@ -13,17 +13,23 @@ const upload = multer({
 
 // ---------- Página ----------
 router.get("/cadastro-questoes", function (req, res) {
-    if (!req.session.usuario) {
-        return res.status(401).json({
-            erro: "Faça login para salvar seu cronograma."
-        });
-    }
 
-    if (req.session.usuario.tipo_usuario != 1) {
+    const ehAdministrador =
+        req.session.admin ||
+        (req.session.usuario && Number(req.session.usuario.tipo_usuario) === 1);
+
+    if (!ehAdministrador) {
         return res.status(401).json({
             erro: "Acesso permitido apenas para administradores."
         });
     }
+
+    res.render("indexCadastroQuestoes", {
+        layout: "layouts/main",
+        query: req.query,
+        admin: req.session.admin || req.session.usuario
+    });
+
 
 
     res.render("indexCadastroQuestoes", {

@@ -1,3 +1,4 @@
+
 const http = require("http");
 const express = require("express");
 const path = require("path");
@@ -6,6 +7,7 @@ const session = require("express-session");
 
 const app = express();
 
+// Importação das rotas
 const cadastroRoutes = require("./routes/rotaCadastro");
 const loginRoutes = require("./routes/rotaLogin");
 const usuarioRoutes = require("./routes/rotaUsuario");
@@ -21,14 +23,17 @@ const adminRoutes = require("./routes/rotaAdmin");
 const alterarQuestoesRoutes = require("./routes/rotaAlterarQuestoes");
 const desempenhoRoutes = require("./routes/rotaDesempenho");
 
+// Configuração do Handlebars
 app.set("view engine", "hbs");
 
+// Arquivos estáticos (CSS, JS, imagens)
 app.use(
     express.static(
         path.join(__dirname, "public")
     )
 );
 
+// Leitura de dados enviados pelos formulários
 app.use(express.json());
 
 app.use(
@@ -37,7 +42,7 @@ app.use(
     })
 );
 
-
+// Configuração das sessões
 app.use(
     session({
         secret: "nextage123",
@@ -49,26 +54,30 @@ app.use(
     })
 );
 
-
-// Usuário disponível nas views
+// Disponibilizar informações do usuário
+// e do administrador para as páginas
 app.use((req, res, next) => {
 
     const usuario = req.session.usuario || null;
+    const admin = req.session.admin || null;
 
     res.locals.usuario = usuario;
+    res.locals.admin = admin;
 
     res.locals.ehAdministrador =
-        usuario
-            ? Number(usuario.tipo_usuario) === 1
-            : false;
+        Boolean(admin) ||
+        (usuario && Number(usuario.tipo_usuario) === 1);
 
     next();
 
 });
 
+// Configuração dos arquivos parciais do Handlebars
+hbs.registerPartials(
+    path.join(__dirname, "views/partials")
+);
 
-hbs.registerPartials("./views/partials");
-
+// Registro das rotas
 app.use("/", cadastroRoutes);
 app.use("/", loginRoutes);
 app.use("/", usuarioRoutes);
@@ -78,13 +87,21 @@ app.use("/", filtrosRoutes);
 app.use("/", cronogramasRoutes);
 app.use("/materiais", materiaisRoutes);
 app.use("/", cadastroQuestoesRoutes);
+<<<<<<< HEAD
 app.use("/" ,lembretesRoutes);
 app.use("/" ,cronometroRoutes);
 app.use("/" ,adminRoutes);
 app.use("/" ,alterarQuestoesRoutes);
 app.use("/" ,desempenhoRoutes);
 
+=======
+app.use("/", lembretesRoutes);
+app.use("/", cronometroRoutes);
+app.use("/", adminRoutes);
+app.use("/", alterarQuestoesRoutes);
+>>>>>>> 4e897a428a60feec0d0fc52f5f1f844a974df88a
 
+// Inicialização do servidor
 http.createServer(app).listen(8080, () => {
 
     console.log(
