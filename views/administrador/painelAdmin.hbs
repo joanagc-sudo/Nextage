@@ -1,3 +1,4 @@
+
 <div class="painel-admin">
 
     <div class="painel-admin-header">
@@ -6,19 +7,17 @@
 
             <h1>Espaço do administrador</h1>
 
-            <p>Bem-vindo, {{usuario.nome}}!</p>
+            <p>Bem-vindo, {{admin.nome}}!</p>
 
         </div>
 
-        <a href="/tela-inicial">Voltar para o Nextage
-        </a>
+        <a href="/admin/logout">Sair da administração </a>
 
     </div>
 
-
     <div class="painel-admin-conteudo">
 
-        <!-- materiasi -->
+        <!-- Gerenciamento de materiais -->
 
         <div class="card-admin">
 
@@ -28,13 +27,13 @@
 
             <p>Adicione, edite e organize os materiais de estudo da plataforma.</p>
 
-            <a href="/admin/materiais"> Gerenciar materiais
+            <a href="/admin/materiais">
+                Gerenciar materiais
             </a>
 
         </div>
 
-
-        <!-- questões -->
+        <!-- Gerenciamento de questões -->
 
         <div class="card-admin">
 
@@ -44,10 +43,9 @@
 
             <p>Cadastre questões, alternativas e respostas corretas.</p>
 
-            <a href="/admin/questoes"> Gerenciar questões</a>
+            <a href="/admin/questoes">Gerenciar questões</a>
 
         </div>
-
     </div>
 
 </div>
