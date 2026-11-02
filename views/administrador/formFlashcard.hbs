@@ -1,0 +1,86 @@
+
+<link rel="stylesheet" href="/styleFlashcardsAdmin.css">
+
+<div class="gerenciar-flashcards">
+
+    <div class="flashcards-container">
+
+        <div class="flashcards-header">
+            <div>
+                <h1>
+                    {{#if editando}}
+                        Editar flashcard
+                    {{else}}
+                        Novo flashcard
+                    {{/if}}
+                </h1>
+
+                <p>Preencha as informações do cartão de revisão.</p>
+            </div>
+
+            <a href="/admin/flashcards" class="btn-voltar">
+                <i class="bi bi-arrow-left"></i> Voltar
+            </a>
+        </div>
+
+        <div class="form-flashcard">
+
+            <form action="{{#if editando}}/admin/flashcards/editar/{{flashcard.id_flashcard}}{{else}}/admin/flashcards/novo{{/if}}"
+                  method="POST">
+
+                <div class="campo-flashcard">
+                    <label for="id_conteudo">Conteúdo relacionado</label>
+
+                    <select name="id_conteudo" id="id_conteudo" required>
+
+                        <option value="">Selecione um conteúdo</option>
+
+                        {{#each conteudos}}
+                            <option value="{{id_conteudo}}" {{#if selecionado}}selected{{/if}}>
+                            {{nome_disciplina}} - {{nome_conteudo}}
+                            </option>
+                        {{/each}}
+
+                    </select>
+                </div>
+
+                <div class="campo-flashcard">
+                    <label for="pergunta">Pergunta</label>
+
+                    <textarea
+                        name="pergunta"
+                        id="pergunta"
+                        placeholder="Digite a pergunta do flashcard..."
+                        required>{{flashcard.pergunta}}</textarea>
+                </div>
+
+                <div class="campo-flashcard">
+                    <label for="resposta">Resposta</label>
+
+                    <textarea
+                        name="resposta"
+                        id="resposta"
+                        placeholder="Digite a resposta do flashcard..."
+                        required>{{flashcard.resposta}}</textarea>
+                </div>
+
+                <div class="form-flashcard-botoes">
+
+                    <a href="/admin/flashcards" class="btn-cancelar">
+                        Cancelar
+                    </a>
+
+                    <button type="submit" class="btn-salvar">
+                        <i class="bi bi-check-circle"></i>
+                        {{#if editando}}Salvar alterações{{else}}Cadastrar flashcard{{/if}}
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

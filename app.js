@@ -25,6 +25,7 @@ const desempenhoRoutes = require("./routes/rotaDesempenho");
 const excluirQuestaoRoutes = require("./routes/rotaExcluirQuestao");
 const atualizarUsuarioRoutes = require("./routes/rotaAtualizarUsuario");
 const flashcardsRoutes = require("./routes/rotaFlashcards");
+const flashcardsEstudanteRoutes = require("./routes/rotaFlashcardsEstudante");
 
 // Configuração do Handlebars
 app.set("view engine", "hbs");
@@ -113,6 +114,7 @@ app.use("/", alterarQuestoesRoutes);
 app.use("/", excluirQuestaoRoutes);
 app.use("/", atualizarUsuarioRoutes);
 app.use("/", flashcardsRoutes);
+app.use("/", flashcardsEstudanteRoutes);
 
 
 // Inicialização do servidor

@@ -1,14 +1,11 @@
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="/styleHeader.css">
 
 <header class="navbar">
 
-    <!--logo teoricamente, fazer uma -->
     <div class="logo">
         <span>Nextage</span>
     </div>
 
-    <!--menu -->
     <nav>
         <a href="/tela-inicial">Início</a>
         <a href="/materiais">Materiais</a>
@@ -18,26 +15,24 @@
 
     <div class="usuario-container">
 
-        <!-- perfil -->
         <button class="usuario" id="botaoUsuario" type="button"
             aria-label="Abrir menu do usuário">
 
             <img id="fotoPerfilNavbar"
-                src="{{#if usuario.foto}}{{usuario.foto}}{{else}}/imagens/usuario.png{{/if}}"alt="Perfil">
+                src="{{#if usuario.foto}}{{usuario.foto}}{{else}}/imagens/usuario.png{{/if}}"
+                alt="Perfil">
 
         </button>
 
-        <!-- parte do menu do usuário -->
         <div class="menu-usuario" id="menuUsuario">
 
-            <!-- info do perfil -->
             <div class="perfil-info">
 
                 <img id="fotoPerfilMenu"
-                    src="{{#if usuario.foto}}{{usuario.foto}}{{else}}/imagens/usuario.png{{/if}}"alt="Perfil">
+                    src="{{#if usuario.foto}}{{usuario.foto}}{{else}}/imagens/usuario.png{{/if}}"
+                    alt="Perfil">
 
                 <div>
-
                     <strong>
                         {{#if usuario}}
                             {{usuario.nome}}
@@ -53,58 +48,41 @@
                             usuario@email.com
                         {{/if}}
                     </span>
-
                 </div>
 
             </div>
 
             <div class="separador"></div>
 
-            <!-- atualizar usuário -->
             <button class="opcao-menu" id="editarConta" type="button">
-                <i class="bi bi-pencil-square"></i></i>
-
+                <i class="bi bi-pencil-square"></i>
                 <span>Editar conta</span>
-
             </button>
 
-            <!-- trocar de conta -->
             <button class="opcao-menu" id="trocarConta" type="button">
                 <i class="bi bi-arrow-left-right"></i>
-
                 <span>Trocar de conta</span>
-
             </button>
 
-            <!-- altera a foto de perfil -->
             <button class="opcao-menu" id="alterarFoto" type="button">
-
                 <i class="bi bi-camera"></i>
-
                 <span>Alterar foto</span>
-
             </button>
 
-            <input type="file" id="inputFoto" accept="image/*" hidden >
+            <input type="file" id="inputFoto" accept="image/*" hidden>
 
-            <!-- espaço do amins -->
-
-        <div class="separador"></div>
-
-        <a href="/admin/login" class="opcao-menu administrador" id="espacoAdmin">
-        <i class="bi bi-shield-lock"></i>
-
-        <span>Espaço do administrador </span>
-        
-        </a>
             <div class="separador"></div>
 
-            <!-- botao de sair -->
+            <a href="/admin/login" class="opcao-menu administrador" id="espacoAdmin">
+                <i class="bi bi-shield-lock"></i>
+                <span>Espaço do administrador</span>
+            </a>
+
+            <div class="separador"></div>
+
             <button class="opcao-menu sair" id="sair" type="button">
                 <i class="bi bi-box-arrow-right"></i>
-
                 <span>Sair</span>
-
             </button>
 
         </div>

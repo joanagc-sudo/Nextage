@@ -1,0 +1,222 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
+
+.gerenciar-flashcards {
+    min-height: 100vh;
+    background: #D8EDF2;
+    padding: 45px 20px;
+    font-family: 'Momo Trust Display', sans-serif;
+    box-sizing: border-box;
+}
+
+.flashcards-container {
+    max-width: 1050px;
+    margin: 0 auto;
+}
+
+.flashcards-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.flashcards-header h1 {
+    color: #0C6878;
+    font-size: 30px;
+    margin: 0 0 10px;
+}
+
+.flashcards-header p {
+    color: #667085;
+    margin: 0;
+    font-size: 14px;
+}
+
+.btn-voltar,
+.btn-novo,
+.btn-editar,
+.btn-excluir,
+.btn-cancelar,
+.btn-salvar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+}
+
+.btn-voltar,
+.btn-novo,
+.btn-salvar {
+    background: #0C6878;
+    color: white;
+}
+
+.btn-voltar:hover,
+.btn-novo:hover,
+.btn-salvar:hover {
+    background: #095563;
+    color: white;
+}
+
+.flashcards-acoes {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 25px;
+}
+
+.flashcards-lista {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.flashcard-admin {
+    background: #FFFDF7;
+    padding: 25px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    min-width: 0;
+}
+
+.flashcard-disciplina {
+    display: inline-block;
+    background: #D8EDF2;
+    color: #0C6878;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.flashcard-conteudo {
+    display: block;
+    color: #667085;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.flashcard-info h3 {
+    color: #0C6878;
+    font-size: 16px;
+    margin: 12px 0 6px;
+}
+
+.flashcard-info p {
+    color: #667085;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.flashcard-botoes {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.flashcard-botoes form {
+    margin: 0;
+}
+
+.btn-editar {
+    background: #D8EDF2;
+    color: #0C6878;
+}
+
+.btn-excluir {
+    background: #FCE8E6;
+    color: #B42318;
+}
+
+.flashcards-vazio {
+    background: #FFFDF7;
+    padding: 60px 20px;
+    border-radius: 8px;
+    text-align: center;
+    color: #667085;
+}
+
+.flashcards-vazio i {
+    font-size: 45px;
+    color: #0C6878;
+}
+
+.flashcards-vazio h2 {
+    color: #0C6878;
+    font-size: 21px;
+}
+
+.form-flashcard {
+    background: #FFFDF7;
+    padding: 35px;
+    border-radius: 8px;
+}
+
+.campo-flashcard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.campo-flashcard label {
+    color: #0C6878;
+    font-size: 15px;
+}
+
+.campo-flashcard select,
+.campo-flashcard textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px;
+    border: 1px solid #BAD8DE;
+    border-radius: 6px;
+    background: white;
+    color: #444;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.campo-flashcard textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.form-flashcard-botoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn-cancelar {
+    background: #E8E8E8;
+    color: #444;
+}
+
+@media (max-width: 700px) {
+    .flashcards-lista {
+        grid-template-columns: 1fr;
+    }
+
+    .flashcards-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .form-flashcard {
+        padding: 22px;
+    }
+}
