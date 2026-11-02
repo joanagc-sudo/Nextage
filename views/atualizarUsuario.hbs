@@ -92,6 +92,27 @@
 
             </form>
 
+            <div class="secao-apagar-conta">
+
+    <h3>Apagar conta</h3>
+
+    <p>
+        Ao apagar sua conta, seus dados pessoais e registros
+        associados serão excluídos.
+        Essa ação não poderá ser desfeita.
+    </p>
+
+    <form action="/apagar-usuario" method="POST"
+          onsubmit="return confirm('Tem certeza de que deseja apagar sua conta? Essa ação não poderá ser desfeita.');">
+
+        <button type="submit" class="botao-apagar">
+            Apagar minha conta
+        </button>
+
+    </form>
+
+</div>
+
         </div>
 
     </div>

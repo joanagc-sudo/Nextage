@@ -155,33 +155,32 @@ body {
     font-size: 14px;
 }
 
-@media (max-width: 650px) {
+.secao-apagar-conta {
+    margin-top: 35px;
+    padding-top: 25px;
+    border-top: 1px solid #ddd;
+}
 
-    .painel-usuario {
-        padding: 30px 15px;
-    }
+.secao-apagar-conta h3 {
+    color: #c0392b;
+    margin-bottom: 10px;
+}
 
-    .painel-usuario-header {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 20px;
-    }
+.secao-apagar-conta p {
+    color: #6e868b;
+    margin-bottom: 20px;
+}
 
-    .painel-usuario-header h1 {
-        font-size: 25px;
-    }
+.botao-apagar {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
 
-    .card-usuario {
-        padding: 25px 18px;
-    }
-
-    .botoes-usuario {
-        gap: 12px;
-    }
-
-    .botao-cancelar,
-    .botao-salvar {
-        padding: 12px 15px;
-        font-size: 12px;
-    }
+.botao-apagar:hover {
+    background-color: #b02a37;
 }
