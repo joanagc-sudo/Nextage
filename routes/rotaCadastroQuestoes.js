@@ -24,17 +24,11 @@ router.get("/cadastro-questoes", function (req, res) {
     }
 
     res.render("indexCadastroQuestoes", {
-        layout: "layouts/main",
+        layout: "layouts/mainAdmin",
         query: req.query,
         admin: req.session.admin || req.session.usuario
     });
 
-
-
-    res.render("indexCadastroQuestoes", {
-        layout: "/layouts/main",
-        query: req.query
-    });
 });
 
 // apis que alimentam os filtros
@@ -139,7 +133,7 @@ router.post("/cadastro-questoes", upload.single("imagem"), async (req, res) => {
 
         await connection.commit();
         return res.redirect(
-            "/questoes?success=Questão cadastrada com sucesso!"
+            "/cadastro-questoes?success=Questão cadastrada com sucesso!"
         );
     } catch (err) {
         if (connection) await connection.rollback();

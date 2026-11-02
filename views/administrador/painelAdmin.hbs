@@ -1,4 +1,7 @@
-
+{{> message}}
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="styleCadastroQuestoes.css">
 <link rel="stylesheet" href="/stylePainelAdmin.css">
 
 <div class="painel-admin">
@@ -56,8 +59,12 @@
                     alternativas e respostas corretas.
                 </p>
 
-                <a href="/cadastro-questoes">Gerenciar questões</a>
-
+                <div class="botoes-gerenciar">
+                    <a href="/cadastro-questoes">Cadastrar</a>
+                    <a href="#modalSelecionarQuestao" data-bs-toggle="modal">
+                        Alterar/Deletar
+                    </a>
+                </div>
             </div>
 
             <!-- Flashcards -->
@@ -83,3 +90,46 @@
     </div>
 
 </div>
+<!-- MODAL para selecionar ID -->
+<div class="modal fade" id="modalSelecionarQuestao" tabindex="-1" aria-labelledby="tituloModalQuestao"
+    aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="tituloModalQuestao">
+                    Alterar ou excluir questão
+                </h5>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+
+            <div class="modal-body">
+                <p>Digite o ID da questão que deseja modificar.</p>
+
+                <label for="id_questao" class="form-label">
+                    ID da questão
+                </label>
+
+                <input type="number" class="form-control" id="id_questao" min="1" placeholder="Digite o ID" required>
+
+                <div class="d-flex justify-content-end gap-2 mt-3">
+
+                    <a href="#" data-bs-dismiss="modal" id="cancela">
+                        Cancelar
+                    </a>
+
+                    <a href="#" id="btnBuscarQuestao">
+                        Buscar questão
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/scriptAdmin.js"></script>

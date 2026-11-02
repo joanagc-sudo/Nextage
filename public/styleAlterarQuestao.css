@@ -123,7 +123,7 @@ body {
 }
 
 .btn-cadastrar:hover {
-    background-color: #225D69 !important;
+    background-color: #225D69;
 }
 #btnExcluir {
     background-color: #dc3545 !important;
@@ -133,7 +133,7 @@ body {
     font-weight: bold;
 }
 
-#btnExcluir:hover {
+#btn-excluir:hover {
     background-color: #bb2d3b !important;
     color: white;
 }
@@ -141,4 +141,32 @@ body {
 h1{
     padding-left: 4rem;
     color: #0C6878;
+}
+.voltar-admin {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #0C6878;
+    color: #FFFDF7;
+
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 23px;
+
+    transition: 0.2s ease;
+    z-index: 10;
+}
+
+.voltar-admin:hover {
+    background-color: #095563;
+    color: #FFFDF7;
+    transform: scale(1.08);
 }

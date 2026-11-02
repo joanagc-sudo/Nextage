@@ -16,21 +16,51 @@ const letras = ["a", "b", "c", "d", "e"];
 // administradores 
 function apenasAdmin(req, res, next) {
     if (!req.session.usuario) {
-        return res.status(401).json({ erro: "Faça login." });
+        return res.redirect(
+            "/tela-inicial?error=Faça login."
+        );
+
     }
     if (Number(req.session.usuario.tipo_usuario) !== 1) {
-        return res.status(403).json({ erro: "Acesso permitido apenas para administradores." });
+        return res.redirect(
+            "/tela-inicial?error=Acesso permitido apenas para administradores."
+        );
     }
     next();
 }
 
 // alteração
-router.get("/alterar-questoes/:id", apenasAdmin, function (req, res) {
-    res.render("indexAlterarQuestoes", {
-        layout: "/layouts/main",
-        id: req.params.id,
-        query: req.query
-    });
+router.get("/alterar-questoes/:id", apenasAdmin, async function (req, res) {
+    try {
+        const id = req.params.id;
+
+        // Verifica se o ID é um número válido
+        if (!/^[1-9]\d*$/.test(id)) {
+            return res.redirect("/admin?error=ID de questão inválido.");
+        }
+
+        // Verifica se a questão existe no banco
+        const [questoes] = await db.query(
+            "SELECT id_questao FROM questoes WHERE id_questao = ?",
+            [id]
+        );
+
+        // Se não existir, volta para o painel
+        if (questoes.length === 0) {
+            return res.redirect("/admin?error=Questão não encontrada.");
+        }
+
+        // Se existir, abre a tela de edição
+        return res.render("indexAlterarQuestoes", {
+            layout: "/layouts/mainAdmin",
+            id: id,
+            query: req.query
+        });
+
+    } catch (err) {
+        console.error("Erro ao verificar questão:", err);
+        return res.redirect("/admin?error=Erro ao buscar questão.");
+    }
 });
 
 // dados da questão
@@ -48,7 +78,10 @@ router.get("/api/questoes-admin/:id", apenasAdmin, async (req, res) => {
         );
 
         if (!q) {
-            return res.status(404).json({ erro: "Questão não encontrada" });
+            return res.redirect(
+                "/admin?error=Questão não encontrada."
+            );
+
         }
 
         const [alts] = await db.query(
