@@ -1,7 +1,7 @@
 
-    
 
-    // LISTAS
+
+// LISTAS
 const container = document.getElementById("containerFiltros");
 
 // Guarda os filtros criados para um poder consultar o outro
@@ -75,7 +75,7 @@ function criarCampoFiltro(config) {
     const itens = [...campo.querySelectorAll(".item-filtro")];
     const checkboxes = [...campo.querySelectorAll(".checkbox-filtro")];
 
-    // Retorna os valores (ids) marcados, como string
+    // retorna os ids marcados como string
     function getSelecionados() {
         return checkboxes.filter(c => c.checked).map(c => c.value);
     }
@@ -117,7 +117,7 @@ function criarCampoFiltro(config) {
     return { itens, checkboxes, getSelecionados, atualizarBotao, aplicarVisibilidade };
 }
 
-// MOSTRA SÓ OS CONTEÚDOS DAS DISCIPLINAS SELECIONADAS
+// mostra só o conteudo das disciplinas selecionadas
 function filtrarConteudosPorDisciplina() {
     //pega selecionados
     const disciplinasSel = campos.disciplina.getSelecionados();
@@ -145,7 +145,7 @@ function filtrarConteudosPorDisciplina() {
     conteudo.aplicarVisibilidade();
 }
 
-    // MOSTRA SÓ OS ANOS DAS BANCAS SELECIONADAS
+// MOSTRA SÓ OS ANOS DAS BANCAS SELECIONADAS
 function filtrarAnosPorBanca() {
 
     const bancasSel = campos.banca.getSelecionados();
@@ -176,14 +176,14 @@ function filtrarAnosPorBanca() {
     anos.aplicarVisibilidade();
 }
 
-// CRIAR TODOS OS FILTROS
+// cria filtros
 async function iniciarFiltros() {
     const resp = await fetch("/api/filtros");
     const dados = await resp.json();
 
     campos.disciplina = criarCampoFiltro({
         nome: "Disciplina",
-        name: "disciplina",          // só filtra, a rota ignora
+        name: "disciplina",          // várias permitidos
         lista: dados.disciplinas,
         onChange: filtrarConteudosPorDisciplina
     });

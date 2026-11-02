@@ -126,10 +126,7 @@ router.post("/filtar", async function (req, res) {
         console.log("WHERE:", where);
         console.log("PARAMETROS:", parametros);
 
-
-        // ============================================================
-        // 4. BUSCA AS QUESTÕES
-        // ============================================================
+        //BUSCA AS QUESTÕES
 
         const [questoesRows] = await conn.query(
             `
@@ -205,10 +202,7 @@ router.post("/filtar", async function (req, res) {
         );
 
 
-        // ============================================================
-        // 5. PREPARA AS QUESTÕES
-        // ============================================================
-
+        // PREPARA AS QUESTÕES
         const questoes = questoesRows.map(q => ({
 
             ...q,
@@ -220,9 +214,7 @@ router.post("/filtar", async function (req, res) {
         }));
 
 
-        // ============================================================
-        // 6. BUSCA AS ALTERNATIVAS
-        // ============================================================
+        // BUSCA AS ALTERNATIVAS
 
         if (questoes.length > 0) {
 
@@ -255,9 +247,7 @@ router.post("/filtar", async function (req, res) {
             );
 
 
-            // ========================================================
-            // 7. CRIA MAPA DAS QUESTÕES
-            // ========================================================
+            // CRIA MAPA DAS QUESTÕES
 
             const porId = new Map(
                 questoes.map(
@@ -269,9 +259,8 @@ router.post("/filtar", async function (req, res) {
             );
 
 
-            // ========================================================
-            // 8. ADICIONA AS ALTERNATIVAS À QUESTÃO
-            // ========================================================
+            //ADICIONA AS ALTERNATIVAS À QUESTÃO
+
 
             for (const alt of alternativas) {
 
@@ -304,10 +293,7 @@ router.post("/filtar", async function (req, res) {
 
         }
 
-
-        // ============================================================
-        // 9. RENDERIZA A PÁGINA
-        // ============================================================
+        // RENDERIZA A PÁGINA
 
         return res.render(
             "indexQuestoes",
@@ -325,9 +311,7 @@ router.post("/filtar", async function (req, res) {
 
     } catch (erro) {
 
-        // ============================================================
-        // 10. TRATAMENTO DE ERRO
-        // ============================================================
+        // TRATAMENTO DE ERRO
 
         console.error(
             "Erro ao filtrar questões:",

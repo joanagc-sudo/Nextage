@@ -1,20 +1,23 @@
+
 const express = require("express");
 const db = require("../database");
 
 const router = express.Router();
 
+// rota de desempenho
 router.get("/desempenho", async (req, res) => {
 
     try {
 
-        // identifica estudante
+        // identifica o estudante logado
         const idUsuario = req.session?.usuario?.id;
 
+        // verifica se existe usuário na sessão
         if (!idUsuario) {
             return res.redirect("/login");
         }
 
-        // resumo
+        // consulta os totais de questões respondidas
         const sqlTotais = `
             SELECT
                 COUNT(*) AS total,
@@ -32,7 +35,7 @@ router.get("/desempenho", async (req, res) => {
             WHERE id_usuario = ?
         `;
 
-        // agrupado por disciplina
+        // Consulta o desempenho agrupado por disciplina
         const sqlEstatisticas = `
             SELECT
                 d.id_disciplina,
@@ -60,6 +63,7 @@ router.get("/desempenho", async (req, res) => {
 
             FROM responder r
 
+            -- Relaciona questões com suas disciplinas
             JOIN (
                 SELECT DISTINCT
                     qc.id_questao,
@@ -74,38 +78,44 @@ router.get("/desempenho", async (req, res) => {
 
                 ON questoes_disciplinas.id_questao = r.id_questao
 
+            -- Obtém o nome da disciplina
             JOIN disciplinas d
                 ON d.id_disciplina = questoes_disciplinas.id_disciplina
 
+            -- Filtra as respostas do estudante
             WHERE r.id_usuario = ?
 
+            -- Agrupa os resultados por disciplina
             GROUP BY
                 d.id_disciplina,
                 d.nome
 
+            -- Ordena pelo nome da disciplina
             ORDER BY d.nome
         `;
 
-        // consultas
+        // executa a consulta dos totais
         const [resultadoTotais] = await db.query(
             sqlTotais,
             [idUsuario]
         );
 
+        // executa a consulta por disciplina
         const [estatisticas] = await db.query(
             sqlEstatisticas,
             [idUsuario]
         );
 
+        // primeira linha do resultado
         const totais = resultadoTotais[0];
 
-        // segurança
+        // converte os dados para JSON com proteção contra caracteres especiais
         const estatisticasJSON = JSON.stringify(estatisticas)
             .replace(/</g, "\\u003c")
             .replace(/\u2028/g, "\\u2028")
             .replace(/\u2029/g, "\\u2029");
 
-        // carrega a página
+        // envia os dados para a página
         res.render("indexDesempenho", {
             layout: "layouts/main",
             totais,
@@ -115,8 +125,10 @@ router.get("/desempenho", async (req, res) => {
 
     } catch (erro) {
 
+        // exibe o erro no terminal
         console.error("Erro ao carregar desempenho:", erro);
 
+        // retorna uma resposta de erro
         res.status(500).send(
             "Erro ao carregar a página de desempenho."
         );
@@ -125,4 +137,5 @@ router.get("/desempenho", async (req, res) => {
 
 });
 
+// exporta as rotas
 module.exports = router;
