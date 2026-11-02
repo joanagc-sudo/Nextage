@@ -352,3 +352,12 @@ padding: 0.2em;
 .tabela-resumo-cronograma tbody tr:last-child td:last-child {
     border-bottom-right-radius: 11px;
 }
+a.card-atalho {
+    text-decoration: none;
+    color: inherit;
+}
+
+a.card-atalho:hover {
+    text-decoration: none;
+    color: inherit;
+}

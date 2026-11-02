@@ -1,0 +1,143 @@
+
+<link rel="stylesheet" href="/styleFlashcards.css">
+
+<div class="pagina-flashcards">
+
+    <div class="flashcards-container">
+
+        <div class="flashcards-topo">
+
+            <div class="flashcards-titulo">
+                <span class="flashcards-subtitulo">
+                    <i class="bi bi-stars"></i>
+                    Seu espaço de revisão
+                </span>
+
+                {{#if nomeDisciplina}}
+                    <h1>{{nomeDisciplina}}</h1>
+                    <p>Escolha um conteúdo e comece a revisar seus conhecimentos.</p>
+                {{else}}
+                    <h1>Hora de estudar!</h1>
+                    <p>Escolha uma disciplina para começar a estudar com flashcards.</p>
+                {{/if}}
+            </div>
+
+            <div class="flashcards-icone-topo">
+                <i class="bi bi-card-checklist"></i>
+            </div>
+
+        </div>
+
+        {{#if nomeDisciplina}}
+            <a href="/flashcards" class="flashcards-voltar">
+                <i class="bi bi-arrow-left"></i>
+                Voltar para disciplinas
+            </a>
+        {{/if}}
+
+        {{#if disciplinas}}
+
+            <div class="flashcards-secao-titulo">
+                <h2>Disciplinas disponíveis</h2>
+                <span>Escolha uma para continuar</span>
+            </div>
+
+            <div class="flashcards-grade">
+
+                {{#each disciplinas}}
+
+                    <a href="/flashcards/disciplina/{{id_disciplina}}"
+                       class="flashcard-disciplina">
+
+                        <div class="disciplina-icone">
+                            <i class="bi bi-book"></i>
+                        </div>
+
+                        <div class="disciplina-informacoes">
+                            <h3>{{nome_disciplina}}</h3>
+                            <p>Estude e revise seus conhecimentos</p>
+                        </div>
+
+                        <div class="disciplina-seta">
+                            <i class="bi bi-arrow-right"></i>
+                        </div>
+
+                    </a>
+
+                {{else}}
+
+                    <div class="flashcards-vazio">
+                        <i class="bi bi-journal-x"></i>
+                        <h3>Nenhuma disciplina disponível</h3>
+                        <p>Ainda não existem flashcards cadastrados.</p>
+                    </div>
+
+                {{/each}}
+
+            </div>
+
+        {{else}}
+
+            {{#if conteudos}}
+
+                <div class="flashcards-secao-titulo">
+                    <h2>Conteúdos disponíveis</h2>
+                    <span>Selecione o assunto que deseja revisar</span>
+                </div>
+
+                <div class="flashcards-grade">
+
+                    {{#each conteudos}}
+
+                        <a href="/flashcards/estudar/{{id_conteudo}}"
+                           class="flashcard-conteudo">
+
+                            <div class="conteudo-icone">
+                                <i class="bi bi-collection"></i>
+                            </div>
+
+                            <div class="conteudo-informacoes">
+                                <h3>{{nome_conteudo}}</h3>
+
+                                <span>
+                                    <i class="bi bi-card-text"></i>
+                                    {{quantidade_flashcards}} flashcards
+                                </span>
+                            </div>
+
+                            <div class="conteudo-seta">
+                                <i class="bi bi-arrow-right-circle"></i>
+                            </div>
+
+                        </a>
+
+                    {{else}}
+
+                        <div class="flashcards-vazio">
+                            <i class="bi bi-journal-x"></i>
+                            <h3>Nenhum conteúdo disponível</h3>
+                            <p>Esta disciplina ainda não possui flashcards cadastrados.</p>
+                        </div>
+
+                    {{/each}}
+
+                </div>
+
+            {{else}}
+
+                {{#if nomeDisciplina}}
+                {{else}}
+                    <div class="flashcards-vazio">
+                        <i class="bi bi-journal-x"></i>
+                        <h3>Nenhum flashcard disponível</h3>
+                        <p>Os flashcards cadastrados aparecerão aqui.</p>
+                    </div>
+                {{/if}}
+
+            {{/if}}
+
+        {{/if}}
+
+    </div>
+
+</div>

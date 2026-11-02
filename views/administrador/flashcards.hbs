@@ -1,0 +1,91 @@
+
+<link rel="stylesheet" href="/styleFlashcardsAdmin.css">
+
+<div class="gerenciar-flashcards">
+
+    <div class="flashcards-container">
+
+        <div class="flashcards-header">
+            <div>
+                <h1>Gerenciar flashcards</h1>
+                <p>Organize os cartões de revisão dos alunos.</p>
+            </div>
+
+            <a href="/admin" class="btn-voltar">
+                <i class="bi bi-arrow-left"></i> Voltar
+            </a>
+        </div>
+
+        <div class="flashcards-acoes">
+            <a href="/admin/flashcards/novo" class="btn-novo">
+                <i class="bi bi-plus-circle"></i>
+                Novo flashcard
+            </a>
+        </div>
+
+        {{#if flashcards.length}}
+
+            <div class="flashcards-lista">
+
+                {{#each flashcards}}
+
+                    <div class="flashcard-admin">
+
+                        <div class="flashcard-info">
+
+                            <span class="flashcard-disciplina">
+                                {{nome_disciplina}}
+                            </span>
+
+                            <span class="flashcard-conteudo">
+                                {{nome_conteudo}}
+                            </span>
+
+                            <h3>Pergunta</h3>
+                            <p>{{pergunta}}</p>
+
+                            <h3>Resposta</h3>
+                            <p>{{resposta}}</p>
+
+                        </div>
+
+                        <div class="flashcard-botoes">
+
+                            <a href="/admin/flashcards/editar/{{id_flashcard}}"
+                               class="btn-editar">
+                                <i class="bi bi-pencil-square"></i>
+                                Editar
+                            </a>
+
+                            <form action="/admin/flashcards/excluir/{{id_flashcard}}"
+                                  method="POST"
+                                  onsubmit="return confirm('Deseja realmente excluir este flashcard?')">
+
+                                <button type="submit" class="btn-excluir">
+                                    <i class="bi bi-trash"></i>
+                                    Excluir
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                {{/each}}
+
+            </div>
+
+        {{else}}
+
+            <div class="flashcards-vazio">
+                <i class="bi bi-card-text"></i>
+                <h2>Nenhum flashcard cadastrado</h2>
+                <p>Comece criando seu primeiro flashcard!</p>
+            </div>
+
+        {{/if}}
+
+    </div>
+
+</div>

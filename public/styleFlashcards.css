@@ -1,0 +1,262 @@
+
+/* Página principal */
+
+.pagina-flashcards {
+    min-height: 80vh;
+    background-color: #D8EDF2;
+    padding: 55px 7%;
+    font-family: "Momo Trust Display", sans-serif;
+}
+
+.flashcards-container {
+    max-width: 1150px;
+    margin: 0 auto;
+}
+
+/* Cabeçalho */
+
+.flashcards-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FFFDF7;
+    padding: 35px 40px;
+    border-radius: 20px;
+    margin-bottom: 35px;
+    box-shadow: 0 4px 15px rgba(12, 104, 120, 0.07);
+}
+
+.flashcards-subtitulo {
+    color: #428591;
+    font-size: 14px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.flashcards-titulo h1 {
+    color: #0C6878;
+    font-size: 32px;
+    margin: 0 0 10px;
+}
+
+.flashcards-titulo p {
+    color: #667085;
+    font-size: 15px;
+    margin: 0;
+}
+
+.flashcards-icone-topo {
+    width: 85px;
+    height: 85px;
+    border-radius: 22px;
+    background-color: #D8EDF2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0C6878;
+    font-size: 40px;
+    flex-shrink: 0;
+}
+
+/* Títulos das seções */
+
+.flashcards-secao-titulo {
+    margin-bottom: 22px;
+}
+
+.flashcards-secao-titulo h2 {
+    color: #0C6878;
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+.flashcards-secao-titulo span {
+    color: #667085;
+    font-size: 14px;
+}
+
+/* Grade de cartões */
+
+.flashcards-grade {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+/* Cartão de disciplina */
+
+.flashcard-disciplina,
+.flashcard-conteudo {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 24px;
+    background-color: #FFFDF7;
+    border: 1px solid #BAD8DE;
+    border-radius: 17px;
+    text-decoration: none;
+    transition: 0.25s ease;
+    min-width: 0;
+}
+
+.flashcard-disciplina:hover,
+.flashcard-conteudo:hover {
+    transform: translateY(-4px);
+    border-color: #428591;
+    box-shadow: 0 8px 20px rgba(12, 104, 120, 0.12);
+}
+
+/* Ícones */
+
+.disciplina-icone,
+.conteudo-icone {
+    width: 55px;
+    height: 55px;
+    min-width: 55px;
+    border-radius: 15px;
+    background-color: #D8EDF2;
+    color: #0C6878;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+}
+
+/* Informações */
+
+.disciplina-informacoes,
+.conteudo-informacoes {
+    flex: 1;
+    min-width: 0;
+}
+
+.disciplina-informacoes h3,
+.conteudo-informacoes h3 {
+    color: #0C6878;
+    font-size: 17px;
+    margin: 0 0 7px;
+    overflow-wrap: anywhere;
+}
+
+.disciplina-informacoes p {
+    color: #667085;
+    font-size: 13px;
+    margin: 0;
+}
+
+.conteudo-informacoes span {
+    color: #667085;
+    font-size: 13px;
+}
+
+.conteudo-informacoes span i {
+    color: #428591;
+    margin-right: 4px;
+}
+
+/* Setas */
+
+.disciplina-seta,
+.conteudo-seta {
+    color: #428591;
+    font-size: 22px;
+    transition: 0.2s;
+}
+
+.flashcard-disciplina:hover .disciplina-seta,
+.flashcard-conteudo:hover .conteudo-seta {
+    transform: translateX(5px);
+    color: #0C6878;
+}
+
+/* Botão voltar */
+
+.flashcards-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #0C6878;
+    text-decoration: none;
+    font-size: 14px;
+    margin: -15px 0 30px;
+    transition: 0.2s;
+}
+
+.flashcards-voltar:hover {
+    color: #428591;
+    transform: translateX(-3px);
+}
+
+/* Estado vazio */
+
+.flashcards-vazio {
+    grid-column: 1 / -1;
+    background-color: #FFFDF7;
+    padding: 55px 20px;
+    border-radius: 17px;
+    text-align: center;
+    border: 1px solid #BAD8DE;
+}
+
+.flashcards-vazio > i {
+    font-size: 45px;
+    color: #428591;
+}
+
+.flashcards-vazio h3 {
+    color: #0C6878;
+    font-size: 20px;
+    margin: 15px 0 8px;
+}
+
+.flashcards-vazio p {
+    color: #667085;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Responsividade */
+
+@media (max-width: 768px) {
+
+    .pagina-flashcards {
+        padding: 30px 5%;
+    }
+
+    .flashcards-topo {
+        padding: 25px;
+    }
+
+    .flashcards-titulo h1 {
+        font-size: 25px;
+    }
+
+    .flashcards-icone-topo {
+        width: 65px;
+        height: 65px;
+        font-size: 30px;
+    }
+
+    .flashcards-grade {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .flashcards-topo {
+        padding: 20px;
+    }
+
+    .flashcards-icone-topo {
+        display: none;
+    }
+
+    .flashcard-disciplina,
+    .flashcard-conteudo {
+        padding: 18px;
+        gap: 12px;
+    }
+
+}
