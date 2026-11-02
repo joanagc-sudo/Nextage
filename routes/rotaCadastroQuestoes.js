@@ -5,13 +5,12 @@ const db = require("../database");
 
 const router = express.Router();
 
-// Upload em memória (a imagem vai direto para o MEDIUMBLOB)
+// a imagem vai direto para o MEDIUMBLOB
 const upload = multer({
     storage: multer.memoryStorage(),
     limits: { fileSize: 10 * 1024 * 1024 } // 10 MB
 });
 
-// ---------- Página ----------
 router.get("/cadastro-questoes", function (req, res) {
 
     const ehAdministrador =
@@ -19,9 +18,9 @@ router.get("/cadastro-questoes", function (req, res) {
         (req.session.usuario && Number(req.session.usuario.tipo_usuario) === 1);
 
     if (!ehAdministrador) {
-        return res.status(401).json({
-            erro: "Acesso permitido apenas para administradores."
-        });
+        return res.redirect(
+            "/tela-inicial?error=Acesso permitido apenas para administradores."
+        );
     }
 
     res.render("indexCadastroQuestoes", {
@@ -38,7 +37,7 @@ router.get("/cadastro-questoes", function (req, res) {
     });
 });
 
-// ---------- APIs que alimentam os filtros ----------
+// apis que alimentam os filtros
 router.get("/api/filtros", async (req, res) => {
     try {
         const [disciplinas] = await db.query(
@@ -73,19 +72,19 @@ router.get("/api/filtros", async (req, res) => {
         res.status(500).json({ erro: "Erro ao buscar filtros" });
     }
 });
-// ---------- Cadastro da questão ----------
+// cadastro da questão 
 router.post("/cadastro-questoes", upload.single("imagem"), async (req, res) => {
     const { banca, ano, id_conteudo, enunciado, correta,
         alt_a, alt_b, alt_c, alt_d, alt_e } = req.body;
-
-    // console.log(req.body);
 
     const letras = ["a", "b", "c", "d", "e"];
     const textos = { a: alt_a, b: alt_b, c: alt_c, d: alt_d, e: alt_e };
     const conteudos = [].concat(id_conteudo || []);
 
     if (!banca || !ano || conteudos.length === 0 || !enunciado?.trim() || !letras.includes(correta)) {
-        return res.status(400).send("Preencha enunciado, banca, ano, conteúdo e a alternativa correta.");
+        return res.redirect(
+            "/cadastro-questoes?error=Preencha enunciado, banca, ano, conteúdo e a alternativa correta."
+        );
     }
     if (!textos[correta] || !textos[correta].trim()) {
         return res.status(400).send("A alternativa marcada como correta precisa ser preenchida.");
@@ -139,11 +138,15 @@ router.post("/cadastro-questoes", upload.single("imagem"), async (req, res) => {
         }
 
         await connection.commit();
-        res.redirect("/cadastro-questoes?sucesso=1");
+        return res.redirect(
+            "/questoes?success=Questão cadastrada com sucesso!"
+        );
     } catch (err) {
         if (connection) await connection.rollback();
         console.error(err);
-        res.status(500).send("Erro ao cadastrar questão.");
+        return res.redirect(
+            "/cadastro-questoes?error=Erro ao cadastrar questão!"
+        );
     } finally {
         if (connection) connection.release();
     }

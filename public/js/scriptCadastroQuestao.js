@@ -56,7 +56,7 @@ function criarCampoFiltro(config) {
                                 value="${opcao.id}"
                                 data-nome="${opcao.nome}"
                                 name="${config.name ?? config.nome}">
-                                >
+                        
                             <label class="form-check-label">
                                 ${opcao.nome}
                             </label>

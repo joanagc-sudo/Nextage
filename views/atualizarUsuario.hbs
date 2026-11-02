@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="/styleAtualizarUsuario.css">
 
 <div class="painel-usuario">
@@ -27,15 +26,15 @@
             </p>
 
             {{#if query.success}}
-                <div class="alert alert-success">
-                    {{query.success}}
-                </div>
+            <div class="alert alert-success">
+                {{query.success}}
+            </div>
             {{/if}}
 
             {{#if query.error}}
-                <div class="alert alert-danger">
-                    {{query.error}}
-                </div>
+            <div class="alert alert-danger">
+                {{query.error}}
+            </div>
             {{/if}}
 
             <form action="/atualizar-usuario" method="POST">
@@ -43,23 +42,13 @@
                 <div class="grupo-campo">
                     <label for="nome">Nome completo</label>
 
-                    <input
-                        type="text"
-                        id="nome"
-                        name="nome"
-                        value="{{usuario.nome}}"
-                        required>
+                    <input type="text" id="nome" name="nome" value="{{usuario.nome}}" required>
                 </div>
 
                 <div class="grupo-campo">
                     <label for="email">E-mail</label>
 
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value="{{usuario.email}}"
-                        required>
+                    <input type="email" id="email" name="email" value="{{usuario.email}}" required>
                 </div>
 
                 <div class="grupo-campo">
@@ -67,12 +56,8 @@
                         Data de nascimento
                     </label>
 
-                    <input
-                        type="date"
-                        id="dataNascimento"
-                        name="dataNascimento"
-                        value="{{formatDate usuario.data_nascimento}}"
-                        required>
+                    <input type="date" id="dataNascimento" name="dataNascimento"
+                        value="{{formatDate usuario.data_nascimento}}" required>
                 </div>
 
                 <div class="secao-senha">
@@ -88,24 +73,18 @@
                     <div class="grupo-campo">
                         <label for="senha">Nova senha</label>
 
-                        <input
-                            type="password"
-                            id="senha"
-                            name="senha"
-                            placeholder="Digite sua nova senha">
+                        <input type="password" id="senha" name="senha" placeholder="Digite sua nova senha">
                     </div>
 
                 </div>
 
                 <div class="botoes-usuario">
 
-                    <a href="/tela-inicial"
-                       class="botao-cancelar">
+                    <a href="/tela-inicial" class="botao-cancelar">
                         Cancelar
                     </a>
 
-                    <button type="submit"
-                            class="botao-salvar">
+                    <button type="submit" class="botao-salvar">
                         Salvar alterações
                     </button>
 

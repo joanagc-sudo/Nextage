@@ -116,7 +116,7 @@ router.post("/atualizar-usuario", async (req, res) => {
         req.session.usuario.email = email;
 
         return res.redirect(
-            "/atualizar-usuario?success=Dados atualizados com sucesso."
+            "/tela-inicial?success=Dados atualizados com sucesso!"
         );
 
     } catch (error) {
