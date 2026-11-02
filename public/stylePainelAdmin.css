@@ -15,76 +15,81 @@ body {
 }
 
 .painel-admin-container {
-    max-width: 1050px;
-    margin: 0 auto;
+max-width: 1050px;
+margin: 0 auto;
 }
 
 .painel-admin-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 65px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 65px;
 }
 
 .painel-admin-header h1 {
-    color: #0C6878;
-    font-size: 32px;
-    margin: 0 0 10px;
+color: #0C6878;
+font-size: 32px;
+margin: 0 0 10px;
 }
 
 .painel-admin-header p {
-    color: #667085;
-    margin: 0;
-    font-size: 15px;
+color: #667085;
+margin: 0;
+font-size: 15px;
 }
 
 .botao-sair {
-    background: #0C6878;
-    color: white;
-    text-decoration: none;
-    padding: 11px 25px;
-    border-radius: 6px;
-    font-size: 14px;
+background: #0C6878;
+color: white;
+text-decoration: none;
+padding: 11px 25px;
+border-radius: 6px;
+font-size: 14px;
 }
 
 .botao-sair:hover {
-    background: #095563;
+background: #095563;
 }
 
 .painel-admin-introducao {
-    margin-bottom: 30px;
+margin-bottom: 30px;
 }
 
 .painel-admin-introducao h2 {
-    color: #0C6878;
-    font-size: 24px;
-    margin-bottom: 10px;
+color: #0C6878;
+font-size: 24px;
+margin-bottom: 10px;
 }
 
 .painel-admin-introducao p {
-    color: #667085;
-    font-size: 14px;
+color: #667085;
+font-size: 14px;
 }
 
+/* Organização dos três cards */
 .painel-admin-conteudo {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+    align-items: stretch;
 }
 
 .card-admin {
     background: #FFFDF7;
-    padding: 35px;
-    min-height: 270px;
+    padding: 30px;
+    min-height: 300px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    min-width: 0;
+    border-radius: 8px;
 }
 
 .icone-admin {
     width: 55px;
     height: 55px;
+    flex-shrink: 0;
     background: #D8EDF2;
     color: #0C6878;
     border-radius: 8px;
@@ -117,13 +122,26 @@ body {
     border-radius: 6px;
     text-decoration: none;
     font-size: 13px;
+    transition: background 0.2s;
 }
 
 .card-admin a:hover {
     background: #095563;
 }
 
+/* Telas médias */
+@media (max-width: 900px) {
+    .painel-admin-conteudo {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Celulares */
 @media (max-width: 650px) {
+    .painel-admin {
+        padding: 30px 18px;
+    }
+
     .painel-admin-header {
         align-items: flex-start;
         gap: 20px;
@@ -135,10 +153,10 @@ body {
     }
 
     .painel-admin-conteudo {
-        grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
     }
 
     .card-admin {
-        min-height: 250px;
+    min-height: 250px;
     }
 }
