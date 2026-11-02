@@ -1516,6 +1516,7 @@ section {
     cursor: pointer;
 }
 
+
 .atalhos .icones > [class^="assuntog"] img {
     position: absolute;
     top: 14px;
@@ -1726,4 +1727,50 @@ section {
 
 .atalhos .icones > [class^="assuntog"] + [class^="assuntog"] {
     margin-left: 0 !important;
+}
+
+/* CORES DOS CARDS POR DISCIPLINA */
+
+.atalhos[data-disciplina="Geografia"] .icones > [class^="assuntog"] {
+    background-color: #A9E460;
+}
+
+.atalhos[data-disciplina="Biologia"] .icones > [class^="assuntog"] {
+    background-color: #63CBE8;
+}
+
+.atalhos[data-disciplina="Espanhol"] .icones > [class^="assuntog"] {
+    background-color: #FF9283;
+}
+
+.atalhos[data-disciplina="Fisica"] .icones > [class^="assuntog"] {
+    background-color: #5EDFB2;
+}
+
+.atalhos[data-disciplina="Filosofia"] .icones > [class^="assuntog"] {
+    background-color: #F3D947;
+}
+
+.atalhos[data-disciplina="Historia"] .icones > [class^="assuntog"] {
+    background-color: #D46E4F;
+}
+
+.atalhos[data-disciplina="Ingles"] .icones > [class^="assuntog"] {
+    background-color: #93A9FF;
+}
+
+.atalhos[data-disciplina="Matematica"] .icones > [class^="assuntog"] {
+    background-color: #AE8CFF;
+}
+
+.atalhos[data-disciplina="Portugues"] .icones > [class^="assuntog"] {
+    background-color: #FFB956;
+}
+
+.atalhos[data-disciplina="Quimica"] .icones > [class^="assuntog"] {
+    background-color: #F962BD;
+}
+
+.atalhos[data-disciplina="Sociologia"] .icones > [class^="assuntog"] {
+    background-color: #FF6969;
 }
