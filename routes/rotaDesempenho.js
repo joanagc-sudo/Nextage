@@ -18,11 +18,8 @@ router.get("/desempenho", async (req, res) => {
         const sqlTotais = `
             SELECT
                 COUNT(*) AS total,
-
                 COALESCE(SUM(certo = 1), 0) AS certas,
-
                 COALESCE(SUM(certo = 0), 0) AS erradas,
-
                 COALESCE(
                     ROUND(
                         SUM(certo = 1) * 100.0 /
@@ -31,9 +28,7 @@ router.get("/desempenho", async (req, res) => {
                     ),
                     0
                 ) AS porcentagem
-
             FROM responder
-
             WHERE id_usuario = ?
         `;
 
@@ -41,9 +36,7 @@ router.get("/desempenho", async (req, res) => {
         const sqlEstatisticas = `
             SELECT
                 d.id_disciplina,
-
                 d.nome AS disciplina,
-
                 COUNT(DISTINCT r.id_questao) AS total,
 
                 COUNT(DISTINCT CASE
@@ -112,8 +105,9 @@ router.get("/desempenho", async (req, res) => {
             .replace(/\u2028/g, "\\u2028")
             .replace(/\u2029/g, "\\u2029");
 
-        // carrega a pag
+        // carrega a página
         res.render("indexDesempenho", {
+            layout: "layouts/main",
             totais,
             estatisticas,
             estatisticasJSON

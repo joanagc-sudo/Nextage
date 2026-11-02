@@ -93,7 +93,6 @@ app.use("/" ,cronometroRoutes);
 app.use("/" ,adminRoutes);
 app.use("/" ,alterarQuestoesRoutes);
 app.use("/" ,desempenhoRoutes);
-
 app.use("/", lembretesRoutes);
 app.use("/", cronometroRoutes);
 app.use("/", adminRoutes);

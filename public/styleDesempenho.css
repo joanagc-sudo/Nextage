@@ -1,0 +1,121 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #9DC8CF;
+    font-family: 'Momo Trust Display', sans-serif;
+    color: #428591;
+}
+
+.desempenho {
+    width: 92%;
+    max-width: 1500px;
+    margin: 35px auto;
+    color: #075E70;
+}
+
+h1 {
+     color: #0C6878;
+    margin-bottom: 25px;
+}
+
+h2 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}
+
+.resumo {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.card-desempenho {
+    background-color: #FFFEFA;
+    border-radius: 8px;
+    padding: 22px;
+    min-height: 125px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.card-desempenho:hover {
+    transform: scale(1.05); 
+}
+
+.card-desempenho h3 {
+    font-size: 1rem;
+
+    color: #08768A;
+    margin-bottom: 10px;
+}
+
+.card-desempenho p {
+    font-size: 2rem;
+    color: #075E70;
+    margin: 0;
+}
+
+.tabela-container {
+    background-color: #FFFEFA;
+    padding: 22px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+}
+
+.tabela-container h2 {
+    color: #075E70;
+}
+
+.tabela-container table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.tabela-container th {
+    background-color: #bddee3;
+    color: #075E70;
+    padding: 13px;
+    font-size: 0.95rem;
+}
+
+.tabela-container td {
+    padding: 13px;
+    color: #286D7B;
+    border-bottom: 1px solid #DCEAEC;
+    font-size: 0.9rem;
+}
+
+.tabela-container tbody tr:hover {
+    background-color: #F0F8F8;
+}
+
+
+.grafico-container {
+    background-color: #FFFEFA;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.grafico-container h2 {
+    color: #075E70;
+}
+
+#graficoDesempenho {
+    width: 100%;
+    max-height: 400px;
+}
