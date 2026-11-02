@@ -160,3 +160,41 @@ font-size: 14px;
     min-height: 250px;
     }
 }
+
+.botoes-gerenciar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: auto;
+}
+
+/* Links do modal */
+.modal-body a#btnBuscarQuestao {
+    display: inline-block;
+    background-color: #0C6878;
+    color: white !important;
+    padding: 12px 20px;
+    border-radius: 6px;
+    text-decoration: none !important;
+    font-size: 13px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.modal-body a#btnBuscarQuestao:hover {
+    background-color: #095563 !important;
+    color: white !important;
+}
+
+.modal-body a#cancela{
+    display: inline-block;
+    color: rgb(123, 0, 0) !important;
+    padding: 12px 20px;
+    border-radius: 6px;
+    text-decoration: none !important;
+    font-size: 13px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}

@@ -75,8 +75,9 @@ router.post("/admin/login", async (req, res) => {
 // Painel administrativo
 router.get("/admin", verificarAdministrador, (req, res) => {
     res.render("administrador/painelAdmin", {
-        layout: "layouts/main",
-        admin: req.session.admin
+        layout: "layouts/mainAdmin",
+        admin: req.session.admin,
+        query: req.query
     });
 });
 
