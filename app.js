@@ -22,6 +22,7 @@ const cronometroRoutes = require("./routes/rotaCronometro");
 const adminRoutes = require("./routes/rotaAdmin");
 const alterarQuestoesRoutes = require("./routes/rotaAlterarQuestoes");
 const desempenhoRoutes = require("./routes/rotaDesempenho");
+const excluirQuestaoRoutes = require("./routes/rotaExcluirQuestao");
 
 // Configuração do Handlebars
 app.set("view engine", "hbs");
@@ -97,8 +98,7 @@ app.use("/", lembretesRoutes);
 app.use("/", cronometroRoutes);
 app.use("/", adminRoutes);
 app.use("/", alterarQuestoesRoutes);
-
-
+app.use("/", excluirQuestaoRoutes);
 // Inicialização do servidor
 http.createServer(app).listen(8080, () => {
 

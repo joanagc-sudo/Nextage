@@ -125,6 +125,18 @@ body {
 .btn-cadastrar:hover {
     background-color: #225D69 !important;
 }
+#btnExcluir {
+    background-color: #dc3545 !important;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+#btnExcluir:hover {
+    background-color: #bb2d3b !important;
+    color: white;
+}
 
 h1{
     padding-left: 4rem;

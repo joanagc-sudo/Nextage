@@ -262,7 +262,39 @@
             console.error("Erro ao iniciar a página de alteração:", err);
         }
     }
+ // Excluir questão
+document.getElementById("btnExcluir").addEventListener("click", async () => {
 
+    const confirmar = confirm(
+        "Tem certeza que deseja excluir esta questão? Essa ação não poderá ser desfeita."
+    );
+
+    if (!confirmar) return;
+
+    try {
+
+        const resp = await fetch(`/api/questoes-admin/${ID_QUESTAO}`, {
+            method: "DELETE"
+        });
+
+        if (!resp.ok) {
+            const erro = await resp.text();
+            alert(erro);
+            return;
+        }
+
+        alert("Questão excluída com sucesso!");
+
+        window.location.href = "/cadastro-questoes";
+
+    } catch (err) {
+
+        console.error(err);
+        alert("Erro ao excluir questão.");
+
+    }
+
+});
     iniciarFiltros();
 
 })();
