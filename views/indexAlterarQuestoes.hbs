@@ -1,13 +1,13 @@
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="/styleCadastroQuestoes.css">
+<link rel="stylesheet" href="/styleAlterarQuestao.css">
 
 
 <h1 class="titulo my-4">
     Alterar questão #{{id}}
 </h1>
 
-<form action="/cadastro-questoes" method="POST" enctype="multipart/form-data" class="container-cadastro">
+<form action="/alterar-questoes/{{id}}" method="POST" enctype="multipart/form-data" class="container-cadastro">
 
 
     <!-- filtros -->
@@ -77,10 +77,18 @@
         </select>
     </div>
 
-    <!-- botão de envio-->
-    <div class="d-flex justify-content-center mt-5 mb-4">
-        <button type="submit" class="btn btn-cadastrar">SALVAR ALTERAÇÕES</button>
-    </div>
+    <!-- Botões -->
+<div class="d-flex justify-content-center gap-3 mt-5 mb-4">
+
+    <button type="submit" class="btn btn-cadastrar">
+        SALVAR ALTERAÇÕES
+    </button>
+
+    <button type="button" class="btn btn-excluir" id="btnExcluir">
+        EXCLUIR QUESTÃO
+    </button>
+
+</div>
 </form>
 
 <script>const ID_QUESTAO = "{{id}}";</script>

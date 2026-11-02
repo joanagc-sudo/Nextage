@@ -137,3 +137,12 @@ document
 
     });
 
+document
+    .getElementById("editarConta")
+    .addEventListener("click", function() {
+
+        window.location.href = "/atualizar-usuario";
+
+    });
+
+

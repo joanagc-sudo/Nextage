@@ -1,821 +1,588 @@
-document.addEventListener(
-"DOMContentLoaded",
-function () {
 
-    // enviar material
-    async function enviarMaterial(
-    arquivo,
-    materia
-    ) 
+document.addEventListener("DOMContentLoaded", function () {
 
-    {
+    // envia o arquivo e as informações do material para o servidor
+    async function enviarMaterial(arquivo, materia) {
 
-    const formData =
-        new FormData();
+        const formData = new FormData();
 
-    formData.append(
-        "arquivo",
-        arquivo
-    );
+        formData.append("arquivo", arquivo);
+        formData.append("titulo", arquivo.name);
+        formData.append("descricao", materia);
 
-    formData.append(
-        "titulo",
-        arquivo.name
-    );
+        const resposta = await fetch("/materiais", {
+            method: "POST",
+            body: formData
+        });
 
-    formData.append(
-        "descricao",
-        materia
-    );
+        const resultado = await resposta.json();
 
+        if (!resposta.ok) {
+            throw new Error(resultado.erro || "Erro ao cadastrar material.");
+        }
 
-    const resposta =
-        await fetch(
-            "/materiais",
-            {
-                method: "POST",
-                body: formData
+        return resultado;
+    }
+
+    // controla a abertura e o fechamento do seletor de disciplinas
+    const seletorDisciplina = document.querySelector(".seletorDisciplina");
+    const btnDisciplina = document.getElementById("btnDisciplina");
+    const disciplinas = document.querySelectorAll("#listaDisciplinas button");
+
+    if (btnDisciplina && seletorDisciplina) {
+        btnDisciplina.addEventListener("click", function (event) {
+            event.stopPropagation();
+            seletorDisciplina.classList.toggle("aberto");
+        });
+    }
+
+    // busca as rotas das disciplinas cadastradas
+    let rotasDisciplinas = {};
+    let erroCarregamentoRotas = false;
+
+    const carregarRotasDisciplinas = fetch("/api/disciplinas-paginas")
+        .then(function (resposta) {
+
+            if (!resposta.ok) {
+                throw new Error("Erro ao buscar as disciplinas.");
             }
-        );
 
+            return resposta.json();
+        })
+        .then(function (dados) {
 
-    const resultado =
-        await resposta.json();
+            dados.forEach(function (disciplina) {
+                rotasDisciplinas[disciplina.nome] = disciplina.rota;
+            });
 
+        })
+        .catch(function (erro) {
 
-    if (!resposta.ok) {
+            erroCarregamentoRotas = true;
+            console.error("Erro ao carregar as disciplinas:", erro);
 
-        console.error(
-            "Erro retornado pelo servidor:",
-            resultado
-        );
+        });
 
-        throw new Error(
-            resultado.erro ||
-            "Erro ao cadastrar material"
-        );
-
-    }
-
-
-    return resultado;
-
-
-    }
-
-
-    // seletor de disciplinas
-    const seletorDisciplina =
-        document.querySelector(
-            ".seletorDisciplina"
-        );
-
-    const btnDisciplina =
-        document.getElementById(
-            "btnDisciplina"
-        );
-
-    const listaDisciplinas =
-        document.getElementById(
-            "listaDisciplinas"
-        );
-
-    const disciplinaAtual =
-        document.getElementById(
-            "disciplinaAtual"
-        );
-
-    const disciplinas =
-        document.querySelectorAll(
-            "#listaDisciplinas button"
-        );
-
-    // abrir e fechar seletor
-    if (btnDisciplina) {
-
-        btnDisciplina.addEventListener(
-            "click",
-            function (event) {
-
-                event.stopPropagation();
-
-
-                seletorDisciplina.classList.toggle(
-                    "aberto"
-                );
-
-            }
-        );
-
-    }
-
-    
-    // Selecionar disciplina e abrir a tela correspondente
-    const rotasDisciplinas = {
-        "Geografia": "/materiais",
-        "Biologia": "/biologia",
-        "Espanhol": "/espanhol",
-        "Física": "/fisica",
-        "Filosofia": "/filosofia",
-        "História": "/historia",
-        "Inglês": "/ingles",
-        "Matemática": "/matematica",
-        "Português": "/portugues",
-        "Química": "/quimica",
-        "Sociologia": "/sociologia"
-    };
-
+    // direciona o usuário para a página da disciplina escolhida
     disciplinas.forEach(function (botao) {
-        botao.addEventListener("click", function () {
+
+        botao.addEventListener("click", async function () {
+
+            await carregarRotasDisciplinas;
+
+            if (erroCarregamentoRotas) {
+                alert("Não foi possível carregar as disciplinas.");
+                return;
+            }
+
             const disciplina = botao.dataset.disciplina;
             const rota = rotasDisciplinas[disciplina];
 
             if (!rota) {
-                console.error(
-                    "Não existe uma rota para:",
-                    disciplina
-                );
+                console.error("Rota não encontrada para:", disciplina);
                 return;
             }
 
             window.location.href = rota;
         });
+
     });
 
-    // fechar ao clicar fora do modal (nao ta funcionando)
-    document.addEventListener(
-        "click",
-        function (event) {
+    // fecha o seletor quando o usuário clica fora dele
+    document.addEventListener("click", function (event) {
 
-            if (
-                seletorDisciplina &&
-                !seletorDisciplina.contains(
-                    event.target
-                )
-            ) {
-
-                seletorDisciplina.classList.remove(
-                    "aberto"
-                );
-
-            }
-
+        if (
+            seletorDisciplina &&
+            !seletorDisciplina.contains(event.target)
+        ) {
+            seletorDisciplina.classList.remove("aberto");
         }
-    );
 
-    // disciplina 
-    const parametrosURL =
-        new URLSearchParams(
-            window.location.search
+    });
+
+    // identifica a disciplina indicada na url
+    const parametrosURL = new URLSearchParams(window.location.search);
+    const disciplinaSelecionada = parametrosURL.get("materia");
+
+    // identifica os elementos utilizados no cadastro de materiais
+    const btnCadastrar = document.getElementById("btnCadastrar");
+    const fileInput = document.getElementById("fileInput");
+    const listaMateriais = document.getElementById("listaMateriais");
+    const modalMateria = document.getElementById("modalMateria");
+    const selectMateria = document.getElementById("selectMateria");
+    const salvarMaterial = document.getElementById("salvarMaterial");
+    const cancelarMateria = document.getElementById("cancelarMateria");
+    const nomeArquivo = document.getElementById("nomeArquivo");
+
+    let arquivoSelecionado = null;
+    let materiaFiltrada = disciplinaSelecionada || null;
+
+    // seleciona automaticamente a disciplina indicada na url
+    if (disciplinaSelecionada && selectMateria) {
+
+        const opcaoExiste = Array.from(selectMateria.options).some(
+            function (opcao) {
+                return opcao.value === disciplinaSelecionada;
+            }
         );
-
-    const disciplinaSelecionada =
-        parametrosURL.get(
-            "materia"
-        );
-
-    console.log(
-        "Disciplina selecionada:",
-        disciplinaSelecionada
-    );
-
-    // elementos html
-    const btnCadastrar =
-        document.getElementById(
-            "btnCadastrar"
-        );
-
-    const fileInput =
-        document.getElementById(
-            "fileInput"
-        );
-
-    const listaMateriais =
-        document.getElementById(
-            "listaMateriais"
-        );
-
-    const modalMateria =
-        document.getElementById(
-            "modalMateria"
-        );
-
-    const selectMateria =
-        document.getElementById(
-            "selectMateria"
-        );
-
-    const salvarMaterial =
-        document.getElementById(
-            "salvarMaterial"
-        );
-
-    const cancelarMateria =
-        document.getElementById(
-            "cancelarMateria"
-        );
-
-    const nomeArquivo =
-        document.getElementById(
-            "nomeArquivo"
-        );
-
-    const assuntos =
-        document.querySelectorAll(
-            "[data-materia]"
-        );
-
-    // verificacao dos elementos
-    if (
-        !btnCadastrar ||
-        !fileInput ||
-        !listaMateriais ||
-        !modalMateria ||
-        !selectMateria ||
-        !salvarMaterial ||
-        !cancelarMateria ||
-        !nomeArquivo
-    ) {
-
-        console.error(
-            "Erro: elementos do HTML não encontrados."
-        );
-
-        return;
-
-    }
-
-    // variaveis
-    let arquivoSelecionado =
-        null;
-
-    let materiaFiltrada =
-        disciplinaSelecionada || null;
-
-    // configuracao da pagina
-    if (disciplinaSelecionada) {
-
-        const opcaoExiste =
-            Array.from(
-                selectMateria.options
-            ).some(
-                function (opcao) {
-
-                    return (
-                        opcao.value ===
-                        disciplinaSelecionada
-                    );
-
-                }
-            );
-
 
         if (opcaoExiste) {
-
-            selectMateria.value =
-                disciplinaSelecionada;
+            selectMateria.value = disciplinaSelecionada;
         }
-
     }
 
-    // botao maisinho
-    btnCadastrar.addEventListener(
-        "click",
-        function () {
+    // configura os eventos do cadastro quando os elementos existem
+    if (
+        btnCadastrar &&
+        fileInput &&
+        modalMateria &&
+        selectMateria &&
+        salvarMaterial &&
+        cancelarMateria &&
+        nomeArquivo
+    ) {
 
-            console.log(
-                "Botão + clicado!"
-            );
-
+        // abre a seleção de arquivos ao clicar no botão de cadastro
+        btnCadastrar.addEventListener("click", function () {
             fileInput.click();
+        });
 
-        }
-    );
+        // mostra o arquivo escolhido e abre o modal de cadastro
+        fileInput.addEventListener("change", function () {
 
-    // selecionar arquivo
-    fileInput.addEventListener(
-        "change",
-        function () {
-
-            if (
-                fileInput.files.length === 0
-            ) {
-
+            if (fileInput.files.length === 0) {
                 return;
-
             }
 
-            arquivoSelecionado =
-                fileInput.files[0];
-
-            console.log(
-                "Arquivo escolhido:",
-                arquivoSelecionado.name
-            );
+            arquivoSelecionado = fileInput.files[0];
 
             nomeArquivo.textContent =
-                "Arquivo: " +
-                arquivoSelecionado.name;
+                "Arquivo: " + arquivoSelecionado.name;
 
             if (disciplinaSelecionada) {
-
-                selectMateria.value =
-                    disciplinaSelecionada;
-
+                selectMateria.value = disciplinaSelecionada;
             }
 
-            modalMateria.style.display =
-                "flex";
-        }
-    );
+            modalMateria.style.display = "flex";
+        });
 
-    // botao do modal p cancelar
-    cancelarMateria.addEventListener(
-        "click",
-        function () {
+        // fecha o modal e cancela o cadastro
+        cancelarMateria.addEventListener("click", function () {
 
-            modalMateria.style.display =
-                "none";
+            modalMateria.style.display = "none";
+            selectMateria.value = disciplinaSelecionada || "";
+            arquivoSelecionado = null;
+            fileInput.value = "";
 
+        });
 
-            selectMateria.value =
-                disciplinaSelecionada || "";
-
-
-            arquivoSelecionado =
-                null;
-
-
-            fileInput.value =
-                "";
-
-        }
-    );
-
-    // salvar material
-    salvarMaterial.addEventListener(
-        "click",
-        async function () {
+        // salva o material escolhido pelo usuário
+        salvarMaterial.addEventListener("click", async function () {
 
             if (!arquivoSelecionado) {
-
-                alert(
-                    "Escolha um arquivo primeiro."
-                );
-
+                alert("Escolha um arquivo primeiro.");
                 return;
             }
 
-            const materia =
-                selectMateria.value;
+            const materia = selectMateria.value;
 
-
-            if (materia === "") {
-
-                alert(
-                    "Escolha uma matéria."
-                );
-
+            if (!materia) {
+                alert("Escolha uma matéria.");
                 return;
             }
 
-            salvarMaterial.disabled =
-                true;
+            salvarMaterial.disabled = true;
 
             try {
 
-                // Envia para o servidor
+                await enviarMaterial(arquivoSelecionado, materia);
 
-                await enviarMaterial(
-                    arquivoSelecionado,
-                    materia
-                );
-
-                // Fecha modal
-
-                modalMateria.style.display =
-                    "none";
-
-                selectMateria.value =
-                    disciplinaSelecionada || "";
-
-                arquivoSelecionado =
-                    null;
-
-                fileInput.value =
-                    "";
-
-                // Busca novamente no banco
+                modalMateria.style.display = "none";
+                selectMateria.value = disciplinaSelecionada || "";
+                arquivoSelecionado = null;
+                fileInput.value = "";
 
                 await carregarMateriais();
 
-                console.log(
-                    "Material cadastrado com sucesso!"
-                );
+                alert("Material cadastrado com sucesso!");
 
             } catch (erro) {
 
-                console.error(
-                    "Erro ao cadastrar:",
-                    erro
-                );
-
-                alert(
-                "Não foi possível salvar o material:\n\n" +
-                erro.message
-    );
+                console.error("Erro ao cadastrar material:", erro);
+                alert("Não foi possível salvar o material: " + erro.message);
 
             } finally {
 
-                salvarMaterial.disabled =
-                    false;
+                salvarMaterial.disabled = false;
 
             }
 
-        }
-    );
-
-    // add material na tabela de materiais
-    function adicionarMaterialNaTabela(
-        material
-    ) {
-
-        const linha =
-            document.createElement(
-                "tr"
-            );
-
-        // Guarda a matéria
-        linha.dataset.materia =
-            material.descricao;
-
-        // nome do material
-        const colunaNome =
-            document.createElement(
-                "td"
-            );
-
-        colunaNome.textContent =
-            material.titulo;
-
-        // conteudo do material
-        const colunaConteudo =
-            document.createElement(
-                "td"
-            );
-
-        colunaConteudo.textContent =
-            material.descricao;
-
-        // coluna dos botoes
-        const colunaBotao =
-            document.createElement(
-                "td"
-            );
-
-        const acoesMaterial =
-            document.createElement(
-                "div"
-            );
-
-        acoesMaterial.classList.add(
-            "acoesMaterial"
-        );
-
-        // botao baixar
-        const botaoBaixar =
-            document.createElement(
-                "button"
-            );
-
-        botaoBaixar.type =
-            "button";
-
-
-        botaoBaixar.textContent =
-            "Baixar";
-
-
-        botaoBaixar.classList.add(
-            "botaoBaixar"
-        );
-
-        botaoBaixar.addEventListener(
-            "click",
-            function () {
-
-                baixarMaterial(
-                    material
-                );
-
-            }
-        );
-
-        // botao de excluir
-        const botaoExcluir =
-            document.createElement(
-                "button"
-            );
-
-        botaoExcluir.type =
-            "button";
-
-        botaoExcluir.textContent =
-            "Excluir";
-
-        botaoExcluir.classList.add(
-            "botaoExcluir"
-        );
-
-        botaoExcluir.addEventListener(
-            "click",
-            async function () {
-
-                await excluirMaterial(
-                    material,
-                    linha,
-                    botaoExcluir
-                );
-
-            }
-        );
-
-        // organizacao dos botoes
-        acoesMaterial.appendChild(
-            botaoBaixar
-        );
-
-        acoesMaterial.appendChild(
-            botaoExcluir
-        );
-
-        colunaBotao.appendChild(
-            acoesMaterial
-        );
-
-        // monta a linha
-        linha.appendChild(
-            colunaNome
-        );
-
-        linha.appendChild(
-            colunaConteudo
-        );
-
-        linha.appendChild(
-            colunaBotao
-        );
-
-        listaMateriais.appendChild(
-            linha
-        );
-
-        // mantem o filtro
-        if (
-            materiaFiltrada !== null
-        ) {
-
-            linha.style.display =
-                material.descricao ===
-                materiaFiltrada
-                    ? ""
-                    : "none";
-
-        }
+        });
 
     }
 
-    // carrega maeriais do banco
+    // adiciona um material à tabela de materiais cadastrados
+    function adicionarMaterialNaTabela(material) {
+
+        if (!listaMateriais) return;
+
+        const linha = document.createElement("tr");
+        linha.dataset.materia = material.descricao;
+
+        const colunaNome = document.createElement("td");
+        colunaNome.textContent = material.titulo;
+
+        const colunaConteudo = document.createElement("td");
+        colunaConteudo.textContent = material.descricao;
+
+        const colunaAcoes = document.createElement("td");
+
+        const acoesMaterial = document.createElement("div");
+        acoesMaterial.classList.add("acoesMaterial");
+
+        // cria o botão para baixar o arquivo
+        const botaoBaixar = document.createElement("button");
+        botaoBaixar.type = "button";
+        botaoBaixar.textContent = "Baixar";
+        botaoBaixar.classList.add("botaoBaixar");
+
+        botaoBaixar.addEventListener("click", function () {
+            baixarMaterial(material);
+        });
+
+        // cria o botão para excluir o material
+        const botaoExcluir = document.createElement("button");
+        botaoExcluir.type = "button";
+        botaoExcluir.textContent = "Excluir";
+        botaoExcluir.classList.add("botaoExcluir");
+
+        botaoExcluir.addEventListener("click", async function () {
+            await excluirMaterial(material, linha, botaoExcluir);
+        });
+
+        acoesMaterial.appendChild(botaoBaixar);
+        acoesMaterial.appendChild(botaoExcluir);
+
+        colunaAcoes.appendChild(acoesMaterial);
+
+        linha.appendChild(colunaNome);
+        linha.appendChild(colunaConteudo);
+        linha.appendChild(colunaAcoes);
+
+        listaMateriais.appendChild(linha);
+
+        // mantém a tabela filtrada pela disciplina selecionada
+        if (materiaFiltrada !== null) {
+
+            linha.style.display =
+                material.descricao === materiaFiltrada ? "" : "none";
+
+        }
+    }
+
+    // busca os materiais cadastrados pelo usuário logado
     async function carregarMateriais() {
+
+        if (!listaMateriais) return;
 
         try {
 
-            const resposta =
-                await fetch(
-                    "/materiais"
-                );
+            const resposta = await fetch("/materiais/lista");
 
             if (!resposta.ok) {
-
-                throw new Error(
-                    "Erro ao buscar materiais"
-                );
-
+                throw new Error("Erro ao buscar materiais.");
             }
 
-            const materiais =
-                await resposta.json();
+            const materiais = await resposta.json();
 
-            listaMateriais.innerHTML =
-                "";
+            listaMateriais.innerHTML = "";
 
-            materiais.forEach(
-                function (material) {
+            materiais.forEach(function (material) {
+                adicionarMaterialNaTabela(material);
+            });
 
-                    adicionarMaterialNaTabela(
-                        material
-                    );
-
-                }
-            );
-
-            console.log(
-                "Materiais carregados:",
-                materiais
-            );
+            console.log("Materiais carregados:", materiais);
 
         } catch (erro) {
 
-            console.error(
-                "Erro ao carregar materiais:",
-                erro
-            );
-
-            alert(
-                "Não foi possível carregar os materiais."
-            );
+            console.error("Erro ao carregar materiais:", erro);
+            alert("Não foi possível carregar os materiais.");
 
         }
-
     }
 
-    // baixa materiais
-    function baixarMaterial(
-        material
-    ) {
+    // realiza o download de um material cadastrado
+    function baixarMaterial(material) {
 
-        const caminhoArquivo =
-            "/imagens/materiais/" +
-            material.material_arquivo;
-
-        const link =
-            document.createElement(
-                "a"
-            );
+        const link = document.createElement("a");
 
         link.href =
-            caminhoArquivo;
+            "/imagens/materiais/" +
+            encodeURIComponent(material.material_arquivo);
 
-        link.download =
-            material.titulo;
+        link.download = material.titulo;
 
-        document.body.appendChild(
-            link
-        );
-
+        document.body.appendChild(link);
         link.click();
-
         link.remove();
     }
 
-    // exclui material
-    async function excluirMaterial(
-        material,
-        linha,
-        botaoExcluir
-    ) {
+    // exclui o material selecionado
+    async function excluirMaterial(material, linha, botaoExcluir) {
 
-        const confirmar =
-            confirm(
-                "Deseja realmente excluir o material " +
-                material.titulo +
-                "?"
-            );
+        const confirmar = confirm(
+            "Deseja realmente excluir o material " +
+            material.titulo +
+            "?"
+        );
 
+        if (!confirmar) return;
 
-        if (!confirmar) {
-
-            return;
-
-        }
-
-        botaoExcluir.disabled =
-            true;
+        botaoExcluir.disabled = true;
 
         try {
 
-            const resposta =
-                await fetch(
-                    "/materiais/" +
-                    material.id_material,
-                    {
-                        method: "DELETE"
-                    }
-                );
+            const resposta = await fetch(
+                "/materiais/" + material.id_material,
+                {
+                    method: "DELETE"
+                }
+            );
+
+            const resultado = await resposta.json();
 
             if (!resposta.ok) {
-
-                throw new Error(
-                    "Erro ao excluir material"
-                );
-
+                throw new Error(resultado.erro || "Erro ao excluir material.");
             }
 
-            // remove da tabela
             linha.remove();
 
-
-            console.log(
-                "Material excluído!"
-            );
+            console.log("Material excluído com sucesso.");
 
         } catch (erro) {
 
-            console.error(
-                "Erro ao excluir:",
-                erro
+            console.error("Erro ao excluir material:", erro);
+
+            alert("Não foi possível excluir o material: " + erro.message);
+
+            botaoExcluir.disabled = false;
+
+        }
+    }
+
+    // carrega os materiais assim que a página é aberta
+    carregarMateriais();
+
+});
+
+
+// controla os cliques nos cards e apresenta os materiais compartilhados
+document.addEventListener("DOMContentLoaded", function () {
+
+    // identifica os elementos do modal
+    const modal = document.getElementById("modalMateriaisCompartilhados");
+    const titulo = document.getElementById("tituloModalCompartilhados");
+    const lista = document.getElementById("listaMateriaisCompartilhados");
+
+    // abre o modal e busca os materiais do assunto selecionado
+    async function abrirModalMateriais(materiaSelecionada) {
+
+        if (!materiaSelecionada) return;
+
+        if (!modal || !titulo || !lista) {
+            console.error("Os elementos do modal não foram encontrados.");
+            return;
+        }
+
+        console.log("Card selecionado:", materiaSelecionada);
+
+        // apresenta o modal antes de carregar os materiais
+        modal.style.display = "flex";
+        titulo.textContent = materiaSelecionada;
+
+        lista.innerHTML = `
+            <p class="carregandoMateriais">
+                Carregando materiais...
+            </p>
+        `;
+
+        try {
+
+            const resposta = await fetch(
+                "/materiais/assunto/" +
+                encodeURIComponent(materiaSelecionada)
             );
 
+            if (!resposta.ok) {
+                throw new Error("Erro ao buscar materiais: " + resposta.status);
+            }
 
-            alert(
-                "Não foi possível excluir o material."
-            );
+            const materiais = await resposta.json();
 
+            lista.innerHTML = "";
 
-            botaoExcluir.disabled =
-                false;
+            // informa quando não existem materiais para o assunto
+            if (!Array.isArray(materiais) || materiais.length === 0) {
 
+                lista.innerHTML = `
+                    <p class="semMateriais">
+                        Ainda não existem materiais cadastrados neste assunto.
+                    </p>
+                `;
+
+                return;
+            }
+
+            // apresenta cada material encontrado no modal
+            materiais.forEach(function (material) {
+
+                const item = document.createElement("div");
+                item.classList.add("itemMaterialCompartilhado");
+
+                const informacoes = document.createElement("div");
+                informacoes.classList.add("infoMaterialCompartilhado");
+
+                const nome = document.createElement("h4");
+                nome.textContent = material.titulo || "Material sem título";
+
+                const descricao = document.createElement("p");
+                descricao.textContent = "Assunto: " + (material.descricao || "");
+
+                const autor = document.createElement("p");
+                autor.classList.add("autorMaterialCompartilhado");
+
+                autor.textContent =
+                    "Cadastrado por: " +
+                    (material.autor || "Usuário");
+
+                const data = document.createElement("p");
+                data.classList.add("autorMaterialCompartilhado");
+
+                // apresenta a data de publicação do material
+                if (material.data_publicacao) {
+
+                    const dataFormatada = new Date(material.data_publicacao);
+
+                    data.textContent =
+                        "Publicado em: " +
+                        (
+                            isNaN(dataFormatada.getTime())
+                                ? material.data_publicacao
+                                : dataFormatada.toLocaleDateString("pt-BR")
+                        );
+                }
+
+                informacoes.appendChild(nome);
+                informacoes.appendChild(descricao);
+                informacoes.appendChild(autor);
+                informacoes.appendChild(data);
+
+                // disponibiliza o arquivo para download
+                const baixar = document.createElement("a");
+
+                baixar.classList.add("botaoBaixarCompartilhado");
+                baixar.textContent = "Baixar";
+
+                baixar.href =
+                    "/imagens/materiais/" +
+                    encodeURIComponent(material.material_arquivo);
+
+                baixar.download = material.titulo || "material";
+
+                item.appendChild(informacoes);
+                item.appendChild(baixar);
+
+                lista.appendChild(item);
+
+            });
+
+        } catch (erro) {
+
+            console.error("Erro ao carregar materiais compartilhados:", erro);
+
+            lista.innerHTML = `
+                <p class="semMateriais">
+                    Não foi possível carregar os materiais. Tente novamente.
+                </p>
+            `;
+
+        }
+    }
+
+    // identifica o card pela posição real do clique na tela
+    document.addEventListener("click", function (event) {
+
+    const elementos = document.elementsFromPoint(
+        event.clientX,
+        event.clientY
+    );
+
+    const assunto = elementos
+        .map(function (elemento) {
+            return elemento.closest("[data-materia]");
+        })
+        .find(function (elemento) {
+            return elemento && elemento.closest(".atalhos");
+        });
+
+    if (!assunto) return;
+
+    console.log("CARD IDENTIFICADO:", assunto.dataset.materia);
+
+    abrirModalMateriais(assunto.dataset.materia);
+
+}, true);
+
+    // fecha o modal de materiais compartilhados
+    function fecharModal() {
+
+        if (modal) {
+            modal.style.display = "none";
         }
 
     }
 
-    //  filtra materiais ppor assunto
-    assuntos.forEach(
-        function (assunto) {
+    const botaoFechar = document.getElementById("fecharModalCompartilhados");
+    const botaoFechar2 = document.getElementById("fecharModalCompartilhados2");
 
-            assunto.addEventListener(
-                "click",
-                function () {
+    if (botaoFechar) {
+        botaoFechar.addEventListener("click", fecharModal);
+    }
 
-                    const materiaSelecionada =
-                        assunto.dataset.materia;
+    if (botaoFechar2) {
+        botaoFechar2.addEventListener("click", fecharModal);
+    }
 
+    // fecha o modal quando o usuário clica no fundo
+    if (modal) {
 
-                    // Se clicar novamente,
-                    // remove o filtro
+        modal.addEventListener("click", function (event) {
 
-                    if (
-                        materiaFiltrada ===
-                        materiaSelecionada
-                    ) {
+            if (event.target === modal) {
+                fecharModal();
+            }
 
-                        materiaFiltrada =
-                            null;
+        });
 
-                    } else {
+    }
 
-                        materiaFiltrada =
-                            materiaSelecionada;
+    // permite fechar o modal utilizando a tecla esc
+    document.addEventListener("keydown", function (event) {
 
-                    }
-
-
-                    const linhas =
-                        listaMateriais.querySelectorAll(
-                            "tr"
-                        );
-
-
-                    linhas.forEach(
-                        function (linha) {
-
-                            if (
-                                materiaFiltrada ===
-                                    null ||
-                                linha.dataset.materia ===
-                                    materiaFiltrada
-                            ) {
-
-                                linha.style.display =
-                                    "";
-
-                            } else {
-
-                                linha.style.display =
-                                    "none";
-
-                            }
-
-                        }
-                    );
-
-                }
-            );
-
+        if (event.key === "Escape") {
+            fecharModal();
         }
-    );
 
-    // inicializacao
-    carregarMateriais();
-}
+    });
 
-);
+});
 
 
-/* ===== CARROSSEL DE TODAS AS DISCIPLINAS ===== */
-
+// controla a movimentação dos cards no carrossel
 document.addEventListener("DOMContentLoaded", function () {
+
     document.querySelectorAll(".atalhos").forEach(function (atalhos) {
+
         const faixa = atalhos.querySelector(".icones");
         const area = atalhos.querySelector(".atalhos1");
         const setas = atalhos.querySelectorAll(".seta");
@@ -823,12 +590,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!faixa || !area || setas.length < 2) return;
 
         const setaEsquerda = setas[0];
-        const setaDireita = setas[setas.length - 1];
+        const setaDireita = setas[1];
 
-        /*
-         * Coloca as duas setas nas laterais da área
-         * sem precisar editar os arquivos HBS individualmente.
-         */
+        // posiciona as setas nas laterais do carrossel
         atalhos.insertBefore(setaEsquerda, area);
         atalhos.appendChild(setaDireita);
 
@@ -838,15 +602,21 @@ document.addEventListener("DOMContentLoaded", function () {
         setaEsquerda.setAttribute("aria-label", "Conteúdos anteriores");
         setaDireita.setAttribute("aria-label", "Próximos conteúdos");
 
+        // atualiza o estado das setas conforme a posição dos cards
         function atualizarSetas() {
+
             const limite = faixa.scrollWidth - faixa.clientWidth;
 
             setaEsquerda.disabled = faixa.scrollLeft <= 1;
             setaDireita.disabled = faixa.scrollLeft >= limite - 1;
+
         }
 
+        // movimenta o carrossel de acordo com a seta escolhida
         function mover(direcao) {
+
             const card = faixa.querySelector('[class^="assuntog"]');
+
             const larguraCard = card
                 ? card.getBoundingClientRect().width
                 : 152;
@@ -857,6 +627,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 left: direcao * (larguraCard + gap) * 2,
                 behavior: "smooth"
             });
+
         }
 
         setaEsquerda.addEventListener("click", function () {
@@ -867,25 +638,32 @@ document.addEventListener("DOMContentLoaded", function () {
             mover(1);
         });
 
-        /* Arrastar com o mouse */
+        // permite arrastar os cards com o mouse
         let pressionado = false;
         let inicioX = 0;
         let scrollInicial = 0;
         let arrastou = false;
 
         faixa.addEventListener("pointerdown", function (evento) {
-            if (evento.pointerType !== "mouse" || evento.button !== 0) return;
+
+            if (evento.pointerType !== "mouse" || evento.button !== 0) {
+                return;
+            }
 
             pressionado = true;
             arrastou = false;
+
             inicioX = evento.clientX;
             scrollInicial = faixa.scrollLeft;
 
             faixa.classList.add("arrastando");
+
             faixa.setPointerCapture(evento.pointerId);
+
         });
 
         faixa.addEventListener("pointermove", function (evento) {
+
             if (!pressionado) return;
 
             const distancia = evento.clientX - inicioX;
@@ -897,28 +675,38 @@ document.addEventListener("DOMContentLoaded", function () {
             if (arrastou) {
                 faixa.scrollLeft = scrollInicial - distancia;
             }
+
         });
 
+        // encerra o movimento de arrastar
         function pararArraste() {
+
             pressionado = false;
             faixa.classList.remove("arrastando");
+
         }
 
         faixa.addEventListener("pointerup", pararArraste);
         faixa.addEventListener("pointercancel", pararArraste);
         faixa.addEventListener("lostpointercapture", pararArraste);
 
+        // impede que o movimento de arrastar seja confundido com um clique
         faixa.addEventListener("click", function (evento) {
+
             if (!arrastou) return;
 
             evento.preventDefault();
             evento.stopPropagation();
+
             arrastou = false;
+
         }, true);
 
         faixa.addEventListener("scroll", atualizarSetas);
         window.addEventListener("resize", atualizarSetas);
 
         atualizarSetas();
+
     });
+
 });

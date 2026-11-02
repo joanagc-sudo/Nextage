@@ -21,10 +21,24 @@ const lembretesRoutes = require("./routes/rotaLembretes");
 const cronometroRoutes = require("./routes/rotaCronometro");
 const adminRoutes = require("./routes/rotaAdmin");
 const alterarQuestoesRoutes = require("./routes/rotaAlterarQuestoes");
+const desempenhoRoutes = require("./routes/rotaDesempenho");
+const excluirQuestaoRoutes = require("./routes/rotaExcluirQuestao");
+const atualizarUsuarioRoutes = require("./routes/rotaAtualizarUsuario");
 const flashcardsRoutes = require("./routes/rotaFlashcards");
 
 // Configuração do Handlebars
 app.set("view engine", "hbs");
+
+// Helper para formatar a data de nascimento
+hbs.registerHelper("formatDate", function(data) {
+
+    if (!data) return "";
+
+    const dataFormatada = new Date(data);
+
+    return dataFormatada.toISOString().split("T")[0];
+
+});
 
 // Arquivos estáticos (CSS, JS, imagens)
 app.use(
@@ -87,10 +101,17 @@ app.use("/", filtrosRoutes);
 app.use("/", cronogramasRoutes);
 app.use("/materiais", materiaisRoutes);
 app.use("/", cadastroQuestoesRoutes);
+app.use("/" ,lembretesRoutes);
+app.use("/" ,cronometroRoutes);
+app.use("/" ,adminRoutes);
+app.use("/" ,alterarQuestoesRoutes);
+app.use("/" ,desempenhoRoutes);
 app.use("/", lembretesRoutes);
 app.use("/", cronometroRoutes);
 app.use("/", adminRoutes);
 app.use("/", alterarQuestoesRoutes);
+app.use("/", excluirQuestaoRoutes);
+app.use("/", atualizarUsuarioRoutes);
 app.use("/", flashcardsRoutes);
 
 

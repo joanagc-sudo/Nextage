@@ -1,17 +1,14 @@
 (function () {
 
-    // ID da questão lido direto da URL: /alterar-questoes/2
     const ID_QUESTAO = window.location.pathname.split("/").filter(Boolean).pop();
 
     const container = document.getElementById("containerFiltros");
 
-    // Guarda os filtros criados para um poder consultar o outro
     const campos = {};
 
-    // Dados vindos de /api/filtros
     let dadosFiltros;
 
-    // ---------- Função genérica para criar um filtro ----------
+    // criar um filtro
     function criarCampoFiltro(config) {
 
         const campo = document.createElement("div");
@@ -74,7 +71,7 @@
         const itens = [...campo.querySelectorAll(".item-filtro")];
         const checkboxes = [...campo.querySelectorAll(".checkbox-filtro")];
 
-        // Retorna os valores (ids) marcados, como string
+        // retorna ids marcados como string
         function getSelecionados() {
             return checkboxes.filter(c => c.checked).map(c => c.value);
         }
@@ -89,7 +86,7 @@
                 : nomes.join(", ");
         }
 
-        // Combina a pesquisa por texto com o bloqueio por disciplina/banca
+        //pesquisa por texto com o bloqueio por disciplina/banca
         function aplicarVisibilidade() {
             const texto = pesquisa.value.toLowerCase().trim();
 
@@ -116,7 +113,7 @@
         return { itens, checkboxes, getSelecionados, atualizarBotao, aplicarVisibilidade };
     }
 
-    // ---------- Mostra só os conteúdos das disciplinas selecionadas ----------
+    // conteúdos das disciplinas selecionadas
     function filtrarConteudosPorDisciplina() {
         const disciplinasSel = campos.disciplina.getSelecionados();
         const conteudo = campos.conteudo;
@@ -139,7 +136,7 @@
         conteudo.aplicarVisibilidade();
     }
 
-    // ---------- Mostra só os anos das bancas selecionadas ----------
+    // mostra só os anos das bancas selecionadas
     function filtrarAnosPorBanca() {
         const bancasSel = campos.banca.getSelecionados();
         const anos = campos.ano;
@@ -166,7 +163,7 @@
         anos.aplicarVisibilidade();
     }
 
-    // ---------- Marca no filtro os valores informados ----------
+    //marca no filtro os valores informados 
     function marcar(campo, valores) {
         const lista = valores.map(String);
 
@@ -177,7 +174,7 @@
         campo.atualizarBotao();
     }
 
-    // ---------- Preenche o formulário com a questão ----------
+    // preenche o formulário com a questão
     async function preencherQuestao() {
         const resp = await fetch(`/api/questoes-admin/${ID_QUESTAO}`);
 
@@ -190,7 +187,6 @@
         const q = await resp.json();
         console.log("Questão carregada:", q);
 
-        // Campos simples
         document.querySelector("[name=enunciado]").value = q.enunciado;
         document.querySelector("[name=correta]").value = q.correta;
 
@@ -209,7 +205,7 @@
                 .map(c => String(c.id_disciplina))
         )];
 
-        // A ordem importa: os filtros desmarcam o que está bloqueado
+        // s filtros desmarcam o que está bloqueado
         marcar(campos.disciplina, disciplinas);
         filtrarConteudosPorDisciplina();
         marcar(campos.conteudo, q.conteudos);
@@ -219,7 +215,7 @@
         marcar(campos.ano, [q.ano]);
     }
 
-    // ---------- Cria todos os filtros e preenche a questão ----------
+    // cria todos os filtros e preenche a questão
     async function iniciarFiltros() {
         try {
             const resp = await fetch("/api/filtros");
@@ -266,7 +262,39 @@
             console.error("Erro ao iniciar a página de alteração:", err);
         }
     }
+ // Excluir questão
+document.getElementById("btnExcluir").addEventListener("click", async () => {
 
+    const confirmar = confirm(
+        "Tem certeza que deseja excluir esta questão? Essa ação não poderá ser desfeita."
+    );
+
+    if (!confirmar) return;
+
+    try {
+
+        const resp = await fetch(`/api/questoes-admin/${ID_QUESTAO}`, {
+            method: "DELETE"
+        });
+
+        if (!resp.ok) {
+            const erro = await resp.text();
+            alert(erro);
+            return;
+        }
+
+        alert("Questão excluída com sucesso!");
+
+        window.location.href = "/cadastro-questoes";
+
+    } catch (err) {
+
+        console.error(err);
+        alert("Erro ao excluir questão.");
+
+    }
+
+});
     iniciarFiltros();
 
 })();

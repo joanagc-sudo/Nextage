@@ -5,7 +5,7 @@ const db = require("../database");
 
 const router = express.Router();
 
-// Upload em memória (a imagem vai direto para o MEDIUMBLOB)
+// Upload em memória
 const upload = multer({
     storage: multer.memoryStorage(),
     limits: { fileSize: 10 * 1024 * 1024 } // 10 MB
@@ -13,7 +13,7 @@ const upload = multer({
 
 const letras = ["a", "b", "c", "d", "e"];
 
-// ---------- Middleware: só administradores ----------
+// administradores 
 function apenasAdmin(req, res, next) {
     if (!req.session.usuario) {
         return res.status(401).json({ erro: "Faça login." });
@@ -24,7 +24,7 @@ function apenasAdmin(req, res, next) {
     next();
 }
 
-// ---------- Página de alteração ----------
+// alteração
 router.get("/alterar-questoes/:id", apenasAdmin, function (req, res) {
     res.render("indexAlterarQuestoes", {
         layout: "/layouts/main",
@@ -33,8 +33,7 @@ router.get("/alterar-questoes/:id", apenasAdmin, function (req, res) {
     });
 });
 
-// ---------- Dados da questão (para pré-preencher o formulário) ----------
-// Caminho exclusivo para não conflitar com rotaQuestoes
+// dados da questão
 router.get("/api/questoes-admin/:id", apenasAdmin, async (req, res) => {
     try {
         const id = req.params.id;
@@ -64,7 +63,7 @@ router.get("/api/questoes-admin/:id", apenasAdmin, async (req, res) => {
             [id]
         );
 
-        // Alternativas viram A, B, C... pela ordem do ID
+        // Alternativas pela ordem do ID
         const alternativas = {};
         alts.forEach((a, i) => {
             alternativas[letras[i]] = a.texto;
@@ -89,7 +88,7 @@ router.get("/api/questoes-admin/:id", apenasAdmin, async (req, res) => {
     }
 });
 
-// ---------- Atualização ----------
+// atualização
 router.post("/alterar-questoes/:id", apenasAdmin, upload.single("imagem"), async (req, res) => {
     const idQuestao = req.params.id;
 
@@ -111,7 +110,7 @@ router.post("/alterar-questoes/:id", apenasAdmin, upload.single("imagem"), async
         connection = await db.getConnection();
         await connection.beginTransaction();
 
-        // Vestibular (banca + ano)
+        // Vestibular
         const [vest] = await connection.query(
             `SELECT id_vestibular FROM vestibulares WHERE banca = ? AND ano = ? LIMIT 1`,
             [banca, ano]
@@ -138,7 +137,7 @@ router.post("/alterar-questoes/:id", apenasAdmin, upload.single("imagem"), async
             );
         }
 
-        // Alternativas: atualiza / insere / remove, por posição
+        // Alternativas
         const [existentes] = await connection.query(
             `SELECT id_alternativas FROM alternativas
              WHERE questoes_id_questao = ?
@@ -176,7 +175,7 @@ router.post("/alterar-questoes/:id", apenasAdmin, upload.single("imagem"), async
             }
         }
 
-        // Troca a correta ANTES de apagar (evita problema de FK)
+        // Troca a correta 
         await connection.query(
             `UPDATE questoes SET id_alternativa_correta = ? WHERE id_questao = ?`,
             [idCorreta, idQuestao]
