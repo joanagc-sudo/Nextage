@@ -1,5 +1,6 @@
 
 const express = require("express");
+const db = require("../database");
 
 const router = express.Router();
 
@@ -45,6 +46,31 @@ Object.entries(disciplinas).forEach(([rota, arquivo]) => {
             query: req.query
         });
     });
+});
+
+// Consultar disciplinas e suas páginas no banco de dados
+router.get("/api/disciplinas-paginas", async (req, res) => {
+    try {
+        const [resultado] = await db.query(`
+            SELECT
+                d.id_disciplina,
+                d.nome,
+                dp.rota
+            FROM disciplinas d
+            INNER JOIN disciplinas_paginas dp
+                ON d.id_disciplina = dp.id_disciplina
+            ORDER BY d.nome ASC
+        `);
+
+        res.json(resultado);
+
+    } catch (erro) {
+        console.error("Erro ao consultar disciplinas:", erro);
+
+        res.status(500).json({
+            erro: "Não foi possível consultar as disciplinas."
+        });
+    }
 });
 
 // Tela de disciplinas

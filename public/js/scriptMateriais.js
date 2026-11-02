@@ -110,37 +110,86 @@ function () {
     }
 
     
-    // Selecionar disciplina e abrir a tela correspondente
-    const rotasDisciplinas = {
-        "Geografia": "/materiais",
-        "Biologia": "/biologia",
-        "Espanhol": "/espanhol",
-        "Física": "/fisica",
-        "Filosofia": "/filosofia",
-        "História": "/historia",
-        "Inglês": "/ingles",
-        "Matemática": "/matematica",
-        "Português": "/portugues",
-        "Química": "/quimica",
-        "Sociologia": "/sociologia"
-    };
+   
+// Selecionar disciplina e buscar sua rota no banco de dados
+let rotasDisciplinas = {};
+let erroCarregamentoRotas = false;
 
-    disciplinas.forEach(function (botao) {
-        botao.addEventListener("click", function () {
-            const disciplina = botao.dataset.disciplina;
-            const rota = rotasDisciplinas[disciplina];
+const carregarRotasDisciplinas = fetch(
+    "/api/disciplinas-paginas"
+)
+    .then(function (resposta) {
 
-            if (!rota) {
-                console.error(
-                    "Não existe uma rota para:",
-                    disciplina
-                );
-                return;
-            }
+        if (!resposta.ok) {
+            throw new Error("Erro ao buscar rotas das disciplinas.");
+        }
 
-            window.location.href = rota;
+        return resposta.json();
+
+    })
+    .then(function (dados) {
+
+        dados.forEach(function (disciplina) {
+
+            rotasDisciplinas[disciplina.nome] =
+                disciplina.rota;
+
         });
+
+        console.log(
+            "Rotas carregadas do banco:",
+            rotasDisciplinas
+        );
+
+    })
+    .catch(function (erro) {
+
+        erroCarregamentoRotas = true;
+
+        console.error(
+            "Erro ao carregar rotas das disciplinas:",
+            erro
+        );
+
     });
+
+disciplinas.forEach(function (botao) {
+
+    botao.addEventListener("click", async function () {
+
+        await carregarRotasDisciplinas;
+
+        if (erroCarregamentoRotas) {
+
+            alert(
+                "Não foi possível carregar as páginas das disciplinas."
+            );
+
+            return;
+
+        }
+
+        const disciplina = botao.dataset.disciplina;
+
+        const rota = rotasDisciplinas[disciplina];
+
+        if (!rota) {
+
+            console.error(
+                "Não existe uma rota cadastrada para:",
+                disciplina
+            );
+
+            return;
+
+        }
+
+        window.location.href = rota;
+
+    });
+
+});
+
 
     // fechar ao clicar fora do modal (nao ta funcionando)
     document.addEventListener(

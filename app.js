@@ -87,19 +87,18 @@ app.use("/", filtrosRoutes);
 app.use("/", cronogramasRoutes);
 app.use("/materiais", materiaisRoutes);
 app.use("/", cadastroQuestoesRoutes);
-<<<<<<< HEAD
+
 app.use("/" ,lembretesRoutes);
 app.use("/" ,cronometroRoutes);
 app.use("/" ,adminRoutes);
 app.use("/" ,alterarQuestoesRoutes);
 app.use("/" ,desempenhoRoutes);
 
-=======
 app.use("/", lembretesRoutes);
 app.use("/", cronometroRoutes);
 app.use("/", adminRoutes);
 app.use("/", alterarQuestoesRoutes);
->>>>>>> 4e897a428a60feec0d0fc52f5f1f844a974df88a
+
 
 // Inicialização do servidor
 http.createServer(app).listen(8080, () => {
