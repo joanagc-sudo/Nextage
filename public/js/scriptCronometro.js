@@ -106,12 +106,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             intervalo = setInterval(atualizarTempo, 200);
 
-            iconeIniciarPausar.textContent = "Ⅱ";
+            iconeIniciarPausar.innerHTML = '<i class="bi bi-pause-fill"></i>';
             iniciarPausar.setAttribute(
                 "aria-label", "Pausar cronômetro"
             );
 
-            estadoCronometro.textContent = "Hora de focar nos estudos!";
+            estadoCronometro.textContent = "Hora de focar nos estudos";
             marcarVolta.disabled = false;
         }
 
@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
         marcacoes = [];
 
         tempoCronometro.textContent = "00:00:00";
-        iconeIniciarPausar.textContent = "▶";
+        iconeIniciarPausar.innerHTML = '<i class="bi bi-play-fill"></i>';
 
         iniciarPausar.setAttribute(
             "aria-label", "Iniciar cronômetro"
