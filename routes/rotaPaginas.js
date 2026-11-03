@@ -17,6 +17,13 @@ router.get("/tela-inicial", (req, res) => {
     });
 });
 
+//Atalho de metodos de tudo
+router.get("/metodos-estudo", (req, res) => {
+    res.render("estudante/metodosEstudo", {
+        layout: "/layouts/main"
+    });
+});
+
 // Geografia: tela padrão de materiais
 router.get("/materiais", (req, res) => {
     res.render("indexMateriais", {

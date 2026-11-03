@@ -1,0 +1,183 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #9DC8CF;
+    font-family: 'Momo Trust Display', sans-serif;
+    color: #32818F;
+    font-weight: normal;
+}
+.pagina-metodos {
+    width: 90%;
+    max-width: 1100px;
+    margin: 35px auto;
+    padding-bottom: 30px;
+    color: #32818F;
+}
+
+.introducao-metodos {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.introducao-metodos h1 {
+    color: #08758A;
+    font-size: 30px;
+    font-weight: normal;
+    margin-bottom: 12px;
+}
+
+.introducao-metodos p {
+    max-width: 650px;
+    margin: auto;
+    color: #367F8A;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.lista-metodos {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.card-metodo {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 24px;
+    background-color: #FFFDF7;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 65, 80, 0.07);
+    transition: transform 0.2s ease;
+}
+
+.card-metodo:hover {
+    transform: translateY(-3px);
+}
+
+.icone-metodo {
+    width: 58px;
+    height: 58px;
+    min-width: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #DDF0F2;
+    color: #08788A;
+    border-radius: 50%;
+    font-size: 27px;
+}
+
+.conteudo-metodo {
+    flex: 1;
+}
+
+.conteudo-metodo h2 {
+    color: #08758A;
+    font-size: 19px;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+.conteudo-metodo p {
+    color: #568A92;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.conteudo-metodo h3 {
+    color: #32818F;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.conteudo-metodo ul {
+    padding-left: 20px;
+    color: #568A92;
+}
+
+.conteudo-metodo li {
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.dica-metodos {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 25px;
+    padding: 20px;
+    background-color: #DDF0F2;
+    border-radius: 12px;
+    color: #08758A;
+}
+
+.dica-metodos i {
+    font-size: 28px;
+}
+
+.dica-metodos p {
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.voltar-inicio {
+    text-align: center;
+    margin-top: 28px;
+}
+
+.voltar-inicio a {
+    display: inline-block;
+    padding: 10px 23px;
+    background-color: #08758A;
+    color: white;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.voltar-inicio a:hover {
+    background-color: #075564;
+    color: white;
+}
+
+@media (max-width: 600px) {
+
+    .pagina-metodos {
+        width: 94%;
+        margin-top: 25px;
+    }
+
+    .introducao-metodos h1 {
+        font-size: 25px;
+    }
+
+    .card-metodo {
+        padding: 17px;
+        gap: 12px;
+    }
+
+    .icone-metodo {
+        width: 43px;
+        height: 43px;
+        min-width: 43px;
+        font-size: 21px;
+    }
+
+    .conteudo-metodo h2 {
+        font-size: 16px;
+    }
+
+    .conteudo-metodo p,
+    .conteudo-metodo li {
+        font-size: 12px;
+    }
+}
