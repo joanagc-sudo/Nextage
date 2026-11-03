@@ -4,7 +4,7 @@ const conn = mysql.createPool({
     host: 'localhost',
     user: 'root',
     //password: 'admin',
-    password: '1234',
+    password: 'admin',
     database: 'nextage',
     waitForConnections: true,
     connectionLimit: 10
