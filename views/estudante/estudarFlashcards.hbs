@@ -1,0 +1,206 @@
+
+<link rel="stylesheet" href="/styleFlashcards.css">
+
+<div class="pagina-flashcards">
+    <div class="flashcards-container">
+
+        <a href="/flashcards" class="flashcards-voltar">
+            <i class="bi bi-arrow-left"></i>
+            Voltar para flashcards
+        </a>
+
+        <div class="flashcards-topo">
+            <div class="flashcards-titulo">
+                <span class="flashcards-subtitulo">
+                    <i class="bi bi-stars"></i>
+                    Hora de revisar!
+                </span>
+
+                <h1>{{nomeConteudo}}</h1>
+                <p>{{nomeDisciplina}} · Teste seus conhecimentos.</p>
+            </div>
+
+            <div class="flashcards-icone-topo">
+                <i class="bi bi-card-heading"></i>
+            </div>
+        </div>
+
+        <section class="estudo-flashcards">
+
+            <div class="estudo-info">
+                <span id="contadorFlashcards">Cartão 1 de {{flashcards.length}}</span>
+                <span><i class="bi bi-lightbulb"></i> Clique no cartão para virar</span>
+            </div>
+
+            <div class="progresso-fundo">
+                <div id="barraProgresso" class="progresso-preenchido"></div>
+            </div>
+
+            <div class="cartoes-area">
+
+                {{#each flashcards}}
+                <div class="cartao-estudo {{#if @first}}ativo{{/if}}">
+
+                    <div class="cartao-inner">
+
+                        <div class="cartao-face cartao-frente">
+                            <span class="cartao-etiqueta">
+                                <i class="bi bi-question-circle"></i>
+                                PERGUNTA
+                            </span>
+
+                            <div class="cartao-texto">
+                                {{pergunta}}
+                            </div>
+
+                            <span class="cartao-instrucao">
+                                Clique para revelar a resposta
+                                <i class="bi bi-arrow-repeat"></i>
+                            </span>
+                        </div>
+
+                        <div class="cartao-face cartao-verso">
+                            <span class="cartao-etiqueta">
+                                <i class="bi bi-check-circle"></i>
+                                RESPOSTA
+                            </span>
+
+                            <div class="cartao-texto">
+                                {{resposta}}
+                            </div>
+
+                            <span class="cartao-instrucao">
+                                Clique para voltar à pergunta
+                                <i class="bi bi-arrow-repeat"></i>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+                {{/each}}
+
+            </div>
+
+            <div class="estudo-botoes" id="botoesNavegacao">
+
+                <button type="button" id="btnAnterior" class="botao-estudo botao-secundario" disabled>
+                    <i class="bi bi-arrow-left"></i>
+                    Anterior
+                </button>
+
+                <button type="button" id="btnProximo" class="botao-estudo botao-principal">
+                    Próximo
+                    <i class="bi bi-arrow-right"></i>
+                </button>
+
+            </div>
+
+            <div class="estudo-concluido" id="mensagemConclusao" style="display: none;">
+                <div class="conclusao-icone">
+                    <i class="bi bi-trophy"></i>
+                </div>
+
+                <h2>Parabéns!</h2>
+                <p>Você chegou ao final dos flashcards deste conteúdo. Continue revisando para fortalecer seus conhecimentos!</p>
+
+                <button type="button" id="btnRevisar" class="botao-estudo botao-principal">
+                    <i class="bi bi-arrow-repeat"></i>
+                    Revisar novamente
+                </button>
+
+                <a href="/flashcards" class="link-voltar-estudo">
+                    Voltar para disciplinas
+                </a>
+            </div>
+
+        </section>
+
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const cartoes = Array.from(document.querySelectorAll(".cartao-estudo"));
+
+    const contador = document.getElementById("contadorFlashcards");
+    const barra = document.getElementById("barraProgresso");
+
+    const btnAnterior = document.getElementById("btnAnterior");
+    const btnProximo = document.getElementById("btnProximo");
+    const btnRevisar = document.getElementById("btnRevisar");
+
+    const botoesNavegacao = document.getElementById("botoesNavegacao");
+    const mensagemConclusao = document.getElementById("mensagemConclusao");
+
+    let atual = 0;
+
+    if (cartoes.length === 0) {
+        return;
+    }
+
+    function atualizarCartao() {
+
+        cartoes.forEach((cartao, indice) => {
+            cartao.classList.toggle("ativo", indice === atual);
+            cartao.classList.remove("virado");
+        });
+
+        contador.textContent = `Cartão ${atual + 1} de ${cartoes.length}`;
+
+        const progresso = ((atual + 1) / cartoes.length) * 100;
+        barra.style.width = `${progresso}%`;
+
+        btnAnterior.disabled = atual === 0;
+
+        btnProximo.innerHTML = atual === cartoes.length - 1
+            ? 'Concluir <i class="bi bi-check-lg"></i>'
+            : 'Próximo <i class="bi bi-arrow-right"></i>';
+
+    }
+
+    cartoes.forEach(cartao => {
+        cartao.addEventListener("click", function () {
+            cartao.classList.toggle("virado");
+        });
+    });
+
+    btnAnterior.addEventListener("click", function () {
+        if (atual > 0) {
+            atual--;
+            atualizarCartao();
+        }
+    });
+
+    btnProximo.addEventListener("click", function () {
+
+        if (atual < cartoes.length - 1) {
+            atual++;
+            atualizarCartao();
+        } else {
+            botoesNavegacao.style.display = "none";
+            document.querySelector(".cartoes-area").style.display = "none";
+            document.querySelector(".estudo-info").style.display = "none";
+            barra.style.width = "100%";
+            mensagemConclusao.style.display = "block";
+        }
+
+    });
+
+    btnRevisar.addEventListener("click", function () {
+
+        atual = 0;
+
+        mensagemConclusao.style.display = "none";
+        botoesNavegacao.style.display = "flex";
+        document.querySelector(".cartoes-area").style.display = "block";
+        document.querySelector(".estudo-info").style.display = "flex";
+
+        atualizarCartao();
+
+    });
+
+    atualizarCartao();
+
+});
+</script>

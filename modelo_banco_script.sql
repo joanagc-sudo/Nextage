@@ -471,3 +471,31 @@ ADD UNIQUE INDEX uk_cronograma_usuario (id_usuario);
 
 ALTER TABLE questoes
 ADD COLUMN tipo_imagem VARCHAR(100) NULL;
+
+CREATE TABLE flashcards (
+    id_flashcard INT NOT NULL AUTO_INCREMENT,
+    id_conteudo INT NOT NULL,
+    pergunta TEXT NOT NULL,
+    resposta TEXT NOT NULL,
+
+    PRIMARY KEY (id_flashcard),
+
+    CONSTRAINT fk_flashcard_conteudo
+    FOREIGN KEY (id_conteudo)
+    REFERENCES conteudos(id_conteudo)
+);
+USE nextage;
+
+CREATE TABLE IF NOT EXISTS lembretes (
+    id_lembrete INT NOT NULL AUTO_INCREMENT,
+    id_usuario INT NOT NULL,
+    texto VARCHAR(500) NOT NULL,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (id_lembrete),
+
+    CONSTRAINT fk_lembretes_usuario
+    FOREIGN KEY (id_usuario)
+    REFERENCES usuarios_administradores_estudantes(id_usuario)
+    ON DELETE CASCADE
+);
