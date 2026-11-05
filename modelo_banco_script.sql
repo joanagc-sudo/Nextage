@@ -472,30 +472,73 @@ ADD UNIQUE INDEX uk_cronograma_usuario (id_usuario);
 ALTER TABLE questoes
 ADD COLUMN tipo_imagem VARCHAR(100) NULL;
 
-CREATE TABLE flashcards (
-    id_flashcard INT NOT NULL AUTO_INCREMENT,
-    id_conteudo INT NOT NULL,
-    pergunta TEXT NOT NULL,
-    resposta TEXT NOT NULL,
+-- -----------------------------------------------------
+-- ABA 2: CONSULTA E INSERÇÃO DE DISCIPLINAS
+-- -----------------------------------------------------
 
-    PRIMARY KEY (id_flashcard),
-
-    CONSTRAINT fk_flashcard_conteudo
-    FOREIGN KEY (id_conteudo)
-    REFERENCES conteudos(id_conteudo)
-);
 USE nextage;
 
-CREATE TABLE IF NOT EXISTS lembretes (
-    id_lembrete INT NOT NULL AUTO_INCREMENT,
-    id_usuario INT NOT NULL,
-    texto VARCHAR(500) NOT NULL,
-    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+SELECT * FROM disciplinas
+ORDER BY id_disciplina;
 
-    PRIMARY KEY (id_lembrete),
+USE nextage;
 
-    CONSTRAINT fk_lembretes_usuario
-    FOREIGN KEY (id_usuario)
-    REFERENCES usuarios_administradores_estudantes(id_usuario)
-    ON DELETE CASCADE
+INSERT INTO disciplinas (id_disciplina, nome) VALUES
+(4, 'Geografia'),
+(5, 'Espanhol'),
+(6, 'Física'),
+(7, 'Filosofia'),
+(8, 'História'),
+(9, 'Inglês'),
+(10, 'Química'),
+(11, 'Sociologia');
+
+
+-- -----------------------------------------------------
+-- ABA 3: DISCIPLINAS E SUAS PÁGINAS
+-- -----------------------------------------------------
+
+USE nextage;
+
+CREATE TABLE IF NOT EXISTS disciplinas_paginas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_disciplina INT NOT NULL UNIQUE,
+    rota VARCHAR(100) NOT NULL UNIQUE,
+
+    CONSTRAINT fk_disciplina_pagina
+        FOREIGN KEY (id_disciplina)
+        REFERENCES disciplinas(id_disciplina)
 );
+
+INSERT INTO disciplinas_paginas (id_disciplina, rota) VALUES
+(1, '/matematica'),
+(2, '/portugues'),
+(3, '/biologia'),
+(4, '/materiais'),
+(5, '/espanhol'),
+(6, '/fisica'),
+(7, '/filosofia'),
+(8, '/historia'),
+(9, '/ingles'),
+(10, '/quimica'),
+(11, '/sociologia');
+
+SELECT
+    d.id_disciplina,
+    d.nome,
+    dp.rota
+FROM disciplinas d
+INNER JOIN disciplinas_paginas dp
+    ON d.id_disciplina = dp.id_disciplina
+ORDER BY d.id_disciplina;
+
+
+-- -----------------------------------------------------
+-- ABA 4: INFORMAÇÕES DO SERVIDOR
+-- -----------------------------------------------------
+
+SELECT
+    @@hostname AS servidor,
+    @@port AS porta,
+    USER() AS usuario_conectado,
+    CURRENT_USER() AS usuario_autenticado;
