@@ -50,7 +50,7 @@ router.get(
             `);
 
             res.render("administrador/flashcards", {
-                layout: "layouts/mainAdmin",
+                layout: "/layouts/mainAdmin",
                 admin: req.session.admin,
                 flashcards
             });
