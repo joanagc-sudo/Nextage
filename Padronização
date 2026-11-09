@@ -7,6 +7,14 @@ Animação de aumentar escala: scale(1.05); - transform 0.2s ease;
 
 
 HTML
+
+senha admin
+admin@gmail.com 
+123
+
+node Administrador.js -- inicializar no banco
+
+
 <!--Container do carrossel-->
 <div class="container-slider">
 
