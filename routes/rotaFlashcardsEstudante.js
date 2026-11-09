@@ -92,7 +92,7 @@ router.get(
             `, [idDisciplina]);
 
             res.render("estudante/flashcards", {
-                layout: "layouts/main",
+                layout: "layouts/mainAdmin",
                 disciplinas: null,
                 conteudos,
                 nomeDisciplina: disciplinas[0].nome

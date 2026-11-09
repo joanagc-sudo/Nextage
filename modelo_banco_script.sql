@@ -532,6 +532,7 @@ INNER JOIN disciplinas_paginas dp
     ON d.id_disciplina = dp.id_disciplina
 ORDER BY d.id_disciplina;
 
+ADD COLUMN tipo_imagem VARCHAR(100) NULL;
 
 -- -----------------------------------------------------
 -- ABA 4: INFORMAÇÕES DO SERVIDOR
@@ -542,3 +543,18 @@ SELECT
     @@port AS porta,
     USER() AS usuario_conectado,
     CURRENT_USER() AS usuario_autenticado;
+
+    
+
+CREATE TABLE flashcards (
+    id_flashcard INT NOT NULL AUTO_INCREMENT,
+    id_conteudo INT NOT NULL,
+    pergunta TEXT NOT NULL,
+    resposta TEXT NOT NULL,
+
+    PRIMARY KEY (id_flashcard),
+
+    CONSTRAINT fk_flashcard_conteudo
+    FOREIGN KEY (id_conteudo)
+    REFERENCES conteudos(id_conteudo)
+);
