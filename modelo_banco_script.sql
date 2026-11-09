@@ -557,3 +557,14 @@ CREATE TABLE flashcards (
     FOREIGN KEY (id_conteudo)
     REFERENCES conteudos(id_conteudo)
 );
+
+CREATE TABLE lembretes (
+    id_lembrete INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    texto VARCHAR(255) NOT NULL,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (id_usuario)
+    REFERENCES usuarios_administradores_estudantes(id_usuario)
+    ON DELETE CASCADE
+);
