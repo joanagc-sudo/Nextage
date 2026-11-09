@@ -5,8 +5,8 @@ const conn = require("./database");
 async function criarAdministrador() {
     try {
         const nome = "Administrador Nextage";
-        const email = "admin@nextage.com";
-        const senha = "Nextage@2026";
+        const email = "admin@gmail.com";
+        const senha = "123";
         const dataNascimento = "2000-01-01";
         const tipo_usuario = 1;
 

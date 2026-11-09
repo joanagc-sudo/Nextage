@@ -545,7 +545,6 @@ SELECT
     CURRENT_USER() AS usuario_autenticado;
 
     
-
 CREATE TABLE flashcards (
     id_flashcard INT NOT NULL AUTO_INCREMENT,
     id_conteudo INT NOT NULL,
