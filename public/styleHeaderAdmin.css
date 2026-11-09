@@ -1,7 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #D8EDF2;
+    font-family: 'Momo Trust Display', sans-serif;
+    color: #428591;
+}
+
 .navbar {
     width: 21%;
     height: 54px;
-    min-width: 240;
+    min-width: 350px;
     margin: 16px 40px 0 auto;
     padding: 0 18px;
     background-color: #FFFDF7;
