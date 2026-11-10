@@ -6,20 +6,11 @@
     box-sizing: border-box;
 }
 
-html, body {
-    min-height: 100%;
-}
-
 body {
-    background-color: #9bc9d2;
-    min-height: 100vh;
+    background-color: #9DC8CF;
     font-family: 'Momo Trust Display', sans-serif;
-    font-weight: normal;
-
-    display: flex;
-    flex-direction: column;
+    color: #428591;
 }
-
 
 .pagina-cronograma {
     width: 90%;
