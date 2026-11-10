@@ -314,6 +314,7 @@ USE `nextage`;
 INSERT INTO `nextage`.`usuarios_administradores_estudantes` (`id_usuario`, `nome`, `email`, `senha`, `data_nascimento`, `tipo_usuario`) VALUES (1, 'João Silva', 'joao@email.com', '123456', '2010-12-12', 0);
 INSERT INTO `nextage`.`usuarios_administradores_estudantes` (`id_usuario`, `nome`, `email`, `senha`, `data_nascimento`, `tipo_usuario`) VALUES (2, 'Maria Souza', 'maria@email.com', '654321', '2010-12-12', 0);
 INSERT INTO `nextage`.`usuarios_administradores_estudantes` (`id_usuario`, `nome`, `email`, `senha`, `data_nascimento`, `tipo_usuario`) VALUES (3, 'Carlos Lima', 'carlos@email.com', 'abcdef', '2010-12-12', 0);
+INSERT INTO `nextage`.`usuarios_administradores_estudantes` (`id_usuario`, `nome`, `email`, `senha`, `data_nascimento`, `tipo_usuario`) VALUES (4, 'Nextage', 'admin@gmail.com', '$2b$10$Yel.WvtJmhmtAI6Z93cyqOF0HPlw4if72pLjbd3FKZCYzQeD7K3jW', '2010-12-12', 1);
 
 COMMIT;
 

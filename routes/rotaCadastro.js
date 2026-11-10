@@ -72,6 +72,8 @@
                 await bcrypt.hash(senha, 10);
 
 
+                await conn.query("SET autocommit = 1");
+
             const [resultado] =
                 await conn.query(
                     `
