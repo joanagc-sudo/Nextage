@@ -534,9 +534,72 @@ ORDER BY d.id_disciplina;
 
 ADD COLUMN tipo_imagem VARCHAR(100) NULL;
 
--- -----------------------------------------------------
--- ABA 4: INFORMAÇÕES DO SERVIDOR
--- -----------------------------------------------------
+INSERT INTO conteudos (id_disciplina, nome) VALUES
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Geografia'), 'Conceitos da Geografia'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Geografia'), 'Terra'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Geografia'), 'Cartografia'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Geografia'), 'Fuso Horário'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Geografia'), 'Espaço Brasileiro'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Geografia'), 'Geologia'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Geografia'), 'Geomorfologia'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Geografia'), 'Minérios e Minerais'),
+
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Matemática Básica'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Conjuntos'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Funções'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Módulo'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Exponencial e Logaritmo'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Geometria Plana'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Trigonometria'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Matrizes'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Sistemas Lineares'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Geometria Espacial'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Sequências e Progressões'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Análise Combinatória'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Probabilidade'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Estatística'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Geometria Analítica'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Números Complexos'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Polinômios'),
+
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Introdução à Língua Portuguesa'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Classes Gramaticais'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Verbos'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Pronomes'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Conjunções'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Análise Sintática'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Concordância'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Regência e Crase'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Orações'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Vírgula'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Morfologia das Palavras'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Fonologia e Ortografia'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Gramática e Interpretação'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Funções da Linguagem'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Figuras de Linguagem'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Linguagem Culta e Coloquial'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Estratégias de Interpretação'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Texto e Contexto'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Gêneros Textuais'),
+
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
+((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais');
+
 
 SELECT
     @@hostname AS servidor,
