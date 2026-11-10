@@ -86,6 +86,39 @@ router.get("/api/disciplinas-paginas", async (req, res) => {
     }
 
 });
+
+
+// Buscar conteúdos de uma disciplina
+router.get("/api/conteudos/:id_disciplina", async (req, res) => {
+    try {
+        const idDisciplina = Number(req.params.id_disciplina);
+
+        if (!Number.isInteger(idDisciplina) || idDisciplina <= 0) {
+            return res.status(400).json({
+                erro: "ID da disciplina inválido."
+            });
+        }
+
+        const [conteudos] = await conn.query(`
+            SELECT
+                id_conteudo,
+                nome
+            FROM conteudos
+            WHERE id_disciplina = ?
+            ORDER BY id_conteudo ASC
+        `, [idDisciplina]);
+
+        res.json(conteudos);
+
+    } catch (erro) {
+        console.error("ERRO AO BUSCAR CONTEÚDOS:", erro);
+
+        res.status(500).json({
+            erro: "Erro ao buscar conteúdos no banco de dados."
+        });
+    }
+});
+
 // Tela de disciplinas
 router.get("/disciplinas", (req, res) => {
     res.render("indexDisciplinas", {

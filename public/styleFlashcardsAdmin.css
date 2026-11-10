@@ -1,12 +1,25 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #D8EDF2;
+    font-family: 'Momo Trust Display', sans-serif;
+    color: #428591;
+}
+
 .gerenciar-flashcards {
     min-height: 100vh;
     background: #D8EDF2;
     padding: 45px 20px;
     font-family: 'Momo Trust Display', sans-serif;
     box-sizing: border-box;
+    min-height: 84vh;
 }
 
 .flashcards-container {
@@ -219,4 +232,32 @@
     .form-flashcard {
         padding: 22px;
     }
+}
+.voltar-admin {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #0C6878;
+    color: #FFFDF7;
+
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 23px;
+
+    transition: 0.2s ease;
+    z-index: 10;
+}
+
+.voltar-admin:hover {
+    background-color: #095563;
+    color: #FFFDF7;
+    transform: scale(1.08);
 }

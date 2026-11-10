@@ -71,7 +71,7 @@ router.get(
             const conteudos = await buscarConteudos();
 
             res.render("administrador/formFlashcard", {
-                layout: "layouts/main",
+                layout: "layouts/mainAdmin",
                 admin: req.session.admin,
                 conteudos,
                 flashcard: null,
@@ -146,7 +146,7 @@ router.get(
             }));
 
             res.render("administrador/formFlashcard", {
-                layout: "layouts/main",
+                layout: "layouts/mainAdmin",
                 admin: req.session.admin,
                 flashcard,
                 conteudos: conteudosComSelecao,
