@@ -24,81 +24,103 @@ document.addEventListener("DOMContentLoaded", function () {
         return resultado;
     }
 
-    // controla a abertura e o fechamento do seletor de disciplinas
-    const seletorDisciplina = document.querySelector(".seletorDisciplina");
-    const btnDisciplina = document.getElementById("btnDisciplina");
-    const disciplinas = document.querySelectorAll("#listaDisciplinas button");
+   
+    // SELETOR DE DISCIPLINAS
 
-    if (btnDisciplina && seletorDisciplina) {
-        btnDisciplina.addEventListener("click", function (event) {
-            event.stopPropagation();
-            seletorDisciplina.classList.toggle("aberto");
-        });
-    }
+const seletorDisciplina = document.querySelector(".seletorDisciplina");
+const btnDisciplina = document.getElementById("btnDisciplina");
+const listaDisciplinas = document.getElementById("listaDisciplinas");
 
-    // busca as rotas das disciplinas cadastradas
-    let rotasDisciplinas = {};
-    let erroCarregamentoRotas = false;
+// Abrir e fechar o seletor
+if (btnDisciplina && seletorDisciplina) {
 
-    const carregarRotasDisciplinas = fetch("/api/disciplinas-paginas")
-        .then(function (resposta) {
+    btnDisciplina.addEventListener("click", function (event) {
 
-            if (!resposta.ok) {
-                throw new Error("Erro ao buscar as disciplinas.");
-            }
+        event.stopPropagation();
 
-            return resposta.json();
-        })
-        .then(function (dados) {
-
-            dados.forEach(function (disciplina) {
-                rotasDisciplinas[disciplina.nome] = disciplina.rota;
-            });
-
-        })
-        .catch(function (erro) {
-
-            erroCarregamentoRotas = true;
-            console.error("Erro ao carregar as disciplinas:", erro);
-
-        });
-
-    // direciona o usuário para a página da disciplina escolhida
-    disciplinas.forEach(function (botao) {
-
-        botao.addEventListener("click", async function () {
-
-            await carregarRotasDisciplinas;
-
-            if (erroCarregamentoRotas) {
-                alert("Não foi possível carregar as disciplinas.");
-                return;
-            }
-
-            const disciplina = botao.dataset.disciplina;
-            const rota = rotasDisciplinas[disciplina];
-
-            if (!rota) {
-                console.error("Rota não encontrada para:", disciplina);
-                return;
-            }
-
-            window.location.href = rota;
-        });
+        seletorDisciplina.classList.toggle("aberto");
 
     });
 
-    // fecha o seletor quando o usuário clica fora dele
-    document.addEventListener("click", function (event) {
+}
 
-        if (
-            seletorDisciplina &&
-            !seletorDisciplina.contains(event.target)
-        ) {
-            seletorDisciplina.classList.remove("aberto");
+// Buscar disciplinas do banco de dados
+async function carregarDisciplinas() {
+
+    if (!listaDisciplinas) return;
+
+    try {
+
+        const resposta = await fetch("/api/disciplinas-paginas");
+
+        if (!resposta.ok) {
+            throw new Error("Erro ao consultar as disciplinas.");
+        }
+
+        const disciplinas = await resposta.json();
+
+        listaDisciplinas.innerHTML = "";
+
+        disciplinas.forEach(function (disciplina) {
+
+            const botao = document.createElement("button");
+
+            botao.type = "button";
+            botao.textContent = disciplina.nome;
+
+            botao.dataset.disciplina = disciplina.nome;
+            botao.dataset.rota = disciplina.rota;
+
+            listaDisciplinas.appendChild(botao);
+
+        });
+
+    } catch (erro) {
+
+        console.error("Erro ao carregar disciplinas:", erro);
+
+    }
+
+}
+
+carregarDisciplinas();
+
+
+// Redirecionar ao selecionar uma disciplina
+if (listaDisciplinas) {
+
+    listaDisciplinas.addEventListener("click", function (event) {
+
+        const botao = event.target.closest("button[data-rota]");
+
+        if (!botao) return;
+
+        const rota = botao.dataset.rota;
+
+        if (rota) {
+
+            window.location.href = rota;
+
         }
 
     });
+
+}
+
+
+// Fechar o seletor ao clicar fora dele
+document.addEventListener("click", function (event) {
+
+    if (
+        seletorDisciplina &&
+        !seletorDisciplina.contains(event.target)
+    ) {
+
+        seletorDisciplina.classList.remove("aberto");
+
+    }
+
+});
 
     // identifica a disciplina indicada na url
     const parametrosURL = new URLSearchParams(window.location.search);
