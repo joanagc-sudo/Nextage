@@ -17,6 +17,7 @@ body {
     background-color: #D8EDF2;
     padding: 55px 7%;
     font-family: "Momo Trust Display", sans-serif;
+    min-height: 84vh;
 }
 
 .flashcards-container {
