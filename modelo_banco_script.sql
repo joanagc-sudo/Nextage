@@ -632,3 +632,34 @@ CREATE TABLE lembretes (
     REFERENCES usuarios_administradores_estudantes(id_usuario)
     ON DELETE CASCADE
 );
+USE nextage;
+
+-- Criar tabela de flashcards
+CREATE TABLE IF NOT EXISTS flashcards (
+    id_flashcard INT NOT NULL AUTO_INCREMENT,
+    id_conteudo INT NOT NULL,
+    pergunta TEXT NOT NULL,
+    resposta TEXT NOT NULL,
+
+    PRIMARY KEY (id_flashcard),
+
+    FOREIGN KEY (id_conteudo)
+    REFERENCES conteudos(id_conteudo)
+);
+
+-- Criar tabela de lembretes
+CREATE TABLE IF NOT EXISTS lembretes (
+    id_lembrete INT NOT NULL AUTO_INCREMENT,
+    id_usuario INT NOT NULL,
+    texto VARCHAR(255) NOT NULL,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (id_lembrete),
+
+    FOREIGN KEY (id_usuario)
+    REFERENCES usuarios_administradores_estudantes(id_usuario)
+    ON DELETE CASCADE
+);
+
+-- Conferir as tabelas
+SHOW TABLES;
