@@ -65,7 +65,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `nextage`.`materiais`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `nextage`.`materiais` (
-  `id_material` INT NOT NULL,
+  `id_material` INT NOT NULL AUTO_INCREMENT,
   `id_usuario` INT NOT NULL,
   `titulo` VARCHAR(200) NOT NULL,
   `material_arquivo` VARCHAR(255) NULL,
@@ -314,7 +314,6 @@ USE `nextage`;
 INSERT INTO `nextage`.`usuarios_administradores_estudantes` (`id_usuario`, `nome`, `email`, `senha`, `data_nascimento`, `tipo_usuario`) VALUES (1, 'João Silva', 'joao@email.com', '123456', '2010-12-12', 0);
 INSERT INTO `nextage`.`usuarios_administradores_estudantes` (`id_usuario`, `nome`, `email`, `senha`, `data_nascimento`, `tipo_usuario`) VALUES (2, 'Maria Souza', 'maria@email.com', '654321', '2010-12-12', 0);
 INSERT INTO `nextage`.`usuarios_administradores_estudantes` (`id_usuario`, `nome`, `email`, `senha`, `data_nascimento`, `tipo_usuario`) VALUES (3, 'Carlos Lima', 'carlos@email.com', 'abcdef', '2010-12-12', 0);
-INSERT INTO `nextage`.`usuarios_administradores_estudantes` (`id_usuario`, `nome`, `email`, `senha`, `data_nascimento`, `tipo_usuario`) VALUES (4, 'Nextage', 'admin@gmail.com', '$2b$10$Yel.WvtJmhmtAI6Z93cyqOF0HPlw4if72pLjbd3FKZCYzQeD7K3jW', '2010-12-12', 1);
 
 COMMIT;
 
@@ -533,74 +532,9 @@ INNER JOIN disciplinas_paginas dp
     ON d.id_disciplina = dp.id_disciplina
 ORDER BY d.id_disciplina;
 
-ADD COLUMN tipo_imagem VARCHAR(100) NULL;
-
-INSERT INTO conteudos (id_disciplina, nome) VALUES
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Geografia'), 'Conceitos da Geografia'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Geografia'), 'Terra'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Geografia'), 'Cartografia'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Geografia'), 'Fuso Horário'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Geografia'), 'Espaço Brasileiro'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Geografia'), 'Geologia'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Geografia'), 'Geomorfologia'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Geografia'), 'Minérios e Minerais'),
-
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Matemática Básica'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Conjuntos'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Funções'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Módulo'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Exponencial e Logaritmo'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Geometria Plana'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Trigonometria'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Matrizes'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Sistemas Lineares'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Geometria Espacial'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Sequências e Progressões'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Análise Combinatória'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Probabilidade'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Estatística'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Geometria Analítica'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Números Complexos'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Matemática'), 'Polinômios'),
-
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Introdução à Língua Portuguesa'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Classes Gramaticais'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Verbos'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Pronomes'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Conjunções'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Análise Sintática'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Concordância'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Regência e Crase'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Orações'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Vírgula'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Morfologia das Palavras'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Fonologia e Ortografia'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Gramática e Interpretação'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Funções da Linguagem'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Figuras de Linguagem'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Linguagem Culta e Coloquial'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Estratégias de Interpretação'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Texto e Contexto'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Português'), 'Gêneros Textuais'),
-
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais'),
-((SELECT id_disciplina FROM disciplinas WHERE nome = 'Biologia'), 'Gêneros Textuais');
-
+-- -----------------------------------------------------
+-- ABA 4: INFORMAÇÕES DO SERVIDOR
+-- -----------------------------------------------------
 
 SELECT
     @@hostname AS servidor,
@@ -632,34 +566,12 @@ CREATE TABLE lembretes (
     REFERENCES usuarios_administradores_estudantes(id_usuario)
     ON DELETE CASCADE
 );
+
+-- -----------------------------------------------------
+-- ABA 5: CONFIGURAÇÃO DE MATERIAIS
+-- -----------------------------------------------------
+
 USE nextage;
 
--- Criar tabela de flashcards
-CREATE TABLE IF NOT EXISTS flashcards (
-    id_flashcard INT NOT NULL AUTO_INCREMENT,
-    id_conteudo INT NOT NULL,
-    pergunta TEXT NOT NULL,
-    resposta TEXT NOT NULL,
-
-    PRIMARY KEY (id_flashcard),
-
-    FOREIGN KEY (id_conteudo)
-    REFERENCES conteudos(id_conteudo)
-);
-
--- Criar tabela de lembretes
-CREATE TABLE IF NOT EXISTS lembretes (
-    id_lembrete INT NOT NULL AUTO_INCREMENT,
-    id_usuario INT NOT NULL,
-    texto VARCHAR(255) NOT NULL,
-    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    PRIMARY KEY (id_lembrete),
-
-    FOREIGN KEY (id_usuario)
-    REFERENCES usuarios_administradores_estudantes(id_usuario)
-    ON DELETE CASCADE
-);
-
--- Conferir as tabelas
-SHOW TABLES;
+ALTER TABLE materiais
+MODIFY COLUMN id_material INT NOT NULL AUTO_INCREMENT;

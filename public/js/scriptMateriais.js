@@ -531,29 +531,30 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // identifica o card pela posição real do clique na tela
-    document.addEventListener("click", function (event) {
-
-    const elementos = document.elementsFromPoint(
-        event.clientX,
-        event.clientY
+    
+    // Adiciona o clique diretamente em cada card
+    const cards = document.querySelectorAll(
+        ".atalhos .icones [data-materia]"
     );
 
-    const assunto = elementos
-        .map(function (elemento) {
-            return elemento.closest("[data-materia]");
-        })
-        .find(function (elemento) {
-            return elemento && elemento.closest(".atalhos");
+    cards.forEach(function (card) {
+
+        card.addEventListener("click", function (event) {
+
+            // Evita que o clique em um card seja confundido
+            // com o clique em outro elemento
+            event.stopPropagation();
+
+            const materiaSelecionada = card.dataset.materia;
+
+            console.log("CARD CLICADO:", materiaSelecionada);
+
+            abrirModalMateriais(materiaSelecionada);
+
         });
 
-    if (!assunto) return;
+    });
 
-    console.log("CARD IDENTIFICADO:", assunto.dataset.materia);
-
-    abrirModalMateriais(assunto.dataset.materia);
-
-}, true);
 
     // fecha o modal de materiais compartilhados
     function fecharModal() {

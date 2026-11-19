@@ -55,31 +55,55 @@ Object.entries(disciplinas).forEach(([rota, arquivo]) => {
     });
 });
 
+
 // Buscar disciplinas cadastradas no MySQL
 router.get("/api/disciplinas-paginas", async (req, res) => {
 
     try {
 
         const [disciplinas] = await conn.query(`
-            SELECT
-                d.id_disciplina,
-                d.nome,
-                dp.rota
-            FROM disciplinas d
-            INNER JOIN disciplinas_paginas dp
-                ON d.id_disciplina = dp.id_disciplina
-            ORDER BY d.nome ASC
+            SELECT id_disciplina, nome
+            FROM disciplinas
+            ORDER BY nome ASC
         `);
 
-        console.log("DISCIPLINAS ENCONTRADAS:", disciplinas);
+        // Relaciona cada disciplina à sua página
+        const rotas = {
+            "geografia": "/materiais",
+            "biologia": "/biologia",
+            "espanhol": "/espanhol",
+            "fisica": "/fisica",
+            "filosofia": "/filosofia",
+            "historia": "/historia",
+            "ingles": "/ingles",
+            "matematica": "/matematica",
+            "portugues": "/portugues",
+            "quimica": "/quimica",
+            "sociologia": "/sociologia"
+        };
 
-        res.json(disciplinas);
+        const resultado = disciplinas.map(disciplina => {
+
+            const nomeNormalizado = disciplina.nome
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .toLowerCase()
+                .trim();
+
+            return {
+                ...disciplina,
+                rota: rotas[nomeNormalizado] || null
+            };
+
+        }).filter(disciplina => disciplina.rota);
+
+        return res.json(resultado);
 
     } catch (erro) {
 
         console.error("ERRO AO BUSCAR DISCIPLINAS:", erro);
 
-        res.status(500).json({
+        return res.status(500).json({
             erro: "Erro ao buscar disciplinas no banco de dados."
         });
 
