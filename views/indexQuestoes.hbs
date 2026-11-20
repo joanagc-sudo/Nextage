@@ -2,143 +2,135 @@
 <link rel="stylesheet" href="styleQuestoes.css">
 <link rel="stylesheet" href="/StyleCronometro.css">
 
+<div class="container">
 
-<div class="filtro">
-    <form method="post" action="/filtar">
-        <h1>Filtrar Questões</h1>
+    <h1>Questões</h1>
+    <p>Encontre questões, teste seus conhecimentos e aprimore seu aprendizado.</p>
+    <div class="filtro">
+        <form method="post" action="/filtar">
+            <h3>Filtro</h3>
 
-        <div class="containerFiltro">
+            <div class="containerFiltro">
 
-            <form id="filtrarQuestoes">
+                <form id="filtrarQuestoes">
 
-                <!-- CAMPOS CRIADOS PELO JAVASCRIPT -->
-                <div id="containerFiltros"></div>
+                    <!-- CAMPOS CRIADOS PELO JAVASCRIPT -->
+                    <div id="containerFiltros"></div>
 
-            </form>
+                </form>
 
-            <button type="submit" class="btn btn-primary" id="filtrar">
-                <i class="bi bi-sort-down"></i> FILTRAR
-            </button>
-        </div>
-    </form>
-</div>
-<div class="questoes">
-
-    {{#each questoes}}
-    <div class="questao card p-3 my-4" data-id-questao="{{id_questao}}">
-
-        <p class="identificacao text-muted">
-            ID: {{id_questao}}<i class="fa fa-xing" aria-hidden="true"></i>
-            | {{vestibular}} ({{banca}}) {{ano}}
-            {{#if disciplinas}} - {{disciplinas}}{{/if}}
-            {{#if conteudos}} - {{conteudos}}{{/if}}
-        </p>
-
-        <p class="enunciado">{{enunciado}}</p>
-
-        {{#if tem_imagem}}
-        <img src="/questoes/{{id_questao}}/imagem" class="imagem-questao mb-3" loading="lazy"
-            alt="Imagem da questão {{id_questao}}">
-        {{/if}}
-
-        <div class="alternativas">
-            {{#each alternativas}}
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="questao-{{../id_questao}}"
-                    id="q{{../id_questao}}-{{id_alternativas}}" value="{{id_alternativas}}">
-
-                <label class="altern form-check-label" for="q{{../id_questao}}-{{id_alternativas}}">
-                    <strong>{{letra}})</strong> {{texto}}
-                </label>
+                <button type="submit" class="btn btn-primary" id="filtrar">
+                    <i class="bi bi-sort-down"></i> FILTRAR
+                </button>
             </div>
-            {{/each}}
-        </div>
-
-        <div class="mt-3">
-            <button type="button" class="btn btn-primary btn-verificar" data-questao="{{id_questao}}">
-                Verificar resposta
-            </button>
-        </div>
-
-        <div class="resultado mt-2"></div>
+        </form>
     </div>
-    {{else}}
-    <p>Nenhuma questão encontrada.</p>
-    {{/each}}
+    <div class="questoes">
 
-</div>
+        {{#each questoes}}
+        <div class="questao card p-3 my-4" data-id-questao="{{id_questao}}">
 
-<!-- CRONÔMETRO FLUTUANTE -->
-<div id="cronometro-flutuante">
-
-    <button type="button" id="botaoCronometro"
-        class="botao-cronometro"
-        aria-label="Abrir cronômetro"
-        title="Cronômetro de estudos">
-        <i class="bi bi-clock"></i>
-    </button>
-
-    <div id="painelCronometro" class="painel-cronometro" hidden>
-
-        <div class="cabecalho-cronometro">
-            <div class="titulo-cronometro">
-                <i class="bi bi-clock"></i>
-                <span>Cronômetro</span>
-            </div>
-
-            <button type="button" id="fecharCronometro"
-                class="fechar-cronometro"
-                aria-label="Minimizar cronômetro">
-                <i class="bi bi-x-lg"></i>
-            </button>
-        </div>
-
-        <p class="subtitulo-cronometro">Seu tempo de estudo</p>
-
-        <div id="tempoCronometro" class="tempo-cronometro"
-            role="timer" aria-live="off">
-            00:00:00
-        </div>
-
-        <div id="estadoCronometro" class="estado-cronometro"></div>
-
-        <div class="controles-cronometro">
-
-            <button type="button" id="iniciarPausar"
-                class="controle iniciar"
-                aria-label="Iniciar cronômetro">
-                <span id="iconeIniciarPausar">
-                    <i class="bi bi-play"></i>
-                </span>
-            </button>
-
-            <button type="button" id="marcarVolta"
-                class="controle marcar"
-                aria-label="Marcar tempo" disabled>
-                <i class="bi bi-flag"></i>
-            </button>
-
-            <button type="button" id="zerarCronometro"
-                class="controle zerar"
-                aria-label="Zerar cronômetro">
-                <i class="bi bi-arrow-clockwise"></i>
-            </button>
-
-        </div>
-
-        <div class="titulo-marcacoes">
-            <span>Marcações</span>
-            <span id="quantidadeMarcacoes">0</span>
-        </div>
-
-        <div id="listaMarcacoes" class="lista-marcacoes">
-            <p class="sem-marcacoes">
-                Suas marcações aparecerão aqui.
+            <p class="identificacao text-muted">
+                ID: {{id_questao}}<i class="fa fa-xing" aria-hidden="true"></i>
+                | {{vestibular}} ({{banca}}) {{ano}}
+                {{#if disciplinas}} - {{disciplinas}}{{/if}}
+                {{#if conteudos}} - {{conteudos}}{{/if}}
             </p>
+
+            <p class="enunciado">{{enunciado}}</p>
+
+            {{#if tem_imagem}}
+            <img src="/questoes/{{id_questao}}/imagem" class="imagem-questao mb-3" loading="lazy"
+                alt="Imagem da questão {{id_questao}}">
+            {{/if}}
+
+            <div class="alternativas">
+                {{#each alternativas}}
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="questao-{{../id_questao}}"
+                        id="q{{../id_questao}}-{{id_alternativas}}" value="{{id_alternativas}}">
+
+                    <label class="altern form-check-label" for="q{{../id_questao}}-{{id_alternativas}}">
+                        <strong>{{letra}})</strong> {{texto}}
+                    </label>
+                </div>
+                {{/each}}
+            </div>
+
+            <div class="mt-3">
+                <button type="button" class="btn btn-primary btn-verificar" data-questao="{{id_questao}}">
+                    Verificar resposta
+                </button>
+            </div>
+
+            <div class="resultado mt-2"></div>
         </div>
+        {{else}}
+        <p>Nenhuma questão encontrada.</p>
+        {{/each}}
 
     </div>
-</div>
 
+    <!-- CRONÔMETRO FLUTUANTE -->
+    <div id="cronometro-flutuante">
+
+        <button type="button" id="botaoCronometro" class="botao-cronometro" aria-label="Abrir cronômetro"
+            title="Cronômetro de estudos">
+            <i class="bi bi-clock"></i>
+        </button>
+
+        <div id="painelCronometro" class="painel-cronometro" hidden>
+
+            <div class="cabecalho-cronometro">
+                <div class="titulo-cronometro">
+                    <i class="bi bi-clock"></i>
+                    <span>Cronômetro</span>
+                </div>
+
+                <button type="button" id="fecharCronometro" class="fechar-cronometro" aria-label="Minimizar cronômetro">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <p class="subtitulo-cronometro">Seu tempo de estudo</p>
+
+            <div id="tempoCronometro" class="tempo-cronometro" role="timer" aria-live="off">
+                00:00:00
+            </div>
+
+            <div id="estadoCronometro" class="estado-cronometro"></div>
+
+            <div class="controles-cronometro">
+
+                <button type="button" id="iniciarPausar" class="controle iniciar" aria-label="Iniciar cronômetro">
+                    <span id="iconeIniciarPausar">
+                        <i class="bi bi-play"></i>
+                    </span>
+                </button>
+
+                <button type="button" id="marcarVolta" class="controle marcar" aria-label="Marcar tempo" disabled>
+                    <i class="bi bi-flag"></i>
+                </button>
+
+                <button type="button" id="zerarCronometro" class="controle zerar" aria-label="Zerar cronômetro">
+                    <i class="bi bi-arrow-clockwise"></i>
+                </button>
+
+            </div>
+
+            <div class="titulo-marcacoes">
+                <span>Marcações</span>
+                <span id="quantidadeMarcacoes">0</span>
+            </div>
+
+            <div id="listaMarcacoes" class="lista-marcacoes">
+                <p class="sem-marcacoes">
+                    Suas marcações aparecerão aqui.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
 <script src="/js/scriptQuestoes.js"></script>
 <script src="/js/scriptCronometro.js"></script>

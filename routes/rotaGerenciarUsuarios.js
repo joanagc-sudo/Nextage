@@ -26,7 +26,9 @@ async function apenasAdmin(req, res, next) {
         );
 
         if (rows.length === 0 || Number(rows[0].tipo_usuario) !== 1) {
-            return res.status(403).send("Acesso negado.");
+            return res.redirect(
+                "/admin?error=Acesso."
+            );
         }
 
         next();
@@ -67,12 +69,16 @@ router.get("/admin/usuarios", apenasAdmin, async (req, res) => {
 });
 
 //cadastro usuarios
+// cadastro usuarios
 router.post("/admin/usuarios", apenasAdmin, async (req, res) => {
     try {
-        const {nome, email, senha, dataNascimento, tipo} = req.body;
+        const { nome, email, senha, dataNascimento, tipo } = req.body;
 
         if (!nome || !email || !senha || !dataNascimento) {
-            return res.status(400).json({ ok: false, erro: "Preencha todos os campos." });
+            return res.status(400).json({
+                ok: false,
+                erro: "Preencha todos os campos."
+            });
         }
 
         const tipo_usuario = Number(tipo) === 1 ? 1 : 0;
@@ -85,12 +91,14 @@ router.post("/admin/usuarios", apenasAdmin, async (req, res) => {
         );
 
         if (existente.length > 0) {
-            return res.status(409).json({ ok: false, erro: "Este e-mail já está cadastrado." });
+            return res.status(409).json({
+                ok: false,
+                erro: "Este e-mail já está cadastrado."
+            });
         }
 
         const senhaCriptografada = await bcrypt.hash(senha, 10);
 
-        await conn.query("SET autocommit = 1");
         const [resultado] = await conn.query(
             `INSERT INTO Usuarios_Administradores_Estudantes
              (nome, email, senha, data_nascimento, tipo_usuario)
@@ -98,10 +106,19 @@ router.post("/admin/usuarios", apenasAdmin, async (req, res) => {
             [nome, email, senhaCriptografada, dataNascimento, tipo_usuario]
         );
 
-        res.status(201).json({ ok: true, id: resultado.insertId });
+        // Cadastro realizado
+        return res.status(201).json({
+            ok: true,
+            mensagem: "Usuário cadastrado com sucesso!"
+        });
+
     } catch (error) {
         console.error("Erro ao cadastrar usuário:", error);
-        res.status(500).json({ ok: false, erro: "Erro ao cadastrar usuário." });
+
+        return res.status(500).json({
+            ok: false,
+            erro: "Erro ao cadastrar usuário."
+        });
     }
 });
 

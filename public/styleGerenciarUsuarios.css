@@ -19,13 +19,12 @@ body {
 .gerenciar-usuarios {
     min-height: 84vh;
     background: #D8EDF2;
-    padding: 45px 20px;
     font-family: 'Momo Trust Display', sans-serif;
 }
 
 .usuarios-container {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 50px auto;
 }
 .usuarios-header {
     display: flex;

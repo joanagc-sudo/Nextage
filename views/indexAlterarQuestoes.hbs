@@ -10,9 +10,12 @@
 
 <form action="/alterar-questoes/{{id}}" method="POST" enctype="multipart/form-data" class="container-cadastro">
 
-<h1 class="titulo my-4">
-    Alterar questão #{{id}}
-</h1>
+<div class="titulo">
+        <div>
+        <h1>Alterar questão #{{id}}</h1>
+        <p>Altere questões, alternativas e respostas corretas.</p>
+        </div>
+    </div>
     <!-- filtros -->
     
 
@@ -24,19 +27,19 @@
 
     <!-- enunciado -->
     <div class="secao-card mb-4">
-        <label class="form-label fw-bold mb-2">Enunciado</label>
+        <label class="form-label mb-2">Enunciado</label>
         <textarea name="enunciado" class="form-control" placeholder="Digite aqui o enunciado..." rows="5" required></textarea>
     </div>
 
     <!-- imagem -->
     <div class="secao-card mb-4">
-        <label class="form-label fw-bold mb-2">Imagem</label>
+        <label class="form-label mb-2">Imagem</label>
         <p id="avisoImagem" class="d-none">Esta questão já tem imagem. Envie outra só se quiser substituí-la.</p>
         <input type="file" name="imagem" class="form-control" accept="image/*">
     </div>
 
     <div class="secao-card mb-4">
-        <p class="fw-bold mb-3 secao-titulo">Alternativas</p>
+        <p class="mb-3 secao-titulo">Alternativas</p>
         
         <div class="d-flex flex-column gap-3">
 
@@ -69,7 +72,7 @@
 
     <!-- resposta correta -->
     <div class="secao-card mb-4">
-        <label class="form-label fw-bold mb-2">Alternativa correta</label>
+        <label class="form-label mb-2">Alternativa correta</label>
         <select name="correta" class="form-select" required>
             <option value="">selecione a letra...</option>
             <option value="a">A</option>

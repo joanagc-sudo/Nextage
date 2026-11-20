@@ -12,11 +12,12 @@ body{
     color: #428591 ;
 }
 
+.container{
+    max-width: 1500px;
+    margin: 35px auto;
+}
 .filtro {
     border-radius: 10px;
-    margin-top: 2em;
-    margin-left: 3.5rem;
-    margin-right: 3.5rem;
     padding: 1em;
     background-color: #BAD8DE;
 }
@@ -57,7 +58,9 @@ body{
 h1 {
     color: #0C6878;
 }
-
+h3{
+    color: #0C6878;
+}
 label {
     color: #428591;
 }
@@ -70,11 +73,7 @@ input::placeholder {
     color: #444746;
 }
 
-.questoes{
-    border-radius: 10px;
-    padding-right: 3.5em;
-    padding-left: 3.5em;
-}
+
 
 .btn{
     background-color: #428591;
