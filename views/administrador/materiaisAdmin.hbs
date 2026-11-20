@@ -1,0 +1,109 @@
+<link rel="stylesheet" href="/styleAdminMateriais.css">
+
+<div class="pagina-admin-materiais">
+
+    <div class="cabecalho-materiais">
+        <a href="/admin" class="btn-voltar">← Voltar</a>
+        <h1>Gerenciar Materiais</h1>
+        <p>Cadastre e organize os materiais do NEXTAGE.</p>
+    </div>
+
+    <section class="area-cadastro">
+
+        <h2>Cadastrar material</h2>
+
+        <form id="formAdminMaterial" enctype="multipart/form-data">
+
+            <div class="campo">
+                <label for="tituloMaterial">Título do material</label>
+                <input
+                    type="text"
+                    id="tituloMaterial"
+                    name="titulo"
+                    placeholder="Digite o título do material"
+                    required
+                >
+            </div>
+
+            <div class="campo">
+                <label for="disciplinaMaterial">Disciplina</label>
+                <select id="disciplinaMaterial" required>
+                    <option value="">Selecione uma disciplina</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="conteudoMaterial">Conteúdo</label>
+                <select id="conteudoMaterial" name="id_conteudo" required disabled>
+                    <option value="">Selecione primeiro uma disciplina</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="descricaoMaterial">Descrição</label>
+                <textarea
+                    id="descricaoMaterial"
+                    name="descricao"
+                    placeholder="Adicione uma descrição"
+                ></textarea>
+            </div>
+
+            <div class="campo">
+                <label for="arquivoMaterial">Arquivo</label>
+                <input
+                    type="file"
+                    id="arquivoMaterial"
+                    name="arquivo"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="btn-cadastrar">
+                Cadastrar material
+            </button>
+
+        </form>
+
+    </section>
+
+    <section class="area-lista">
+
+        <h2>Materiais cadastrados</h2>
+
+        <div class="campo-pesquisa">
+            <input
+                type="text"
+                id="pesquisarMaterial"
+                placeholder="Pesquisar material..."
+            >
+        </div>
+
+        <div class="tabela-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Disciplina</th>
+                        <th>Autor</th>
+                        <th>Data de cadastro</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tabelaMateriaisAdmin">
+                    <tr>
+                        <td colspan="5">Carregando materiais...</td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</div>
+
+<script src="/js/scriptAdmin.js"></script>
