@@ -328,8 +328,6 @@ document.addEventListener("DOMContentLoaded", function () {
         } catch (erro) {
 
             console.error("Erro ao carregar materiais:", erro);
-            alert("Não foi possível carregar os materiais.");
-
         }
     }
 

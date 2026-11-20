@@ -100,7 +100,7 @@ app.use("/", paginasRoutes);
 app.use("/", questoesRoutes);
 app.use("/", filtrosRoutes);
 app.use("/", cronogramasRoutes);
-app.use("/materiais", materiaisRoutes);
+app.use("/", materiaisRoutes);
 app.use("/", cadastroQuestoesRoutes);
 app.use("/" ,lembretesRoutes);
 app.use("/" ,cronometroRoutes);

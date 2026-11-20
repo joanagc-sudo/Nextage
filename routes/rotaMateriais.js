@@ -135,7 +135,14 @@ router.get("/assunto/:materia", async (req, res) => {
 
 // busca os materiais cadastrados pelo usuário logado
 router.get("/lista", async (req, res) => {
+    
     try {
+        
+        console.log("===== TESTE DA SESSÃO =====");
+        console.log("ID da sessão:", req.sessionID);
+        console.log("Usuário da sessão:", req.session.usuario);
+        console.log("===========================");
+        
         if (!req.session.usuario) {
             return res.status(401).json({
                 erro: "Usuário não está logado."
