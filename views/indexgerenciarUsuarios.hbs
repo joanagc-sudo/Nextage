@@ -1,0 +1,79 @@
+<h1>Administrar usuários</h1>
+<p>{{total}} usuário(s) cadastrado(s)</p>
+
+<div>
+    <input type="search" id="busca" placeholder="Buscar por nome ou e-mail">
+    <button type="button" id="btnNovoUsuario">Novo usuário</button>
+</div>
+
+<p id="alerta" hidden></p>
+
+<table id="tabelaUsuarios" border="1" cellpadding="6" cellspacing="0">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Nascimento</th>
+            <th>Tipo</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each usuarios}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{nome}}{{#if ehVoce}} (você){{/if}}</td>
+            <td>{{email}}</td>
+            <td>{{dataNascimento}}</td>
+            <td>{{#if ehAdmin}}Administrador{{else}}Estudante{{/if}}</td>
+            <td>
+                {{#unless ehVoce}}
+                <button type="button" class="btn-excluir" data-id="{{id}}" data-nome="{{nome}}">Excluir</button>
+                {{/unless}}
+            </td>
+        </tr>
+        {{else}}
+        <tr>
+            <td colspan="6">Nenhum usuário encontrado.</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<dialog id="modalNovoUsuario">
+    <form id="formNovoUsuario" method="dialog">
+        <h2>Cadastrar usuário</h2>
+
+        <p id="erroModal" hidden></p>
+
+        <p>
+            <label for="novoNome">Nome completo</label><br>
+            <input type="text" id="novoNome" required>
+        </p>
+        <p>
+            <label for="novoEmail">E-mail</label><br>
+            <input type="email" id="novoEmail" required>
+        </p>
+        <p>
+            <label for="novaSenha">Senha</label><br>
+            <input type="password" id="novaSenha" required>
+        </p>
+        <p>
+            <label for="novaData">Data de nascimento</label><br>
+            <input type="date" id="novaData" required>
+        </p>
+        <p>
+            <label for="novoTipo">Tipo de usuário</label><br>
+            <select id="novoTipo">
+                <option value="0" selected>Estudante</option>
+                <option value="1">Administrador</option>
+            </select>
+        </p>
+
+        <button type="button" id="btnCancelar">Cancelar</button>
+        <button type="submit">Cadastrar</button>
+    </form>
+</dialog>
+
+<script src="/js/scriptGerenciarUsuarios.js"></script>

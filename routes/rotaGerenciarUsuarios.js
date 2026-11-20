@@ -1,156 +1,160 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-const db = require("../database");
+const conn = require("../database");
 
 const router = express.Router();
 
-// administradores 
-function apenasAdmin(req, res, next) {
-    if (!req.session.usuario) {
-        return res.redirect(
-            "/tela-inicial?error=Faça login."
-        );
-
-    }
-    if (Number(req.session.usuario.tipo_usuario) !== 1) {
-        return res.redirect(
-            "/tela-inicial?error=Acesso permitido apenas para administradores."
-        );
-    }
-    next();
+function idLogado(req) {
+    const u = req.session.usuario;
+    if (!u) return null;
+    return u.id ?? u.id_usuario ?? null;
 }
 
-//rota para gerenciar usuários
-router.get("/gerenciar-usuarios", verificarAdmin, (req, res) => {
+async function apenasAdmin(req, res, next) {
+    try {
+        const id = idLogado(req);
 
-    const sql = `
-        SELECT
-            id_usuario,
-            nome,
-            email,
-            tipo_usuario
-        FROM usuarios_administradores_estudantes
-        ORDER BY nome ASC
-    `;
-
-    db.query(sql, (erro, resultados) => {
-
-        if (erro) {
-            return res.redirect(
-            "/admin?error=Erro ao buscar usuários."
-        );
-            console.log(erro);
+        if (!id) {
+            return res.redirect("/tela-login");
         }
 
-        res.render("gerenciarUsuarios", {
-            usuarios: resultados,
-            layout: "layouts/mainAdmin"
+        const [rows] = await conn.query(
+            `SELECT tipo_usuario
+             FROM Usuarios_Administradores_Estudantes
+             WHERE id_usuario = ?`,
+            [id]
+        );
+
+        if (rows.length === 0 || Number(rows[0].tipo_usuario) !== 1) {
+            return res.status(403).send("Acesso negado.");
+        }
+
+        next();
+    } catch (error) {
+        next(error);
+    }
+}
+
+//lista de usuarios
+router.get("/admin/usuarios", apenasAdmin, async (req, res) => {
+    try {
+        const [usuarios] = await conn.query(
+            `SELECT id_usuario, nome, email, data_nascimento, tipo_usuario
+             FROM Usuarios_Administradores_Estudantes
+             ORDER BY id_usuario`
+        );
+
+        const lista = usuarios.map((u) => ({
+            id: u.id_usuario,
+            nome: u.nome,
+            email: u.email,
+            dataNascimento: u.data_nascimento
+                ? new Date(u.data_nascimento).toLocaleDateString("pt-BR")
+                : "-",
+            ehAdmin: Number(u.tipo_usuario) === 1,
+            ehVoce: u.id_usuario === idLogado(req)
+        }));
+
+        res.render("indexGerenciarUsuarios", {
+            layout: "/layouts/simples",
+            usuarios: lista,
+            total: lista.length
         });
-
-    });
-
-    });
-
-    //cadastro de usuários
-    router.post("/gerenciar-usuarios/cadastrar", verificarAdmin, async (req, res) => {
-
-    const { nome, email, senha, confirmarSenha, tipo_usuario } = req.body;
-
-    if (!nome || !email || !senha || !confirmarSenha) {
-        return res.redirect("/gerenciar-usuarios");
+    } catch (error) {
+        console.error("Erro ao listar usuários:", error);
+        res.status(500).send("Erro ao carregar usuários.");
     }
+});
 
-    if (senha !== confirmarSenha) {
-        return res.redirect("/gerenciar-usuarios?error=senhas");
+//cadastro usuarios
+router.post("/admin/usuarios", apenasAdmin, async (req, res) => {
+    try {
+        const {nome, email, senha, dataNascimento, tipo} = req.body;
+
+        if (!nome || !email || !senha || !dataNascimento) {
+            return res.status(400).json({ ok: false, erro: "Preencha todos os campos." });
+        }
+
+        const tipo_usuario = Number(tipo) === 1 ? 1 : 0;
+
+        const [existente] = await conn.query(
+            `SELECT id_usuario
+             FROM Usuarios_Administradores_Estudantes
+             WHERE email = ?`,
+            [email]
+        );
+
+        if (existente.length > 0) {
+            return res.status(409).json({ ok: false, erro: "Este e-mail já está cadastrado." });
+        }
+
+        const senhaCriptografada = await bcrypt.hash(senha, 10);
+
+        await conn.query("SET autocommit = 1");
+        const [resultado] = await conn.query(
+            `INSERT INTO Usuarios_Administradores_Estudantes
+             (nome, email, senha, data_nascimento, tipo_usuario)
+             VALUES (?, ?, ?, ?, ?)`,
+            [nome, email, senhaCriptografada, dataNascimento, tipo_usuario]
+        );
+
+        res.status(201).json({ ok: true, id: resultado.insertId });
+    } catch (error) {
+        console.error("Erro ao cadastrar usuário:", error);
+        res.status(500).json({ ok: false, erro: "Erro ao cadastrar usuário." });
     }
+});
 
-    if (!["0", "1"].includes(tipo_usuario)) {
-        return res.redirect("/gerenciar-usuarios?error=Tipo de usuário inválido.");
-
-    }
+// excluir - apaga todos os dados relacionados
+router.delete("/admin/usuarios/:id", apenasAdmin, async (req, res) => {
+    const ehPool = typeof conn.getConnection === "function";
+    const c = ehPool ? await conn.getConnection() : conn;
 
     try {
+        const id = Number(req.params.id);
 
-        // verificar se o email já está cadastrado
-        const sqlVerificar = `
-            SELECT id_usuario
-            FROM usuarios_administradores_estudantes
-            WHERE email = ?
-        `;
-
-        db.query(sqlVerificar, [email], async (erro, resultados) => {
-
-            if (erro) {
-                console.log(erro);
-                return res.redirect("/gerenciar-usuarios?error=Erro ao veificar usuário.");
-            }
-
-            if (resultados.length > 0) {
-                return res.redirect("/gerenciar-usuarios?error=email");
-            }
-
-            // criptografar senha
-            const senhaCriptografada = await bcrypt.hash(senha, 10);
-
-            const sqlInserir = `
-                INSERT INTO usuarios_administradores_estudantes
-                (nome, email, senha, tipo_usuario)
-                VALUES (?, ?, ?, ?)
-            `;
-
-            db.query(
-                sqlInserir,
-                [nome, email, senhaCriptografada, Number(tipo_usuario)],
-                (erro) => {
-
-                    if (erro) {
-                        console.log(erro);
-                        return res.redirect("/gerenciar-usuarios?error=Erro ao cadastrar usuário.");
-                    }
-
-                    res.redirect("/gerenciar-usuarios?success=cadastro");
-                }
-            );
-
-        });
-
-    } catch (erro) {
-        console.log(erro);
-        res.redirect("/gerenciar-usuarios?error=Erro ao cadastrar usuário.");
-    }
-
-});
-
-
-router.post("/gerenciar-usuarios/excluir/:id", verificarAdmin, (req, res) => {
-
-    const id = req.params.id;
-
-    const admin = req.session.admin || req.session.usuario;
-
-    // Impedir que o administrador exclua a própria conta
-    if (admin.id_usuario == id) {
-        return res.redirect("/gerenciar-usuarios?erro=propria-conta");
-    }
-
-    const sql = `
-        DELETE FROM usuarios_administradores_estudantes
-        WHERE id_usuario = ?
-    `;
-
-    db.query(sql, [id], (erro, resultado) => {
-
-        if (erro) {
-            console.log(erro);
-            return res.status(500).send("Erro ao excluir usuário.");
+        if (!Number.isInteger(id)) {
+            return res.status(400).json({ ok: false, erro: "ID inválido." });
         }
+
+        if (id === idLogado(req)) {
+            return res.status(400).json({ ok: false, erro: "Você não pode excluir a sua própria conta." });
+        }
+
+        await c.beginTransaction();
+
+        await c.query(
+            `DELETE FROM conteudo_material
+             WHERE id_material IN (SELECT id_material FROM materiais WHERE id_usuario = ?)`, [id]);
+        await c.query(
+            `DELETE FROM conteudos_topicosforum
+             WHERE id_topico IN (SELECT id_topico FROM topicos_forum WHERE id_usuario = ?)`, [id]);
+
+        await c.query("DELETE FROM materiais WHERE id_usuario = ?", [id]);
+        await c.query("DELETE FROM topicos_forum WHERE id_usuario = ?", [id]);
+        await c.query("DELETE FROM cronograma_estudos WHERE id_usuario = ?", [id]);
+        await c.query("DELETE FROM cronometros WHERE id_usuario = ?", [id]);
+        await c.query("DELETE FROM relatorio_desempenho WHERE id_usuario = ?", [id]);
+        await c.query("DELETE FROM responder WHERE id_usuario = ?", [id]);
+        await c.query("DELETE FROM lembretes WHERE id_usuario = ?", [id]);
+
+        const [resultado] = await c.query(
+            "DELETE FROM Usuarios_Administradores_Estudantes WHERE id_usuario = ?", [id]);
 
         if (resultado.affectedRows === 0) {
-            return res.redirect("/gerenciar-usuarios?erro=nao-encontrado");
+            await c.rollback();
+            return res.status(404).json({ ok: false, erro: "Usuário não encontrado." });
         }
 
-        res.redirect("/gerenciar-usuarios?sucesso=exclusao");
-
-    });
-
+        await c.commit();
+        res.json({ ok: true });
+    } catch (error) {
+        await c.rollback();
+        console.error("Erro ao excluir usuário:", error);
+        res.status(500).json({ ok: false, erro: "Erro ao excluir usuário." });
+    } finally {
+        if (ehPool) c.release();
+    }
 });
+
+module.exports = router;
