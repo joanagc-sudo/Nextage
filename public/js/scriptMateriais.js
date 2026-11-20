@@ -27,100 +27,100 @@ document.addEventListener("DOMContentLoaded", function () {
    
     // SELETOR DE DISCIPLINAS
 
-const seletorDisciplina = document.querySelector(".seletorDisciplina");
-const btnDisciplina = document.getElementById("btnDisciplina");
-const listaDisciplinas = document.getElementById("listaDisciplinas");
+    const seletorDisciplina = document.querySelector(".seletorDisciplina");
+    const btnDisciplina = document.getElementById("btnDisciplina");
+    const listaDisciplinas = document.getElementById("listaDisciplinas");
 
-// Abrir e fechar o seletor
-if (btnDisciplina && seletorDisciplina) {
+    // Abrir e fechar o seletor
+    if (btnDisciplina && seletorDisciplina) {
 
-    btnDisciplina.addEventListener("click", function (event) {
+        btnDisciplina.addEventListener("click", function (event) {
 
-        event.stopPropagation();
+            event.stopPropagation();
 
-        seletorDisciplina.classList.toggle("aberto");
-
-    });
-
-}
-
-// Buscar disciplinas do banco de dados
-async function carregarDisciplinas() {
-
-    if (!listaDisciplinas) return;
-
-    try {
-
-        const resposta = await fetch("/api/disciplinas-paginas");
-
-        if (!resposta.ok) {
-            throw new Error("Erro ao consultar as disciplinas.");
-        }
-
-        const disciplinas = await resposta.json();
-
-        listaDisciplinas.innerHTML = "";
-
-        disciplinas.forEach(function (disciplina) {
-
-            const botao = document.createElement("button");
-
-            botao.type = "button";
-            botao.textContent = disciplina.nome;
-
-            botao.dataset.disciplina = disciplina.nome;
-            botao.dataset.rota = disciplina.rota;
-
-            listaDisciplinas.appendChild(botao);
+            seletorDisciplina.classList.toggle("aberto");
 
         });
 
-    } catch (erro) {
+    }
 
-        console.error("Erro ao carregar disciplinas:", erro);
+    // Buscar disciplinas do banco de dados
+    async function carregarDisciplinas() {
+
+        if (!listaDisciplinas) return;
+
+        try {
+
+            const resposta = await fetch("/api/disciplinas-paginas");
+
+            if (!resposta.ok) {
+                throw new Error("Erro ao consultar as disciplinas.");
+            }
+
+            const disciplinas = await resposta.json();
+
+            listaDisciplinas.innerHTML = "";
+
+            disciplinas.forEach(function (disciplina) {
+
+                const botao = document.createElement("button");
+
+                botao.type = "button";
+                botao.textContent = disciplina.nome;
+
+                botao.dataset.disciplina = disciplina.nome;
+                botao.dataset.rota = disciplina.rota;
+
+                listaDisciplinas.appendChild(botao);
+
+            });
+
+        } catch (erro) {
+
+            console.error("Erro ao carregar disciplinas:", erro);
+
+        }
 
     }
 
-}
-
-carregarDisciplinas();
+    carregarDisciplinas();
 
 
-// Redirecionar ao selecionar uma disciplina
-if (listaDisciplinas) {
+    // Redirecionar ao selecionar uma disciplina
+    if (listaDisciplinas) {
 
-    listaDisciplinas.addEventListener("click", function (event) {
+        listaDisciplinas.addEventListener("click", function (event) {
 
-        const botao = event.target.closest("button[data-rota]");
+            const botao = event.target.closest("button[data-rota]");
 
-        if (!botao) return;
+            if (!botao) return;
 
-        const rota = botao.dataset.rota;
+            const rota = botao.dataset.rota;
 
-        if (rota) {
+            if (rota) {
 
-            window.location.href = rota;
+                window.location.href = rota;
+
+            }
+
+        });
+
+    }
+
+
+    // Fechar o seletor ao clicar fora dele
+    document.addEventListener("click", function (event) {
+
+        if (
+            seletorDisciplina &&
+            !seletorDisciplina.contains(event.target)
+        ) {
+
+            seletorDisciplina.classList.remove("aberto");
 
         }
 
     });
-
-}
-
-
-// Fechar o seletor ao clicar fora dele
-document.addEventListener("click", function (event) {
-
-    if (
-        seletorDisciplina &&
-        !seletorDisciplina.contains(event.target)
-    ) {
-
-        seletorDisciplina.classList.remove("aberto");
-
-    }
-
-});
 
     // identifica a disciplina indicada na url
     const parametrosURL = new URLSearchParams(window.location.search);
@@ -531,29 +531,19 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    
-    // Adiciona o clique diretamente em cada card
-    const cards = document.querySelectorAll(
-        ".atalhos .icones [data-materia]"
-    );
 
-    cards.forEach(function (card) {
+    // Identifica os cliques nos cards
+    document.addEventListener("click", function (event) {
 
-        card.addEventListener("click", function (event) {
+        const card = event.target.closest("[data-materia]");
 
-            // Evita que o clique em um card seja confundido
-            // com o clique em outro elemento
-            event.stopPropagation();
+        if (!card) return;
 
-            const materiaSelecionada = card.dataset.materia;
+        console.log("CARD IDENTIFICADO:", card.dataset.materia);
 
-            console.log("CARD CLICADO:", materiaSelecionada);
+        abrirModalMateriais(card.dataset.materia);
 
-            abrirModalMateriais(materiaSelecionada);
-
-        });
-
-    });
+    }, true);
 
 
     // fecha o modal de materiais compartilhados
@@ -666,6 +656,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let inicioX = 0;
         let scrollInicial = 0;
         let arrastou = false;
+        let bloqueiaClique = false;
 
         faixa.addEventListener("pointerdown", function (evento) {
 
@@ -679,10 +670,6 @@ document.addEventListener("DOMContentLoaded", function () {
             inicioX = evento.clientX;
             scrollInicial = faixa.scrollLeft;
 
-            faixa.classList.add("arrastando");
-
-            faixa.setPointerCapture(evento.pointerId);
-
         });
 
         faixa.addEventListener("pointermove", function (evento) {
@@ -691,7 +678,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const distancia = evento.clientX - inicioX;
 
-            if (Math.abs(distancia) > 4) {
+            if (Math.abs(distancia) > 5) {
                 arrastou = true;
             }
 
@@ -701,30 +688,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
         });
 
-        // encerra o movimento de arrastar
         function pararArraste() {
 
+            if (arrastou) {
+                bloqueiaClique = true;
+            }
+
             pressionado = false;
-            faixa.classList.remove("arrastando");
+            arrastou = false;
 
         }
 
         faixa.addEventListener("pointerup", pararArraste);
         faixa.addEventListener("pointercancel", pararArraste);
-        faixa.addEventListener("lostpointercapture", pararArraste);
 
-        // impede que o movimento de arrastar seja confundido com um clique
+        // cancela somente o clique que aconteceu depois de um arraste
         faixa.addEventListener("click", function (evento) {
 
-            if (!arrastou) return;
+            if (bloqueiaClique) {
 
-            evento.preventDefault();
-            evento.stopPropagation();
+                evento.preventDefault();
+                evento.stopImmediatePropagation();
 
-            arrastou = false;
+                bloqueiaClique = false;
+
+            }
 
         }, true);
-
         faixa.addEventListener("scroll", atualizarSetas);
         window.addEventListener("resize", atualizarSetas);
 
