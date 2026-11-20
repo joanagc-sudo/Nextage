@@ -1,0 +1,222 @@
+* {
+    box-sizing: border-box;
+}
+
+.pagina-admin-materiais {
+    width: 90%;
+    max-width: 1150px;
+    margin: 35px auto;
+    color: #24434a;
+    font-family: 'Momo Trust Display', sans-serif;
+}
+
+/* CABEÇALHO */
+
+.cabecalho-materiais {
+    margin-bottom: 30px;
+}
+
+.btn-voltar {
+    display: inline-block;
+    color: #0c6878;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.btn-voltar:hover {
+    text-decoration: underline;
+}
+
+.cabecalho-materiais h1 {
+    color: #0c6878;
+    font-size: 30px;
+    margin: 0 0 8px;
+}
+
+.cabecalho-materiais p {
+    color: #71878b;
+    margin: 0;
+    font-size: 15px;
+}
+
+/* ÁREAS PRINCIPAIS */
+
+.area-cadastro,
+.area-lista {
+    background-color: #ffffff;
+    border: 1px solid #dce9eb;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 3px 12px rgba(12, 104, 120, 0.06);
+}
+
+.area-cadastro h2,
+.area-lista h2 {
+    color: #0c6878;
+    font-size: 21px;
+    margin: 0 0 22px;
+}
+
+/* FORMULÁRIO */
+
+#formAdminMaterial {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.campo label {
+    color: #34545a;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cbdcde;
+    border-radius: 7px;
+    background-color: #fbfefe;
+    color: #29484e;
+    font-size: 14px;
+    outline: none;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+    border-color: #0c6878;
+    box-shadow: 0 0 0 2px rgba(12, 104, 120, 0.10);
+}
+
+.campo textarea {
+    min-height: 95px;
+    resize: vertical;
+    font-family: 'Momo Trust Display', sans-serif;
+}
+
+.campo input[type="file"] {
+    padding: 10px;
+}
+
+/* BOTÃO CADASTRAR */
+
+.btn-cadastrar {
+    align-self: flex-start;
+    padding: 12px 22px;
+    background-color: #0c6878;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-cadastrar:hover {
+    background-color: #095461;
+}
+
+/* PESQUISA */
+
+.campo-pesquisa {
+    margin-bottom: 18px;
+}
+
+.campo-pesquisa input {
+    width: 100%;
+    max-width: 380px;
+    padding: 11px 14px;
+    border: 1px solid #cbdcde;
+    border-radius: 7px;
+    outline: none;
+    font-size: 14px;
+}
+
+.campo-pesquisa input:focus {
+    border-color: #0c6878;
+}
+
+/* TABELA */
+
+.tabela-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.tabela-container table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 650px;
+}
+
+.tabela-container th {
+    background-color: #eaf4f5;
+    color: #0c6878;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: left;
+    padding: 14px 12px;
+}
+
+.tabela-container td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #e5eeee;
+    color: #405d62;
+    font-size: 13px;
+}
+
+.tabela-container tr:hover td {
+    background-color: #f8fbfb;
+}
+
+/* BOTÃO EXCLUIR */
+
+.tabela-container td button {
+    background-color: #fff0f0;
+    color: #c34242;
+    border: 1px solid #f0cccc;
+    padding: 8px 13px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.tabela-container td button:hover {
+    background-color: #c34242;
+    color: white;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 600px) {
+    .pagina-admin-materiais {
+        width: 94%;
+        margin: 20px auto;
+    }
+
+    .area-cadastro,
+    .area-lista {
+        padding: 17px;
+    }
+
+    .cabecalho-materiais h1 {
+        font-size: 25px;
+    }
+
+    .btn-cadastrar {
+        width: 100%;
+    }
+}

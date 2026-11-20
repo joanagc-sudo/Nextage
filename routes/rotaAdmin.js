@@ -81,6 +81,14 @@ router.get("/admin", verificarAdministrador, (req, res) => {
     });
 });
 
+// Página de materiais
+router.get("/admin/materiais", verificarAdministrador, (req, res) => {
+    res.render("administrador/materiaisAdmin", {
+        layout: "layouts/mainAdmin",
+        admin: req.session.admin
+    });
+});
+
 // Sair da área administrativa
 router.get("/admin/logout", (req, res) => {
     delete req.session.admin;

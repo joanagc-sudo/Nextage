@@ -567,11 +567,247 @@ CREATE TABLE lembretes (
     ON DELETE CASCADE
 );
 
--- -----------------------------------------------------
--- ABA 5: CONFIGURAÇÃO DE MATERIAIS
--- -----------------------------------------------------
+USE nextage;
+
+-- Criar tabela de flashcards
+CREATE TABLE IF NOT EXISTS flashcards (
+    id_flashcard INT NOT NULL AUTO_INCREMENT,
+    id_conteudo INT NOT NULL,
+    pergunta TEXT NOT NULL,
+    resposta TEXT NOT NULL,
+
+    PRIMARY KEY (id_flashcard),
+
+    FOREIGN KEY (id_conteudo)
+    REFERENCES conteudos(id_conteudo)
+);
+
+-- Criar tabela de lembretes
+CREATE TABLE IF NOT EXISTS lembretes (
+    id_lembrete INT NOT NULL AUTO_INCREMENT,
+    id_usuario INT NOT NULL,
+    texto VARCHAR(255) NOT NULL,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (id_lembrete),
+
+    FOREIGN KEY (id_usuario)
+    REFERENCES usuarios_administradores_estudantes(id_usuario)
+    ON DELETE CASCADE
+);
+
+-- Conferir as tabelas
+SHOW TABLES;
+
+-- materiais
 
 USE nextage;
 
 ALTER TABLE materiais
 MODIFY COLUMN id_material INT NOT NULL AUTO_INCREMENT;
+
+USE nextage;
+
+-- =====================================================
+-- BIOLOGIA (ID 3)
+-- =====================================================
+INSERT INTO conteudos (id_conteudo, id_disciplina, nome) VALUES
+(60, 3, 'Introdução à Biologia'),
+(61, 3, 'Classificação dos Seres Vivos'),
+(62, 3, 'Ecologia'),
+(63, 3, 'Biomas do Brasil'),
+(64, 3, 'Bioquímica'),
+(65, 3, 'Citologia'),
+(66, 3, 'Bioenergética'),
+(67, 3, 'Microbiologia'),
+(68, 3, 'Citogenética'),
+(69, 3, 'Biotecnologia'),
+(70, 3, 'Reprodução'),
+(71, 3, 'Embriologia'),
+(72, 3, 'Histologia'),
+(73, 3, 'Fisiologia Humana'),
+(74, 3, 'Evolução'),
+(75, 3, 'Botânica'),
+(76, 3, 'Micologia'),
+(77, 3, 'Zoologia'),
+(78, 3, 'Fisiologia Animal Comparada'),
+(79, 3, 'Saúde');
+
+-- =====================================================
+-- ESPANHOL (ID 5)
+-- =====================================================
+INSERT INTO conteudos (id_conteudo, id_disciplina, nome) VALUES
+(80, 5, 'Géneros Textuales'),
+(81, 5, 'Gramática y Morfología'),
+(82, 5, 'Pronombres'),
+(83, 5, 'Tiempos Verbales'),
+(84, 5, 'Vocabulario');
+
+-- =====================================================
+-- FILOSOFIA (ID 7)
+-- =====================================================
+INSERT INTO conteudos (id_conteudo, id_disciplina, nome) VALUES
+(85, 7, 'Áreas da Filosofia'),
+(86, 7, 'Ética e Filosofia Política'),
+(87, 7, 'Epistemologia'),
+(88, 7, 'Filosofia Política'),
+(89, 7, 'Filosofia Contemporânea'),
+(90, 7, 'Mal e Justiça'),
+(91, 7, 'Filosofia Alemã'),
+(92, 7, 'Psicanálise e Teoria Crítica'),
+(93, 7, 'Existencialismo'),
+(94, 7, 'Questões Filosóficas da Contemporaneidade'),
+(95, 7, 'Obras Filosóficas');
+
+-- =====================================================
+-- FISICA (ID 6)
+-- =====================================================
+INSERT INTO conteudos (id_conteudo, id_disciplina, nome) VALUES
+(96, 6, 'Introdução à Física'),
+(97, 6, 'Estática'),
+(98, 6, 'Movimento Circular'),
+(99, 6, 'Gravitação Universal'),
+(100, 6, 'Quantidade de Movimento'),
+(101, 6, 'Fluidos'),
+(102, 6, 'Movimento Harmônico Simples'),
+(103, 6, 'Ondulatória'),
+(104, 6, 'Eletrostática'),
+(105, 6, 'Eletrodinâmica'),
+(106, 6, 'Magnetismo'),
+(107, 6, 'Física Moderna'),
+(108, 6, 'Análise Dimensional');
+
+-- =====================================================
+-- HISTORIA (ID 8)
+-- =====================================================
+INSERT INTO conteudos (id_conteudo, id_disciplina, nome) VALUES
+(109, 8, 'Introdução à História Geral'),
+(110, 8, 'Idade Antiga'),
+(111, 8, 'Brasil Colônia'),
+(112, 8, 'Brasil Monárquico'),
+(113, 8, 'Século XX'),
+(114, 8, 'Conflitos do Século XX'),
+(115, 8, 'Primeira República'),
+(116, 8, 'Estado Novo e Populismo'),
+(117, 8, 'Ditadura Militar Brasileira'),
+(118, 8, 'Nova República'),
+(119, 8, 'Tempo Presente'),
+(120, 8, 'História da Arte');
+
+-- =====================================================
+-- INGLES (ID 9)
+-- =====================================================
+INSERT INTO conteudos (id_conteudo, id_disciplina, nome) VALUES
+(121, 9, 'Textual Genres'),
+(122, 9, 'Grammar'),
+(123, 9, 'Morphology'),
+(124, 9, 'Verbs'),
+(125, 9, 'Vocabulary');
+
+-- =====================================================
+-- MATEMATICA (ID 1)
+-- =====================================================
+INSERT INTO conteudos (id_conteudo, id_disciplina, nome) VALUES
+(126, 1, 'Matemática Básica'),
+(127, 1, 'Conjuntos'),
+(128, 1, 'Módulo'),
+(129, 1, 'Exponencial e Logaritmo'),
+(130, 1, 'Geometria Plana'),
+(131, 1, 'Trigonometria'),
+(132, 1, 'Matrizes'),
+(133, 1, 'Sistemas Lineares'),
+(134, 1, 'Geometria Espacial'),
+(135, 1, 'Sequências e Progressões'),
+(136, 1, 'Análise Combinatória'),
+(137, 1, 'Probabilidade'),
+(138, 1, 'Estatística'),
+(139, 1, 'Geometria Analítica'),
+(140, 1, 'Números Complexos'),
+(141, 1, 'Polinômios');
+
+-- =====================================================
+-- GEOGRAFIA (ID 4)
+-- =====================================================
+INSERT INTO conteudos (id_conteudo, id_disciplina, nome) VALUES
+(142, 4, 'Clima'),
+(143, 4, 'Hidrosfera'),
+(144, 4, 'Biomas'),
+(145, 4, 'Domínios Morfoclimáticos'),
+(146, 4, 'Solos'),
+(147, 4, 'Espaço Agrário'),
+(148, 4, 'Indústria'),
+(149, 4, 'Espaços Urbanos'),
+(150, 4, 'Questões Ambientais'),
+(151, 4, 'Fontes de Energia'),
+(152, 4, 'Demografia e Migrações'),
+(153, 4, 'Diversidade Étnico-Racial e Pluralismo Religioso'),
+(154, 4, 'Geopolítica'),
+(155, 4, 'Blocos Econômicos e Geografia Econômica'),
+(156, 4, 'Transporte, Comércio e Serviços'),
+(157, 4, 'Regiões do Brasil');
+
+-- =====================================================
+-- PORTUGUES (ID 2)
+-- =====================================================
+INSERT INTO conteudos (id_conteudo, id_disciplina, nome) VALUES
+(158, 2, 'Introdução à Língua Portuguesa'),
+(159, 2, 'Classes Gramaticais'),
+(160, 2, 'Verbos'),
+(161, 2, 'Pronomes'),
+(162, 2, 'Conjunções'),
+(163, 2, 'Análise Sintática'),
+(164, 2, 'Concordância'),
+(165, 2, 'Regência e Crase'),
+(166, 2, 'Orações'),
+(167, 2, 'Vírgula'),
+(168, 2, 'Morfologia das Palavras'),
+(169, 2, 'Fonologia e Ortografia'),
+(170, 2, 'Gramática e Interpretação'),
+(171, 2, 'Funções da Linguagem'),
+(172, 2, 'Figuras de Linguagem'),
+(173, 2, 'Linguagem Culta e Coloquial'),
+(174, 2, 'Estratégias de Interpretação'),
+(175, 2, 'Texto e Contexto'),
+(176, 2, 'Gêneros Textuais');
+
+-- =====================================================
+-- QUIMICA (ID 10)
+-- =====================================================
+INSERT INTO conteudos (id_conteudo, id_disciplina, nome) VALUES
+(177, 10, 'Introdução à Química'),
+(178, 10, 'Estudo da Matéria'),
+(179, 10, 'Átomos'),
+(180, 10, 'Moléculas e Propriedades'),
+(181, 10, 'Reações Químicas'),
+(182, 10, 'Estudo dos Gases'),
+(183, 10, 'Termoquímica'),
+(184, 10, 'Cinética Química'),
+(185, 10, 'Equilíbrio Químico'),
+(186, 10, 'Propriedades Coligativas'),
+(187, 10, 'Eletroquímica'),
+(188, 10, 'Hidrocarbonetos'),
+(189, 10, 'Funções Oxigenadas'),
+(190, 10, 'Funções Nitrogenadas'),
+(191, 10, 'Outras Funções Orgânicas'),
+(192, 10, 'Propriedades dos Compostos Orgânicos'),
+(193, 10, 'Separação de Misturas'),
+(194, 10, 'Isomeria'),
+(195, 10, 'Reações Orgânicas'),
+(196, 10, 'Bioquímica'),
+(197, 10, 'Polímeros'),
+(198, 10, 'Química Ambiental'),
+(199, 10, 'Radioatividade');
+
+-- =====================================================
+-- SOCIOLOGIA (ID 11)
+-- =====================================================
+INSERT INTO conteudos (id_conteudo, id_disciplina, nome) VALUES
+(200, 11, 'As Ciências Sociais'),
+(201, 11, 'Teoria Sociológica'),
+(202, 11, 'Sociologia no Trabalho'),
+(203, 11, 'Sociologia Brasileira'),
+(204, 11, 'Estado e Cidadania'),
+(205, 11, 'Sociologia Política'),
+(206, 11, 'Meio Ambiente, Sociedade e Comunicação'),
+(207, 11, 'Sociologia Contemporânea'),
+(208, 11, 'Obras Sociológicas');
