@@ -174,7 +174,7 @@ if (formulario && tabela && seletorConteudo && pesquisa) {
         const dados = new FormData(formulario);
 
         try {
-            const resposta = await fetch("/materiais/admin", {
+            const resposta = await fetch("/admin", {
                 method: "POST",
                 body: dados
             });
@@ -208,7 +208,7 @@ if (formulario && tabela && seletorConteudo && pesquisa) {
         if (!confirmar) return;
 
         try {
-            const resposta = await fetch(`/materiais/admin/${id}`, {
+            const resposta = await fetch(`/admin/${id}`, {
                 method: "DELETE"
             });
 
