@@ -7,13 +7,13 @@
 }
 
 body {
-    background-color: #9DC8CF;
+    background-color: #D8EDF2;
     font-family: 'Momo Trust Display', sans-serif;
     color: #428591;
 }
 
 .container-cadastro {
-    max-width: 1420px;
+    max-width: 1200px;
     padding: 0 1rem;
     margin: 0 auto;
 }
@@ -145,7 +145,6 @@ body {
 }
 
 h1{
-    padding-left: 4rem;
     color: #0C6878;
 }
 

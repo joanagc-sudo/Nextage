@@ -11,7 +11,7 @@ document.getElementById("btnNovoUsuario").addEventListener("click", () => {
 });
 
 document.getElementById("btnCancelar").addEventListener("click", () => {
-    mdocument.getElementById("modalNovoUsuario").close();
+    document.getElementById("modalNovoUsuario").close();
 });
 
 //filtro de nome

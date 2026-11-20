@@ -208,7 +208,6 @@ font-size: 14px;
 
 .modal-body a#cancela{
     display: inline-block;
-    color: rgb(123, 0, 0) !important;
     padding: 12px 20px;
     border-radius: 6px;
     text-decoration: none !important;
@@ -216,4 +215,9 @@ font-size: 14px;
     border: none;
     cursor: pointer;
     transition: background 0.2s;
+
+    
+    background: #E8E8E8;
+    color: #444;
+
 }

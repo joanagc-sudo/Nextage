@@ -5,3 +5,10 @@
     font-family: "Momo Trust Display", sans-serif;
     font-size: 20px;
 }
+
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  margin: 0;
+}

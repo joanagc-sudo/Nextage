@@ -41,7 +41,7 @@ router.get("/admin/usuarios", apenasAdmin, async (req, res) => {
         const [usuarios] = await conn.query(
             `SELECT id_usuario, nome, email, data_nascimento, tipo_usuario
              FROM Usuarios_Administradores_Estudantes
-             ORDER BY id_usuario`
+             ORDER BY tipo_usuario DESC, id_usuario ASC`
         );
 
         const lista = usuarios.map((u) => ({
@@ -56,7 +56,7 @@ router.get("/admin/usuarios", apenasAdmin, async (req, res) => {
         }));
 
         res.render("indexGerenciarUsuarios", {
-            layout: "/layouts/simples",
+            layout: "/layouts/mainAdmin",
             usuarios: lista,
             total: lista.length
         });
