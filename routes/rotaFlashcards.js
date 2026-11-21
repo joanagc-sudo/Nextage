@@ -5,8 +5,23 @@ const conn = require("../database");
 
 // Verifica se o administrador está autenticado
 function verificarAdministrador(req, res, next) {
-    if (!req.session.admin) {
-        return res.redirect("/admin/login");
+
+    const usuario = req.session.usuario;
+    const admin = req.session.admin;
+
+    const ehAdministrador =
+        Boolean(admin) ||
+        (usuario && Number(usuario.tipo_usuario) === 1);
+
+    if (!ehAdministrador) {
+
+        if (!usuario && !admin) {
+            return res.redirect("/admin/login");
+        }
+
+        return res.redirect(
+            "/tela-inicial?error=Acesso não autorizado."
+        );
     }
 
     next();
@@ -14,6 +29,7 @@ function verificarAdministrador(req, res, next) {
 
 // Buscar conteúdos para associar aos flashcards
 async function buscarConteudos() {
+
     const [conteudos] = await conn.query(`
         SELECT
             c.id_conteudo,
@@ -33,8 +49,11 @@ router.get(
     "/admin/flashcards",
     verificarAdministrador,
     async (req, res) => {
-         console.log("ENTROU NA ROTA DE FLASHCARDS!");
+
         try {
+
+            console.log("ENTROU NA LISTAGEM DE FLASHCARDS!");
+
             const [flashcards] = await conn.query(`
                 SELECT
                     f.id_flashcard,
@@ -57,8 +76,12 @@ router.get(
             });
 
         } catch (erro) {
+
             console.error("Erro ao buscar flashcards:", erro);
-            res.status(500).send("Erro ao carregar flashcards.");
+
+            res.status(500).send(
+                "Erro ao carregar flashcards."
+            );
         }
     }
 );
@@ -68,7 +91,9 @@ router.get(
     "/admin/flashcards/novo",
     verificarAdministrador,
     async (req, res) => {
+
         try {
+
             const conteudos = await buscarConteudos();
 
             res.render("administrador/formFlashcard", {
@@ -80,8 +105,12 @@ router.get(
             });
 
         } catch (erro) {
+
             console.error("Erro ao carregar cadastro:", erro);
-            res.status(500).send("Erro ao carregar formulário.");
+
+            res.status(500).send(
+                "Erro ao carregar formulário."
+            );
         }
     }
 );
@@ -91,11 +120,23 @@ router.post(
     "/admin/flashcards/novo",
     verificarAdministrador,
     async (req, res) => {
-        try {
-            const { id_conteudo, pergunta, resposta } = req.body;
 
-            if (!id_conteudo || !pergunta?.trim() || !resposta?.trim()) {
-                return res.status(400).send("Preencha todos os campos.");
+        try {
+
+            const {
+                id_conteudo,
+                pergunta,
+                resposta
+            } = req.body;
+
+            if (
+                !id_conteudo ||
+                !pergunta?.trim() ||
+                !resposta?.trim()
+            ) {
+                return res.status(400).send(
+                    "Preencha todos os campos."
+                );
             }
 
             await conn.query(`
@@ -111,8 +152,12 @@ router.post(
             res.redirect("/admin/flashcards");
 
         } catch (erro) {
+
             console.error("Erro ao cadastrar flashcard:", erro);
-            res.status(500).send("Erro ao cadastrar flashcard.");
+
+            res.status(500).send(
+                "Erro ao cadastrar flashcard."
+            );
         }
     }
 );
@@ -122,9 +167,9 @@ router.get(
     "/admin/flashcards/editar/:id",
     verificarAdministrador,
     async (req, res) => {
-       
 
         try {
+
             const id = req.params.id;
 
             const [flashcards] = await conn.query(
@@ -140,13 +185,14 @@ router.get(
 
             const conteudos = await buscarConteudos();
 
-            // Identifica o conteúdo relacionado ao flashcard
-            const conteudosComSelecao = conteudos.map(conteudo => ({
-                ...conteudo,
-                selecionado:
-                    Number(conteudo.id_conteudo) ===
-                    Number(flashcard.id_conteudo)
-            }));
+            const conteudosComSelecao = conteudos.map(
+                conteudo => ({
+                    ...conteudo,
+                    selecionado:
+                        Number(conteudo.id_conteudo) ===
+                        Number(flashcard.id_conteudo)
+                })
+            );
 
             res.render("administrador/formFlashcard", {
                 layout: "layouts/mainAdmin",
@@ -157,8 +203,15 @@ router.get(
             });
 
         } catch (erro) {
-            console.error("Erro ao buscar flashcard para edição:", erro);
-            res.status(500).send("Erro ao carregar flashcard para edição.");
+
+            console.error(
+                "Erro ao buscar flashcard para edição:",
+                erro
+            );
+
+            res.status(500).send(
+                "Erro ao carregar flashcard para edição."
+            );
         }
     }
 );
@@ -168,12 +221,25 @@ router.post(
     "/admin/flashcards/editar/:id",
     verificarAdministrador,
     async (req, res) => {
-        try {
-            const id = req.params.id;
-            const { id_conteudo, pergunta, resposta } = req.body;
 
-            if (!id_conteudo || !pergunta?.trim() || !resposta?.trim()) {
-                return res.status(400).send("Preencha todos os campos.");
+        try {
+
+            const id = req.params.id;
+
+            const {
+                id_conteudo,
+                pergunta,
+                resposta
+            } = req.body;
+
+            if (
+                !id_conteudo ||
+                !pergunta?.trim() ||
+                !resposta?.trim()
+            ) {
+                return res.status(400).send(
+                    "Preencha todos os campos."
+                );
             }
 
             const [resultado] = await conn.query(`
@@ -191,14 +257,20 @@ router.post(
             ]);
 
             if (resultado.affectedRows === 0) {
-                return res.status(404).send("Flashcard não encontrado.");
+                return res.status(404).send(
+                    "Flashcard não encontrado."
+                );
             }
 
             res.redirect("/admin/flashcards");
 
         } catch (erro) {
+
             console.error("Erro ao editar flashcard:", erro);
-            res.status(500).send("Erro ao editar flashcard.");
+
+            res.status(500).send(
+                "Erro ao editar flashcard."
+            );
         }
     }
 );
@@ -208,7 +280,9 @@ router.post(
     "/admin/flashcards/excluir/:id",
     verificarAdministrador,
     async (req, res) => {
+
         try {
+
             await conn.query(`
                 DELETE FROM flashcards
                 WHERE id_flashcard = ?
@@ -217,8 +291,12 @@ router.post(
             res.redirect("/admin/flashcards");
 
         } catch (erro) {
+
             console.error("Erro ao excluir flashcard:", erro);
-            res.status(500).send("Erro ao excluir flashcard.");
+
+            res.status(500).send(
+                "Erro ao excluir flashcard."
+            );
         }
     }
 );
