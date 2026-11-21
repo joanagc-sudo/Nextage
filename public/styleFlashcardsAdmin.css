@@ -15,11 +15,9 @@ body {
 
 .gerenciar-flashcards {
     min-height: 100vh;
-    background: #D8EDF2;
-    padding: 45px 20px;
+    background-color: #D8EDF2;
+    padding: 50px 20px;
     font-family: 'Momo Trust Display', sans-serif;
-    box-sizing: border-box;
-    min-height: 84vh;
 }
 
 .flashcards-container {
@@ -47,192 +45,6 @@ body {
     font-size: 14px;
 }
 
-.btn-voltar,
-.btn-novo,
-.btn-editar,
-.btn-excluir,
-.btn-cancelar,
-.btn-salvar {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 11px 18px;
-    border-radius: 6px;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 13px;
-}
-
-.btn-voltar,
-.btn-novo,
-.btn-salvar {
-    background: #0C6878;
-    color: white;
-}
-
-.btn-voltar:hover,
-.btn-novo:hover,
-.btn-salvar:hover {
-    background: #095563;
-    color: white;
-}
-
-.flashcards-acoes {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 25px;
-}
-
-.flashcards-lista {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 22px;
-}
-
-.flashcard-admin {
-    background: #FFFDF7;
-    padding: 25px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 20px;
-    min-width: 0;
-}
-
-.flashcard-disciplina {
-    display: inline-block;
-    background: #D8EDF2;
-    color: #0C6878;
-    padding: 6px 12px;
-    border-radius: 5px;
-    font-size: 12px;
-    margin-bottom: 8px;
-}
-
-.flashcard-conteudo {
-    display: block;
-    color: #667085;
-    font-size: 12px;
-    margin-bottom: 20px;
-}
-
-.flashcard-info h3 {
-    color: #0C6878;
-    font-size: 16px;
-    margin: 12px 0 6px;
-}
-
-.flashcard-info p {
-    color: #667085;
-    font-size: 14px;
-    line-height: 1.6;
-    overflow-wrap: anywhere;
-}
-
-.flashcard-botoes {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.flashcard-botoes form {
-    margin: 0;
-}
-
-.btn-editar {
-    background: #D8EDF2;
-    color: #0C6878;
-}
-
-.btn-excluir {
-    background: #FCE8E6;
-    color: #B42318;
-}
-
-.flashcards-vazio {
-    background: #FFFDF7;
-    padding: 60px 20px;
-    border-radius: 8px;
-    text-align: center;
-    color: #667085;
-}
-
-.flashcards-vazio i {
-    font-size: 45px;
-    color: #0C6878;
-}
-
-.flashcards-vazio h2 {
-    color: #0C6878;
-    font-size: 21px;
-}
-
-.form-flashcard {
-    background: #FFFDF7;
-    padding: 35px;
-    border-radius: 8px;
-}
-
-.campo-flashcard {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 25px;
-}
-
-.campo-flashcard label {
-    color: #0C6878;
-    font-size: 15px;
-}
-
-.campo-flashcard select,
-.campo-flashcard textarea {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 13px;
-    border: 1px solid #BAD8DE;
-    border-radius: 6px;
-    background: white;
-    color: #444;
-    font-family: inherit;
-    font-size: 14px;
-}
-
-.campo-flashcard textarea {
-    min-height: 120px;
-    resize: vertical;
-}
-
-.form-flashcard-botoes {
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.btn-cancelar {
-    background: #E8E8E8;
-    color: #444;
-}
-
-@media (max-width: 700px) {
-    .flashcards-lista {
-        grid-template-columns: 1fr;
-    }
-
-    .flashcards-header {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .form-flashcard {
-        padding: 22px;
-    }
-}
 .voltar-admin {
     position: fixed;
     top: 20px;
@@ -260,4 +72,378 @@ body {
     background-color: #095563;
     color: #FFFDF7;
     transform: scale(1.08);
+}
+
+.btn-voltar,
+.btn-novo,
+.btn-editar,
+.btn-excluir,
+.btn-cancelar,
+.btn-salvar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 11px 18px;
+
+    border-radius: 6px;
+    text-decoration: none;
+    border: none;
+
+    cursor: pointer;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    transition: background-color 0.2s ease;
+}
+
+
+.btn-voltar,
+.btn-novo,
+.btn-salvar {
+    background-color: #2F7E8E;
+    color: #FFFFFF;
+}
+
+.btn-voltar:hover,
+.btn-novo:hover,
+.btn-salvar:hover {
+    background-color: #225D69;
+    color: #FFFFFF;
+}
+
+/* AÇÕES DA LISTAGEM */
+
+.flashcards-acoes {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 25px;
+}
+
+/* LISTA DE FLASHCARDS */
+
+.flashcards-lista {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+/* CARTÃO DE FLASHCARD */
+
+.flashcard-admin {
+    background-color: #BAD8DE;
+    padding: 25px;
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+
+    min-width: 0;
+}
+
+/* INFORMAÇÕES DO FLASHCARD */
+
+.flashcard-disciplina {
+    display: inline-block;
+
+    background-color: #84B2B9;
+    color: #FFFDF5;
+
+    padding: 6px 12px;
+    border-radius: 6px;
+
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.flashcard-conteudo {
+    display: block;
+
+    color: #0C6878;
+    font-size: 13px;
+
+    margin-bottom: 20px;
+}
+
+.flashcard-info h3 {
+    color: #0C6878;
+    font-size: 16px;
+    margin: 12px 0 6px;
+}
+
+.flashcard-info p {
+    color: #667085;
+    font-size: 14px;
+    line-height: 1.6;
+
+    overflow-wrap: anywhere;
+}
+
+/* BOTÕES DE EDITAR E EXCLUIR */
+
+.flashcard-botoes {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.flashcard-botoes form {
+    margin: 0;
+}
+
+.btn-editar {
+    background-color: #FFFFFF;
+    color: #0C6878;
+}
+
+.btn-editar:hover {
+    background-color: #D8EDF2;
+    color: #0C6878;
+}
+
+.btn-excluir {
+    background-color: #FCE8E6;
+    color: #B42318;
+}
+
+.btn-excluir:hover {
+    background-color: #F8D7D4;
+    color: #B42318;
+}
+
+/* MENSAGEM DE LISTA VAZIA */
+
+.flashcards-vazio {
+    background-color: #BAD8DE;
+    padding: 60px 20px;
+    border-radius: 12px;
+
+    text-align: center;
+    color: #667085;
+}
+
+.flashcards-vazio i {
+    font-size: 45px;
+    color: #0C6878;
+}
+
+.flashcards-vazio h2 {
+    color: #0C6878;
+    font-size: 21px;
+    margin: 15px 0 10px;
+}
+
+.flashcards-vazio p {
+    font-size: 14px;
+}
+
+/* FORMULÁRIO DE CADASTRO E EDIÇÃO */
+
+.form-flashcard {
+    background-color: #BAD8DE;
+    padding: 35px;
+    border-radius: 12px;
+
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+/* CAMPOS DO FORMULÁRIO */
+
+.campo-flashcard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    margin-bottom: 25px;
+}
+
+.campo-flashcard label {
+    color: #0C6878;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* INPUTS, SELECTS E TEXTAREAS */
+
+.campo-flashcard select,
+.campo-flashcard textarea {
+    width: 100%;
+
+    background-color: #FFFFFF;
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 0.8rem 1rem;
+
+    color: #428591;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    outline: none;
+}
+
+/* TEXTAREA */
+
+.campo-flashcard textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+/* PLACEHOLDER */
+
+.campo-flashcard textarea::placeholder {
+    color: #ABB3B4;
+}
+
+.campo-flashcard select:focus,
+.campo-flashcard textarea:focus {
+    box-shadow: 0 0 0 2px rgba(12, 104, 120, 0.2);
+}
+
+/* FILTROS DE DISCIPLINA E CONTEÚDO */
+
+.filtros-flashcard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+
+    margin-bottom: 25px;
+}
+
+.filtros-flashcard .campo-flashcard {
+    margin-bottom: 0;
+}
+
+/* BOTÕES DO FORMULÁRIO */
+
+.form-flashcard-botoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    margin-top: 35px;
+}
+
+/* CANCELAR */
+
+.btn-cancelar {
+    background-color: #FFFFFF;
+    color: #428591;
+}
+
+.btn-cancelar:hover {
+    background-color: #E8F4F6;
+    color: #0C6878;
+}
+
+/* SALVAR */
+
+.btn-salvar {
+    padding: 0.75rem 2.5rem;
+    font-weight: bold;
+    font-size: 1rem;
+    letter-spacing: 0.3px;
+}
+
+/* FILTROS DA LISTAGEM */
+
+.filtros-flashcards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    margin: 25px 0;
+    padding: 20px;
+
+    background-color: #BAD8DE;
+    border-radius: 12px;
+}
+
+.campo-filtro {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    flex: 1;
+    min-width: 220px;
+}
+
+.campo-filtro label {
+    font-weight: 600;
+    color: #0C6878;
+}
+
+.campo-filtro select {
+    width: 100%;
+
+    padding: 0.8rem 1rem;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #FFFFFF;
+    color: #428591;
+
+    font-family: inherit;
+    outline: none;
+}
+
+.campo-filtro select:focus {
+    box-shadow: 0 0 0 2px rgba(12, 104, 120, 0.2);
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 700px) {
+
+    .flashcards-lista {
+        grid-template-columns: 1fr;
+    }
+
+    .flashcards-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .form-flashcard {
+        padding: 22px;
+    }
+
+    .filtros-flashcard {
+        grid-template-columns: 1fr;
+    }
+
+    .form-flashcard-botoes {
+        justify-content: center;
+    }
+
+    .btn-salvar,
+    .btn-cancelar {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .gerenciar-flashcards {
+        padding: 35px 15px;
+    }
+
+    .filtros-flashcards {
+        flex-direction: column;
+    }
+
+    .campo-filtro {
+        width: 100%;
+    }
+
 }

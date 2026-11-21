@@ -1,11 +1,15 @@
 
 <link rel="stylesheet" href="/styleFlashcardsAdmin.css">
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 <div class="gerenciar-flashcards">
 
     <div class="flashcards-container">
 
+        <!-- CABEÇALHO -->
         <div class="flashcards-header">
+
             <div>
                 <h1>
                     {{#if editando}}
@@ -19,60 +23,133 @@
             </div>
 
             <a href="/admin/flashcards" class="btn-voltar">
-                <i class="bi bi-arrow-left"></i> Voltar
+                <i class="bi bi-arrow-left"></i>
+                Voltar
             </a>
+
         </div>
 
+        <!-- FORMULÁRIO -->
         <div class="form-flashcard">
 
-            <form action="{{#if editando}}/admin/flashcards/editar/{{flashcard.id_flashcard}}{{else}}/admin/flashcards/novo{{/if}}"
-                  method="POST">
+            <form
+                action="{{#if editando}}/admin/flashcards/editar/{{flashcard.id_flashcard}}{{else}}/admin/flashcards/novo{{/if}}"
+                method="POST"
+            >
 
-                <div class="campo-flashcard">
-                    <label for="id_conteudo">Conteúdo relacionado</label>
+                <!-- FILTROS DE DISCIPLINA E CONTEÚDO -->
+                <div class="filtros-flashcard">
 
-                    <select name="id_conteudo" id="id_conteudo" required>
+                    <!-- DISCIPLINA -->
+                    <div class="campo-flashcard">
 
-                        <option value="">Selecione um conteúdo</option>
+                        <label for="filtroDisciplinaFlashcard">
+                            Disciplina
+                        </label>
 
-                        {{#each conteudos}}
-                            <option value="{{id_conteudo}}" {{#if selecionado}}selected{{/if}}>
-                            {{nome_disciplina}} - {{nome_conteudo}}
+                        <select
+                            id="filtroDisciplinaFlashcard"
+                            required
+                        >
+
+                            <option value="">
+                                Selecione uma disciplina
                             </option>
-                        {{/each}}
 
-                    </select>
+                        </select>
+
+                    </div>
+
+                    <!-- CONTEÚDO -->
+                    <div class="campo-flashcard">
+
+                        <label for="id_conteudo">
+                            Conteúdo
+                        </label>
+
+                        <select
+                            name="id_conteudo"
+                            id="id_conteudo"
+                            required
+                        >
+
+                            <option value="">
+                                Selecione um conteúdo
+                            </option>
+
+                            {{#each conteudos}}
+
+                                <option
+                                    value="{{id_conteudo}}"
+                                    data-disciplina="{{nome_disciplina}}"
+                                    {{#if selecionado}}selected{{/if}}
+                                >
+                                    {{nome_conteudo}}
+                                </option>
+
+                            {{/each}}
+
+                        </select>
+
+                    </div>
+
                 </div>
 
+                <!-- PERGUNTA -->
                 <div class="campo-flashcard">
-                    <label for="pergunta">Pergunta</label>
+
+                    <label for="pergunta">
+                        Pergunta
+                    </label>
 
                     <textarea
                         name="pergunta"
                         id="pergunta"
                         placeholder="Digite a pergunta do flashcard..."
-                        required>{{flashcard.pergunta}}</textarea>
+                        required
+                    >{{flashcard.pergunta}}</textarea>
+
                 </div>
 
+                <!-- RESPOSTA -->
                 <div class="campo-flashcard">
-                    <label for="resposta">Resposta</label>
+
+                    <label for="resposta">
+                        Resposta
+                    </label>
 
                     <textarea
                         name="resposta"
                         id="resposta"
                         placeholder="Digite a resposta do flashcard..."
-                        required>{{flashcard.resposta}}</textarea>
+                        required
+                    >{{flashcard.resposta}}</textarea>
+
                 </div>
 
+                <!-- BOTÕES -->
                 <div class="form-flashcard-botoes">
 
-                    <a href="/admin/flashcards" class="btn-cancelar">
+                    <a
+                        href="/admin/flashcards"
+                        class="btn-cancelar"
+                    >
                         Cancelar
                     </a>
 
-                    <button type="submit" class="btn-salvar">
+                    <button
+                        type="submit"
+                        class="btn-salvar"
+                    >
+
                         <i class="bi bi-check-circle"></i>
-                        {{#if editando}}Salvar alterações{{else}}Cadastrar flashcard{{/if}}
+
+                        {{#if editando}}
+                            Salvar alterações
+                        {{else}}
+                            Cadastrar flashcard
+                        {{/if}}
+
                     </button>
 
                 </div>
@@ -84,3 +161,5 @@
     </div>
 
 </div>
+
+<script src="/js/scriptFormFlashcards.js"></script>
