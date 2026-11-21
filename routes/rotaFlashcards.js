@@ -33,6 +33,7 @@ router.get(
     "/admin/flashcards",
     verificarAdministrador,
     async (req, res) => {
+         console.log("ENTROU NA ROTA DE FLASHCARDS!");
         try {
             const [flashcards] = await conn.query(`
                 SELECT
@@ -50,7 +51,7 @@ router.get(
             `);
 
             res.render("administrador/flashcards", {
-                layout: "/layouts/mainAdmin",
+                layout: "layouts/mainAdmin",
                 admin: req.session.admin,
                 flashcards
             });
@@ -121,6 +122,8 @@ router.get(
     "/admin/flashcards/editar/:id",
     verificarAdministrador,
     async (req, res) => {
+       
+
         try {
             const id = req.params.id;
 
