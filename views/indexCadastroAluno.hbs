@@ -1,4 +1,4 @@
- <link rel="stylesheet" href="styleCadastroAluno.css">
+<link rel="stylesheet" href="styleCadastroAluno.css">
 
 <!-- Linha (row) -->
 <div class="row">
@@ -7,12 +7,13 @@
         <section>
             <h1>Crie sua conta e dê o próximo <br>passo na sua
                 jornada</h1>
-            <p class =>No Nextage, você encontra tudo o que
+            <p class=>No Nextage, você encontra tudo o que
                 precisa<br>para
                 estudar,
                 organizar seus conteúdos e<br> evoluir todos os
                 dias</p>
         </section>
+
         <div class="item">
             <div class="icone">
                 <img src="imagens/iconLivro.png" alt="Ícone">
@@ -24,6 +25,7 @@
                     que quiser.</p>
             </div>
         </div>
+
         <div class="item">
             <div class="icone">
                 <img src="imagens/iconAlvo.png" alt="Ícone">
@@ -35,6 +37,7 @@
                     realmente importa.</p>
             </div>
         </div>
+
         <div class="item">
             <div class="icone">
                 <img src="imagens/iconSocial.png" alt="Ícone">
@@ -65,13 +68,11 @@
                 <div class="my-3">
                     <label for="nome">Nome Completo</label><br>
                     <div class="input-group mt-1">
-                        <span class="input-group-text"
-                            id="basic-addon1">
+                        <span class="input-group-text" id="basic-addon1">
                             <i class="bi bi-person"></i>
                         </span>
 
-                        <input class="form-control" type="text"
-                            id="nome" name="nome"
+                        <input class="form-control" type="text" id="nome" name="nome"
                             placeholder="Digite seu nome completo">
                     </div>
                 </div>
@@ -79,13 +80,11 @@
                 <div class="my-3">
                     <label for="email">E-mail</label><br>
                     <div class="input-group mt-1">
-                        <span class="input-group-text"
-                            id="basic-addon1">
+                        <span class="input-group-text" id="basic-addon1">
                             <i class="bi bi-envelope"></i>
                         </span>
 
-                        <input class="form-control" type="email"
-                            id="email" name="email"
+                        <input class="form-control" type="email" id="email" name="email"
                             placeholder="Digite seu e-mail">
                     </div>
                 </div>
@@ -97,15 +96,19 @@
                 <div class="my-3">
                     <label for="senha">Senha</label><br>
                     <div class="input-group mt-1">
-                        <span class="input-group-text"
-                            id="basic-addon1">
+                        <span class="input-group-text" id="basic-addon1">
                             <i class="bi bi-lock"></i>
                         </span>
 
-                        <input class="form-control" type="password"
-                            id="senha" name="senha"
-                            placeholder="Crie uma senha segura">
+                        <input class="form-control" type="password" id="senha" name="senha"
+                            placeholder="Crie uma senha segura" minlength="8" required>
+
                     </div>
+                    <small class="text-muted">
+                        A senha deve ter pelo menos 8 caracteres,
+                        uma letra maiúscula, uma minúscula,
+                        um número e um símbolo.
+                    </small>
                 </div>
                 <div class="my-3">
 
@@ -114,36 +117,27 @@
                     <label for="confirmarSenha">Confirmar
                         senha</label>
                     <div class="input-group mt-1">
-                        <span class="input-group-text"
-                            id="basic-addon1">
+                        <span class="input-group-text" id="basic-addon1">
                             <i class="bi bi-lock"></i>
                         </span>
 
-                        <input class="form-control" type="password"
-                            id="confirmarSenha"
-                            name="confirmarSenha"
-                            placeholder="Confirme sua senha">
+                        <input class="form-control" type="password" id="confirmarSenha" name="confirmarSenha"
+                            placeholder="Confirme sua senha" required>
                     </div>
                 </div>
 
                 <div class="my-3">
                     <label for="dataNascimento">Data de nascimento</label>
                     <div class="input-group mt-1">
-                        <span class="input-group-text"
-                            id="basic-addon1">
+                        <span class="input-group-text" id="basic-addon1">
                             <i class="bi bi-calendar4-week"></i>
                         </span>
 
-                        <input class="form-control" type="date"
-                            id="dataNascimento"
-                            name="dataNascimento"
-                            placeholder="DD/MM/AAAA">
+                        <input class="form-control" type="date" id="dataNascimento" name="dataNascimento" required>
                     </div>
                 </div>
                 <div>
-                    <button
-                        type="submit"
-                        class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary">
                         Criar minha conta
                     </button>
                 </div>
@@ -159,15 +153,9 @@
     </div>
 </div>
 
-<div id="alerta-sucesso"
-    class="alert alert-success d-flex align-items-center d-none"
-    role="alert">
+<div id="alerta-sucesso" class="alert alert-success d-flex align-items-center d-none" role="alert">
 
-    <svg class="bi flex-shrink-0 me-2"
-        width="20"
-        height="20"
-        role="img"
-        aria-label="Sucesso:">
+    <svg class="bi flex-shrink-0 me-2" width="20" height="20" role="img" aria-label="Sucesso:">
         <use xlink:href="#check-circle-fill"></use>
     </svg>
 

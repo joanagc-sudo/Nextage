@@ -1,9 +1,14 @@
 <link rel="stylesheet" href="/styleAdminMateriais.css">
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <a href="/admin" class="voltar-admin" title="Voltar ao painel administrativo">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
 <div class="pagina-admin-materiais">
 
     <div class="cabecalho-materiais">
-        <a href="/admin" class="btn-voltar">Voltar</a>
+        
         <h1>Gerenciar Materiais</h1>
         <p>Cadastre e organize os materiais do NEXTAGE.</p>
     </div>
@@ -16,13 +21,7 @@
 
             <div class="campo">
                 <label for="tituloMaterial">Título do material</label>
-                <input
-                    type="text"
-                    id="tituloMaterial"
-                    name="titulo"
-                    placeholder="Digite o título do material"
-                    required
-                >
+                <input type="text" id="tituloMaterial" name="titulo" placeholder="Digite o título do material" required>
             </div>
 
             <div class="campo">
@@ -41,21 +40,12 @@
 
             <div class="campo">
                 <label for="descricaoMaterial">Descrição</label>
-                <textarea
-                    id="descricaoMaterial"
-                    name="descricao"
-                    placeholder="Adicione uma descrição"
-                ></textarea>
+                <textarea id="descricaoMaterial" name="descricao" placeholder="Adicione uma descrição"></textarea>
             </div>
 
             <div class="campo">
                 <label for="arquivoMaterial">Arquivo</label>
-                <input
-                    type="file"
-                    id="arquivoMaterial"
-                    name="arquivo"
-                    required
-                >
+                <input type="file" id="arquivoMaterial" name="arquivo" required>
             </div>
 
             <button type="submit" class="btn-cadastrar">
@@ -71,11 +61,7 @@
         <h2>Materiais cadastrados</h2>
 
         <div class="campo-pesquisa">
-            <input
-                type="text"
-                id="pesquisarMaterial"
-                placeholder="Pesquisar material..."
-            >
+            <input type="text" id="pesquisarMaterial" placeholder="Pesquisar material...">
         </div>
 
         <div class="tabela-container">

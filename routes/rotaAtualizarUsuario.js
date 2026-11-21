@@ -1,9 +1,9 @@
-
 const express = require("express");
 const bcrypt = require("bcrypt");
 const conn = require("../database");
 
 const router = express.Router();
+
 
 // abre a página de atualização
 router.get("/atualizar-usuario", async (req, res) => {
@@ -30,7 +30,8 @@ router.get("/atualizar-usuario", async (req, res) => {
         // carrega a página com os dados
         res.render("atualizarUsuario", {
             layout: "/layouts/simples",
-            usuario: usuarios[0]
+            usuario: usuarios[0],
+            query: req.query
         });
 
     } catch (error) {
@@ -46,82 +47,106 @@ router.get("/atualizar-usuario", async (req, res) => {
 
 // salva as alterações do usuário
 router.post("/atualizar-usuario", async (req, res) => {
-
     // verifica se o usuário está logado
-    if (!req.session.usuario) {
-        return res.redirect("/tela-login");
-    }
+    if (!req.session.usuario) return res.redirect("/tela-login");
 
     try {
-
         // recebe os dados do formulário
-        const {
-            nome,
-            email,
-            dataNascimento,
-            senha
-        } = req.body;
+        const { nome, email, dataNascimento, senhaAtual, novaSenha, confirmarSenha } = req.body;
 
         // verifica os campos obrigatórios
         if (!nome || !email || !dataNascimento) {
-            return res.redirect(
-                "/atualizar-usuario?error=Preencha os campos obrigatórios."
-            );
+            return res.redirect("/atualizar-usuario?error=Preencha todos os campos obrigatórios.");
+        }
+
+        // verifica se a data informada é válida
+        const [ano, mes, dia] = dataNascimento.split("-").map(Number);
+        const dataInformada = new Date(ano, mes - 1, dia);
+
+        const dataValida =
+            dataInformada.getFullYear() === ano &&
+            dataInformada.getMonth() === mes - 1 &&
+            dataInformada.getDate() === dia;
+
+        if (!dataValida) {
+            return res.redirect("/atualizar-usuario?error=Informe uma data válida.");
+        }
+
+        // verifica se a data não está no futuro
+        const hoje = new Date();
+        hoje.setHours(0, 0, 0, 0);
+
+        if (dataInformada > hoje) {
+            return res.redirect("/atualizar-usuario?error=A data de nascimento não pode ser futura.");
         }
 
         // verifica se o e-mail já está cadastrado
         const [emailExistente] = await conn.query(
-            `SELECT id_usuario
-             FROM Usuarios_Administradores_Estudantes
+            `SELECT id_usuario FROM Usuarios_Administradores_Estudantes
              WHERE email = ? AND id_usuario != ?`,
             [email, req.session.usuario.id]
         );
 
         // impede o uso de um e-mail existente
         if (emailExistente.length > 0) {
-            return res.redirect(
-                "/atualizar-usuario?error=Este e-mail já está em uso."
-            );
+            return res.redirect("/atualizar-usuario?error=Este e-mail já está cadastrado.");
         }
 
         // verifica se uma nova senha foi informada
-        if (senha && senha.trim() !== "") {
+        if (novaSenha || confirmarSenha || senhaAtual) {
+
+            // verifica se todos os campos de senha foram preenchidos
+            if (!senhaAtual || !novaSenha || !confirmarSenha) {
+                return res.redirect("/atualizar-usuario?error=Preencha os três campos de senha para alterá-la.");
+            }
+
+            // busca a senha atual cadastrada
+            const [usuarios] = await conn.query(
+                `SELECT senha FROM Usuarios_Administradores_Estudantes
+                 WHERE id_usuario = ?`,
+                [req.session.usuario.id]
+            );
+
+            // verifica se a senha atual está correta
+            const senhaCorreta = await bcrypt.compare(
+                senhaAtual,
+                usuarios[0].senha
+            );
+
+            if (!senhaCorreta) {
+                return res.redirect("/atualizar-usuario?error=Senha atual incorreta.");
+            }
+
+            // verifica os requisitos da nova senha
+            const senhaSegura = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+
+            if (!senhaSegura.test(novaSenha)) {
+                return res.redirect("/atualizar-usuario?error=A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma minúscula, um número e um símbolo.");
+            }
+
+            // verifica se a confirmação corresponde à nova senha
+            if (novaSenha !== confirmarSenha) {
+                return res.redirect("/atualizar-usuario?error=A confirmação da senha não corresponde à nova senha.");
+            }
 
             // criptografa a nova senha
-            const senhaCriptografada = await bcrypt.hash(senha, 10);
+            const senhaCriptografada = await bcrypt.hash(novaSenha, 10);
 
             // atualiza os dados e a senha
             await conn.query(
                 `UPDATE Usuarios_Administradores_Estudantes
-                 SET nome = ?,
-                     email = ?,
-                     data_nascimento = ?,
-                     senha = ?
+                 SET nome = ?, email = ?, data_nascimento = ?, senha = ?
                  WHERE id_usuario = ?`,
-                [
-                    nome,
-                    email,
-                    dataNascimento,
-                    senhaCriptografada,
-                    req.session.usuario.id
-                ]
+                [nome, email, dataNascimento, senhaCriptografada, req.session.usuario.id]
             );
 
         } else {
-
             // atualiza os dados sem alterar a senha
             await conn.query(
                 `UPDATE Usuarios_Administradores_Estudantes
-                 SET nome = ?,
-                     email = ?,
-                     data_nascimento = ?
+                 SET nome = ?, email = ?, data_nascimento = ?
                  WHERE id_usuario = ?`,
-                [
-                    nome,
-                    email,
-                    dataNascimento,
-                    req.session.usuario.id
-                ]
+                [nome, email, dataNascimento, req.session.usuario.id]
             );
         }
 
@@ -130,19 +155,14 @@ router.post("/atualizar-usuario", async (req, res) => {
         req.session.usuario.email = email;
 
         // retorna para a página inicial
-        return res.redirect(
-            "/tela-inicial?success=Dados atualizados com sucesso!"
-        );
+        return res.redirect("/tela-inicial?success=Dados atualizados com sucesso!");
 
     } catch (error) {
-
         // exibe o erro no terminal
         console.error("Erro ao atualizar usuário:", error);
 
         // retorna uma mensagem de erro
-        return res.redirect(
-            "/atualizar-usuario?error=Erro ao atualizar os dados."
-        );
+        return res.redirect("/atualizar-usuario?error=Erro ao atualizar os dados.");
     }
 });
 

@@ -68,7 +68,6 @@ router.get("/admin/usuarios", apenasAdmin, async (req, res) => {
     }
 });
 
-//cadastro usuarios
 // cadastro usuarios
 router.post("/admin/usuarios", apenasAdmin, async (req, res) => {
     try {
@@ -78,6 +77,43 @@ router.post("/admin/usuarios", apenasAdmin, async (req, res) => {
             return res.status(400).json({
                 ok: false,
                 erro: "Preencha todos os campos."
+            });
+        }
+
+        // verifica se a data informada é válida
+        const [ano, mes, dia] = dataNascimento.split("-").map(Number);
+        const dataInformada = new Date(ano, mes - 1, dia);
+
+        const dataValida =
+            dataInformada.getFullYear() === ano &&
+            dataInformada.getMonth() === mes - 1 &&
+            dataInformada.getDate() === dia;
+
+        if (!dataValida) {
+            return res.status(400).json({
+                ok: false,
+                erro: "Informe uma data de nascimento válida."
+            });
+        }
+
+        // verifica se a data não está no futuro
+        const hoje = new Date();
+        hoje.setHours(0, 0, 0, 0);
+
+        if (dataInformada > hoje) {
+            return res.status(400).json({
+                ok: false,
+                erro: "A data de nascimento não pode ser futura."
+            });
+        }
+
+        // verifica os requisitos da senha
+        const senhaSegura = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+
+        if (!senhaSegura.test(senha)) {
+            return res.status(400).json({
+                ok: false,
+                erro: "A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma minúscula, um número e um símbolo."
             });
         }
 

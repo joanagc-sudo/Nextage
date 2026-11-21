@@ -1,82 +1,133 @@
-    const express = require("express");
-    const bcrypt = require("bcrypt");
+const express = require("express");
+const bcrypt = require("bcrypt");
 
-    const conn = require("../database");
+const conn = require("../database");
 
-    const router = express.Router();
+const router = express.Router();
 
-    router.get("/", function (req, res) {
+router.get("/", function (req, res) {
 
-        res.render("indexCadastroAluno", {
-            layout: "/layouts/simples",
-            query: req.query
-        });
-
+    res.render("indexCadastroAluno", {
+        layout: "/layouts/simples",
+        query: req.query
     });
 
-    router.post("/", async (req, res) => {
+});
 
-        try {
+router.post("/", async (req, res) => {
 
-            const {
-                nome,
-                email,
-                senha,
-                confirmarSenha,
-                dataNascimento
-            } = req.body;
+    try {
 
+        const {
+            nome,
+            email,
+            senha,
+            confirmarSenha,
+            dataNascimento
+        } = req.body;
 
-            const tipo_usuario = 0;
+        //validação da segurança da senha
+        const senhaSegura =
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
 
-
-            if (!nome || !email || !senha || !confirmarSenha) {
-
-                return res.redirect(
-                    "/?error=Preencha todos os campos obrigatórios."
-                );
-
-            }
-
-
-            if (senha !== confirmarSenha) {
-
-                return res.redirect(
-                    "/?error=As senhas não coincidem."
-                );
-
-            }
+        if (!senhaSegura.test(senha)) {
+            return res.redirect(
+                "/?error=A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma minúscula, um número e um símbolo."
+            );
+        }
 
 
-            const [usuarioExistente] =
-                await conn.query(
-                    `
+        //validação da data de nascimento
+        if (!dataNascimento) {
+            return res.redirect(
+                "/?error=Informe sua data de nascimento."
+            );
+        }
+
+
+        //verifica se a data é válida
+        const [anoNascimento, mesNascimento, diaNascimento] =
+            dataNascimento.split("-").map(Number);
+
+        const dataInformada = new Date(
+            anoNascimento,
+            mesNascimento - 1,
+            diaNascimento
+        );
+
+        const dataValida =
+            dataInformada.getFullYear() === anoNascimento &&
+            dataInformada.getMonth() === mesNascimento - 1 &&
+            dataInformada.getDate() === diaNascimento;
+
+        if (!dataValida) {
+            return res.redirect(
+                "/?error=Informe uma data de nascimento válida."
+            );
+        }
+
+        const hoje = new Date();
+
+        hoje.setHours(0, 0, 0, 0);
+
+
+        //impede nascimento no futuro
+        if (dataInformada > hoje) {
+            return res.redirect(
+                "/?error=A data de nascimento não pode ser futura."
+            );
+        }
+
+        const tipo_usuario = 0;
+
+
+        if (!nome || !email || !senha || !confirmarSenha || !dataNascimento) {
+
+            return res.redirect(
+                "/?error=Preencha todos os campos obrigatórios."
+            );
+
+        }
+
+
+        if (senha !== confirmarSenha) {
+
+            return res.redirect(
+                "/?error=As senhas não coincidem."
+            );
+
+        }
+
+
+        const [usuarioExistente] =
+            await conn.query(
+                `
                     SELECT id_usuario
                     FROM Usuarios_Administradores_Estudantes
                     WHERE email = ?
                     `,
-                    [email]
-                );
+                [email]
+            );
 
 
-            if (usuarioExistente.length > 0) {
+        if (usuarioExistente.length > 0) {
 
-                return res.redirect(
-                    "/?error=Este e-mail já está cadastrado."
-                );
+            return res.redirect(
+                "/?error=Este e-mail já está cadastrado."
+            );
 
-            }
-
-
-            const senhaCriptografada =
-                await bcrypt.hash(senha, 10);
+        }
 
 
-                await conn.query("SET autocommit = 1");
+        const senhaCriptografada =
+            await bcrypt.hash(senha, 10);
 
-            const [resultado] =
-                await conn.query(
-                    `
+
+        await conn.query("SET autocommit = 1");
+
+        const [resultado] =
+            await conn.query(
+                `
                     INSERT INTO
                     Usuarios_Administradores_Estudantes
                     (
@@ -88,45 +139,45 @@
                     )
                     VALUES (?, ?, ?, ?, ?)
                     `,
-                    [
-                        nome,
-                        email,
-                        senhaCriptografada,
-                        dataNascimento,
-                        tipo_usuario
-                    ]
-                );
-
-
-            req.session.usuario = {
-
-                id: resultado.insertId,
-                nome: nome,
-                email: email,
-                foto: null
-
-            };
-
-
-            return res.redirect(
-                "/tela-inicial?success=Cadastro Realizado"
+                [
+                    nome,
+                    email,
+                    senhaCriptografada,
+                    dataNascimento,
+                    tipo_usuario
+                ]
             );
 
 
-        } catch (error) {
+        req.session.usuario = {
 
-            console.error(
-                "Erro ao cadastrar usuário:",
-                error
-            );
+            id: resultado.insertId,
+            nome: nome,
+            email: email,
+            foto: null
 
-            return res.redirect(
-                "/?error=Erro ao cadastrar usuário."
-            );
-
-        }
-
-    });
+        };
 
 
-    module.exports = router;
+        return res.redirect(
+            "/tela-inicial?success=Cadastro Realizado"
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Erro ao cadastrar usuário:",
+            error
+        );
+
+        return res.redirect(
+            "/?error=Erro ao cadastrar usuário."
+        );
+
+    }
+
+});
+
+
+module.exports = router;

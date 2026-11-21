@@ -1,6 +1,28 @@
 * {
     box-sizing: border-box;
 }
+.voltar-admin {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #0C6878;
+    color: #FFFDF7;
+
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 23px;
+
+    transition: 0.2s ease;
+    z-index: 10;
+}
 
 .pagina-admin-materiais {
     width: 90%;

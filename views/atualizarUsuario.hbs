@@ -71,11 +71,23 @@
                     </p>
 
                     <div class="grupo-campo">
-                        <label for="senha">Nova senha</label>
+                        <label for="senhaAtual">Sua senha atual</label>
 
-                        <input type="password" id="senha" name="senha" placeholder="Digite sua nova senha">
+                        <input type="password" id="senhaAtual" name="senhaAtual" placeholder="Digite sua senha atual">
                     </div>
 
+                    <div class="grupo-campo">
+                        <label for="novaSenha">Nova senha</label>
+
+                        <input type="password" id="novaSenha" name="novaSenha" placeholder="Digite sua nova senha">
+                    </div>
+
+                    <div class="grupo-campo">
+                        <label for="confirmarSenha">Confirmar nova senha</label>
+
+                        <input type="password" id="confirmarSenha" name="confirmarSenha"
+                            placeholder="Confirme sua nova senha">
+                    </div>
                 </div>
 
                 <div class="botoes-usuario">
@@ -94,27 +106,29 @@
 
             <div class="secao-apagar-conta">
 
-    <h3>Apagar conta</h3>
+                <h3>Apagar conta</h3>
 
-    <p>
-        Ao apagar sua conta, seus dados pessoais e registros
-        associados serão excluídos.
-        Essa ação não poderá ser desfeita.
-    </p>
+                <p>
+                    Ao apagar sua conta, seus dados pessoais e registros
+                    associados serão excluídos.
+                    Essa ação não poderá ser desfeita.
+                </p>
 
-    <form action="/apagar-usuario" method="POST"
-          onsubmit="return confirm('Tem certeza de que deseja apagar sua conta? Essa ação não poderá ser desfeita.');">
+                <form action="/apagar-usuario" method="POST"
+                    onsubmit="return confirm('Tem certeza de que deseja apagar sua conta? Essa ação não poderá ser desfeita.');">
 
-        <button type="submit" class="botao-apagar">
-            Apagar minha conta
-        </button>
+                    <button type="submit" class="botao-apagar">
+                        Apagar minha conta
+                    </button>
 
-    </form>
+                </form>
 
-</div>
+            </div>
 
         </div>
 
     </div>
 
 </div>
+
+<script src="/js/scriptAtualizarUsuario.js"></script>

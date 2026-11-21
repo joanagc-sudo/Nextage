@@ -22,7 +22,7 @@ function mostrarMensagem(texto, tipo) {
     alerta.textContent = texto;
 
     container.appendChild(alerta);
-    
+
     setTimeout(() => {
         alerta.remove();
     }, 3000);
@@ -101,6 +101,66 @@ document.getElementById("formNovoUsuario").addEventListener("submit", async (e) 
         tipo: document.getElementById("novoTipo").value
     };
 
+    // verifica os campos obrigatórios
+    if (!corpo.nome || !corpo.email || !corpo.senha || !corpo.dataNascimento) {
+        document.getElementById("erroModal").textContent =
+            "Preencha todos os campos.";
+
+        document.getElementById("erroModal").hidden = false;
+        return;
+    }
+
+    // verifica o formato do e-mail
+    const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailValido.test(corpo.email)) {
+        document.getElementById("erroModal").textContent =
+            "Informe um e-mail válido.";
+
+        document.getElementById("erroModal").hidden = false;
+        return;
+    }
+
+    // verifica se a data informada é válida
+    const [ano, mes, dia] = corpo.dataNascimento.split("-").map(Number);
+    const dataInformada = new Date(ano, mes - 1, dia);
+
+    const dataValida =
+        dataInformada.getFullYear() === ano &&
+        dataInformada.getMonth() === mes - 1 &&
+        dataInformada.getDate() === dia;
+
+    if (!dataValida) {
+        document.getElementById("erroModal").textContent =
+            "Informe uma data de nascimento válida.";
+
+        document.getElementById("erroModal").hidden = false;
+        return;
+    }
+
+    // verifica se a data não está no futuro
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+
+    if (dataInformada > hoje) {
+        document.getElementById("erroModal").textContent =
+            "A data de nascimento não pode ser futura.";
+
+        document.getElementById("erroModal").hidden = false;
+        return;
+    }
+
+    // verifica os requisitos da senha
+    const senhaSegura = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+
+    if (!senhaSegura.test(corpo.senha)) {
+        document.getElementById("erroModal").textContent =
+            "A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma minúscula, um número e um símbolo.";
+
+        document.getElementById("erroModal").hidden = false;
+        return;
+    }
+
     // post do usuario
     try {
         const resposta = await fetch("/admin/usuarios", {
@@ -114,12 +174,28 @@ document.getElementById("formNovoUsuario").addEventListener("submit", async (e) 
         const dados = await resposta.json();
 
         if (!resposta.ok) {
-    document.getElementById("erroModal").textContent =
-        dados.erro || "Erro ao cadastrar.";
+            document.getElementById("erroModal").textContent =
+                dados.erro || "Erro ao cadastrar.";
 
-    document.getElementById("erroModal").hidden = false;
-    return;
-}
+            document.getElementById("erroModal").hidden = false;
+            return;
+        }
+
+        document.getElementById("modalNovoUsuario").close();
+        document.getElementById("formNovoUsuario").reset();
+
+        mostrarMensagem(
+            dados.mensagem || "Usuário cadastrado com sucesso!",
+            "success"
+        );
+
+    } catch (erro) {
+        document.getElementById("erroModal").textContent =
+            "Não foi possível conectar ao servidor.";
+
+        document.getElementById("erroModal").hidden = false;
+    }
+});
 
 document.getElementById("modalNovoUsuario").close();
 document.getElementById("formNovoUsuario").reset();
