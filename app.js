@@ -7,6 +7,9 @@ const session = require("express-session");
 
 const app = express();
 
+//logins
+const { exigirLogin, exigirAdmin } = require("./autenticacao");
+
 // Importação das rotas
 const cadastroRoutes = require("./routes/rotaCadastro");
 const loginRoutes = require("./routes/rotaLogin");
@@ -27,6 +30,7 @@ const atualizarUsuarioRoutes = require("./routes/rotaAtualizarUsuario");
 const flashcardsRoutes = require("./routes/rotaFlashcards");
 const flashcardsEstudanteRoutes = require("./routes/rotaFlashcardsEstudante");
 const gerenciarUsuariosRoutes = require("./routes/rotaGerenciarUsuarios");
+
 
 // Configuração do Handlebars
 app.set("view engine", "hbs");
@@ -93,30 +97,34 @@ hbs.registerPartials(
     path.join(__dirname, "views/partials")
 );
 
-// Registro das rotas
+
+// rotas publicas (NÃO EXIGEM LOGIN)
+
 app.use("/", cadastroRoutes);
 app.use("/", loginRoutes);
-app.use("/", usuarioRoutes);
-app.use("/", paginasRoutes);
-app.use("/", questoesRoutes);
-app.use("/", filtrosRoutes);
-app.use("/", cronogramasRoutes);
-app.use("/", materiaisRoutes);
-app.use("/", cadastroQuestoesRoutes);
-app.use("/" ,lembretesRoutes);
-app.use("/" ,cronometroRoutes);
-app.use("/" ,adminRoutes);
-app.use("/" ,alterarQuestoesRoutes);
-app.use("/" ,desempenhoRoutes);
-app.use("/", lembretesRoutes);
-app.use("/", cronometroRoutes);
-app.use("/", adminRoutes);
-app.use("/", alterarQuestoesRoutes);
-app.use("/", excluirQuestaoRoutes);
-app.use("/", atualizarUsuarioRoutes);
-app.use("/", flashcardsRoutes);
-app.use("/", flashcardsEstudanteRoutes);
-app.use("/", gerenciarUsuariosRoutes);
+
+// rotas que exigem login
+
+app.use("/", exigirLogin, usuarioRoutes);
+app.use("/", exigirLogin, paginasRoutes);
+app.use("/", exigirLogin, questoesRoutes);
+app.use("/", exigirLogin, filtrosRoutes);
+app.use("/", exigirLogin, cronogramasRoutes);
+app.use("/", exigirLogin, materiaisRoutes);
+app.use("/", exigirLogin, lembretesRoutes);
+app.use("/", exigirLogin, cronometroRoutes);
+app.use("/", exigirLogin, desempenhoRoutes);
+app.use("/", exigirLogin, atualizarUsuarioRoutes);
+app.use("/", exigirLogin, flashcardsEstudanteRoutes);
+
+// rotas que exigem admin
+
+app.use("/", exigirAdmin, adminRoutes);
+app.use("/", exigirAdmin, gerenciarUsuariosRoutes);
+app.use("/", exigirAdmin, cadastroQuestoesRoutes);
+app.use("/", exigirAdmin, alterarQuestoesRoutes);
+app.use("/", exigirAdmin, excluirQuestaoRoutes);
+app.use("/", exigirAdmin, flashcardsRoutes);
 
 // Inicialização do servidor
 http.createServer(app).listen(8080, () => {

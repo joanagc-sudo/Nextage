@@ -7,8 +7,19 @@ const router = express.Router();
 
 // Verifica se o administrador está autenticado
 function verificarAdministrador(req, res, next) {
-    if (!req.session.admin) {
-        return res.redirect("/admin/login");
+    const usuario = req.session.usuario;
+    const admin = req.session.admin;
+
+    const ehAdministrador =
+        Boolean(admin) ||
+        (usuario && Number(usuario.tipo_usuario) === 1);
+
+    if (!ehAdministrador) {
+        if (!usuario && !admin) {
+            return res.redirect("/admin/login");
+        }
+
+        return res.redirect("/tela-inicial?error=Acesso não autorizado.");
     }
 
     next();
@@ -16,8 +27,22 @@ function verificarAdministrador(req, res, next) {
 
 // Página de login administrativo
 router.get("/admin/login", (req, res) => {
-    if (req.session.admin) {
+
+    const usuario = req.session.usuario;
+    const admin = req.session.admin;
+
+    const ehAdministrador =
+        Boolean(admin) ||
+        (usuario && Number(usuario.tipo_usuario) === 1);
+
+    // Se já estiver logado como administrador
+    if (ehAdministrador) {
         return res.redirect("/admin");
+    }
+
+    // Se estiver logado como estudante
+    if (usuario) {
+        return res.redirect("/tela-inicial?error=Acesso não autorizado.");
     }
 
     res.render("administrador/loginAdmin", {
