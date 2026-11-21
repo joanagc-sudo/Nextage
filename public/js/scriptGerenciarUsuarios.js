@@ -1,4 +1,3 @@
-
 function mostrarAlerta(mensagem) {
     document.getElementById("alerta").textContent = mensagem;
     document.getElementById("alerta").hidden = false;
@@ -197,18 +196,14 @@ document.getElementById("formNovoUsuario").addEventListener("submit", async (e) 
     }
 });
 
-document.getElementById("modalNovoUsuario").close();
-document.getElementById("formNovoUsuario").reset();
+// define a data máxima de nascimento
+const campoData = document.getElementById("novaData");
 
-mostrarMensagem(
-    dados.mensagem || "Usuário cadastrado com sucesso!",
-    "success"
-);
+if (campoData) {
+    const hoje = new Date();
+    const ano = hoje.getFullYear();
+    const mes = String(hoje.getMonth() + 1).padStart(2, "0");
+    const dia = String(hoje.getDate()).padStart(2, "0");
 
-    } catch (erro) {
-        document.getElementById("erroModal").textContent =
-            "Não foi possível conectar ao servidor.";
-
-        document.getElementById("erroModal").hidden = false;
-    }
-});
+    campoData.max = `${ano}-${mes}-${dia}`;
+}
