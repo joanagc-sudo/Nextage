@@ -6,19 +6,15 @@
     box-sizing: border-box;
 }
 
-body {
-    background-color: #D8EDF2;
+body{
+    background-color: #9DC8CF;
     font-family: 'Momo Trust Display', sans-serif;
-    color: #428591;
+    color: #428591 ;
 }
-
-/* =========================================
-   PÁGINA PRINCIPAL DOS FLASHCARDS
-========================================= */
 
 .pagina-flashcards {
     min-height: 100vh;
-    background-color: #D8EDF2;
+    background-color: 9DC8CF;
     padding: 30px 7%;
     font-family: "Momo Trust Display", sans-serif;
 }
