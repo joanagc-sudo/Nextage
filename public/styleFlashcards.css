@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -10,14 +12,15 @@ body {
     color: #428591;
 }
 
-/* Página principal */
+/* =========================================
+   PÁGINA PRINCIPAL DOS FLASHCARDS
+========================================= */
 
 .pagina-flashcards {
-    min-height: 80vh;
+    min-height: 100vh;
     background-color: #D8EDF2;
-    padding: 55px 7%;
+    padding: 30px 7%;
     font-family: "Momo Trust Display", sans-serif;
-    min-height: 84vh;
 }
 
 .flashcards-container {
@@ -25,66 +28,66 @@ body {
     margin: 0 auto;
 }
 
-/* Cabeçalho */
+/* Cabeçalho compacto */
 
 .flashcards-topo {
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: #FFFDF7;
-    padding: 35px 40px;
-    border-radius: 20px;
-    margin-bottom: 35px;
+    padding: 22px 30px;
+    border-radius: 18px;
+    margin-bottom: 25px;
     box-shadow: 0 4px 15px rgba(12, 104, 120, 0.07);
 }
 
 .flashcards-subtitulo {
     color: #428591;
-    font-size: 14px;
+    font-size: 12px;
     display: inline-block;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .flashcards-titulo h1 {
     color: #0C6878;
-    font-size: 32px;
-    margin: 0 0 10px;
+    font-size: 26px;
+    margin: 0 0 5px;
 }
 
 .flashcards-titulo p {
     color: #667085;
-    font-size: 15px;
+    font-size: 13px;
     margin: 0;
 }
 
 .flashcards-icone-topo {
-    width: 85px;
-    height: 85px;
-    border-radius: 22px;
+    width: 65px;
+    height: 65px;
+    border-radius: 18px;
     background-color: #D8EDF2;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #0C6878;
-    font-size: 40px;
+    font-size: 32px;
     flex-shrink: 0;
 }
 
 /* Títulos das seções */
 
 .flashcards-secao-titulo {
-    margin-bottom: 22px;
+    margin-bottom: 18px;
 }
 
 .flashcards-secao-titulo h2 {
     color: #0C6878;
-    font-size: 22px;
-    margin-bottom: 5px;
+    font-size: 20px;
+    margin-bottom: 4px;
 }
 
 .flashcards-secao-titulo span {
     color: #667085;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 /* Grade de cartões */
@@ -92,20 +95,20 @@ body {
 .flashcards-grade {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
+    gap: 18px;
 }
 
-/* Cartão de disciplina */
+/* Cartões de disciplina e conteúdo */
 
 .flashcard-disciplina,
 .flashcard-conteudo {
     display: flex;
     align-items: center;
-    gap: 18px;
-    padding: 24px;
+    gap: 15px;
+    padding: 20px;
     background-color: #FFFDF7;
     border: 1px solid #BAD8DE;
-    border-radius: 17px;
+    border-radius: 16px;
     text-decoration: none;
     transition: 0.25s ease;
     min-width: 0;
@@ -113,7 +116,7 @@ body {
 
 .flashcard-disciplina:hover,
 .flashcard-conteudo:hover {
-    transform: translateY(-4px);
+    transform: translateY(-3px);
     border-color: #428591;
     box-shadow: 0 8px 20px rgba(12, 104, 120, 0.12);
 }
@@ -122,16 +125,16 @@ body {
 
 .disciplina-icone,
 .conteudo-icone {
-    width: 55px;
-    height: 55px;
-    min-width: 55px;
-    border-radius: 15px;
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    border-radius: 14px;
     background-color: #D8EDF2;
     color: #0C6878;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 25px;
+    font-size: 23px;
 }
 
 /* Informações */
@@ -145,20 +148,20 @@ body {
 .disciplina-informacoes h3,
 .conteudo-informacoes h3 {
     color: #0C6878;
-    font-size: 17px;
-    margin: 0 0 7px;
+    font-size: 16px;
+    margin: 0 0 5px;
     overflow-wrap: anywhere;
 }
 
 .disciplina-informacoes p {
     color: #667085;
-    font-size: 13px;
+    font-size: 12px;
     margin: 0;
 }
 
 .conteudo-informacoes span {
     color: #667085;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .conteudo-informacoes span i {
@@ -171,13 +174,13 @@ body {
 .disciplina-seta,
 .conteudo-seta {
     color: #428591;
-    font-size: 22px;
+    font-size: 20px;
     transition: 0.2s;
 }
 
 .flashcard-disciplina:hover .disciplina-seta,
 .flashcard-conteudo:hover .conteudo-seta {
-    transform: translateX(5px);
+    transform: translateX(4px);
     color: #0C6878;
 }
 
@@ -189,8 +192,8 @@ body {
     gap: 8px;
     color: #0C6878;
     text-decoration: none;
-    font-size: 14px;
-    margin: -15px 0 30px;
+    font-size: 13px;
+    margin: 0 0 18px;
     transition: 0.2s;
 }
 
@@ -204,87 +207,42 @@ body {
 .flashcards-vazio {
     grid-column: 1 / -1;
     background-color: #FFFDF7;
-    padding: 55px 20px;
+    padding: 40px 20px;
     border-radius: 17px;
     text-align: center;
     border: 1px solid #BAD8DE;
 }
 
 .flashcards-vazio > i {
-    font-size: 45px;
+    font-size: 40px;
     color: #428591;
 }
 
 .flashcards-vazio h3 {
     color: #0C6878;
-    font-size: 20px;
-    margin: 15px 0 8px;
+    font-size: 18px;
+    margin: 12px 0 8px;
 }
 
 .flashcards-vazio p {
     color: #667085;
-    font-size: 14px;
+    font-size: 13px;
     margin: 0;
 }
 
-/* Responsividade */
-
-@media (max-width: 768px) {
-
-    .pagina-flashcards {
-        padding: 30px 5%;
-    }
-
-    .flashcards-topo {
-        padding: 25px;
-    }
-
-    .flashcards-titulo h1 {
-        font-size: 25px;
-    }
-
-    .flashcards-icone-topo {
-        width: 65px;
-        height: 65px;
-        font-size: 30px;
-    }
-
-    .flashcards-grade {
-        grid-template-columns: 1fr;
-    }
-
-}
-
-@media (max-width: 480px) {
-
-    .flashcards-topo {
-        padding: 20px;
-    }
-
-    .flashcards-icone-topo {
-        display: none;
-    }
-
-    .flashcard-disciplina,
-    .flashcard-conteudo {
-        padding: 18px;
-        gap: 12px;
-    }
-
-}
-
-
-/* =================================
-   TELA DE ESTUDO DOS FLASHCARDS
-================================= */
+/* =========================================
+   TELA DE ESTUDO
+========================================= */
 
 .estudo-flashcards {
     background-color: #FFFDF7;
-    padding: 35px;
+    padding: 22px 28px;
     border: 1px solid #BAD8DE;
     border-radius: 20px;
     box-shadow: 0 4px 15px rgba(12, 104, 120, 0.07);
 }
+
+/* Informações e progresso */
 
 .estudo-info {
     display: flex;
@@ -292,17 +250,17 @@ body {
     align-items: center;
     gap: 15px;
     color: #428591;
-    font-size: 14px;
-    margin-bottom: 12px;
+    font-size: 13px;
+    margin-bottom: 10px;
 }
 
 .progresso-fundo {
     width: 100%;
-    height: 9px;
+    height: 7px;
     background-color: #D8EDF2;
     border-radius: 20px;
     overflow: hidden;
-    margin-bottom: 35px;
+    margin-bottom: 20px;
 }
 
 .progresso-preenchido {
@@ -319,12 +277,15 @@ body {
     perspective: 1200px;
     max-width: 750px;
     margin: 0 auto;
+    display: block;
 }
+
+/* Cartão */
 
 .cartao-estudo {
     display: none;
     width: 100%;
-    min-height: 340px;
+    height: 300px;
     cursor: pointer;
 }
 
@@ -332,10 +293,12 @@ body {
     display: block;
 }
 
+/* Parte interna */
+
 .cartao-inner {
     position: relative;
     width: 100%;
-    min-height: 340px;
+    height: 300px;
     transform-style: preserve-3d;
     transition: transform 0.65s ease;
 }
@@ -349,14 +312,17 @@ body {
 .cartao-face {
     position: absolute;
     inset: 0;
-    min-height: 340px;
-    padding: 35px;
+    height: 300px;
+    padding: 25px 35px;
     border-radius: 20px;
     border: 2px solid #BAD8DE;
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 18px;
+
     text-align: center;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
@@ -373,32 +339,47 @@ body {
     transform: rotateY(180deg);
 }
 
+/* Etiqueta pergunta/resposta */
+
 .cartao-etiqueta {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: bold;
     letter-spacing: 1.5px;
     color: #428591;
 }
 
+/* Etiqueta do verso */
+
 .cartao-verso .cartao-etiqueta {
     color: #D8EDF2;
 }
 
+/* Texto centralizado */
+
 .cartao-texto {
-    font-size: 23px;
+    width: 100%;
+    max-width: 620px;
+
+    font-size: 22px;
     font-weight: 500;
-    line-height: 1.6;
+    line-height: 1.5;
+
     color: #0C6878;
     overflow-wrap: anywhere;
     white-space: pre-wrap;
+
+    text-align: center;
+    margin: auto 0;
 }
 
 .cartao-verso .cartao-texto {
     color: #FFFDF7;
 }
 
+/* Instrução para virar */
+
 .cartao-instrucao {
-    font-size: 13px;
+    font-size: 12px;
     color: #428591;
 }
 
@@ -406,14 +387,16 @@ body {
     color: #D8EDF2;
 }
 
-/* Botões de navegação */
+/* =========================================
+   BOTÕES DE NAVEGAÇÃO
+========================================= */
 
 .estudo-botoes {
     display: flex;
     justify-content: space-between;
     gap: 15px;
     max-width: 750px;
-    margin: 30px auto 0;
+    margin: 18px auto 0;
 }
 
 .botao-estudo {
@@ -421,10 +404,10 @@ body {
     justify-content: center;
     align-items: center;
     gap: 9px;
-    padding: 13px 25px;
+    padding: 11px 22px;
     border-radius: 12px;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 13px;
     cursor: pointer;
     transition: 0.25s ease;
 }
@@ -456,46 +439,48 @@ body {
     cursor: not-allowed;
 }
 
-/* Conclusão */
+/* =========================================
+   CONCLUSÃO DO ESTUDO
+========================================= */
 
 .estudo-concluido {
     text-align: center;
-    padding: 30px 15px;
+    padding: 20px 15px;
 }
 
 .conclusao-icone {
-    width: 90px;
-    height: 90px;
+    width: 75px;
+    height: 75px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 20px;
-    border-radius: 25px;
+    margin: 0 auto 15px;
+    border-radius: 22px;
     background-color: #D8EDF2;
     color: #0C6878;
-    font-size: 42px;
+    font-size: 35px;
 }
 
 .estudo-concluido h2 {
     color: #0C6878;
-    font-size: 28px;
-    margin-bottom: 12px;
+    font-size: 25px;
+    margin-bottom: 10px;
 }
 
 .estudo-concluido p {
     max-width: 500px;
-    margin: 0 auto 25px;
+    margin: 0 auto 20px;
     color: #667085;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.6;
 }
 
 .link-voltar-estudo {
     display: block;
-    margin-top: 18px;
+    margin-top: 15px;
     color: #428591;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .link-voltar-estudo:hover {
@@ -503,22 +488,46 @@ body {
     text-decoration: underline;
 }
 
-/* Responsividade */
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
 
 @media (max-width: 768px) {
 
+    .pagina-flashcards {
+        padding: 25px 5%;
+    }
+
+    .flashcards-topo {
+        padding: 20px;
+    }
+
+    .flashcards-titulo h1 {
+        font-size: 23px;
+    }
+
+    .flashcards-icone-topo {
+        width: 55px;
+        height: 55px;
+        font-size: 27px;
+    }
+
+    .flashcards-grade {
+        grid-template-columns: 1fr;
+    }
+
     .estudo-flashcards {
-        padding: 25px 18px;
+        padding: 20px 15px;
     }
 
     .cartao-estudo,
     .cartao-inner,
     .cartao-face {
-        min-height: 300px;
+        height: 280px;
     }
 
     .cartao-face {
-        padding: 25px 18px;
+        padding: 20px 18px;
     }
 
     .cartao-texto {
@@ -529,29 +538,45 @@ body {
 
 @media (max-width: 480px) {
 
+    .flashcards-topo {
+        padding: 18px;
+    }
+
+    .flashcards-icone-topo {
+        display: none;
+    }
+
+    .flashcard-disciplina,
+    .flashcard-conteudo {
+        padding: 16px;
+        gap: 12px;
+    }
+
     .estudo-info {
         align-items: flex-start;
         flex-direction: column;
+        gap: 5px;
     }
 
     .cartao-estudo,
     .cartao-inner,
     .cartao-face {
-        min-height: 280px;
+        height: 260px;
     }
 
     .cartao-texto {
         font-size: 17px;
+        line-height: 1.4;
     }
 
     .estudo-botoes {
-        gap: 10px;
+        gap: 8px;
+        margin-top: 15px;
     }
 
     .botao-estudo {
-        padding: 12px 15px;
-        font-size: 13px;
+        padding: 10px 13px;
+        font-size: 12px;
     }
 
 }
-
