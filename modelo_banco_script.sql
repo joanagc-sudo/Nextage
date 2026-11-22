@@ -813,6 +813,184 @@ INSERT INTO conteudos (id_conteudo, id_disciplina, nome) VALUES
 (208, 11, 'Obras Sociológicas');
 
 -- -----------------------------------------------------
+-- Data for table `nextage`.`disciplinas`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `nextage`;
+INSERT INTO `nextage`.`disciplinas` (`id_disciplina`, `nome`) VALUES (1, 'Matemática');
+INSERT INTO `nextage`.`disciplinas` (`id_disciplina`, `nome`) VALUES (2, 'Português');
+INSERT INTO `nextage`.`disciplinas` (`id_disciplina`, `nome`) VALUES (3, 'Biologia');
+INSERT INTO `nextage`.`disciplinas` (`id_disciplina`, `nome`) VALUES (4, 'Geografia');
+INSERT INTO `nextage`.`disciplinas` (`id_disciplina`, `nome`) VALUES (5, 'Espanhol');
+INSERT INTO `nextage`.`disciplinas` (`id_disciplina`, `nome`) VALUES (6, 'Física ');
+INSERT INTO `nextage`.`disciplinas` (`id_disciplina`, `nome`) VALUES (7, 'Filosofia');
+INSERT INTO `nextage`.`disciplinas` (`id_disciplina`, `nome`) VALUES (8, 'História ');
+INSERT INTO `nextage`.`disciplinas` (`id_disciplina`, `nome`) VALUES (9, 'Inglês');
+INSERT INTO `nextage`.`disciplinas` (`id_disciplina`, `nome`) VALUES (10, 'Química');
+INSERT INTO `nextage`.`disciplinas` (`id_disciplina`, `nome`) VALUES (11, 'Sociologia');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `nextage`.`conteudos`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `nextage`;
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (126, 1, 'Matemática Básica');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (127, 1, 'Conjuntos');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (128, 1, 'Módulo');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (129, 1, 'Exponencial e Logaritmo');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (130, 1, 'Geometria Plana');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (131, 1, 'Trigonometria');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (132, 1, 'Matrizes');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (133, 1, 'Sistemas Lineares');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (134, 1, 'Geometria Espacial');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (135, 1, 'Sequências e Progressões');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (136, 1, 'Análise Combinatória');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (137, 1, 'Probabilidade');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (138, 1, 'Estatística');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (139, 1, 'Geometria Analítica');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (140, 1, 'Números Complexos');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (141, 1, 'Polinômios');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (158, 2, 'Introdução à Língua Portuguesa');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (159, 2, 'Classes Gramaticais');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (160, 2, 'Verbos');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (161, 2, 'Pronomes');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (162, 2, 'Conjunções');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (163, 2, 'Análise Sintática');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (164, 2, 'Concordância');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (165, 2, 'Regência e Crase');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (166, 2, 'Orações');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (167, 2, 'Vírgula');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (168, 2, 'Morfologia das Palavras');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (169, 2, 'Fonologia e Ortografia');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (170, 2, 'Gramática e Interpretação');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (171, 2, 'Funções da Linguagem');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (172, 2, 'Figuras de Linguagem');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (173, 2, 'Linguagem Culta e Coloquial');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (174, 2, 'Estratégias de Interpretação');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (175, 2, 'Texto e Contexto');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (176, 2, 'Gêneros Textuais');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (60, 3, 'Introdução à Biologia');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (61, 3, 'Classificação dos Seres Vivos');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (62, 3, 'Ecologia');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (63, 3, 'Biomas do Brasil');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (64, 3, 'Bioquímica');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (65, 3, 'Citologia');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (66, 3, 'Bioenergética');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (67, 3, 'Microbiologia');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (68, 3, 'Citogenética');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (69, 3, 'Biotecnologia');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (70, 3, 'Reprodução');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (71, 3, 'Embriologia');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (72, 3, 'Histologia');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (73, 3, 'Fisiologia Humana');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (74, 3, 'Evolução');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (75, 3, 'Botânica');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (76, 3, 'Micologia');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (77, 3, 'Zoologia');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (78, 3, 'Fisiologia Animal Comparada');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (79, 3, 'Saúde');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (142, 4, 'Clima');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (143, 4, 'Hidrosfera');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (144, 4, 'Biomas');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (145, 4, 'Domínios Morfoclimáticos');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (146, 4, 'Solos');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (147, 4, 'Espaço Agrário');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (148, 4, 'Indústria');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (149, 4, 'Espaços urbanos');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (150, 4, 'Questões Ambientais');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (151, 4, 'Fontes de Energia');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (152, 4, 'Demografia e Migrações');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (153, 4, 'Diversidade Étnico-Racial e Pluralismo Religioso');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (154, 4, 'Geopolítica');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (155, 4, 'Blocos Econômicos e Geografia Econômica');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (156, 4, 'Transporte, Comércio e Serviços');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (157, 4, 'Regiões do Brasil');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (80, 5, 'Géneros Textuales');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (81, 5, 'Gramática y Morfología');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (82, 5, 'Pronombres');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (83, 5, 'Tiempos Verbales');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (84, 5, 'Vocabulario');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (96, 6, 'Introdução à Física');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (97, 6, 'Estática');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (98, 6, 'Movimento Circular');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (99, 6, 'Gravitação Universal');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (100, 6, 'Quantidade de Movimento');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (101, 6, 'Fluidos');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (102, 6, 'Movimento Harmônico Simples');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (103, 6, 'Ondulatória');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (104, 6, 'Eletrostática');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (105, 6, 'Eletrodinâmica');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (106, 6, 'Magnetismo');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (107, 6, 'Física Moderna');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (108, 6, 'Análise Dimensional');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (85, 7, 'Áreas da Filosofia');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (86, 7, 'Ética e Filosofia Política');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (87, 7, 'Epistemologia');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (88, 7, 'Filosofia Política');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (89, 7, 'Filosofia Contemporânea');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (90, 7, 'Mal e Justiça');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (91, 7, 'Filosofia Alemã');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (92, 7, 'Psicanálise e Teoria Crítica');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (93, 7, 'Existencialismo');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (94, 7, 'Questões Filosóficas da Contemporaneidade');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (95, 7, 'Obras Filosóficas');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (109, 8, 'Introdução à História Geral');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (110, 8, 'Idade Antiga');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (111, 8, 'Brasil Colônia');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (112, 8, 'Brasil Monárquico');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (113, 8, 'Século XX');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (114, 8, 'Conflitos do Século XX');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (115, 8, 'Primeira República');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (116, 8, 'Estado Novo e Populismo');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (117, 8, 'Ditadura Militar Brasileira');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (118, 8, 'Nova República');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (119, 8, 'Tempo Presente');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (120, 8, 'História da Arte');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (121, 9, 'Textual Genres');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (122, 9, 'Grammar');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (123, 9, 'Morphology');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (124, 9, 'Verbs');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (125, 9, 'Vocabulary');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (177, 10, 'Introdução à Química');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (178, 10, 'Estudo da Matéria');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (179, 10, 'Átomos');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (180, 10, 'Moléculas e Propriedades');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (181, 10, 'Reações Químicas');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (182, 10, 'Estudo dos Gases');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (183, 10, 'Termoquímica');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (184, 10, 'Cinética Química');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (185, 10, 'Equilíbrio Químico');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (186, 10, 'Propriedades Coligativas');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (187, 10, 'Eletroquímica');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (188, 10, 'Hidrocarbonetos');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (189, 10, 'Funções Oxigenadas');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (190, 10, 'Funções Nitrogenadas');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (191, 10, 'Outras Funções Orgânicas');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (192, 10, 'Propriedades dos Compostos Orgânicos');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (193, 10, 'Separação de Misturas');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (194, 10, 'Isomeria');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (195, 10, 'Reações Orgânicas');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (196, 10, 'Bioquímica');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (197, 10, 'Polímeros');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (198, 10, 'Química Ambiental');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (199, 10, 'Radioatividade');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (200, 11, 'As Ciências Sociais');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (201, 11, 'Teoria Sociológica');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (202, 11, 'Sociologia no Trabalho');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (203, 11, 'Sociologia Brasileira');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (204, 11, 'Estado e Cidadania');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (205, 11, 'Sociologia Política');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (206, 11, 'Meio Ambiente, Sociedade e Comunicação');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (207, 11, 'Sociologia Contemporânea');
+INSERT INTO `nextage`.`conteudos` (`id_conteudo`, `id_disciplina`, `nome`) VALUES (208, 11, 'Obras Sociológicas');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `nextage`.`flashcards`
 -- -----------------------------------------------------
 START TRANSACTION;
@@ -899,6 +1077,9 @@ INSERT INTO `nextage`.`flashcards` (`id_flashcard`, `id_conteudo`, `pergunta`, `
 
 COMMIT;
 
+
+
+SELECT * FROM `nextage`.`disciplinas`;
 
 
 
