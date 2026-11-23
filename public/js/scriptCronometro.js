@@ -1,4 +1,5 @@
-//Script do cronometro
+
+ //Script do cronometro
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -41,6 +42,16 @@ document.addEventListener("DOMContentLoaded", function () {
     let executando = false;
     let marcacoes = [];
 
+    // Salvar e recuperar o tempo do cronômetro
+    const chaveCronometro = "cronometroNextage";
+
+    const dadosSalvos = JSON.parse(
+        sessionStorage.getItem(chaveCronometro)
+    ) || {};
+
+    tempoAcumulado = dadosSalvos.tempo || 0;
+    marcacoes = dadosSalvos.marcacoes || [];
+
     // Abre e minimiza o painel
     botaoCronometro.addEventListener("click", function () {
         painelCronometro.hidden = !painelCronometro.hidden;
@@ -61,6 +72,19 @@ document.addEventListener("DOMContentLoaded", function () {
         return tempoAcumulado;
     }
 
+    // Salva o tempo e as marcações
+    function salvarCronometro() {
+
+        sessionStorage.setItem(
+            chaveCronometro,
+            JSON.stringify({
+                tempo: obterTempo(),
+                marcacoes: marcacoes
+            })
+        );
+
+    }
+
     // Formata em horas, minutos e segundos
     function formatarTempo(milissegundos) {
         const totalSegundos = Math.floor(milissegundos / 1000);
@@ -79,6 +103,8 @@ document.addEventListener("DOMContentLoaded", function () {
     function atualizarTempo() {
         tempoCronometro.textContent =
             formatarTempo(obterTempo());
+
+        salvarCronometro();
     }
 
     // Inicia ou pausa
@@ -98,6 +124,8 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             estadoCronometro.textContent = "Cronômetro pausado";
+
+            salvarCronometro();
 
         } else {
             // Iniciar ou continuar
@@ -131,6 +159,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         renderizarMarcacoes();
+
+        salvarCronometro();
     });
 
     function renderizarMarcacoes() {
@@ -196,7 +226,48 @@ document.addEventListener("DOMContentLoaded", function () {
         estadoCronometro.textContent = "Pronto para começar?";
 
         renderizarMarcacoes();
+
+        salvarCronometro();
     });
 
+    // Pausa automaticamente ao sair da página de questões
+    window.addEventListener("pagehide", function () {
+
+        if (executando) {
+
+            tempoAcumulado = obterTempo();
+            executando = false;
+
+            clearInterval(intervalo);
+            intervalo = null;
+
+        }
+
+        salvarCronometro();
+
+    });
+
+    // Recupera o tempo salvo ao voltar para questões
+    tempoCronometro.textContent =
+        formatarTempo(tempoAcumulado);
+
     renderizarMarcacoes();
+
+    // Deixa o cronômetro pausado ao voltar
+    executando = false;
+
+    iconeIniciarPausar.innerHTML =
+        '<i class="bi bi-play-fill"></i>';
+
+    iniciarPausar.setAttribute(
+        "aria-label", "Continuar cronômetro"
+    );
+
+    marcarVolta.disabled = true;
+
+    estadoCronometro.textContent =
+        tempoAcumulado > 0
+            ? "Cronômetro pausado"
+            : "Pronto para começar?";
+
 });
