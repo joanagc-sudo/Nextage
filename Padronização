@@ -17,6 +17,14 @@ admin@gmail.com
 node Administrador.js -- inicializar no banco
 
 
+
+
+-- Alterando a senha do banco
+ALTER USER 'root'@'localhost' IDENTIFIED BY '1234';
+FLUSH PRIVILEGES;
+
+
+
 <!--Container do carrossel-->
 <div class="container-slider">
 

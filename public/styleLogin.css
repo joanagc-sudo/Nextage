@@ -1,75 +1,107 @@
 @import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
 
-
-/*arrumar o que falta  na tela*/
-body{
-    font-family: 'Momo Trust Display', sans-serif; 
-    background:#D8EDF2;
-    margin:0;
-    min-height:100vh;
-   
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.conteudo{
-    height:calc(100vh - 140px); 
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    width:100%;
+body {
+    font-family: 'Momo Trust Display', sans-serif;
+    background: hsl(191, 100%, 93%); /* Mesmo fundo suave do painel esquerdo do cadastro */
+    color: #6E868B;
+    margin: 0;
+    min-height: 100vh;
 }
 
-.card-login{
-    width:460px;
-    background:#FFFDF7;
-    padding:55px;
+.conteudo {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
 }
 
-.card-login h1{
-    color:#0C6878;
-    font-size:32px;
-    line-height:1.1;
-    margin-bottom:12px;
+.card-login {
+    width: 100%;
+    max-width: 480px;
+    background: #fff;
+    padding: 55px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
-.card-login p{
-    color:#667085;
-    margin-bottom:35px;
+/* Padronização dos textos igual ao Cadastro */
+.card-login h1 {
+    color: #0C6878;
+    font-size: 2rem; /* Mesmo tamanho do .textoConta */
+    line-height: 1.2;
+    margin-bottom: 10px;
 }
 
-.card-login label{
-    display:block;
-    color:#0C6878;
-    font-size:16px;
-    font-weight:600;
-    margin-bottom:8px;
+.card-login p.subtitulo {
+    color: #6E868B;
+    font-size: 1em;
+    margin-bottom: 2.5em; /* Mesmo espaçamento da classe .conta */
 }
 
-.input-box{
-    display:flex;
-    align-items:center;
-    border:1px solid #A5C6CE;
-    border-radius:8px;
-    height:46px;
-    padding:0 12px;
-    margin-bottom:28px;
+.card-login label {
+    display: block;
+    color: #0C6878;
+    font-size: 1em; /* Mesmo tamanho dos labels do cadastro */
+    font-weight: 400;
+    margin-bottom: 4px;
 }
 
-.input-box input{
-    flex:1;
-    border:none;
-    outline:none;
-    background:transparent;
-    margin:0 10px;
+/* Padronização dos Inputs */
+.form-control {
+    color: #126579 !important;
 }
 
-button{
-    display:block;
-    margin:10px auto 0;
-    width:120px;
-    height:42px;
-    border:none;
-    border-radius:6px;
-    background:#0C6878;
-    color:#fff;
-    box-shadow:0 4px 8px rgba(0,0,0,.25);
+input::placeholder {
+    color: #6E868B !important;
+}
+
+.form-control:focus {
+    border-color: #08788c;
+    box-shadow: none;
+}
+
+/* Padronização do Botão e Hover */
+.btn-login {
+    display: block;
+    width: 65%;
+    height: 42px;
+    margin: 30px auto 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #08788c;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-login:hover {
+    background-color: #094e5a; /* Mesmo hover do cadastro */
+}
+
+/* Padronização do link inferior */
+.cadastro-link {
+    text-align: center;
+    font-size: 1em;
+    color: #6E868B;
+    margin-top: 15px;
+    margin-bottom: 0;
+}
+
+.cadastro-link a {
+    color: #126579;
+    text-decoration: underline;
+}
+
+.cadastro-link a:hover {
+    color: #094e5a;
 }
