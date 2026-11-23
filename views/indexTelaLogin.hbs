@@ -1,17 +1,16 @@
-
 <link rel="stylesheet" href="styleLogin.css">
 
 <main class="conteudo">
     <div class="card-login">
 
         <h1>Bem-vindo de volta!</h1>
-        <p>Para continuar sua experiência informe seus dados de acesso.</p>
+        <p class="subtitulo">Para continuar sua experiência informe seus dados de acesso.</p>
 
         <form method="POST" action="/login">
 
             <div class="my-3">
                 <label for="email" class="form-label">E-mail</label>
-                <div class="input-group">
+                <div class="input-group mt-1">
                     <span class="input-group-text">
                         <i class="bi bi-envelope"></i>
                     </span>
@@ -20,14 +19,14 @@
                         class="form-control"
                         id="email"
                         name="email"
-                        placeholder="Insira seu e-mail"
+                        placeholder="Digite seu e-mail"
                         required>
                 </div>
             </div>
-<!--Arrumar o formulario e o design -->
+
             <div class="my-3">
                 <label for="senha" class="form-label">Senha</label>
-                <div class="input-group">
+                <div class="input-group mt-1">
                     <span class="input-group-text">
                         <i class="bi bi-lock"></i>
                     </span>
@@ -36,12 +35,14 @@
                         class="form-control"
                         id="senha"
                         name="senha"
-                        placeholder="Insira sua senha"
+                        placeholder="Digite sua senha"
                         required>
                 </div>
             </div>
 
-            <button type="submit">login</button>
+            <button type="submit" class="btn-login">Entrar</button>
+        
+            <p class="cadastro-link">Não tem uma conta? <a href="/">Cadastrar</a></p>
 
         </form>
 
