@@ -905,3 +905,17 @@ INSERT INTO `nextage`.`materiais` (`id_material`, `id_usuario`, `titulo`, `mater
 INSERT INTO `nextage`.`materiais` (`id_material`, `id_usuario`, `titulo`, `material_arquivo`, `data_publicacao`, `autor`, `aprovado_publicacao`, `descricao`) VALUES (3, 9, 'Guia de História da Arte', 'guia_historia_da_arte_nextage.pdf', '2026-11-24', 'Administrador Nextage', 1, 'História da Arte');
 
 COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `nextage`.`usuarios_administradores_estudantes`
+-- -----------------------------------------------------
+
+USE `nextage`;
+INSERT INTO `nextage`.`usuarios_administradores_estudantes` (`id_usuario`, `nome`, `email`, `senha`, `data_nascimento`, `tipo_usuario`, `foto`) VALUES (8, 'Sabrina da Silva', 'sabrinadasilva@gmail.com', 'M@rte2026', '2005-04-15', 0, NULL);
+INSERT INTO `nextage`.`usuarios_administradores_estudantes` (`id_usuario`, `nome`, `email`, `senha`, `data_nascimento`, `tipo_usuario`, `foto`) VALUES (9, 'Julia Gabriely Kehl', 'kehljulia@gmail.com', '$2b$10$H/JG.HtamJ4AJ6GSPk7Ma.Nw9727JluW15xNm9i1VgM4Sjd7URlU6', '2008-12-19', 1, NULL);
+INSERT INTO `nextage`.`usuarios_administradores_estudantes` (`id_usuario`, `nome`, `email`, `senha`, `data_nascimento`, `tipo_usuario`, `foto`) VALUES (10, 'Lucas dos Santos', 'lucasdossantos@gmail.com', 'Bibi#628', '2009-09-03', 0, NULL);
+INSERT INTO `nextage`.`usuarios_administradores_estudantes` (`id_usuario`, `nome`, `email`, `senha`, `data_nascimento`, `tipo_usuario`, `foto`) VALUES (11, 'Maria Eduarda dos Santos Schafer', 'mariaeduarda@gmail.com', 'Duda@123', '2009-01-19', 1, NULL);
+INSERT INTO `nextage`.`usuarios_administradores_estudantes` (`id_usuario`, `nome`, `email`, `senha`, `data_nascimento`, `tipo_usuario`, `foto`) VALUES (12, 'Pedro Melo', 'pedromelo@gmail.com', 'Fadalegal16.', '2007-07-29', 0, NULL);
+INSERT INTO `nextage`.`usuarios_administradores_estudantes` (`id_usuario`, `nome`, `email`, `senha`, `data_nascimento`, `tipo_usuario`, `foto`) VALUES (13, 'Joana Gonçalves Cardoso', 'joanagc@gmail.com', 'Joana@123', '2008-07-23', 1, NULL);
+
+COMMIT;
