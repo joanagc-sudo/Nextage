@@ -136,6 +136,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `nextage`.`materiais`
 -- -----------------------------------------------------
+
 DROP TABLE IF EXISTS `nextage`.`materiais` ;
 
 CREATE TABLE IF NOT EXISTS `nextage`.`materiais` (
@@ -645,8 +646,8 @@ COMMIT;
 START TRANSACTION;
 USE `nextage`;
 INSERT INTO `nextage`.`flashcards` (`id_flashcard`, `id_conteudo`, `pergunta`, `resposta`) VALUES (DEFAULT, 127, 'Qual é a condição necessária e suficiente para que uma função seja invertível (bijetora)?', 'A função deve ser simultaneamente injetora e sobrejetora');
-INSERT INTO `nextage`.`flashcards` (`id_flashcard`, `id_conteudo`, `pergunta`, `resposta`) VALUES (DEFAULT, 127, 'Em uma função, quem é o Domínio e quem é a Imagem?', 'Domínio são os valores de entrada ($x$); Imagem são os resultados de saída ($y$).');
-INSERT INTO `nextage`.`flashcards` (`id_flashcard`, `id_conteudo`, `pergunta`, `resposta`) VALUES (DEFAULT, 126, 'Quanto é 25% de um valor?', ' É a quarta parte desse valor (basta dividir por $4$).');
+INSERT INTO `nextage`.`flashcards` (`id_flashcard`, `id_conteudo`, `pergunta`, `resposta`) VALUES (DEFAULT, 127, 'Em uma função, quem é o Domínio e quem é a Imagem?', 'Domínio são os valores de entrada (x); Imagem são os resultados de saída (y).');
+INSERT INTO `nextage`.`flashcards` (`id_flashcard`, `id_conteudo`, `pergunta`, `resposta`) VALUES (DEFAULT, 126, 'Quanto é 25% de um valor?', ' É a quarta parte desse valor (basta dividir por 4).');
 INSERT INTO `nextage`.`flashcards` (`id_flashcard`, `id_conteudo`, `pergunta`, `resposta`) VALUES (DEFAULT, 127, ' O que significa a Interseção (A ∩ B) entre dois conjuntos?', 'São apenas os elementos que os dois conjuntos têm em comum (repetidos).');
 INSERT INTO `nextage`.`flashcards` (`id_flashcard`, `id_conteudo`, `pergunta`, `resposta`) VALUES (DEFAULT, 128, 'Qual é o resultado de |−8| e de |+8|?', ' Ambos valem 8 (o módulo sempre deixa o número positivo).');
 INSERT INTO `nextage`.`flashcards` (`id_flashcard`, `id_conteudo`, `pergunta`, `resposta`) VALUES (DEFAULT, 129, 'Qual é o valor de log₁₀(100)?', '2 (porque 10² = 100).');
@@ -726,3 +727,181 @@ INSERT INTO `nextage`.`flashcards` (`id_flashcard`, `id_conteudo`, `pergunta`, `
 
 COMMIT;
 
+
+-- -----------------------------------------------------
+-- Data for table `nextage`.`conteudo_material`
+-- -----------------------------------------------------
+
+-- Relacionamento dos materiais com seus conteúdos
+
+INSERT INTO `nextage`.`conteudo_material`
+(`id_conteudo`, `id_material`)
+VALUES
+(65, 1),
+(142, 2),
+(120, 3);
+
+START TRANSACTION;
+USE `nextage`;
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (126, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (127, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (128, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (129, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (130, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (131, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (132, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (133, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (134, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (135, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (136, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (137, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (138, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (139, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (140, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (141, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (158, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (159, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (160, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (161, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (162, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (163, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (164, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (165, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (166, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (167, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (168, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (169, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (170, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (171, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (172, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (173, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (174, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (175, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (176, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (60, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (61, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (62, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (63, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (64, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (65, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (66, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (67, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (68, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (69, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (70, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (71, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (72, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (73, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (74, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (75, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (76, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (77, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (78, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (79, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (142, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (143, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (144, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (145, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (146, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (147, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (148, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (149, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (150, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (151, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (152, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (153, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (154, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (155, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (156, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (157, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (80, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (81, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (82, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (83, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (84, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (96, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (97, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (98, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (99, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (100, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (101, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (102, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (103, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (104, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (105, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (106, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (107, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (108, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (85, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (86, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (87, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (88, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (89, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (90, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (91, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (92, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (93, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (94, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (95, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (109, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (110, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (111, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (112, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (113, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (114, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (115, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (116, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (117, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (118, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (119, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (120, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (121, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (122, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (123, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (124, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (125, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (177, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (178, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (179, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (180, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (181, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (182, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (183, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (184, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (185, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (186, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (187, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (188, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (189, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (190, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (191, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (192, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (193, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (194, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (195, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (196, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (197, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (198, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (199, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (200, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (201, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (202, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (203, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (204, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (205, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (206, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (207, DEFAULT);
+INSERT INTO `nextage`.`conteudo_material` (`id_conteudo`, `id_material`) VALUES (208, DEFAULT);
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `nextage`.`materiais`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `nextage`;
+INSERT INTO `nextage`.`materiais` (`id_material`, `id_usuario`, `titulo`, `material_arquivo`, `data_publicacao`, `autor`, `aprovado_publicacao`, `descricao`) VALUES (1, 9, 'Guia de Citologia', 'guia_citologia_nextage.pdf', '2026-11-24', '	Administrador Nextage', 1, '	Citologia');
+INSERT INTO `nextage`.`materiais` (`id_material`, `id_usuario`, `titulo`, `material_arquivo`, `data_publicacao`, `autor`, `aprovado_publicacao`, `descricao`) VALUES (2, 9, 'Guia de Climatologia', 'guia_climatologia_nextage.pdf', '2026-11-24', '	Administrador Nextage', 1, 'Clima');
+INSERT INTO `nextage`.`materiais` (`id_material`, `id_usuario`, `titulo`, `material_arquivo`, `data_publicacao`, `autor`, `aprovado_publicacao`, `descricao`) VALUES (3, 9, 'Guia de História da Arte', 'guia_historia_da_arte_nextage.pdf', '2026-11-24', 'Administrador Nextage', 1, 'História da Arte');
+
+COMMIT;

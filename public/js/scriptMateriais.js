@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         formData.append("titulo", arquivo.name);
         formData.append("descricao", materia);
 
-        const resposta = await fetch("/materiais", {
+        const resposta = await fetch("/", {
             method: "POST",
             body: formData
         });
@@ -309,7 +309,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         try {
 
-            const resposta = await fetch("/materiais/lista");
+            const resposta = await fetch("/lista");
 
             if (!resposta.ok) {
                 throw new Error("Erro ao buscar materiais.");
@@ -363,7 +363,7 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
 
             const resposta = await fetch(
-                "/materiais/" + material.id_material,
+                "/" + material.id_material,
                 {
                     method: "DELETE"
                 }
@@ -429,7 +429,7 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
 
             const resposta = await fetch(
-                "/materiais/assunto/" +
+                "/assunto/" +
                 encodeURIComponent(materiaSelecionada)
             );
 

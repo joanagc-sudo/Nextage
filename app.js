@@ -97,6 +97,24 @@
         path.join(__dirname, "views/partials")
     );
 
+    // encaminha o cadastro de materiais antes do cadastro de usuários
+    app.use("/", (req, res, next) => {
+
+        if (
+            req.method === "POST" &&
+            req.path === "/" &&
+            req.is("multipart/form-data")
+        ) {
+
+            return exigirLogin(req, res, () => {
+                materiaisRoutes(req, res, next);
+            });
+
+        }
+
+        next();
+
+    });
 
     // rotas publicas (NÃO EXIGEM LOGIN)
 
