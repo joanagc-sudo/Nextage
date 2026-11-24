@@ -72,6 +72,7 @@ router.post("/", upload.single("arquivo"), async (req, res) => {
 
         await conn.query(`
             INSERT INTO materiais (
+                id_material,
                 id_usuario,
                 titulo,
                 material_arquivo,
@@ -80,7 +81,7 @@ router.post("/", upload.single("arquivo"), async (req, res) => {
                 aprovado_publicacao,
                 descricao
             )
-            VALUES (?, ?, ?, CURDATE(), ?, 1, ?)
+            VALUES (null, ?, ?, ?, CURDATE(), ?, 1, ?)
         `, [
             idUsuario,
             titulo,
