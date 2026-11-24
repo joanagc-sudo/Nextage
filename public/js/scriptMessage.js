@@ -7,16 +7,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
     alertas.forEach(function (alerta) {
 
-        setTimeout(function () {
+        // Observa quando a mensagem aparece na tela.
+        const observador = new MutationObserver(function () {
 
-            alerta.style.transition = "opacity 0.5s ease";
-            alerta.style.opacity = "0";
+            if (!alerta.classList.contains("d-none")) {
 
-            setTimeout(function () {
-                alerta.remove();
-            }, 500);
+                // Evita iniciar o temporizador várias vezes.
+                observador.disconnect();
 
-        }, 3000);
+                setTimeout(function () {
+
+                    alerta.style.transition = "opacity 0.5s ease";
+                    alerta.style.opacity = "0";
+
+                    setTimeout(function () {
+
+                        alerta.classList.add("d-none");
+                        alerta.style.opacity = "1";
+
+                    }, 500);
+
+                }, 3000);
+
+            }
+
+        });
+
+        observador.observe(alerta, {
+            attributes: true,
+            attributeFilter: ["class"]
+        });
 
     });
 

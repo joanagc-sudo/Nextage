@@ -1,22 +1,39 @@
+
 <link rel="stylesheet" href="/styleCronograma.css">
 
 <div class="pagina-cronograma">
 
     <h2>Cronograma personalizado</h2>
 
+     <!-- Mensagem de erro -->
+    <div id="alerta-danger"
+         class="alert alert-danger d-none"
+         role="alert">
+    </div>
+
+    <!-- Mensagem de sucesso -->
+    <div id="alerta-sucesso"
+         class="alert alert-success d-none"
+         role="alert">
+    </div>
+
+    <!-- Mensagem de aviso -->
+    <div id="alerta-warning"
+         class="alert alert-warning d-none"
+         role="alert">
+    </div>
+
     <div class="tabela-container">
         <table class="tabela-cronograma">
 
             <thead>
-                <tr>
-                    <th>Segunda-feira</th>
+                <tr><th>Segunda-feira</th>
                     <th>Terça-feira</th>
                     <th>Quarta-feira</th>
                     <th>Quinta-feira</th>
                     <th>Sexta-feira</th>
                     <th>Sábado</th>
-                    <th>Domingo</th>
-                </tr>
+                    <th>Domingo</th></tr>
             </thead>
 
             <tbody>
@@ -29,19 +46,24 @@
                     <td></td>
                     <td></td>
                 </tr>
-
             </tbody>
 
         </table>
+
     </div>
 
     <div class="botoes-cronograma">
+
         <button type="button" id="btnEditar">Editar</button>
         <button type="button" id="btnExcluir">Excluir</button>
         <button type="button" id="btnSalvar">Salvar</button>
         <button type="button" id="btnVoltar">Voltar</button>
+
     </div>
-
 </div>
-<script src="/js/scriptCronograma.js"></script>
 
+<!-- Primeiro carrega as mensagens -->
+<script src="/js/Message.js"></script>
+
+<!-- Depois carrega o cronograma -->
+<script src="/js/scriptCronograma.js"></script>
