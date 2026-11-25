@@ -121,18 +121,33 @@ router.get("/assunto/:materia", async (req, res) => {
         const materia = req.params.materia;
 
         const [materiais] = await conn.query(`
-            SELECT
-                id_material,
-                titulo,
-                descricao,
-                material_arquivo,
-                autor,
-                data_publicacao
-            FROM materiais
-            WHERE descricao = ?
-            AND aprovado_publicacao = 1
-            ORDER BY id_material DESC
-        `, [materia]);
+            SELECT DISTINCT
+                m.id_material,
+                m.titulo,
+                m.descricao,
+                m.material_arquivo,
+                m.autor,
+                m.data_publicacao
+            FROM materiais m
+
+            LEFT JOIN conteudo_material cm
+                ON m.id_material = cm.id_material
+
+            LEFT JOIN conteudos c
+                ON cm.id_conteudo = c.id_conteudo
+
+            WHERE
+                (
+                    c.nome = ?
+                    OR (
+                        cm.id_material IS NULL
+                        AND m.descricao = ?
+                    )
+                )
+                AND m.aprovado_publicacao = 1
+
+            ORDER BY m.id_material DESC
+        `, [materia, materia]);
 
         return res.json(materiais);
 
