@@ -139,7 +139,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 DROP TABLE IF EXISTS `nextage`.`materiais` ;
 
 CREATE TABLE IF NOT EXISTS `nextage`.`materiais` (
-  `id_material` INT NOT NULL,
+  `id_material` INT NOT NULL AUTO_INCREMENT,
   `id_usuario` INT NOT NULL,
   `titulo` VARCHAR(200) NOT NULL,
   `material_arquivo` VARCHAR(255) NULL DEFAULT NULL,
