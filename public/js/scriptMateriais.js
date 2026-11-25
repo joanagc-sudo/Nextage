@@ -61,6 +61,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
             listaDisciplinas.innerHTML = "";
 
+            // Identifica e atualiza a disciplina atual no seletor
+            const disciplinaAtual = document.getElementById("disciplinaAtual");
+
+            if (disciplinaAtual) {
+
+                const rotaAtual = window.location.pathname;
+
+                const disciplinaSelecionada = disciplinas.find(function (disciplina) {
+
+                    return disciplina.rota === rotaAtual;
+
+                });
+
+                if (disciplinaSelecionada) {
+                    disciplinaAtual.textContent = disciplinaSelecionada.nome;
+                }
+
+            }
+
             disciplinas.forEach(function (disciplina) {
 
                 const botao = document.createElement("button");
