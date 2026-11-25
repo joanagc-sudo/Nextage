@@ -531,9 +531,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // Identifica os cliques nos cards
+    
     document.addEventListener("click", function (event) {
 
-        const card = event.target.closest("[data-materia]");
+        const card = event.target.closest(
+            '.assuntog1[data-materia], ' +
+            '.assuntog2[data-materia], ' +
+            '.assuntog3[data-materia], ' +
+            '.assuntog4[data-materia], ' +
+            '.assuntog5[data-materia], ' +
+            '.assuntog6[data-materia], ' +
+            '.assuntog7[data-materia], ' +
+            '.assuntog8[data-materia], ' +
+            '.assuntog9[data-materia], ' +
+            '.assuntog10[data-materia], ' +
+            '.assuntog11[data-materia], ' +
+            '.assuntog12[data-materia], ' +
+            '.assuntog13[data-materia], ' +
+            '.assuntog14[data-materia], ' +
+            '.assuntog15[data-materia], ' +
+            '.assuntog16[data-materia], ' +
+            '.assuntog17[data-materia], ' +
+            '.assuntog18[data-materia], ' +
+            '.assuntog19[data-materia], ' +
+            '.assuntog20[data-materia], ' +
+            '.assuntog21[data-materia], ' +
+            '.assuntog22[data-materia], ' +
+            '.assuntog23[data-materia], ' +
+            '.assuntog24[data-materia], ' +
+            '.assuntog25[data-materia], ' +
+            '.assuntog26[data-materia], ' +
+            '.assuntog27[data-materia], ' +
+            '.assuntog28[data-materia], ' +
+            '.assuntog29[data-materia], ' +
+            '.assuntog30[data-materia]'
+        );
 
         if (!card) return;
 
@@ -542,7 +574,6 @@ document.addEventListener("DOMContentLoaded", function () {
         abrirModalMateriais(card.dataset.materia);
 
     }, true);
-
 
     // fecha o modal de materiais compartilhados
     function fecharModal() {

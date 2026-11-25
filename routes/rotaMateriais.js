@@ -70,9 +70,9 @@ router.post("/", upload.single("arquivo"), async (req, res) => {
 
         const idUsuario = req.session.usuario.id;
 
+        
         await conn.query(`
             INSERT INTO materiais (
-                id_material,
                 id_usuario,
                 titulo,
                 material_arquivo,
@@ -81,7 +81,7 @@ router.post("/", upload.single("arquivo"), async (req, res) => {
                 aprovado_publicacao,
                 descricao
             )
-            VALUES (null, ?, ?, ?, CURDATE(), ?, 1, ?)
+            VALUES (?, ?, ?, CURDATE(), ?, 1, ?)
         `, [
             idUsuario,
             titulo,
@@ -89,6 +89,7 @@ router.post("/", upload.single("arquivo"), async (req, res) => {
             req.session.usuario.nome,
             descricao
         ]);
+
 
         return res.json({
             sucesso: true
