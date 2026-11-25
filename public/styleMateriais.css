@@ -2036,3 +2036,70 @@ section {
     }
 
 }
+
+
+/* CORREÇÃO DA LARGURA DA PÁGINA */
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+main {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+/* Impede o carrossel de aumentar a largura da página */
+
+.atalhos {
+    width: 92%;
+    max-width: 92%;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.atalhos1 {
+    width: 0;
+    min-width: 0;
+    flex: 1 1 0;
+    overflow: hidden;
+}
+
+.atalhos .assuntos {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    flex: 1 1 0;
+    overflow: hidden;
+}
+
+.atalhos .icones {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+/* não deixa a tela de materiais ficar larga */
+
+.atalhos2 {
+    width: 92%;
+    max-width: 92%;
+    min-width: 0;
+}
+
+.fundoQuestoes {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+.resolverQuestoes,
+.materiaisCadastrados {
+    min-width: 0;
+}
